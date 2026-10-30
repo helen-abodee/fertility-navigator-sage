@@ -1,0 +1,1487 @@
+[
+  {
+    "id": "california-cryobank",
+    "name": "California Cryobank",
+    "website": "https://www.cryobank.com",
+    "phone": "866-477-3762",
+    "recommendedBy": {
+      "value": "California Cryobank helps those facing potential infertility from medical risks with fertility preservation, including egg, embryo or sperm banking. Financial assistance and long-term storage options are available.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Los Angeles donation center (headquarters)",
+        "address": "11915 La Grange Ave., Los Angeles, CA 90025",
+        "lat": 34.034715,
+        "lng": -118.4543312
+      }
+    ],
+    "services": {
+      "value": [
+        "sperm/egg banking facility (not a treatment clinic)",
+        "private sperm preservation and banking",
+        "donor sperm (extensively screened donors)",
+        "vial storage programs",
+        "vial shipping (priority overnight, international)",
+        "vial management",
+        "genetic services",
+        "family services (Sibling Registry)",
+        "Donor Reserve (exclusive donor reservation)"
+      ],
+      "sourceUrl": "https://www.cryobank.com/services/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": false,
+      "sourceUrl": "https://www.cryobank.com/getting-started/sperm-banking-101",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://www.cryobank.com/services/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://www.cryobank.com/getting-started/sperm-banking-101",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": [
+        "Donor sperm, latest releases (ID disclosure): $2,397 per vial (vial-pricing page)",
+        "Donor sperm, core collection ID disclosure donors: $1,897 per vial (vial-pricing page)",
+        "Donor sperm, core collection open donors: $897 per vial (vial-pricing page)",
+        "Donor sperm, core collection anonymous donors: $897 per vial (vial-pricing page)",
+        "Silver Reserve: $35,000 (vial-pricing page)",
+        "Silver Reserve additional vial: $3,000 each (vial-pricing page)",
+        "Platinum Reserve: $70,000 (vial-pricing page)",
+        "Vial storage 6 months: $285 (shipping-storage page)",
+        "Vial storage 1 year: $520 (shipping-storage page)",
+        "Vial storage 3 years: $1,150 (shipping-storage page)",
+        "Vial storage 5 years: $1,780 (shipping-storage page)",
+        "Vial storage 10 years: $3,000 (shipping-storage page)",
+        "Transfer of ownership fee (non-family): $345 (shipping-storage page)",
+        "Vial exchange fee: $150 (shipping-storage page)",
+        "Vial buyback: 50% of purchase price (shipping-storage page)",
+        "FedEx Priority delivery: $499 (shipping-storage page)",
+        "FedEx Saturday delivery: $499 (shipping-storage page)",
+        "Order cancellation/modification on shipping day: $110 (shipping-storage page)",
+        "Express same-day processing: additional $80 (shipping-storage page)",
+        "Lost tank: $700; late tank return: $25/day (shipping-storage page)"
+      ],
+      "sourceUrl": "https://www.cryobank.com/pricing/vial-pricing",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://www.cryobank.com/pricing/vial-pricing",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://www.cryobank.com/services/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "not_published",
+      "sourceUrl": "https://www.cryobank.com/pricing/vial-pricing",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "pinnacle-fertility-los-angeles",
+    "name": "Pinnacle Fertility Los Angeles (formerly California Fertility Partners)",
+    "website": "https://www.pinnaclefertility.com/location/los-angeles-ca/",
+    "phone": "310-828-4008",
+    "recommendedBy": {
+      "value": "California Fertility Partners is a Los Angeles fertility clinic dedicated to the evaluation and treatment of male and female reproductive issues, and to helping people build families.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Los Angeles office",
+        "address": "11818 Wilshire Boulevard #300, Los Angeles, CA 90025",
+        "lat": 34.047372,
+        "lng": -118.463293
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF",
+        "IUI",
+        "egg retrieval",
+        "frozen embryo transfer",
+        "genetic testing",
+        "egg freezing",
+        "fertility medications",
+        "male infertility treatment",
+        "counseling",
+        "donor egg services",
+        "LGBTQ+ family building",
+        "cancer fertility support"
+      ],
+      "sourceUrl": "https://www.pinnaclefertility.com/location/los-angeles-ca/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://www.pinnaclefertility.com/treatments/cancer-fertility-support/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": true,
+      "sourceUrl": "https://www.pinnaclefertility.com/treatments/cancer-fertility-support/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://www.pinnaclefertility.com/treatments/cancer-fertility-support/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://www.pinnaclefertility.com/affording-care/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://www.pinnaclefertility.com/affording-care/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://www.pinnaclefertility.com/location/los-angeles-ca/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "PatientFi and CapexMD",
+      "sourceUrl": "https://www.pinnaclefertility.com/location/los-angeles-ca/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "care-fertility",
+    "name": "CARE Fertility",
+    "website": "https://www.carefertility.net",
+    "phone": "(323) 230-7311",
+    "recommendedBy": {
+      "value": "Care Fertility is an innovative fertility center which offers fertility preservation and reproductive treatments. Free consultations are provided.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Glendale office",
+        "address": "500 E. Colorado Street, Suite #400, Glendale, CA 91205",
+        "lat": 34.1423873,
+        "lng": -118.2500905
+      },
+      {
+        "label": "Upland office",
+        "address": "510 N. 13th Avenue, Suite #304, Upland, CA 91786",
+        "lat": 34.100443,
+        "lng": -117.6332413
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF programs",
+        "IUI programs",
+        "tubal reversals",
+        "fertility preservation (egg/sperm/embryo freezing)",
+        "frozen embryo transfer (FET)",
+        "LGBTQ+ family building",
+        "surrogacy",
+        "donor egg and donor sperm",
+        "genetic disease detection and gender selection (PGT)",
+        "infertility diagnostics"
+      ],
+      "sourceUrl": "https://www.carefertility.net/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://www.carefertility.net/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://www.carefertility.net/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://www.carefertility.net/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": [
+        "CARE IVF Package: $11,950 (pricing page)",
+        "CARE IVF PLUS (All Inclusive): $23,500 (pricing page)",
+        "CARE IVF Package, two IVF cycles: $23,500 (pricing page)",
+        "Egg Freezing: $6,500 (pricing page)",
+        "Two Egg Freezing Cycles: $12,000 (pricing page)",
+        "IUI Natural: $2,750 (pricing page)",
+        "IUI Combo: $3,450 (pricing page)",
+        "IUI Injectables: $3,950 (pricing page)",
+        "Tubal Reversal: $6,500 (pricing page)",
+        "Frozen Embryo Transfer (FET): $3,950 (pricing page)",
+        "Medications: approximately $4,000 per cycle, not included (pricing page)",
+        "PGT-A embryo testing: $4,000 up to 5 embryos (pricing page)",
+        "Military/veteran discount: 5% off all services (pricing page)"
+      ],
+      "sourceUrl": "https://www.carefertility.net/pricing/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "Free consultations available",
+      "sourceUrl": "https://www.carefertility.net/pricing/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://www.carefertility.net/pricing/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "CareCredit, Future Family, Lending Club Patient Solutions, United Medical Credit",
+      "sourceUrl": "https://www.carefertility.net/pricing/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "center-for-fertility-and-gynecology",
+    "name": "The Center for Fertility and Gynecology",
+    "website": "https://www.center4fertility.com",
+    "phone": "(818) 881-9800",
+    "recommendedBy": {
+      "value": "The Center for Fertility and Gynecology offers comprehensive fertility services, including evaluation, diagnosis and fertility preservation techniques.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Tarzana office (practice headquarters)",
+        "address": "18370 Burbank Blvd, Ste 301, Tarzana, CA 91356",
+        "lat": 34.1721824,
+        "lng": -118.534824
+      },
+      {
+        "label": "Encino lab",
+        "address": "5353 Balboa Blvd, Ste 301, Encino, CA 91316",
+        "lat": 34.1685003,
+        "lng": -118.5011888
+      },
+      {
+        "label": "Torrance office",
+        "address": "24241 Hawthorne Blvd, Ste 201, Torrance, CA 90505",
+        "lat": 33.8027203,
+        "lng": -118.3512469
+      },
+      {
+        "label": "Thousand Oaks office",
+        "address": "415 Rolling Oaks Dr, Ste 260, Thousand Oaks, CA 91361",
+        "lat": 34.1740682,
+        "lng": -118.8656947
+      },
+      {
+        "label": "Bakersfield office",
+        "address": "9610 Stockdale Hwy, Bakersfield, CA 93311",
+        "lat": 35.3545145,
+        "lng": -119.1070582
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF (traditional, mini, natural cycle)",
+        "egg freezing",
+        "egg donation",
+        "surrogacy",
+        "LGBTQ family building",
+        "IUI",
+        "male infertility treatment",
+        "tubal ligation reversal",
+        "PCOS treatment",
+        "preimplantation genetic screening",
+        "recurrent pregnancy loss treatment",
+        "fertility preservation"
+      ],
+      "sourceUrl": "https://www.center4fertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://www.center4fertility.com/services/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": true,
+      "sourceUrl": "https://www.center4fertility.com/services/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://www.center4fertility.com/services/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": [
+        "Natural IVF Cycle: $9,500.00 (IVF cost page)",
+        "Mini IVF Cycle: $10,900.00 (IVF cost page)",
+        "Single Traditional IVF Cycle: $12,900.00 (IVF cost page)",
+        "Traditional Cycle with Egg Donation: $14,900.00 (IVF cost page)",
+        "Egg Freezing, one cycle: $6,500.00 (IVF cost page)",
+        "Egg Freezing, low cost two-cycle: $8,900.00 (IVF cost page)",
+        "Egg Freezing, low cost three-cycle: $11,300.00 (IVF cost page)",
+        "10% discount for nurses, police officers, teachers, firefighters, civil servants (IVF cost page)",
+        "50% discount for veterans via SART Service to Veterans Program (IVF cost page)"
+      ],
+      "sourceUrl": "https://www.center4fertility.com/services/ivf/cost/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://www.center4fertility.com/services/ivf/cost/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://www.center4fertility.com/services/ivf/cost/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "PatientFi, Future Family, New Life Fertility Finance, CapexMD, Prosper Healthcare Lending",
+      "sourceUrl": "https://www.center4fertility.com/services/ivf/cost/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "hrc-fertility",
+    "name": "HRC Fertility",
+    "website": "https://www.havingbabies.com/",
+    "phone": "1-866-HRC-4IVF (1-866-472-4483)",
+    "recommendedBy": {
+      "value": "HRC is one of the largest providers of advanced fertility treatments in the United States. They offer fertility testing and a wide range of reproductive treatments.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Pasadena",
+        "address": "55 S. Lake Ave, 9th Fl., Pasadena, CA 91101",
+        "lat": 34.1449452,
+        "lng": -118.1327409
+      },
+      {
+        "label": "Beverly Hills",
+        "address": "9777 Wilshire Blvd, Suite 600, Beverly Hills, CA 90212",
+        "lat": 34.0674116,
+        "lng": -118.4084039
+      },
+      {
+        "label": "Carlsbad",
+        "address": "6183 Paseo Del Norte, Ste 270, Carlsbad, CA 92011",
+        "lat": 33.1156362,
+        "lng": -117.31716
+      },
+      {
+        "label": "Encino",
+        "address": "15503 Ventura Blvd #200, Encino, CA 91436",
+        "lat": 34.1552863,
+        "lng": -118.4724769
+      },
+      {
+        "label": "Fullerton",
+        "address": "1950 Sunnycrest Dr #2400, Fullerton, CA 92835",
+        "lat": 33.8708215,
+        "lng": -117.929416
+      },
+      {
+        "label": "Mission Viejo",
+        "address": "27800 Medical Center Rd. Building 1, Suite 308, Mission Viejo, CA 92691",
+        "lat": 33.5622118,
+        "lng": -117.6673744
+      },
+      {
+        "label": "Newport Beach",
+        "address": "20360 SW Birch Street, Suite #200, Newport Beach, CA 92660",
+        "lat": 33.6558947,
+        "lng": -117.8780466
+      },
+      {
+        "label": "Rancho Cucamonga",
+        "address": "8112 Milliken Ave. #101, Rancho Cucamonga, CA 91730",
+        "lat": 34.1112316,
+        "lng": -117.558318
+      },
+      {
+        "label": "San Diego",
+        "address": "9339 Genesee Ave., #125, San Diego, CA 92121",
+        "lat": 32.8756316,
+        "lng": -117.2139427
+      },
+      {
+        "label": "Santa Clarita Valley",
+        "address": "26357 McBean Pkwy. Suite 210, Valencia, CA 91355",
+        "lat": 34.4233486,
+        "lng": -118.5626191
+      },
+      {
+        "label": "West LA",
+        "address": "11500 Olympic Blvd #504, West Los Angeles, CA 90064",
+        "lat": 34.0362058,
+        "lng": -118.444088
+      },
+      {
+        "label": "Westlake Village",
+        "address": "1220 La Venta Dr #103, Westlake Village, CA 91361",
+        "lat": 34.1460234,
+        "lng": -118.8061794
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF",
+        "IVF with ICSI",
+        "IUI",
+        "fertility drugs / ovulation induction",
+        "egg donation IVF",
+        "surrogacy (traditional and gestational)",
+        "single embryo transfer",
+        "laser-assisted hatching",
+        "non-surgical sperm retrieval",
+        "semen analysis",
+        "hysteroscopy/laparoscopy/microsurgery",
+        "HSG test",
+        "egg freezing",
+        "fertility preservation (egg/embryo/sperm)"
+      ],
+      "sourceUrl": "https://www.havingbabies.com/fertility-treatments/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://havingbabies.com/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://havingbabies.com/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://havingbabies.com/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://havingbabies.com/affording-treatment/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://havingbabies.com/affording-treatment/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": [
+        "Aetna",
+        "Anthem Blue Cross",
+        "Blue Shield of California",
+        "Cigna Healthcare",
+        "Health Net of California",
+        "Humana",
+        "Kaiser Permanente",
+        "Multiplan",
+        "Tricare/TriWest",
+        "United Healthcare",
+        "Carrot Fertility",
+        "Maven Clinic",
+        "Progyny",
+        "Winfertility"
+      ],
+      "sourceUrl": "https://havingbabies.com/insurance-coverage/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "CapexMD; Future Family",
+      "sourceUrl": "https://havingbabies.com/insurance-coverage/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "innovative-fertility-center",
+    "name": "Innovative Fertility Center",
+    "website": "https://www.innovativefertility.com/",
+    "phone": "(310) 648-2229",
+    "recommendedBy": {
+      "value": "From advanced reproductive technology to minimally invasive therapies, Innovative Fertility Center offers a comprehensive array of treatment plans surrounding fertility preservation and reproductive treatments.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Manhattan Beach office",
+        "address": "3500 N. Sepulveda Blvd. Ste. 130, Manhattan Beach, CA 90266",
+        "lat": 33.8998547,
+        "lng": -118.395481
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF",
+        "IUI",
+        "frozen embryo IVF cycles",
+        "advanced ovulation induction / super ovulation",
+        "injectable fertility medications",
+        "ICSI",
+        "PGD (preimplantation genetic diagnosis)",
+        "PRP ovarian rejuvenation",
+        "PRP uterine infusion",
+        "donor egg and sperm services",
+        "gender selection / family balancing",
+        "reciprocal IVF (LGBTQ+)",
+        "fertility surgery (tubes, polyps, endometriosis)",
+        "surgical sperm retrieval (MESA, TESE)",
+        "egg freezing",
+        "oncofertility / fertility preservation",
+        "infertility testing",
+        "recurrent pregnancy loss treatment"
+      ],
+      "sourceUrl": "https://www.innovativefertility.com/fertility-treatments/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://innovativefertility.com/fertility-treatments/oncofertility/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://innovativefertility.com/fertility-treatments/oncofertility/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": false,
+      "sourceUrl": "https://innovativefertility.com/fertility-treatments/oncofertility/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://innovativefertility.com/about/affordable-fertility-care/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://innovativefertility.com/about/affordable-fertility-care/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": [
+        "Anthem",
+        "Cigna",
+        "Aetna",
+        "Progyny (preferred partner)"
+      ],
+      "sourceUrl": "https://innovativefertility.com/about/insurance-benefits-for-infertility/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "PatientFi; BUNDL; Gaia Family; American Healthcare Lending; Jewish Free Loan Association; CapexMD; EggFund",
+      "sourceUrl": "https://innovativefertility.com/about/fertility-financing/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "livestrong-fertility",
+    "name": "Livestrong Fertility (program of the Livestrong Foundation)",
+    "website": "https://livestrong.org/we-can-help/livestrong-fertility",
+    "phone": "(855) 844-7777",
+    "recommendedBy": {
+      "value": "Livestrong Fertility helps cancer patients and survivors understand their fertility risks and options, get access to fertility preservation services, and provide financial assistance.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [],
+    "services": {
+      "value": [
+        "nonprofit financial-assistance program (not a clinic)",
+        "financial assistance for fertility preservation for cancer patients",
+        "discounted fertility preservation (at least 25% off) via a network of 150+ partner fertility clinics and cryobanks",
+        "free fertility stimulation medication for approved patients (EMD Serono partnership)",
+        "case management support through the application process"
+      ],
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": false,
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "Livestrong Fertility financial assistance: discounts of at least 25% through a 150+ partner clinic and cryobank network, plus free fertility stimulation medication via EMD Serono for approved patients; eligibility includes income limits for non-birthing parents (up to $101,000 single / $130,000 married) and an uninsured/limited-coverage requirement for birthing parents",
+      "sourceUrl": "https://livestrong.org/we-can-help/livestrong-fertility",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "loma-linda-university-center-for-fertility-ivf",
+    "name": "Loma Linda University Center for Fertility & IVF",
+    "website": "https://lomalindafertility.com",
+    "phone": "(909) 554-3003",
+    "recommendedBy": {
+      "value": "The Center for Fertility & IVF offers comprehensive fertility preservation and treatment for cancer patients and survivors.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 1,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Loma Linda office",
+        "address": "11370 Anderson Street, Suite 3950, Loma Linda, CA 92354",
+        "lat": 34.0472071,
+        "lng": -117.2612342
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF",
+        "egg freezing",
+        "sperm freezing",
+        "embryo freezing",
+        "egg, sperm and embryo donation",
+        "fertility preservation before cancer treatment",
+        "surgical infertility treatment",
+        "surrogacy / gestational carriers"
+      ],
+      "sourceUrl": "https://lomalindafertility.com/treatments/cryopreservation/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://lomalindafertility.com/treatments/cryopreservation/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://lomalindafertility.com/treatments/cryopreservation/ovarian-tissue-cryopreservation/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://lomalindafertility.com/treatments/cryopreservation/sperm/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": [
+        "Egg retrieval: around $6,000, first year of frozen-egg storage included at no additional charge (/treatments/cryopreservation/egg-freezing/)",
+        "Frozen sperm storage: $220-500 per year, typical (/treatments/cryopreservation/sperm/)",
+        "Egg/sperm/embryo storage: $400 to $1,200 per year (/treatments/cryopreservation/)",
+        "$100 discount on appointment costs for self-pay patients who register for the MyLLHealth portal before initial consultation (/resources/how-much-does-ivf-cost/)"
+      ],
+      "sourceUrl": "https://lomalindafertility.com/treatments/cryopreservation/egg-freezing/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://lomalindafertility.com/resources/how-much-does-ivf-cost/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": [
+        "private insurance",
+        "managed care such as Kaiser",
+        "veterans"
+      ],
+      "sourceUrl": "https://lomalindafertility.com/resources/insurance-benefits/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "Price Match Program (one/two/three-cycle IVF bundles, matches written price agreements from other centers); cash discount program for patients without insurance benefits; Serono Compassionate Care Program; Ferring Fertility IVF Greenlight Program; Fertility by Design First Steps Program; medication cost assistance for cancer patients",
+      "sourceUrl": "https://lomalindafertility.com/resources/how-much-does-ivf-cost/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "oc-fertility",
+    "name": "OC Fertility + OC Biogenix",
+    "website": "https://www.ocfertility.com",
+    "phone": "949-706-2229",
+    "recommendedBy": {
+      "value": "OC Fertility offers complete reproductive medicine and infertility services, including infertility evaluation, ovulation induction, intra uterine insemination, in vitro fertilization, minimally invasive surgery and more.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Newport Beach office",
+        "address": "1401 Avocado Avenue, Suite 403 + 402, Newport Beach, CA 92660",
+        "lat": 33.6125155,
+        "lng": -117.8706861
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF",
+        "artificial insemination (IUI)",
+        "egg freezing",
+        "embryo freezing",
+        "sperm freezing / sperm banking",
+        "fertility preservation (including before cancer treatment)",
+        "donor eggs and donor sperm",
+        "gestational surrogacy",
+        "male and female infertility treatment"
+      ],
+      "sourceUrl": "https://www.ocfertility.com/services/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://www.ocfertility.com/fertility-preservation-in-individuals-diagnosed-with-cancer/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://www.ocfertility.com/services/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://www.ocfertility.com/services/fertility-preservation/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://ocfertility.com/financial-guide/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://ocfertility.com/financial-guide/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://ocfertility.com/financial-guide/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "Fertility benefits providers accepted: ARC Fertility, Carrot Fertility, Maven Clinic (Progyny not accepted). Financing/loan programs: Bundl Fertility, ARC Fertility financing, Future Family, Sunfish (formerly Origin Finance), Gaia, CoFertility. Cancer-related support: Livestrong Fertility. Grant/scholarship resources listed: FertilityIQ, RESOLVE, Alliance for Fertility Preservation",
+      "sourceUrl": "https://ocfertility.com/financial-guide/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "oncofertility-consortium",
+    "name": "The Oncofertility Consortium (housed at Michigan State University)",
+    "website": "https://oncofertility.msu.edu",
+    "recommendedBy": {
+      "value": "The Oncofertility Consortium represents a nationwide interdisciplinary network of medical specialists, scientists and scholars who are exploring the relationships between health, disease, survivorship and fertility preservation in young cancer patients. They have multiple resources to assist patients and survivors understand their fertility risk, fertility preservation options, and offer a fertility clinic locater.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [],
+    "services": {
+      "value": [
+        "national research network and resource hub (not a clinic)",
+        "national interdisciplinary research initiative on the reproductive future of cancer survivors",
+        "administers the National Physicians' Cooperative (provider network)",
+        "administers the Global Partners Network",
+        "hosts the annual Oncofertility Consortium Conference",
+        "oncofertility news, blog, and patient/provider resources"
+      ],
+      "sourceUrl": "https://oncofertility.msu.edu/about",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://oncofertility.msu.edu/about",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://oncofertility.msu.edu",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": false,
+      "sourceUrl": "https://oncofertility.msu.edu",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://oncofertility.msu.edu",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://oncofertility.msu.edu",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://oncofertility.msu.edu",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "not_published",
+      "sourceUrl": "https://oncofertility.msu.edu",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "pacific-reproductive-center",
+    "name": "Pacific Reproductive Center",
+    "website": "https://www.pacificreproductivecenter.com/",
+    "phone": "424-340-0871",
+    "recommendedBy": {
+      "value": "Pacific Reproductive Center offers a wide range of infertility treatment options. Their infertility treatment processes includes consultation and evaluation, testing, initial treatments and, if necessary, assisted reproductive technologies.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Torrance",
+        "address": "3720 Lomita Blvd, Suite 200, Torrance, CA 90505",
+        "lat": 33.8154515,
+        "lng": -118.349882
+      },
+      {
+        "label": "Glendale",
+        "address": "116 E. Broadway, Suite 300, Glendale, CA 91205",
+        "lat": 34.1461981,
+        "lng": -118.2546719
+      },
+      {
+        "label": "Irvine",
+        "address": "10 Post, Irvine, CA 92618",
+        "lat": 33.6777719,
+        "lng": -117.7675385
+      },
+      {
+        "label": "Corona",
+        "address": "381 Corporate Terrace, Corona, CA 92879",
+        "lat": 33.8806074,
+        "lng": -117.5347037
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF",
+        "mini IVF",
+        "egg freezing",
+        "IUI",
+        "egg donation",
+        "donor insemination",
+        "ovulation induction",
+        "preimplantation genetic testing",
+        "semen analysis",
+        "surgical procedures",
+        "surrogacy",
+        "LGBTQ fertility services",
+        "recurrent pregnancy loss treatment",
+        "gender selection",
+        "acupuncture/integrative medicine"
+      ],
+      "sourceUrl": "https://www.pacificreproductivecenter.com/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://www.pacificreproductivecenter.com/treatments/egg-freezing/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://www.pacificreproductivecenter.com/treatments/egg-freezing/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": false,
+      "sourceUrl": "https://www.pacificreproductivecenter.com/male-infertility/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://www.pacificreproductivecenter.com/treatments/ivf/cost/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://www.pacificreproductivecenter.com/treatments/ivf/cost/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://www.pacificreproductivecenter.com/treatments/ivf/cost/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "CapexMD (named financing partner)",
+      "sourceUrl": "https://www.pacificreproductivecenter.com/treatments/ivf/cost/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "reproductive-fertility-center",
+    "name": "Reproductive Fertility Center",
+    "website": "https://rfcfamily.com/",
+    "phone": "(949) 453-8600",
+    "recommendedBy": {
+      "value": "Reproductive Fertility Center is a leading infertility practice dedicated to helping people fulfill their dreams of family by providing them with the most technologically advanced solutions possible. Services include diagnostic procedures, fertility preservation and assisted reproductive technologies.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Beverly Hills / Los Angeles",
+        "address": "8635 West 3rd Street, Suite 1170W, Los Angeles, CA 90048",
+        "lat": 34.0736577,
+        "lng": -118.37994
+      },
+      {
+        "label": "Corona",
+        "address": "400 East Rincon Street, Suite 108, Corona, CA 92879",
+        "lat": 33.8856613,
+        "lng": -117.5614499
+      },
+      {
+        "label": "Irvine",
+        "address": "16300 Sand Canyon Avenue, 9th Floor, Irvine, CA 92618",
+        "lat": 33.6605317,
+        "lng": -117.7728269
+      },
+      {
+        "label": "Torrance",
+        "address": "21545 Hawthorne Blvd, Pavilion B, Torrance, CA 90503",
+        "lat": 33.8332333,
+        "lng": -118.352658
+      }
+    ],
+    "services": {
+      "value": [
+        "IVF",
+        "IUI",
+        "embryo transfer",
+        "preimplantation genetic testing (PGT)",
+        "fertility preservation (egg, sperm, embryo freezing)",
+        "ovulation induction",
+        "sperm retrieval",
+        "EmbryoScope+",
+        "oncofertility (cancer and fertility)",
+        "donor services",
+        "surrogacy",
+        "hysteroscopic/laparoscopic surgery",
+        "maternal fetal medicine",
+        "minimally invasive gynecological surgery",
+        "reproductive urology",
+        "acupuncture",
+        "telehealth"
+      ],
+      "sourceUrl": "https://rfcfamily.com/services/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://rfcfamily.com/services/oncofertility-cancer-and-fertility/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://rfcfamily.com/services/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://rfcfamily.com/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": [
+        "All-Inclusive IVF Package (single IVF retrieval cycle incl. ICSI, assisted hatching, embryo cryopreservation, first year cryostorage, PGT, embryo biopsy, anesthesia, facility fee, single FET, medications): $28,000 (specials page)"
+      ],
+      "sourceUrl": "https://rfcfamily.com/specials/all-inclusive-ivf-package/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://rfcfamily.com/resources/financial-information/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": [
+        "Blue Cross Blue Shield (PPO)",
+        "Aetna (PPO)",
+        "Cigna Healthcare (PPO)",
+        "United Healthcare (PPO)",
+        "Allied Pacific IPA (HMO)",
+        "Prospect Medical (HMO)",
+        "Riverside Medical Clinic (HMO)",
+        "Optum Monarch Healthcare (HMO)",
+        "Noble AMA IPA (HMO)",
+        "Kind Body",
+        "Progyny",
+        "WIN Fertility",
+        "Carrot",
+        "Kaiser Permanente (member discounts via partnering physicians)"
+      ],
+      "sourceUrl": "https://rfcfamily.com/resources/financial-information/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "CapexMD (outside medical loans); Bundl (bundled treatment packages); Compassionate Discount Program (5-25% off IVF cycle fees by financial need); fertility medication discounts; Multi-IVF Cycle Plan; risk-reducing refund plans for donor egg cycles",
+      "sourceUrl": "https://rfcfamily.com/resources/financial-information/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "savemyfertility",
+    "name": "SaveMyFertility",
+    "website": "https://savemyfertility.org",
+    "phone": "(312) 503-2504",
+    "recommendedBy": {
+      "value": "SaveMyFertility is an authoritative resource for adult cancer patients and the parents of children with cancer. This resource provides important information and guidance to enable a more comprehensive dialogue about fertility preservation before and during cancer treatment, and protecting hormonal health after treatment.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [],
+    "services": {
+      "value": [
+        "online education resource (not a clinic)",
+        "patient education on fertility preservation for adults and children diagnosed with cancer",
+        "printable pocket guides for patients (fertility preservation for women, men, and children diagnosed with cancer)",
+        "printable pocket guides for oncology/reproductive providers"
+      ],
+      "sourceUrl": "https://savemyfertility.org/pocket-guides/patients/fertility-preservation-women-diagnosed-cancer",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://savemyfertility.org/pocket-guides/patients/fertility-preservation-women-diagnosed-cancer",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://savemyfertility.org",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": false,
+      "sourceUrl": "https://savemyfertility.org",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://savemyfertility.org",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://savemyfertility.org",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://savemyfertility.org",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "not_published",
+      "sourceUrl": "https://savemyfertility.org",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "ucla-fertility-and-reproductive-health",
+    "name": "Fertility & Reproductive Health (UCLA Health)",
+    "website": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+    "phone": "310-794-7274",
+    "recommendedBy": {
+      "value": "The UCLA Fertility and Reproductive Health Center manages complicated problems related to infertility. It also provides counseling and treatment regarding the risk of transmitting genetic disorders to offspring.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Westwood OBGYN",
+        "address": "200 UCLA Medical Plaza, Suite 220 & 430, Los Angeles, CA 90095",
+        "lat": 34.0652029,
+        "lng": -118.4465904
+      },
+      {
+        "label": "Santa Monica OBGYN Specialty Suite",
+        "address": "1245 16th St., Suite 202, Santa Monica, CA 90404",
+        "lat": 34.0277496,
+        "lng": -118.4861525
+      }
+    ],
+    "services": {
+      "value": [
+        "fertility evaluations and testing",
+        "IUI",
+        "IVF",
+        "ICSI",
+        "fertility preservation (egg, sperm and embryo freezing)",
+        "genetic counseling and preimplantation genetic testing",
+        "LGBTQ+ family planning",
+        "male fertility evaluation (via Men's Clinic at UCLA)",
+        "oncofertility",
+        "reproductive surgery"
+      ],
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": false,
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "not_published",
+      "sourceUrl": "https://www.uclahealth.org/medical-services/obgyn/fertility",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "usc-fertility",
+    "name": "USC Fertility (part of HRC Fertility since 2021)",
+    "website": "https://uscfertility.org/",
+    "phone": "(800) 872-2273",
+    "recommendedBy": {
+      "value": "USC Fertility offers state-of-the-art clinical care in a personalized and supportive environment, including fertility testing, egg freezing, IVF, surrogacy and more.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [
+      {
+        "label": "Pasadena - USC & HRC Fertility",
+        "address": "55 S. Lake Ave., 9th Floor, Pasadena, CA 91101",
+        "lat": 34.1449452,
+        "lng": -118.1327409
+      },
+      {
+        "label": "USC Fertility and Men's Sexual Health Center (Keck Medicine of USC), Beverly Hills",
+        "address": "9033 Wilshire Blvd, Beverly Hills, CA",
+        "lat": 34.0672517,
+        "lng": -118.3888873
+      }
+    ],
+    "services": {
+      "value": [
+        "male infertility care",
+        "sperm banking",
+        "microsurgical sperm extraction (microTESE)",
+        "vasectomy reversal",
+        "fertility preservation for cancer patients",
+        "hormone optimization"
+      ],
+      "sourceUrl": "https://www.keckmedicine.org/centers-and-programs/male-infertility/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://www.keckmedicine.org/centers-and-programs/male-infertility/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": "not_published",
+      "sourceUrl": "https://uscfertility.org/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://www.keckmedicine.org/centers-and-programs/male-infertility/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://uscfertility.org/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://uscfertility.org/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://uscfertility.org/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "not_published",
+      "sourceUrl": "https://uscfertility.org/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "western-fertility-institute",
+    "name": "Western Fertility Institute",
+    "website": "https://www.westernfertility.com",
+    "phone": "(888) 261-4574",
+    "recommendedBy": {
+      "value": "Western Fertility Institute is a Los Angeles-based fertility clinic providing a supportive and comfortable environment utilizing the latest technology and equipment on the path to achieving a health pregnancy.",
+      "citations": [
+        {
+          "sourceId": "D1",
+          "sourceName": "Fertility Resources List (patient flyer)",
+          "page": 2,
+          "retrieved": "2026-10-30"
+        }
+      ]
+    },
+    "locations": [],
+    "services": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "not_published",
+      "sourceUrl": "https://www.westernfertility.com/",
+      "retrieved": "2026-10-30"
+    }
+  },
+  {
+    "id": "uc-san-diego-health-fertility-preservation",
+    "name": "UC San Diego Health Fertility Care / Fertility Preservation & Counseling (Moores Cancer Center)",
+    "website": "https://health.ucsd.edu/care/fertility/",
+    "phone": "858-657-8561 (female fertility preservation); 858-249-3537 (male fertility preservation)",
+    "locations": [
+      {
+        "label": "Moores Cancer Center (fertility preservation counseling)",
+        "address": "3855 Health Sciences Drive, La Jolla, CA 92037",
+        "lat": 32.8785692,
+        "lng": -117.219076
+      }
+    ],
+    "services": {
+      "value": [
+        "fertility evaluation and preconception counseling",
+        "IUI",
+        "ovulation medications",
+        "reproductive surgery",
+        "ART/IVF via partnership with Reproductive Partners Fertility Center-San Diego",
+        "embryo or oocyte banking",
+        "preimplantation genetic testing (PGT)",
+        "fertility-sparing surgery (ovarian transposition)",
+        "ovarian suppression",
+        "ovarian tissue banking",
+        "sperm banking",
+        "testicular tissue banking",
+        "male fertility/andrology lab (semen analysis, cryopreservation)",
+        "group and couples counseling"
+      ],
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    },
+    "oncofertility": {
+      "value": true,
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    },
+    "ovarianTissueFreezing": {
+      "value": true,
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    },
+    "spermBanking": {
+      "value": true,
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    },
+    "publishedPrices": {
+      "value": "not_published",
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    },
+    "consultCost": {
+      "value": "not_published",
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    },
+    "insuranceAccepted": {
+      "value": "not_published",
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    },
+    "financing": {
+      "value": "not_published",
+      "sourceUrl": "https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/",
+      "retrieved": "2026-10-30"
+    }
+  }
+]
