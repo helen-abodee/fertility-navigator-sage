@@ -86,3 +86,14 @@ h3 {
   line-height: 1.25;
   text-wrap: balance;
 }
+
+@media print {
+  body {
+    background: #ffffff;
+    color: #111111;
+    font-size: 12px;
+  }
+  main {
+    max-width: none;
+  }
+}

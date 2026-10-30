@@ -19,8 +19,9 @@ function StatusBadge({ option }: { option: PreservationOption }) {
   );
 }
 
-function OptionCard({ option }: { option: PreservationOption }) {
-  const [open, setOpen] = useState(false);
+function OptionCard({ option, forceOpen }: { option: PreservationOption; forceOpen?: boolean }) {
+  const [openState, setOpen] = useState(false);
+  const open = forceOpen || openState;
   return (
     <section className="border-line bg-card rounded-2xl border p-5">
       <div className="flex items-start justify-between gap-3">
@@ -35,7 +36,7 @@ function OptionCard({ option }: { option: PreservationOption }) {
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        className="text-accent-ink mt-3 text-sm font-bold underline"
+        className="text-accent-ink mt-3 text-sm font-bold underline print:hidden"
       >
         {open ? "Hide the steps" : "What actually happens, step by step"}
       </button>
@@ -84,6 +85,17 @@ export default function ResultsView({
   results: Results;
   onStartOver: () => void;
 }) {
+  const [printing, setPrinting] = useState(false);
+
+  function downloadSummary() {
+    // Expand every section, then let the browser build the PDF on-device.
+    setPrinting(true);
+    setTimeout(() => {
+      window.print();
+      setPrinting(false);
+    }, 50);
+  }
+
   return (
     <main className="mx-auto flex w-full max-w-md flex-col gap-8 px-6 py-10">
       <header>
@@ -100,7 +112,7 @@ export default function ResultsView({
         <div className="flex flex-col gap-4">
           {!results.survivorSpine && <h2 className="text-xl">Your options</h2>}
           {results.options.map((o) => (
-            <OptionCard key={o.id} option={o} />
+            <OptionCard key={o.id} option={o} forceOpen={printing} />
           ))}
         </div>
       )}
@@ -165,6 +177,17 @@ export default function ResultsView({
       )}
 
       <footer className="border-line mt-2 flex flex-col gap-4 border-t pt-5">
+        <button
+          type="button"
+          onClick={downloadSummary}
+          className="bg-accent text-accent-contrast min-h-12 rounded-xl px-4 py-3 font-bold print:hidden"
+        >
+          Download or print my summary
+        </button>
+        <p className="text-muted -mt-2 text-xs print:hidden">
+          The summary is built by your own browser. Nothing is uploaded. You can save it as a PDF
+          or hand it to your care team.
+        </p>
         <button
           type="button"
           onClick={onStartOver}
