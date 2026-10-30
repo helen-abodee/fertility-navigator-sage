@@ -41,6 +41,18 @@ Last reviewed: 2026-10-30. Things the product spec needs that the current source
 - **C2: Stale resources in D2.** D2 lists Fertile Hope / fertilehope.org and its Sharing Hope program as a live organization; Fertile Hope was absorbed into Livestrong years ago (D4 lists only Livestrong Fertility). Proposed resolution: use D4's philanthropic table; never cite D2's resource list. Helen to confirm.
 - **C3 (minor): HRC naming.** D1 calls it "HRC Fertility"; D2 calls it "Huntington Reproductive Center Medical Group Fertility." Same organization (havingbabies.com). Dataset will use the current public name from their site.
 
+## Found while writing content (2026-10-30, workstream A+C)
+
+Facts the spec or drafts wanted that no approved source supports. Each was left out of `content/app/*`; nothing was filled from memory.
+
+16. **TESE procedure detail.** No approved source gives patient-level steps for testicular sperm extraction (anesthesia type, incision, duration, recovery). MSKCC's TESE patient page could not be found (both candidate URLs returned 404 on 2026-10-30). The option's steps are written only at the altitude ASRM's sperm fact sheet and D4's service list (p.9) support: consult, surgical removal of sperm from the testicle, freezing/storage. Needs a patient-education source before richer steps ship.
+17. **Egg-freezing injection window "10 to 14 days".** The spec's figure is not in the approved sources: MSKCC says "about 10 days," ASRM says "10-12 days." Content says "about 10 to 12 days." If Helen wants "10 to 14," a source saying so is needed.
+18. **GnRH agonist practicalities.** How often the ovarian-suppression medicine is given (injection schedule, monthly vs. per-cycle) is in no approved source; the option describes only what the medicine does (NCI phrasing) and ASCO's stance. No cost is published either.
+19. **`payUpfront` for aid orgs.** D4 (pp.14-16) never says which programs pay clinics directly vs. reimburse after upfront payment. The field is unset on all 11 orgs; needs each org's own page (workstream D style: URL + retrieval date). Related: dollar caps beyond Worth the Wait are still unpublished (existing Gap 12).
+20. **Embryo-specific lab costs.** D4 publishes only the egg-freezing cycle average ($12,400) and meds (~$5,000). Costs for fertilization/embryo creation, TESE, ovarian tissue surgery, and ovarian transposition are not published anywhere approved; shown as "not published."
+21. **Post-treatment sperm banking.** ASCO Rec 4.3 supports post-treatment egg/embryo freezing, but the extraction has no parallel "may be offered post-treatment" statement for sperm banking, so the sperm banking option is gated to `not_started`. Survivors with testes get the semen-analysis guidance instead. If post-treatment banking should be offered as an option, it needs a source (possibly the unread JCO full text).
+22. **Tissue storage fees.** D4's $200-$500/year storage range names "eggs or sperm"; ovarian/testicular tissue storage fees are not published. Flagged in the option's cost note.
+
 ## Explicitly out of scope for v1 (parked, per kickoff)
 
 - Sending patient data to the care team (needs BAA + backend).
