@@ -2,6 +2,17 @@
 
 Last reviewed: 2026-10-30. Things the product spec needs that the current source documents (see INVENTORY.md) do not support. Per project rules, none of these get filled from memory; each needs a document, a named published guideline, or Helen's sign-off on a source.
 
+## Decisions from Helen (2026-10-30)
+
+- C1 and C2 approved: D4 (dated July 31, 2025 — always show the date) is the insurance and financial-aid source; D2's financial section and resource list are never cited. Feedback note for Estella: `content/NOTE-FOR-ESTELLA.md`.
+- Gap 1 (option-eligibility logic): approved to use the ASCO 2025 guideline as a source. In progress.
+- Gap 2 (egg-freezing timeline etc.): find the most reputable online source and show Helen BEFORE using it. In progress; not yet approved.
+- Gap 3 (ovarian suppression): Helen asked what it is; include only if the ASCO guideline supports discussing it. Pending research.
+- Gap 4 (2026 CA IVF law): verify it exists and find a citable source. In progress.
+- Gap 7 (survivor labs): include; use the language the sourced guideline/clinic materials use.
+- Gap 11 (partner clinics): RESOLVED. There is no partner list. List all clinics the source docs recommend, using the docs' own framing (a resource list, explicitly not an endorsement). No "partner" labels anywhere.
+- Post-launch: scheduled background tracker to detect when the insurance content goes stale (AFP legislation map, DMHC). Build at checkpoint 4.
+
 ## Blocking for checkpoint 2 (the one real-content path)
 
 1. **Which options fit which situations.** No document maps age / reproductive organs / treatment stage to the options that apply (for example: egg freezing requires time before treatment starts; ovarian tissue freezing can be done without stimulation; sperm banking before treatment). D4 lists the four service routes but not eligibility or timing logic. Need: the relevant ASCO/ASRM guideline text (D3 and D4 cite ASCO 2025, doi 10.1200/JCO-24-02782) or a document from Hannah/Estella.

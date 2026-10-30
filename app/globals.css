@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Palette is "Option A: Fir on paper" by default; Helen is
+ * choosing between options (see design-options artifact). Swap values here
+ * only; components must reference tokens, never literals.
+ */
+:root {
+  --paper: #f6f3ed;
+  --card: #ffffff;
+  --ink: #283029;
+  --muted: #5f6962;
+  --line: #e0ddd4;
+  --accent: #38654c;
+  --accent-ink: #2c523d;
+  --accent-tint: #e2ebe2;
+  --accent-contrast: #ffffff;
+  --info: #31576e; /* secondary blue, links/info callouts */
+  --warn-bg: #f4e9dc;
+  --warn-ink: #7a4e24;
+  --shadow: 0 1px 2px rgba(40, 48, 41, 0.06), 0 6px 20px rgba(40, 48, 41, 0.07);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1b201d;
+    --card: #242b26;
+    --ink: #e9e7df;
+    --muted: #a7b0a8;
+    --line: #39423b;
+    --accent: #8fbf9f;
+    --accent-ink: #a5cdb2;
+    --accent-tint: #2c3a31;
+    --accent-contrast: #16201a;
+    --info: #8db8cf;
+    --warn-bg: #3a3127;
+    --warn-ink: #dcb888;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #1b201d;
+  --card: #242b26;
+  --ink: #e9e7df;
+  --muted: #a7b0a8;
+  --line: #39423b;
+  --accent: #8fbf9f;
+  --accent-ink: #a5cdb2;
+  --accent-tint: #2c3a31;
+  --accent-contrast: #16201a;
+  --info: #8db8cf;
+  --warn-bg: #3a3127;
+  --warn-ink: #dcb888;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-tint: var(--accent-tint);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-info: var(--info);
+  --font-heading: var(--font-literata), Georgia, serif;
+  --font-body: var(--font-atkinson), "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
