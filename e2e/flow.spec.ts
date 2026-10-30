@@ -56,3 +56,41 @@ test("every question screen carries the privacy line", async ({ page }) => {
   await page.goto("/questions");
   await expect(page.getByText("Your answers never leave this device.")).toBeVisible();
 });
+
+test("the checkpoint path shows real, cited content", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByRole("button", { name: "I haven't started treatment yet" }).click();
+  await page.getByPlaceholder("Your age").fill("24");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "Chemotherapy" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page
+    .getByRole("button", { name: "A plan through a job, or a private plan, based in California" })
+    .click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+
+  // Options that fit: egg freezing shown with steps on demand; sperm banking hidden
+  await expect(page.getByRole("heading", { name: "Egg freezing" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sperm banking" })).not.toBeVisible();
+  await page
+    .locator("section", { has: page.getByRole("heading", { name: "Egg freezing" }) })
+    .getByRole("button", { name: "What actually happens, step by step" })
+    .click();
+  await expect(page.getByText("Source:", { exact: false }).first()).toBeVisible();
+
+  // Insurance branch: SB 600 guidance for CA commercial, pre-treatment
+  await expect(
+    page.getByRole("heading", { name: "Your California plan should cover fertility preservation" }),
+  ).toBeVisible();
+
+  // Aid + doctor questions + summary download present
+  await expect(page.getByRole("heading", { name: "Help paying for it" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Questions you could ask your care team" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Download or print my summary" })).toBeVisible();
+});
