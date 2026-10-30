@@ -1,0 +1,189 @@
+<title>Navigator Palette Options</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --page-bg: #F7F6F2;
+    --page-ink: #2B2F2C;
+    --page-muted: #61675F;
+    --page-line: #E0DFD7;
+    --page-card: #FFFFFF;
+    --page-accent: #38654C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page-bg: #1D211E;
+      --page-ink: #E8E7E0;
+      --page-muted: #A8AFA6;
+      --page-line: #3A413A;
+      --page-card: #262B27;
+      --page-accent: #96C2A4;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page-bg: #1D211E;
+    --page-ink: #E8E7E0;
+    --page-muted: #A8AFA6;
+    --page-line: #3A413A;
+    --page-card: #262B27;
+    --page-accent: #96C2A4;
+  }
+  body {
+    background: var(--page-bg); color: var(--page-ink); margin: 0;
+    font-family: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px; line-height: 1.6;
+  }
+  main { max-width: 1120px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 4px; }
+  h2 { font-size: 1.3rem; margin: 0 0 2px; }
+  p { max-width: 68ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--page-accent); margin: 0; }
+  .sub { color: var(--page-muted); margin-top: 2px; }
+  .rec { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--page-accent); color: var(--page-bg); border-radius: 99px; padding: 3px 10px; vertical-align: 3px; margin-left: 8px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 28px; margin-top: 36px; }
+  .option { background: var(--page-card); border: 1px solid var(--page-line); border-radius: 14px; padding: 24px 22px; }
+  .option p.desc { font-size: .92rem; color: var(--page-muted); min-height: 5.2em; margin-top: 6px; }
+  .sw { display: flex; gap: 8px; margin: 14px 0 20px; }
+  .sw div { flex: 1; height: 40px; border-radius: 7px; border: 1px solid var(--page-line); position: relative; }
+  .sw div span {
+    position: absolute; bottom: -20px; left: 0; right: 0; text-align: center;
+    font-size: .62rem; color: var(--page-muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .sw { margin-bottom: 36px; }
+
+  /* Phone demo, self-contained light rendering driven by scoped vars */
+  .phone {
+    border-radius: 30px; border: 1px solid rgba(0,0,0,.12); box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    padding: 20px 18px 22px; background: var(--d-card); color: var(--d-ink); margin: 0 auto; max-width: 320px;
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .back { background: none; border: none; font: inherit; font-size: .9rem; font-weight: 700; color: var(--d-accent-ink); cursor: pointer; padding: 4px 8px 4px 0; }
+  .dots { display: flex; gap: 6px; }
+  .dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--d-line); }
+  .dots i.done, .dots i.now { background: var(--d-accent); }
+  .q { font-family: Literata, Georgia, serif; font-weight: 600; font-size: 1.22rem; margin: 4px 0 2px; }
+  .qhelp { font-size: .86rem; color: var(--d-muted); margin: 0 0 14px; }
+  .opt-btn {
+    display: block; width: 100%; box-sizing: border-box; text-align: left; cursor: pointer;
+    background: var(--d-paper); color: var(--d-ink); border: 1.5px solid var(--d-line); border-radius: 12px;
+    font: inherit; font-size: .98rem; font-weight: 700; padding: 15px 15px; margin: 9px 0;
+  }
+  .opt-btn:hover { border-color: var(--d-accent); }
+  .opt-btn:focus-visible { outline: 3px solid var(--d-accent); outline-offset: 2px; }
+  .opt-btn[aria-pressed="true"] { background: var(--d-tint); border-color: var(--d-accent); }
+  .opt-btn.notsure { border-style: dashed; font-weight: 400; }
+  .privacyline { font-size: .76rem; color: var(--d-muted); text-align: center; margin: 12px 0 0; }
+  .infolink { font-size: .84rem; color: var(--d-info); font-weight: 700; text-align: center; display: block; margin-top: 10px; text-decoration: underline; }
+
+  /* Option palettes */
+  .pal-a { --d-paper: #F6F3ED; --d-card: #FFFFFF; --d-ink: #283029; --d-muted: #5F6962; --d-line: #E0DDD4;
+           --d-accent: #38654C; --d-accent-ink: #2C523D; --d-tint: #E2EBE2; --d-info: #2E5F86; }
+  .pal-b { --d-paper: #F5F7F7; --d-card: #FFFFFF; --d-ink: #22313A; --d-muted: #5B6B74; --d-line: #DCE2E3;
+           --d-accent: #2E5F86; --d-accent-ink: #27516F; --d-tint: #E2ECF3; --d-info: #3E7059; }
+  .pal-c { --d-paper: #F5F5F1; --d-card: #FFFFFF; --d-ink: #253331; --d-muted: #5D6B68; --d-line: #DEE1DB;
+           --d-accent: #2F6B63; --d-accent-ink: #285A53; --d-tint: #E0EDEA; --d-info: #2F6B63; }
+
+  .note { background: var(--page-card); border: 1px solid var(--page-line); border-left: 4px solid var(--page-accent); border-radius: 10px; padding: 16px 20px; margin-top: 40px; }
+  .note p { margin: 8px 0; font-size: .95rem; }
+  .cohrow { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .cohchip { width: 54px; height: 32px; border-radius: 6px; background: #1B75BC; border: 1px solid var(--page-line); }
+  .cohrow span { font-size: .85rem; color: var(--page-muted); }
+</style>
+
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Palette options</h1>
+  <p class="sub">Same screen, same type (Literata + Atkinson Hyperlegible), three palettes. All meet WCAG AA on every text/background pair. Tap the options in each phone.</p>
+
+  <div class="grid">
+    <section class="option">
+      <h2>A · Fir, blue assist<span class="rec">Recommended</span></h2>
+      <p class="desc">Green stays the identity: warm paper, fir green for every action. A deepened, de-saturated harbor blue (from the City of Hope family) handles links, info callouts, and "learn more" moments. Warmest of the three; blue is present but never clinical because it never paints large surfaces.</p>
+      <div class="sw">
+        <div style="background:#F6F3ED"><span>#F6F3ED</span></div>
+        <div style="background:#283029"><span>#283029</span></div>
+        <div style="background:#38654C"><span>#38654C</span></div>
+        <div style="background:#E2EBE2"><span>#E2EBE2</span></div>
+        <div style="background:#2E5F86"><span>#2E5F86</span></div>
+      </div>
+      <div class="phone pal-a" role="group" aria-label="Option A sample screen">
+        <div class="topbar"><button class="back" type="button">&#8592; Back</button>
+          <div class="dots" aria-label="Question 2 of 10"><i class="done"></i><i class="now"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="q">Where are you with treatment?</div>
+        <p class="qhelp">This helps us show only what applies to you right now.</p>
+        <button class="opt-btn" type="button" aria-pressed="false">I haven't started treatment yet</button>
+        <button class="opt-btn" type="button" aria-pressed="false">I'm in treatment now</button>
+        <button class="opt-btn" type="button" aria-pressed="false">I finished treatment</button>
+        <button class="opt-btn notsure" type="button" aria-pressed="false">I'm not sure</button>
+        <a class="infolink" href="#" onclick="return false">Why we ask this</a>
+        <p class="privacyline">Your answers never leave this device.</p>
+      </div>
+    </section>
+
+    <section class="option">
+      <h2>B · Harbor, green assist</h2>
+      <p class="desc">Blue leads, so it sits closest to City of Hope's world: a deep harbor blue (their blue, darkened and softened) for actions on a cool near-white paper, green reserved for confirmation and "options that fit you." Most objective and institutional of the three; reads calm rather than clinical because the blue is ink-dark, not process-bright.</p>
+      <div class="sw">
+        <div style="background:#F5F7F7"><span>#F5F7F7</span></div>
+        <div style="background:#22313A"><span>#22313A</span></div>
+        <div style="background:#2E5F86"><span>#2E5F86</span></div>
+        <div style="background:#E2ECF3"><span>#E2ECF3</span></div>
+        <div style="background:#3E7059"><span>#3E7059</span></div>
+      </div>
+      <div class="phone pal-b" role="group" aria-label="Option B sample screen">
+        <div class="topbar"><button class="back" type="button">&#8592; Back</button>
+          <div class="dots" aria-label="Question 2 of 10"><i class="done"></i><i class="now"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="q">Where are you with treatment?</div>
+        <p class="qhelp">This helps us show only what applies to you right now.</p>
+        <button class="opt-btn" type="button" aria-pressed="false">I haven't started treatment yet</button>
+        <button class="opt-btn" type="button" aria-pressed="false">I'm in treatment now</button>
+        <button class="opt-btn" type="button" aria-pressed="false">I finished treatment</button>
+        <button class="opt-btn notsure" type="button" aria-pressed="false">I'm not sure</button>
+        <a class="infolink" href="#" onclick="return false">Why we ask this</a>
+        <p class="privacyline">Your answers never leave this device.</p>
+      </div>
+    </section>
+
+    <section class="option">
+      <h2>C · Lagoon, one accent</h2>
+      <p class="desc">The simplest system: a single blue-green teal that reads as both colors at once, on a quiet stone paper. One accent means the fewest decisions and the most even, "objective" feel across screens; it harmonizes with City of Hope blue without ever competing with it. The trade: less expressive range for states like success vs. info.</p>
+      <div class="sw">
+        <div style="background:#F5F5F1"><span>#F5F5F1</span></div>
+        <div style="background:#253331"><span>#253331</span></div>
+        <div style="background:#2F6B63"><span>#2F6B63</span></div>
+        <div style="background:#E0EDEA"><span>#E0EDEA</span></div>
+        <div style="background:#5D6B68"><span>#5D6B68</span></div>
+      </div>
+      <div class="phone pal-c" role="group" aria-label="Option C sample screen">
+        <div class="topbar"><button class="back" type="button">&#8592; Back</button>
+          <div class="dots" aria-label="Question 2 of 10"><i class="done"></i><i class="now"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="q">Where are you with treatment?</div>
+        <p class="qhelp">This helps us show only what applies to you right now.</p>
+        <button class="opt-btn" type="button" aria-pressed="false">I haven't started treatment yet</button>
+        <button class="opt-btn" type="button" aria-pressed="false">I'm in treatment now</button>
+        <button class="opt-btn" type="button" aria-pressed="false">I finished treatment</button>
+        <button class="opt-btn notsure" type="button" aria-pressed="false">I'm not sure</button>
+        <a class="infolink" href="#" onclick="return false">Why we ask this</a>
+        <p class="privacyline">Your answers never leave this device.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="note">
+    <p><strong>About the City of Hope blue.</strong> Their public materials use a bright process blue, roughly the chip below. Used at button scale it reads clinical, so options A and B carry a darkened, softened version (#2E5F86) that sits comfortably next to the real thing. Before any co-branding, we should get the official brand palette and assets from Estella's team rather than rebuilding from documents.</p>
+    <div class="cohrow"><div class="cohchip"></div><span>City of Hope blue as printed in the PDFs (approximate, verify with their brand guide)</span></div>
+    <p>Every option ships with a matching dark mode, and the app is built on swap-in-place tokens, so changing the pick later (or adding official brand colors) is a one-file change.</p>
+  </div>
+</main>
+
+<script>
+  document.querySelectorAll('.phone').forEach(function (phone) {
+    phone.querySelectorAll('.opt-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        phone.querySelectorAll('.opt-btn').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+        btn.setAttribute('aria-pressed', 'true');
+      });
+    });
+  });
+</script>

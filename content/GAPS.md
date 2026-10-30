@@ -5,11 +5,12 @@ Last reviewed: 2026-10-30. Things the product spec needs that the current source
 ## Decisions from Helen (2026-10-30)
 
 - C1 and C2 approved: D4 (dated July 31, 2025 — always show the date) is the insurance and financial-aid source; D2's financial section and resource list are never cited. Feedback note for Estella: `content/NOTE-FOR-ESTELLA.md`.
-- Gap 1 (option-eligibility logic): approved to use the ASCO 2025 guideline as a source. In progress.
-- Gap 2 (egg-freezing timeline etc.): find the most reputable online source and show Helen BEFORE using it. In progress; not yet approved.
-- Gap 3 (ovarian suppression): Helen asked what it is; include only if the ASCO guideline supports discussing it. Pending research.
-- Gap 4 (2026 CA IVF law): verify it exists and find a citable source. In progress.
-- Gap 7 (survivor labs): include; use the language the sourced guideline/clinic materials use.
+- Gap 1 (option-eligibility logic): approved to use the ASCO 2025 guideline as a source. DONE 2026-10-30: recommendations extracted (via the COG endorsement PDF that reproduces them, since JCO full text is paywalled) into `content/sources/asco-2025.md`. Named risk-category tables still need the paywalled full text; listed there under "Not found."
+- Gap 2 (egg-freezing timeline etc.): find the most reputable online source and show Helen BEFORE using it. Candidates memo in progress (`content/sources/patient-education-source-candidates.md`); not yet approved.
+- Gap 3 (ovarian suppression): RESOLVED by ASCO 2025 (Rec 4.8, conditional): GnRH agonists should NOT be used in place of established methods, MAY be offered as an adjunct in breast cancer, and may help in oncologic emergencies (e.g., menstrual suppression). Hormonal gonadoprotection in males: recommended against (strong/high). Show as a short, honest "you may hear about this" note on relevant paths only.
+- Gap 4 (2026 CA IVF law): VERIFIED 2026-10-30. It is SB 729 (signed 2024-09-29), delayed by AB 116 to plans issued/amended/renewed on or after Jan 1, 2026; CalPERS July 1, 2027. Large-group fully insured must cover infertility treatment incl. IVF (3 completed oocyte retrievals, unlimited embryo transfers); small group offer-only; individual market, self-funded ERISA, and religious employers excluded. Inclusive infertility definition (individual or with partner; nondiscrimination incl. marital status/orientation). Full citations: `content/sources/ca-ivf-law-2026.md`. Note: whether SB 729 itself covers "fertility preservation services" is asserted by advocates but undefined in statute; flagged there.
+- Gap 5 (Medi-Cal): CONFIRMED still No as of 2026-10-30. SB 729 expressly excludes Medi-Cal managed care; D4's answer stands. The Medi-Cal branch says so plainly and routes to financial aid.
+- Gap 7 (survivor labs): partially sourced. ASCO 2025: ovarian reserve assessed via AMH and antral follicle count; "there may be no oocyte yield within 3 months of last chemotherapy dose" (closest sourced analog to the "100 days" figure; use ASCO's wording). FSH/LH not addressed in readable ASCO sources; keep hunting or wait for Hannah's doc.
 - Gap 11 (partner clinics): RESOLVED. There is no partner list. List all clinics the source docs recommend, using the docs' own framing (a resource list, explicitly not an endorsement). No "partner" labels anywhere.
 - Post-launch: scheduled background tracker to detect when the insurance content goes stale (AFP legislation map, DMHC). Build at checkpoint 4.
 
