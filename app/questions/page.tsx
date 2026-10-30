@@ -6,6 +6,8 @@ import { nextQuestion, prevQuestion, questionSequence } from "../../lib/flow";
 import { questions } from "../../lib/questions";
 import { buildResults } from "../../lib/results";
 import { appContent } from "../../content/app/content";
+import clinicsData from "../../data/clinics.json";
+import type { Clinic } from "../../lib/types";
 import { eraseEverything, loadProgress, saveProgress } from "../../lib/storage";
 import QuestionScreen from "../../components/QuestionScreen";
 import ResultsView from "../../components/ResultsView";
@@ -64,7 +66,14 @@ export default function QuestionsPage() {
   }
 
   if (current === "results") {
-    return <ResultsView results={buildResults(answers, appContent)} onStartOver={startOver} />;
+    return (
+      <ResultsView
+        results={buildResults(answers, appContent)}
+        clinics={clinicsData as unknown as Clinic[]}
+        zip={answers.zip}
+        onStartOver={startOver}
+      />
+    );
   }
 
   const def = questions[current];

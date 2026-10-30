@@ -3,7 +3,9 @@
 import { useState } from "react";
 import type { Results } from "../lib/results";
 import type { PreservationOption } from "../lib/content-schema";
+import type { Clinic } from "../lib/types";
 import Cite from "./Cite";
+import ClinicsSection from "./ClinicsSection";
 
 function StatusBadge({ option }: { option: PreservationOption }) {
   const label =
@@ -80,9 +82,13 @@ function OptionCard({ option, forceOpen }: { option: PreservationOption; forceOp
 
 export default function ResultsView({
   results,
+  clinics,
+  zip,
   onStartOver,
 }: {
   results: Results;
+  clinics: Clinic[];
+  zip?: string | null;
   onStartOver: () => void;
 }) {
   const [printing, setPrinting] = useState(false);
@@ -175,6 +181,8 @@ export default function ResultsView({
           </ul>
         </section>
       )}
+
+      {clinics.length > 0 && <ClinicsSection clinics={clinics} zip={zip} />}
 
       <footer className="border-line mt-2 flex flex-col gap-4 border-t pt-5">
         <button
