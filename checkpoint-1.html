@@ -1,0 +1,276 @@
+<title>Navigator Checkpoint 1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED;
+    --card: #FFFFFF;
+    --ink: #283029;
+    --muted: #5F6962;
+    --line: #E0DDD4;
+    --accent: #38654C;
+    --accent-ink: #2C523D;
+    --accent-tint: #E2EBE2;
+    --accent-contrast: #FFFFFF;
+    --warn-bg: #F4E9DC;
+    --warn-ink: #7A4E24;
+    --shadow: 0 1px 2px rgba(40,48,41,.06), 0 6px 20px rgba(40,48,41,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D;
+      --card: #242B26;
+      --ink: #E9E7DF;
+      --muted: #A7B0A8;
+      --line: #39423B;
+      --accent: #8FBF9F;
+      --accent-ink: #A5CDB2;
+      --accent-tint: #2C3A31;
+      --accent-contrast: #16201A;
+      --warn-bg: #3A3127;
+      --warn-ink: #DCB888;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D;
+    --card: #242B26;
+    --ink: #E9E7DF;
+    --muted: #A7B0A8;
+    --line: #39423B;
+    --accent: #8FBF9F;
+    --accent-ink: #A5CDB2;
+    --accent-tint: #2C3A31;
+    --accent-contrast: #16201A;
+    --warn-bg: #3A3127;
+    --warn-ink: #DCB888;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  main { max-width: 740px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2, h3 { font-family: Literata, Georgia, serif; font-weight: 600; line-height: 1.25; text-wrap: balance; }
+  h1 { font-size: 2.1rem; margin: 8px 0 4px; }
+  h2 { font-size: 1.45rem; margin: 56px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 28px 0 8px; }
+  p { margin: 10px 0; max-width: 66ch; }
+  a { color: var(--accent-ink); }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700;
+    color: var(--accent-ink); margin: 0;
+  }
+  .sub { color: var(--muted); margin-top: 4px; }
+  .lede { font-size: 1.08rem; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+  th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 8px 12px 6px 0; border-bottom: 1px solid var(--ink); }
+  td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:first-child { white-space: nowrap; font-weight: 700; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 20px; margin: 14px 0; box-shadow: var(--shadow);
+  }
+  .card h3 { margin-top: 0; }
+  .decision { border-left: 4px solid var(--accent); }
+  .conflict { background: var(--warn-bg); border: none; }
+  .conflict h3, .conflict strong { color: var(--warn-ink); }
+  .conflict { color: var(--ink); }
+
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+
+  /* Flow spine */
+  .flow { list-style: none; padding: 0; margin: 20px 0; }
+  .flow > li { position: relative; padding: 0 0 18px 34px; }
+  .flow > li::before {
+    content: ""; position: absolute; left: 10px; top: 26px; bottom: -4px; width: 2px; background: var(--line);
+  }
+  .flow > li:last-child::before { display: none; }
+  .flow > li::after {
+    content: ""; position: absolute; left: 4px; top: 8px; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--card); border: 3px solid var(--accent);
+  }
+  .flow .qnum { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .flow .qtext { font-family: Literata, Georgia, serif; font-weight: 600; font-size: 1.02rem; }
+  .flow .qmeta { font-size: .88rem; color: var(--muted); max-width: 60ch; }
+  .chip {
+    display: inline-block; font-size: .72rem; font-weight: 700; padding: 2px 9px; border-radius: 99px;
+    background: var(--accent-tint); color: var(--accent-ink); margin-left: 6px; vertical-align: 1px;
+  }
+  .fork { background: var(--card); border: 1px dashed var(--accent); border-radius: 10px; padding: 12px 16px; margin: 8px 0 4px; font-size: .9rem; }
+  .fork strong { font-family: Literata, Georgia, serif; }
+
+  /* Palette */
+  .swatches { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0; }
+  .swatch { width: 118px; }
+  .swatch .chipbox { height: 64px; border-radius: 8px; border: 1px solid var(--line); }
+  .swatch .name { font-weight: 700; font-size: .82rem; margin-top: 6px; }
+  .swatch .hex { font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .specimen { display: grid; gap: 4px; margin: 12px 0 4px; }
+  .specimen .serif { font-family: Literata, Georgia, serif; font-size: 1.5rem; font-weight: 600; }
+  .specimen .sans { font-size: 1rem; }
+  .specimen .why { font-size: .88rem; color: var(--muted); max-width: 62ch; }
+
+  /* Phone mock */
+  .phone-wrap { display: flex; justify-content: center; margin: 28px 0 8px; }
+  .phone {
+    width: 340px; border-radius: 34px; background: var(--card); border: 1px solid var(--line);
+    box-shadow: var(--shadow); padding: 22px 20px 26px; box-sizing: border-box;
+  }
+  .phone .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .backbtn { background: none; border: none; color: var(--accent-ink); font: inherit; font-size: .92rem; font-weight: 700; cursor: pointer; padding: 6px 8px 6px 0; }
+  .dots { display: flex; gap: 6px; }
+  .dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+  .dots span.done { background: var(--accent); }
+  .dots span.now { background: var(--accent); outline: 2px solid var(--accent-tint); outline-offset: 2px; }
+  .phone h3.q { font-size: 1.3rem; margin: 6px 0 4px; }
+  .phone .qhelp { font-size: .9rem; color: var(--muted); margin: 0 0 16px; }
+  .opt {
+    display: block; width: 100%; text-align: left; box-sizing: border-box;
+    background: var(--paper); color: var(--ink); border: 1.5px solid var(--line); border-radius: 12px;
+    font: inherit; font-size: 1.02rem; font-weight: 700; padding: 16px 16px; margin: 10px 0; cursor: pointer;
+  }
+  .opt .optsub { display: block; font-weight: 400; font-size: .85rem; color: var(--muted); margin-top: 2px; }
+  .opt:hover { border-color: var(--accent); }
+  .opt:focus-visible, .backbtn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .opt[aria-pressed="true"] { background: var(--accent-tint); border-color: var(--accent); }
+  .opt.notsure { border-style: dashed; font-weight: 400; }
+  .phone .privacyline { font-size: .78rem; color: var(--muted); text-align: center; margin: 14px 0 0; }
+  .caption { text-align: center; font-size: .85rem; color: var(--muted); max-width: 52ch; margin: 0 auto; }
+
+  .footer { margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+  @media (prefers-reduced-motion: no-preference) {
+    .opt { transition: border-color .15s ease, background .15s ease; }
+  }
+</style>
+
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Checkpoint 1</h1>
+  <p class="sub">Source inventory, gaps, question flow, and design direction. October 30, 2026. Nothing is built past this point.</p>
+
+  <p class="lede">I read all four of Estella's PDFs in full. The short version: the toolkit from UC San Diego is strong on insurance and costs and will carry most of Part 3. But the documents support much less medical content than the kickoff assumes, including none of the procedure walkthroughs, and there are two places where a document is simply out of date. Decisions I need from you are marked below.</p>
+
+  <h2>1 · What the documents give us</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Doc</th><th>What it is</th><th>What it supports</th></tr>
+    <tr><td>D1</td><td>Fertility Resources List (City of Hope flyer, undated)</td><td>16 clinic and resource names with phone and URL, including HRC Fertility. Seed list for the clinic dataset, nothing more. One URL has a typo in the source.</td></tr>
+    <tr><td>D2</td><td>Ability to Have Children info sheet (City of Hope, sources dated June 2017)</td><td>Plain-language basics: chemo and radiation can cause temporary or permanent infertility, the factors involved, a list of chemo drugs known to affect fertility, and brief mention of shielding and ovarian transposition. Oldest tier of evidence; its financial section is unusable (see conflict C1).</td></tr>
+    <tr><td>D3</td><td>CancerCon 2026 take-home sheet</td><td>Mostly links. Names the guideline bodies (ASCO 2025, ASRM, COG) and the financial aid organizations. Confirms UCSD publishes the CED calculator Hannah's document will relate to.</td></tr>
+    <tr><td>D4</td><td>UCSD Moores + Alliance for Fertility Preservation benefit-mandates toolkit, updated July 31, 2025 (40 pages)</td><td>The workhorse. Citable costs (egg freezing $12,400 per cycle plus ~$5,000 meds; sperm banking $500 to $1,000; storage $200 to $500 per year). State-by-state mandate matrix. SB 600 and the Knox-Keene basis for California coverage. A full patient benefit-verification phone script with CPT codes, an appeals guide (4-day urgent timeline), a glossary, and a financial aid table with real eligibility detail.</td></tr>
+  </table>
+  </div>
+  <p>Full inventory with page-level citations: <code>content/INVENTORY.md</code>. Gaps and conflicts: <code>content/GAPS.md</code>.</p>
+
+  <h2>2 · Gaps and the two conflicts</h2>
+
+  <div class="card conflict">
+    <h3>Conflict C1: insurance coverage</h3>
+    <p>D2 (2017) says preservation procedures are "usually not covered" by insurance. D4 (2025) says California commercial fully-insured plans are mandated to cover them under SB 600 (2019). D2 simply predates the law. <strong>Proposed: use D4 for all insurance content, never cite D2's financial section.</strong></p>
+  </div>
+  <div class="card conflict">
+    <h3>Conflict C2: dead organization</h3>
+    <p>D2 points patients to Fertile Hope and its Sharing Hope program as a live organization. Fertile Hope was absorbed into Livestrong years ago; D4 lists only Livestrong Fertility. <strong>Proposed: use D4's financial aid table, never D2's resource list.</strong></p>
+  </div>
+
+  <h3>The gaps that matter most</h3>
+  <ul>
+    <li><strong>No document maps situations to options.</strong> Which options fit a 24-year-old with ovaries who hasn't started chemo, versus someone mid-treatment, is the core of the tool and is not in these PDFs. Likely source: the ASCO 2025 guideline that D3 and D4 both cite. I need either that document or your sign-off to pull it as a source.</li>
+    <li><strong>No procedure walkthroughs.</strong> The egg-freezing timeline (10 to 14 days of shots, retrieval under sedation) and the sperm, embryo, and ovarian tissue equivalents appear nowhere. Needs a patient-education source.</li>
+    <li><strong>Ovarian suppression during treatment</strong> is in your spec and in zero documents. It stays hidden until sourced.</li>
+    <li><strong>The 2026 California IVF law is not in any document.</strong> And D4 states Medi-Cal did NOT cover fertility preservation as of June 1, 2025, which shapes the Medi-Cal branch until we verify what the new law changed.</li>
+    <li><strong>Survivor labs (AMH, FSH, LH) and the 100-days-after-chemo timing</strong>: not in the documents. Expected in Hannah's risk document.</li>
+    <li><strong>Partner-clinic labels need your written list.</strong> The source docs explicitly say their clinic lists are not endorsements, so the "partner" designation has to come from you, not from them.</li>
+  </ul>
+  <p>The full list (15 gaps) is in <code>content/GAPS.md</code>.</p>
+
+  <h2>3 · The question flow</h2>
+  <p>Ten questions, one per screen. The treatment-stage question moved up to Q2 because it forks everything after it: survivors get a different results spine (testing and current options, no pre-treatment urgency), and nobody gets asked a question that doesn't apply to them. "Not sure" always routes to real content, never a dead end.</p>
+
+  <ol class="flow">
+    <li><span class="qnum">Welcome</span><div class="qtext">What this tool is, what it never asks, about 3 minutes</div></li>
+    <li><span class="qnum">Q1</span><div class="qtext">Who is this for?</div><div class="qmeta">Just me / me and my partner. "Just me" listed first; most users are single.</div></li>
+    <li><span class="qnum">Q2</span><div class="qtext">Where are you with treatment?</div>
+      <div class="fork"><strong>The fork.</strong> Haven't started / in treatment / finished. "Finished" asks how long ago and switches the results page to the survivor spine.</div></li>
+    <li><span class="qnum">Q3</span><div class="qtext">How old are you?</div></li>
+    <li><span class="qnum">Q4</span><div class="qtext">Which describes your body?</div><div class="qmeta">Asked as anatomy (ovaries and/or uterus, testes), with self-describe and prefer-not-to-say. One line on why it matters. Draft wording is open question 1 for you.</div></li>
+    <li><span class="qnum">Q5</span><div class="qtext">What type of cancer? <span class="chip">optional</span></div><div class="qmeta">Only feeds the questions-for-your-doctor list. Open question: keep in v1?</div></li>
+    <li><span class="qnum">Q6</span><div class="qtext">What treatment is planned or happened?</div><div class="qmeta">Multi-select: chemo, radiation (with body region), surgery, transplant, not sure. Chemo drug names optional, held for the risk module.</div></li>
+    <li><span class="qnum">Q7</span><div class="qtext">How do you feel about having children someday?</div><div class="qmeta">Yes / maybe / not sure / no. "No" still ends with a short, pressure-free results page.</div></li>
+    <li><span class="qnum">Q8</span><div class="qtext">What health insurance do you have?</div><div class="qmeta">CA job/private plan, Medi-Cal, other, none, don't know. "Don't know" routes to the D4 benefit-verification guide. Never asks for IDs or plan names.</div></li>
+    <li><span class="qnum">Q9</span><div class="qtext">Does your partner have insurance through work? <span class="chip">only if partnered</span></div></li>
+    <li><span class="qnum">Q10</span><div class="qtext">ZIP code <span class="chip">optional</span></div><div class="qmeta">"Used only to measure distance to clinics on this device. It never leaves your phone."</div></li>
+    <li><span class="qnum">Results</span><div class="qtext">Options that fit, what each involves, costs with sources, insurance path, financial aid, questions for your doctor, clinic map, PDF download</div></li>
+  </ol>
+
+  <h2>4 · Design direction</h2>
+  <p>Warm paper with a green-gray cast, ink that leans green instead of black, and a single deep fir accent. Calm and alive without being a wellness brand, and nowhere near hospital blue. Headings in Literata, a warm book serif. Body text in Atkinson Hyperlegible, which the Braille Institute designed for low-vision readers; for an audience that includes people reading through chemo fatigue on a phone, the accessible face is also the right aesthetic choice.</p>
+
+  <div class="swatches">
+    <div class="swatch"><div class="chipbox" style="background:#F6F3ED"></div><div class="name">Paper</div><div class="hex">#F6F3ED</div></div>
+    <div class="swatch"><div class="chipbox" style="background:#283029"></div><div class="name">Ink</div><div class="hex">#283029</div></div>
+    <div class="swatch"><div class="chipbox" style="background:#38654C"></div><div class="name">Fir (accent)</div><div class="hex">#38654C</div></div>
+    <div class="swatch"><div class="chipbox" style="background:#E2EBE2"></div><div class="name">Fir tint</div><div class="hex">#E2EBE2</div></div>
+    <div class="swatch"><div class="chipbox" style="background:#5F6962"></div><div class="name">Muted</div><div class="hex">#5F6962</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="serif">Your options, at your pace.</div>
+    <div class="sans">Every question is optional, and "not sure" is always a real answer. Your answers stay on this phone.</div>
+    <div class="why">Literata 600 for headings. Atkinson Hyperlegible 400/700 for everything else. Minimum 17px body, AA contrast throughout, tap targets at least 48px tall.</div>
+  </div>
+
+  <h3>Sample screen (tap the options)</h3>
+  <div class="phone-wrap">
+    <div class="phone" role="group" aria-label="Sample question screen">
+      <div class="topbar">
+        <button class="backbtn" type="button">&#8592; Back</button>
+        <div class="dots" aria-label="Question 2 of 10">
+          <span class="done"></span><span class="now"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <h3 class="q">Where are you with treatment?</h3>
+      <p class="qhelp">This helps us show only what applies to you right now.</p>
+      <button class="opt" type="button" aria-pressed="false">I haven't started treatment yet</button>
+      <button class="opt" type="button" aria-pressed="false">I'm in treatment now</button>
+      <button class="opt" type="button" aria-pressed="false">I finished treatment<span class="optsub">We'll ask how long ago</span></button>
+      <button class="opt notsure" type="button" aria-pressed="false">I'm not sure</button>
+      <p class="privacyline">Your answers never leave this device.</p>
+    </div>
+  </div>
+  <p class="caption">One question per screen, visible progress, back always available, "not sure" styled as a calm, legitimate choice rather than an afterthought.</p>
+
+  <h2>5 · Decisions I need from you</h2>
+  <div class="card decision">
+    <ol>
+      <li>Approve the two conflict resolutions (drop D2's financial section and resource list in favor of D4).</li>
+      <li>May I use the ASCO 2025 fertility preservation guideline (cited by D3 and D4) as the source for option-eligibility logic and procedure explainers, or will Estella send patient-education documents instead?</li>
+      <li>Who sources the 2026 California IVF law text? It is in no document, and it decides what the survivor and Medi-Cal branches say.</li>
+      <li>Q4 anatomy wording: my draft, or Estella's team?</li>
+      <li>Keep the optional cancer-type question in v1?</li>
+      <li>Your written partner-clinic list, whenever ready.</li>
+      <li>Design direction yes/no: fir green on warm paper, Literata + Atkinson Hyperlegible.</li>
+    </ol>
+  </div>
+
+  <p class="footer">Unbranded per kickoff. Repo: <code>~/navigator</code> · sources in <code>source-docs/estella/</code> · citations in <code>content/INVENTORY.md</code> · gaps in <code>content/GAPS.md</code> · flow in <code>content/FLOW.md</code>. Nothing further gets built until checkpoint 1 is approved.</p>
+</main>
+
+<script>
+  document.querySelectorAll('.opt').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.opt').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      btn.setAttribute('aria-pressed', 'true');
+    });
+  });
+</script>
