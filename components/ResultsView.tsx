@@ -205,7 +205,7 @@ export default function ResultsView({
         </button>
         <p className="text-muted text-xs">
           Your answers never left this device. Last reviewed {results.lastReviewed}. Every fact
-          above shows its source and date.
+          above shows its source and date. <a className="underline" href="/sources">All sources</a>
         </p>
       </footer>
     </main>
