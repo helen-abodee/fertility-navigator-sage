@@ -1,0 +1,163 @@
+import type { Citation } from "../../lib/types";
+
+/**
+ * Citation factories for the approved sources. Every factory stamps the
+ * retrieval date the source was read or re-verified for this content
+ * (2026-10-30). See content/app/README.md for provenance.
+ */
+
+const RETRIEVED = "2026-10-30";
+
+/** D4: UCSD Moores + Alliance for Fertility Preservation toolkit (PDF page numbers). */
+export function d4(page: number): Citation {
+  return {
+    sourceId: "D4",
+    sourceName:
+      "UC San Diego Moores Cancer Center & Alliance for Fertility Preservation toolkit",
+    page,
+    sourceDate: "2025-07-31",
+    retrieved: RETRIEVED,
+  };
+}
+
+/**
+ * ASCO 2025 guideline update (Su et al., J Clin Oncol 2025), read via the
+ * Children's Oncology Group endorsement PDF, which reproduces the
+ * recommendations verbatim. `rec` is the ASCO recommendation number
+ * (e.g. "4.10") or statement label (e.g. "GPS 6.4").
+ */
+export function asco(rec: string): Citation {
+  return {
+    sourceId: "asco-2025",
+    sourceName: `ASCO 2025 Fertility Preservation Guideline, Recommendation ${rec} (via COG endorsement)`,
+    url: "https://childrensoncologygroup.org/wp-content/uploads/2026/05/COG_SC_Fertility_Guideline_Document_27AUG2025-new-logo.pdf",
+    sourceDate: "2025-03-19",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** SB 729 / SB 600 research notes: cite the specific URL that backs the fact. */
+export function sb729(sourceName: string, url: string): Citation {
+  return {
+    sourceId: "sb729",
+    sourceName,
+    url,
+    retrieved: RETRIEVED,
+  };
+}
+
+/** Memorial Sloan Kettering: Sperm Banking (last updated 2024-02-22). */
+export function mskSpermBanking(): Citation {
+  return {
+    sourceId: "mskcc-sperm-banking",
+    sourceName: "Memorial Sloan Kettering: Sperm Banking",
+    url: "https://www.mskcc.org/cancer-care/patient-education/sperm-banking",
+    sourceDate: "2024-02-22",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** MSKCC: Fertility Preservation Before Cancer Treatment, ovaries and uterus (2019-10-23). */
+export function mskPreTreatment(): Citation {
+  return {
+    sourceId: "mskcc-fp-before-treatment",
+    sourceName:
+      "Memorial Sloan Kettering: Fertility Preservation Before Cancer Treatment (ovaries and uterus)",
+    url: "https://www.mskcc.org/cancer-care/patient-education/fertility-preservation-females-starting-treatment",
+    sourceDate: "2019-10-23",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** MSKCC: Fertility Evaluation and Preservation After Cancer Treatment, ovaries and uterus (2019-10-23). */
+export function mskAfterTreatment(): Citation {
+  return {
+    sourceId: "mskcc-fp-after-treatment",
+    sourceName:
+      "Memorial Sloan Kettering: Fertility Evaluation and Preservation After Cancer Treatment (ovaries and uterus)",
+    url: "https://www.mskcc.org/cancer-care/patient-education/fertility-evaluation-and-preservation-options-females-who-have-completed-treatment",
+    sourceDate: "2019-10-23",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** MSKCC: Building Your Family After Cancer Treatment, for people born with testicles (2023-06-21). */
+export function mskBuildingFamily(): Citation {
+  return {
+    sourceId: "mskcc-building-family-testicles",
+    sourceName:
+      "Memorial Sloan Kettering: Building Your Family After Cancer Treatment (people born with testicles)",
+    url: "https://www.mskcc.org/cancer-care/patient-education/building-family-born-with-testicles",
+    sourceDate: "2023-06-21",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** ASRM ReproductiveFacts.org: Fertility Preservation patient journey (no date shown on page). */
+export function asrmJourney(): Citation {
+  return {
+    sourceId: "asrm-fp-journey",
+    sourceName: "ASRM ReproductiveFacts.org: Fertility Preservation Journey",
+    url: "https://www.reproductivefacts.org/patient-journeys/fertility-preservation/",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** ASRM ReproductiveFacts.org: Cancer and its impact on sperm fact sheet (revised 2023). */
+export function asrmSperm(): Citation {
+  return {
+    sourceId: "asrm-sperm-factsheet",
+    sourceName:
+      "ASRM ReproductiveFacts.org: Cancer and its impact on sperm, cryopreservation, and fertility",
+    url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/cancer-and-its-impact-on-sperm/",
+    sourceDate: "2023",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** Children's Oncology Group Health Link: Testicular Reproductive Health, v6.0 (Oct 2023). */
+export function cogTesticular(): Citation {
+  return {
+    sourceId: "cog-testicular-v6",
+    sourceName:
+      "Children's Oncology Group Health Link: Testicular and Reproductive Health after Cancer Treatment, v6.0",
+    url: "https://childrensoncologygroup.org/wp-content/uploads/2026/05/30_Testicular_Reproductive_Health_v6-secured.pdf",
+    sourceDate: "2023-10",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** Children's Oncology Group Health Link: Ovarian Reproductive Health, v6.0 (Oct 2023). */
+export function cogOvarian(): Citation {
+  return {
+    sourceId: "cog-ovarian-v6",
+    sourceName:
+      "Children's Oncology Group Health Link: Ovarian and Reproductive Health after Cancer Treatment, v6.0",
+    url: "https://childrensoncologygroup.org/wp-content/uploads/2026/05/17_Ovarian_Reproductive_Health_v6-secured.pdf",
+    sourceDate: "2023-10",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** American Cancer Society: Preserving Fertility in Children and Teens with Cancer (revised 2025-01-13). */
+export function acsTeens(): Citation {
+  return {
+    sourceId: "acs-children-teens",
+    sourceName:
+      "American Cancer Society: Preserving Fertility in Children and Teens with Cancer",
+    url: "https://www.cancer.org/cancer/managing-cancer/side-effects/fertility/preserving-fertility-in-children-and-teens-with-cancer.html",
+    sourceDate: "2025-01-13",
+    retrieved: RETRIEVED,
+  };
+}
+
+/** NCI: Female Fertility and Cancer Treatment (updated 2025-05-14; public domain phrasing). */
+export function nciFemale(): Citation {
+  return {
+    sourceId: "nci-fertility-women",
+    sourceName: "National Cancer Institute: Female Fertility and Cancer Treatment",
+    url: "https://www.cancer.gov/about-cancer/treatment/side-effects/fertility-women",
+    sourceDate: "2025-05-14",
+    retrieved: RETRIEVED,
+  };
+}
