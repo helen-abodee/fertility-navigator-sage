@@ -1,0 +1,93 @@
+<title>Navigator Iteration 1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2, h3 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 68ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 6px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 16px; }
+  .stat b { font-family: Literata, Georgia, serif; font-size: 1.2rem; display: block; }
+  .stat span { font-size: .8rem; color: var(--muted); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin: 12px 0; }
+  .card.flag { border-left: 4px solid var(--accent); }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 1</h1>
+  <p class="sub">First working build, October 30, 2026. Everything below runs locally in <code>~/navigator</code> (<code>npm run dev</code>).</p>
+
+  <div class="stats">
+    <div class="stat"><b>29 + 5</b><span>unit tests + e2e, all green</span></div>
+    <div class="stat"><b>~150</b><span>citations across the content</span></div>
+    <div class="stat"><b>17</b><span>clinics, 37 mapped locations</span></div>
+    <div class="stat"><b>0</b><span>bytes of answers leaving the device</span></div>
+  </div>
+
+  <h2>The flow, as built</h2>
+  <p>Screens below are the real app on a phone viewport, walking the agreed path: 24 years old, just diagnosed, ovaries, California commercial plan, ZIP 91101.</p>
+  <div class="gallery">
+    <div class="shot"><img src="shots/01-welcome.png" alt="Welcome screen"><p>Welcome. Plain promise up front: skippable questions, answers stay on the device.</p></div>
+    <div class="shot"><img src="shots/02-q-who.png" alt="Who is this for question"><p>Q1. "Just me" listed first.</p></div>
+    <div class="shot"><img src="shots/03-q-stage.png" alt="Treatment stage question"><p>Q2, the fork. "I'm not sure" is a real answer.</p></div>
+    <div class="shot"><img src="shots/04-q-anatomy.png" alt="Anatomy question"><p>Anatomy asked as organs, with self-describe and rather-not-say.</p></div>
+    <div class="shot"><img src="shots/05-results-top.png" alt="Results page top"><p>Results. Only matching options; every card cites its source.</p></div>
+    <div class="shot"><img src="shots/06-egg-steps.png" alt="Egg freezing steps"><p>Egg freezing, step by step: 10 to 12 days of shots, retrieval under sedation, yearly storage.</p></div>
+    <div class="shot"><img src="shots/07-insurance.png" alt="Insurance guidance"><p>SB 600 branch: what to say on the phone, the 4-day urgent appeal.</p></div>
+    <div class="shot"><img src="shots/08-aid.png" alt="Financial aid list"><p>Financial aid from the UCSD/AFP toolkit, caps only where published.</p></div>
+    <div class="shot"><img src="shots/09-clinics.png" alt="Clinic map and filters"><p>Clinics: filters, OSM map, distances computed on-device from the ZIP.</p></div>
+    <div class="shot"><img src="shots/10-footer.png" alt="Results footer"><p>On-device summary (browser builds the PDF) and "start over and erase."</p></div>
+  </div>
+
+  <h2>What's inside</h2>
+  <ul>
+    <li><strong>All 10 questions</strong> with back, progress, skip, and "not sure" everywhere; survivor fork and partner-only insurance question. The anti-anxiety rule is enforced in code: a skipped or "not sure" answer can never hide content, only a definite answer narrows it.</li>
+    <li><strong>Cited content:</strong> 7 preservation options (steps, timelines, honest expectations, costs), 8 guidance sections (SB 600 script, SB 729 for survivors, Medi-Cal honesty, benefit verification, survivor labs by anatomy, semen collection prep, partner plans), 11 aid programs, 16 audience-gated doctor questions. Sources: UCSD/AFP toolkit (July 31, 2025), ASCO 2025 guideline, SB 729 statute research, MSKCC, ASRM, COG, ACS.</li>
+    <li><strong>Clinic directory:</strong> all 16 flyer clinics with the flyer's own words (never an endorsement), plus UC San Diego; 12 HRC Southern California offices under one record; 5 clinics with real published prices, the rest honestly "not published."</li>
+    <li><strong>Privacy held:</strong> no backend, answers in memory, opt-in save to local storage with erase, ZIP distance via a bundled public-domain Census table, map tiles from OpenStreetMap with no key.</li>
+    <li><strong>Risk module:</strong> returns "coming soon" for every input by test, pending Hannah's document.</li>
+  </ul>
+
+  <h2>Found while building (for your radar)</h2>
+  <div class="card flag">
+    <ul>
+      <li><strong>The flyer's clinic world has shifted:</strong> California Fertility Partners is now Pinnacle Fertility Los Angeles; USC Fertility was absorbed into HRC in 2021; the Oncofertility Consortium moved from Northwestern to Michigan State; California Cryobank's oncofertility site (fertile-future.com) is gone. All recorded with proving URLs in <code>content/sources/clinics-provenance.md</code>. Worth adding to the Estella note later.</li>
+      <li><strong>Two sites blocked fetching</strong> (USC Fertility returns errors, Western Fertility blocks bots), so their fields read "not published" until checked by hand.</li>
+      <li><strong>Content gaps</strong> the writers hit (TESE patient-level detail, GnRH agonist cost, most aid caps) are appended to <code>content/GAPS.md</code> items 16 to 22.</li>
+    </ul>
+  </div>
+
+  <h2>Not in this iteration</h2>
+  <ul>
+    <li>Risk assessment logic (blocked on Hannah's document).</li>
+    <li>Checkpoint 4 items: reading-level pass, full claim audit, accessibility audit, deploy preview, and the insurance staleness tracker.</li>
+    <li>Polish: welcome-page design, question transitions, print-summary layout refinement.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · run locally with <code>npm run dev</code> · tests <code>npm test</code> and <code>npm run e2e</code> · sources page at <code>/sources</code> · unbranded throughout.</p>
+</main>
