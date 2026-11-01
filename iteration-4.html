@@ -1,0 +1,81 @@
+<title>Navigator Iteration 4</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 68ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 4</h1>
+  <p class="sub">November 1, 2026. Built for you to walk through yourself.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Walk through it here:</strong><br>
+    <a href="https://navigator-nv93g750k-helen-abodees-projects.vercel.app">navigator-nv93g750k-helen-abodees-projects.vercel.app</a></p>
+    <p style="margin-bottom:0">It will ask you to sign in to Vercel once (your helen-abodee account) because deployment protection is on, which keeps the unreviewed tool private. When you want Estella or Hannah to try it, say the word and I'll turn protection off or add a shareable link. Locally: <code>cd ~/navigator && npm run dev</code>.</p>
+  </div>
+
+  <h2>What changed</h2>
+  <ul>
+    <li><strong>Risk gets its own moment.</strong> After the last question you land on a single calm screen: your group, two short lines, "See my options." Results then carry just a one-line recap.</li>
+    <li><strong>Sources are out of the way.</strong> Every fact still carries its citations, but on screen they're a small collapsed "Sources" tap. The printed summary expands them automatically, and /sources still lists everything.</li>
+    <li><strong>The coverage checker.</strong> "Will insurance pay for this?" now walks them through it: how they get insurance (9 choices, military asks member vs family), whether the plan is California-based, self-funded vs fully insured, and for survivors, group size. Out comes a verdict chip (Likely covered / Depends / Likely not) with a headline, two sentences, and a stepped action list: the exact phone script wording from the toolkit, what to write down, the 4-day urgent appeal, aid when uncovered. Medi-Cal and no-insurance answers prefill straight to their verdicts. All of it from the UCSD/AFP toolkit plus the SB 600/SB 729 research, with "likely" language and a verify step on every covered verdict.</li>
+    <li><strong>Animation, gently.</strong> Step icons pop as you swipe to them, the option icon breathes on its detail page, timeline and next-step lists cascade in. All of it disabled automatically for people with reduced-motion set.</li>
+    <li><strong>Less text everywhere.</strong> The long insurance guidance cards are now collapsed behind their headings (the checker replaces most of their job), the options list dropped its helper line, and the risk screen says its piece in three short blocks.</li>
+  </ul>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/05-risk-reveal.png" alt="Risk reveal screen"><p>The risk screen: group chip, headline, short text, continue.</p></div>
+    <div class="shot"><img src="shots/07-coverage-verdict.png" alt="Coverage checker verdict"><p>The coverage checker's verdict after three taps: Likely covered, SB 600, and the call script.</p></div>
+    <div class="shot"><img src="shots/05b-results-top.png" alt="Results with slim risk recap"><p>Results now open with a one-line risk recap, then straight to options.</p></div>
+    <div class="shot"><img src="shots/06b-egg-detail.png" alt="Egg freezing detail"><p>Option detail, now with pop-in icons and collapsed sources.</p></div>
+  </div>
+
+  <h2>QA that ran</h2>
+  <ul>
+    <li>Red-green TDD on the coverage engine: 10 scenario tests written failing first (CA fully insured, self-funded, unknown funding, SB 729 large/small group, Medi-Cal, Medicare, military member vs dependent, out-of-state, uninsured, never-promise check).</li>
+    <li>52 unit tests + 6 end-to-end browser tests green, including two new full journeys: the coverage checker path and a survivor-on-Medi-Cal path checking the honest no-coverage verdict.</li>
+    <li>Browser console checked clean across the full flow; production build clean. (The red "1 Issue" bubble in dev screenshots is Next's dev-tools button; it doesn't exist on the deployed site.)</li>
+    <li>On A/B testing: there's no analytics by design, so nothing can measure variants in the field. TDD plus your walkthrough is the honest version; if you ever want real A/B, that's a privacy-architecture conversation first.</li>
+  </ul>
+
+  <h2>Gaps, as requested</h2>
+  <ul>
+    <li><strong>Plan-specific dollar amounts</strong> (deductible, copays) are unknowable without asking the user to type them in from their plan documents. Buildable as an optional "enter your deductible" refinement if you want it.</li>
+    <li><strong>The large/small group threshold:</strong> our sources say large-group plans must cover and small-group must only be offered, but don't define the employee cutoff, so the checker sends people to HR for that one word rather than quoting a number.</li>
+    <li><strong>CDI-regulated policies:</strong> the research flags that CDI (as opposed to DMHC) guidance on SB 729 is thinner; the checker doesn't distinguish the two regulators. Likely fine for v1.</li>
+    <li><strong>Hannah's risk document</strong> still slots into <code>lib/risk/rules.ts</code> whenever it arrives.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · coverage engine <code>lib/coverage.ts</code> + <code>tests/coverage.test.ts</code> · deployed preview above.</p>
+</main>
