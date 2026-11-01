@@ -1,0 +1,81 @@
+<title>Navigator Iteration 2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2, h3 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 68ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin: 12px 0; }
+  .card.flag { border-left: 4px solid var(--accent); }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 8px 12px 6px 0; border-bottom: 1px solid var(--ink); }
+  td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .table-wrap { overflow-x: auto; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 2</h1>
+  <p class="sub">November 1, 2026. Everything from your iteration-1 feedback, plus the risk assessment, built from published frameworks ahead of Hannah's document.</p>
+
+  <h2>What changed, point by point</h2>
+  <div class="table-wrap"><table>
+    <tr><th>Your note</th><th>What was done</th></tr>
+    <tr><td>Privacy policy with a checkbox in the first flow</td><td>Welcome is now just the headline, a Start button that stays disabled until "I've read the privacy policy" is checked, and the policy itself is a real page at /privacy. Caveat you asked for: nothing is collected, so the gate is not legally required and costs one tap; easy to soften to a plain link later if Estella's team prefers.</td></tr>
+    <tr><td>Cut the subtexts, just the question and the answers</td><td>Every helper sentence and answer sub-line is gone. Optional questions carry a single small "optional" tag.</td></tr>
+    <tr><td>Remove the per-screen privacy line</td><td>Removed everywhere; the policy page and the results footer link carry it now.</td></tr>
+    <tr><td>Ask the diagnosis after the body question</td><td>"What is your diagnosis?" follows anatomy, now a structured list of 11 common AYA cancers plus "something else," "not sure," and skip. It feeds the risk assessment.</td></tr>
+    <tr><td>Risk assessment before the options</td><td>Built and live: the results page now opens with "Will treatment affect your fertility?" The flow also gained two conditional questions that feed it: chemo medicine names (only if chemo) and where radiation is aimed (only if radiation).</td></tr>
+  </table></div>
+
+  <h2>How the risk assessment works</h2>
+  <div class="card flag">
+    <p>It returns a <strong>named group from published guidelines</strong>, never a percentage for the person: Higher risk group, In-between, Lower, Depends on your dose, or Not enough to say. Sources: the Livestrong/Fertile Hope risk charts (recovered in full from archived PDFs), the ESMO 2020 guideline tables, and the Children's Oncology Group survivorship guidelines. The full extraction, including conflicts between sources, lives in <code>content/sources/risk-framework.md</code>.</p>
+    <p>The honest part: every published framework keys its fine detail to total dose and cycle count, which patients don't know. So the tool confidently bands what is bandable without numbers (transplant conditioning is high everywhere; an alkylating drug plus pelvic radiation is high; cisplatin plans are intermediate for ovaries; cyclophosphamide breast regimens under 30 are lower) and says "depends on your dose, ask your team for it (they may call it CED)" for the rest, instead of guessing. Every answer ends with the same line: this is a guideline group, not a prediction about you.</p>
+    <p>When Hannah's document arrives, it gets reconciled against this; the module is one file and the categories are tested.</p>
+  </div>
+
+  <h2>The build, after the changes</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/01-welcome.png" alt="Welcome screen with privacy checkbox"><p>Welcome: headline, Start, privacy checkbox. Nothing else.</p></div>
+    <div class="shot"><img src="shots/02-q-who.png" alt="Who is this for"><p>Questions are now just question + answers.</p></div>
+    <div class="shot"><img src="shots/04b-q-diagnosis.png" alt="Diagnosis question"><p>Structured diagnosis list, after anatomy.</p></div>
+    <div class="shot"><img src="shots/04c-q-chemo.png" alt="Chemo medicines question"><p>Chemo medicine names, only when chemo was selected.</p></div>
+    <div class="shot"><img src="shots/05b-risk.png" alt="Risk panel"><p>The risk group opens the results, cited, with the exact question to ask the care team.</p></div>
+    <div class="shot"><img src="shots/06-egg-steps.png" alt="Egg freezing steps"><p>Options follow, unchanged from iteration 1.</p></div>
+    <div class="shot"><img src="shots/09-clinics.png" alt="Clinics"><p>Clinics and map, unchanged.</p></div>
+    <div class="shot"><img src="shots/10-footer.png" alt="Footer"><p>Footer: summary download, erase, sources and privacy links.</p></div>
+  </div>
+
+  <h2>For Monday's conversation with Hannah</h2>
+  <ul>
+    <li>The one thing money can't buy online: <strong>ASCO 2025's own risk tables are paywalled</strong>, and the public COG endorsement reproduces only the recommendations. If Hannah has institutional access, her sending the tables (or her own document) upgrades our citations from "ASCO 2006 as adapted by ESMO 2020" to the current guideline.</li>
+    <li>Worth asking whether their team uses the Livestrong five-band chart, ESMO's tables, or UCSD's CRISP bands, so our labels match what patients hear in clinic.</li>
+  </ul>
+
+  <p class="footer">39 unit + 4 e2e tests green · repo <code>~/navigator</code> · <code>npm run dev</code> to click through · risk sources in <code>content/sources/risk-framework.md</code>.</p>
+</main>
