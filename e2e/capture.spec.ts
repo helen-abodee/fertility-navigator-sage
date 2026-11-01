@@ -43,6 +43,11 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.waitForTimeout(600);
   await page.screenshot({ path: `${OUT}/05-results-top.png` });
 
+  await page
+    .getByRole("heading", { name: "Will treatment affect your fertility?" })
+    .scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${OUT}/05b-risk.png` });
+
   const eggCard = page.locator("section", {
     has: page.getByRole("heading", { name: "Egg freezing" }),
   });

@@ -13,6 +13,7 @@ Last reviewed: 2026-10-30. Things the product spec needs that the current source
 - Gap 7 (survivor labs): partially sourced. ASCO 2025: ovarian reserve assessed via AMH and antral follicle count; "there may be no oocyte yield within 3 months of last chemotherapy dose" (closest sourced analog to the "100 days" figure; use ASCO's wording). FSH/LH not addressed in readable ASCO sources; keep hunting or wait for Hannah's doc.
 - Gap 11 (partner clinics): RESOLVED. There is no partner list. List all clinics the source docs recommend, using the docs' own framing (a resource list, explicitly not an endorsement). No "partner" labels anywhere.
 - Post-launch: scheduled background tracker to detect when the insurance content goes stale (AFP legislation map, DMHC). Build at checkpoint 4.
+- Gap 8 (risk logic) UPDATE 2026-11-01: Helen approved building v1 from published public frameworks before Hannah's document arrives (she loops back with Hannah Monday). Implemented in lib/risk/ from content/sources/risk-framework.md (Livestrong/Fertile Hope charts as spine, ESMO 2020, COG LTFU v6). Output is a guideline CATEGORY plus care-team prompt, never a probability; everything dose- or cycle-keyed falls back to "depends on dose" honestly. MUST be reconciled against Hannah's document when it lands; conflicts table lives in the risk-framework memo. ASCO 2025's own risk tables remain unread (paywalled); do not cite ASCO 2025 for any band.
 
 ## Blocking for checkpoint 2 (the one real-content path)
 

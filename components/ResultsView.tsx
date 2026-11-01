@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Results } from "../lib/results";
 import type { PreservationOption } from "../lib/content-schema";
+import type { RiskAssessment } from "../lib/risk";
 import type { Clinic } from "../lib/types";
 import Cite from "./Cite";
 import ClinicsSection from "./ClinicsSection";
@@ -82,11 +83,13 @@ function OptionCard({ option, forceOpen }: { option: PreservationOption; forceOp
 
 export default function ResultsView({
   results,
+  risk,
   clinics,
   zip,
   onStartOver,
 }: {
   results: Results;
+  risk: RiskAssessment;
   clinics: Clinic[];
   zip?: string | null;
   onStartOver: () => void;
@@ -113,6 +116,19 @@ export default function ResultsView({
           and your care team, at your pace.
         </p>
       </header>
+
+      <section className="border-line bg-card rounded-2xl border p-5" aria-label="Fertility risk">
+        <div className="flex items-start justify-between gap-3">
+          <h2 className="text-xl">Will treatment affect your fertility?</h2>
+          <span className="bg-accent-tint text-accent-ink rounded-full px-3 py-0.5 text-xs font-bold whitespace-nowrap">
+            {risk.label}
+          </span>
+        </div>
+        <p className="mt-2 font-bold">{risk.headline}</p>
+        <p className="mt-1 text-[0.98rem]">{risk.body}</p>
+        <p className="mt-2 text-[0.95rem]">{risk.askTeam}</p>
+        <Cite citations={risk.citations} />
+      </section>
 
       {results.options.length > 0 && (
         <div className="flex flex-col gap-4">

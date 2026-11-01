@@ -5,6 +5,7 @@ import type { Answers, QuestionId } from "../../lib/types";
 import { nextQuestion, prevQuestion, questionSequence } from "../../lib/flow";
 import { questions } from "../../lib/questions";
 import { buildResults } from "../../lib/results";
+import { assessRisk } from "../../lib/risk";
 import { appContent } from "../../content/app/content";
 import clinicsData from "../../data/clinics.json";
 import type { Clinic } from "../../lib/types";
@@ -69,6 +70,7 @@ export default function QuestionsPage() {
     return (
       <ResultsView
         results={buildResults(answers, appContent)}
+        risk={assessRisk(answers)}
         clinics={clinicsData as unknown as Clinic[]}
         zip={answers.zip}
         onStartOver={startOver}

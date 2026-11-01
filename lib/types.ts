@@ -28,7 +28,8 @@ export type ChemoAgent =
   | "melphalan"
   | "procarbazine"
   | "carmustine_lomustine"
-  | "cisplatin_carboplatin"
+  | "cisplatin"
+  | "carboplatin"
   | "other"
   | "not_sure";
 

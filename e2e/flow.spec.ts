@@ -84,6 +84,10 @@ test("the checkpoint path shows real, cited content", async ({ page }) => {
     .click();
   await page.getByRole("button", { name: "Skip this question" }).click();
 
+  // Risk panel leads the results, category from published frameworks
+  await expect(page.getByRole("heading", { name: "Will treatment affect your fertility?" })).toBeVisible();
+  await expect(page.getByText("Lower risk group", { exact: true })).toBeVisible();
+
   // Options that fit: egg freezing shown with steps on demand; sperm banking hidden
   await expect(page.getByRole("heading", { name: "Egg freezing" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sperm banking" })).not.toBeVisible();
