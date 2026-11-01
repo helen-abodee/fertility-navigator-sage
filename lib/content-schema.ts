@@ -19,6 +19,8 @@ export interface Step {
   body: string;
   /** e.g. "about 10 to 14 days" - only when the source supports it */
   duration?: string;
+  /** icon key rendered by the UI icon set */
+  icon?: string;
 }
 
 export interface CostLine {
@@ -27,6 +29,16 @@ export interface CostLine {
   range: string;
   note?: string;
   citations: Citation[];
+  /** machine-readable version of `range` for the on-device cost estimator; omit when not published */
+  amount?: { min: number; max: number; per: "once" | "year" };
+}
+
+/** A sourced, personal "what would this look like for me" timeline segment. */
+export interface PlanSegment {
+  label: string;
+  icon?: string;
+  /** duration in days, [min, max]; omit for same-day moments */
+  days?: [number, number];
 }
 
 /** Conditions are data, matched by the results engine. Empty array = any. */
@@ -63,6 +75,8 @@ export interface PreservationOption {
   stepsCitations: Citation[];
   /** e.g. "From first visit to freezing: usually about 2 weeks." */
   timeline?: string;
+  /** personal timeline model; only when the sources support the durations */
+  plan?: { segments: PlanSegment[]; note?: string; citations: Citation[] };
   /** honest expectations: results vary, storage continues yearly, etc. */
   expectations: string;
   expectationsCitations: Citation[];

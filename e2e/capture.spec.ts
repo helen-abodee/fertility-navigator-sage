@@ -48,12 +48,20 @@ test("capture iteration screenshots", async ({ page }) => {
     .scrollIntoViewIfNeeded();
   await page.screenshot({ path: `${OUT}/05b-risk.png` });
 
-  const eggCard = page.locator("section", {
-    has: page.getByRole("heading", { name: "Egg freezing" }),
-  });
-  await eggCard.getByRole("button", { name: "What actually happens, step by step" }).click();
-  await eggCard.scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/06-egg-steps.png` });
+  await page.getByRole("heading", { name: "Your options" }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${OUT}/06-option-rows.png` });
+
+  await page.getByRole("button", { name: /Egg freezing/ }).click();
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: `${OUT}/06b-egg-detail.png` });
+  await page.getByRole("button", { name: "Go to step 2" }).click();
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: `${OUT}/06c-egg-step2.png` });
+  await page.getByRole("button", { name: "What would this look like for me?" }).click();
+  await page.getByText("If you paid the published prices yourself").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${OUT}/06d-timeline-cost.png` });
+  await page.getByRole("button", { name: "Back to results" }).first().click();
+  await page.waitForTimeout(300);
 
   await page
     .getByRole("heading", { name: "Your California plan should cover fertility preservation" })

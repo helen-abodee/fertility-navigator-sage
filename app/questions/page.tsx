@@ -72,6 +72,8 @@ export default function QuestionsPage() {
         results={buildResults(answers, appContent)}
         risk={assessRisk(answers)}
         clinics={clinicsData as unknown as Clinic[]}
+        insurance={answers.insurance}
+        stage={answers.stage}
         zip={answers.zip}
         onStartOver={startOver}
       />

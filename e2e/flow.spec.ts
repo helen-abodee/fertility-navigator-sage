@@ -88,14 +88,21 @@ test("the checkpoint path shows real, cited content", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Will treatment affect your fertility?" })).toBeVisible();
   await expect(page.getByText("Lower risk group", { exact: true })).toBeVisible();
 
-  // Options that fit: egg freezing shown with steps on demand; sperm banking hidden
-  await expect(page.getByRole("heading", { name: "Egg freezing" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Sperm banking" })).not.toBeVisible();
-  await page
-    .locator("section", { has: page.getByRole("heading", { name: "Egg freezing" }) })
-    .getByRole("button", { name: "What actually happens, step by step" })
-    .click();
+  // Options as tappable rows: egg freezing shown, sperm banking hidden
+  await expect(page.getByRole("button", { name: /Egg freezing/ })).toBeVisible();
+  await expect(page.getByText("You collect semen samples", { exact: false })).not.toBeVisible();
+
+  // Open the detail: swipeable steps, personal timeline, cost estimator
+  await page.getByRole("button", { name: /Egg freezing/ }).click();
+  await expect(page.getByText("Step 1 of 4")).toBeVisible();
+  await page.getByRole("button", { name: "Go to step 2" }).click();
+  await expect(page.getByText("Hormone shots", { exact: false }).first()).toBeVisible();
+  await page.getByRole("button", { name: "What would this look like for me?" }).click();
+  await expect(page.getByText("about 10 to 12 days").first()).toBeVisible();
+  await expect(page.getByText("If you paid the published prices yourself")).toBeVisible();
+  await expect(page.getByText("Your California plan should cover fertility preservation before treatment", { exact: false })).toBeVisible();
   await expect(page.getByText("Source:", { exact: false }).first()).toBeVisible();
+  await page.getByRole("button", { name: "Back to results" }).first().click();
 
   // Insurance branch: SB 600 guidance for CA commercial, pre-treatment
   await expect(

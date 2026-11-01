@@ -4,80 +4,52 @@ import { useState } from "react";
 import type { Results } from "../lib/results";
 import type { PreservationOption } from "../lib/content-schema";
 import type { RiskAssessment } from "../lib/risk";
-import type { Clinic } from "../lib/types";
+import type { Clinic, InsuranceType, TreatmentStage } from "../lib/types";
 import Cite from "./Cite";
 import ClinicsSection from "./ClinicsSection";
+import OptionDetail from "./OptionDetail";
+import Icon, { optionIcon } from "./icons";
 
-function StatusBadge({ option }: { option: PreservationOption }) {
-  const label =
-    option.status === "established"
-      ? "Established"
-      : option.status === "adjunct"
-        ? "Sometimes added on"
-        : "Still being studied";
+function OptionRow({ option, onOpen }: { option: PreservationOption; onOpen: () => void }) {
   return (
-    <span className="bg-accent-tint text-accent-ink rounded-full px-3 py-0.5 text-xs font-bold">
-      {label}
-    </span>
+    <button
+      type="button"
+      onClick={onOpen}
+      className="border-line bg-card flex w-full items-center gap-4 rounded-2xl border p-4 text-left"
+    >
+      <span className="bg-accent-tint text-accent-ink flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
+        <Icon name={optionIcon[option.id] ?? "clipboard"} size={26} />
+      </span>
+      <span className="flex-1">
+        <span className="block text-lg font-bold">{option.name}</span>
+        <span className="text-muted block text-sm">{option.shortDescription}</span>
+      </span>
+      <span className="text-accent-ink text-xl" aria-hidden="true">
+        &rsaquo;
+      </span>
+    </button>
   );
 }
 
-function OptionCard({ option, forceOpen }: { option: PreservationOption; forceOpen?: boolean }) {
-  const [openState, setOpen] = useState(false);
-  const open = forceOpen || openState;
+/** Print-only expansion so the on-device summary still carries the details. */
+function OptionPrint({ option }: { option: PreservationOption }) {
   return (
-    <section className="border-line bg-card rounded-2xl border p-5">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-xl">{option.name}</h3>
-        <StatusBadge option={option} />
-      </div>
-      <p className="mt-2">{option.shortDescription}</p>
-      {option.statusNote && <p className="text-muted mt-1 text-sm">{option.statusNote}</p>}
-      <Cite citations={option.citations} />
-
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        className="text-accent-ink mt-3 text-sm font-bold underline print:hidden"
-      >
-        {open ? "Hide the steps" : "What actually happens, step by step"}
-      </button>
-
-      {open && (
-        <div className="mt-3 flex flex-col gap-3">
-          <ol className="flex flex-col gap-3">
-            {option.steps.map((step, i) => (
-              <li key={i} className="border-line border-l-2 pl-3">
-                <p className="font-bold">
-                  {i + 1}. {step.title}
-                  {step.duration && <span className="text-muted font-normal"> · {step.duration}</span>}
-                </p>
-                <p className="text-[0.95rem]">{step.body}</p>
-              </li>
-            ))}
-          </ol>
-          <Cite citations={option.stepsCitations} />
-          {option.timeline && <p className="text-sm font-bold">{option.timeline}</p>}
-          <p className="text-[0.95rem]">{option.expectations}</p>
-          <Cite citations={option.expectationsCitations} />
-          {option.costs.length > 0 && (
-            <div className="bg-paper rounded-xl p-3">
-              <p className="text-sm font-bold">What it can cost</p>
-              {option.costs.map((c, i) => (
-                <div key={i} className="mt-2">
-                  <p className="text-[0.95rem]">
-                    {c.label}: <strong>{c.range}</strong>
-                  </p>
-                  {c.note && <p className="text-muted text-sm">{c.note}</p>}
-                  <Cite citations={c.citations} />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </section>
+    <div className="hidden print:block">
+      <ol className="mt-2 pl-5">
+        {option.steps.map((s, i) => (
+          <li key={i} className="text-sm">
+            <strong>{s.title}</strong>
+            {s.duration ? ` (${s.duration})` : ""}: {s.body}
+          </li>
+        ))}
+      </ol>
+      {option.costs.map((c, i) => (
+        <p key={i} className="text-sm">
+          {c.label}: {c.range}
+        </p>
+      ))}
+      <p className="text-sm">{option.expectations}</p>
+    </div>
   );
 }
 
@@ -85,24 +57,34 @@ export default function ResultsView({
   results,
   risk,
   clinics,
+  insurance,
+  stage,
   zip,
   onStartOver,
 }: {
   results: Results;
   risk: RiskAssessment;
   clinics: Clinic[];
+  insurance?: InsuranceType;
+  stage?: TreatmentStage;
   zip?: string | null;
   onStartOver: () => void;
 }) {
-  const [printing, setPrinting] = useState(false);
+  const [openOption, setOpenOption] = useState<PreservationOption | null>(null);
 
   function downloadSummary() {
-    // Expand every section, then let the browser build the PDF on-device.
-    setPrinting(true);
-    setTimeout(() => {
-      window.print();
-      setPrinting(false);
-    }, 50);
+    setTimeout(() => window.print(), 50);
+  }
+
+  if (openOption) {
+    return (
+      <OptionDetail
+        option={openOption}
+        insurance={insurance}
+        stage={stage}
+        onClose={() => setOpenOption(null)}
+      />
+    );
   }
 
   return (
@@ -111,10 +93,6 @@ export default function ResultsView({
         <h1 className="text-3xl">
           {results.survivorSpine ? "Where you stand now, and what can help" : "Options that may fit your situation"}
         </h1>
-        <p className="text-muted mt-2">
-          This is information, not advice. Decisions about fertility preservation belong with you
-          and your care team, at your pace.
-        </p>
       </header>
 
       <section className="border-line bg-card rounded-2xl border p-5" aria-label="Fertility risk">
@@ -131,12 +109,16 @@ export default function ResultsView({
       </section>
 
       {results.options.length > 0 && (
-        <div className="flex flex-col gap-4">
-          {!results.survivorSpine && <h2 className="text-xl">Your options</h2>}
+        <section className="flex flex-col gap-3">
+          <h2 className="text-xl">Your options</h2>
+          <p className="text-muted -mt-2 text-sm">Tap one to see the steps, your timeline, and costs.</p>
           {results.options.map((o) => (
-            <OptionCard key={o.id} option={o} forceOpen={printing} />
+            <div key={o.id}>
+              <OptionRow option={o} onOpen={() => setOpenOption(o)} />
+              <OptionPrint option={o} />
+            </div>
           ))}
-        </div>
+        </section>
       )}
 
       {results.guidance.map((g) => (
@@ -215,7 +197,7 @@ export default function ResultsView({
         <button
           type="button"
           onClick={onStartOver}
-          className="border-line bg-card min-h-12 rounded-xl border px-4 py-3 font-bold"
+          className="border-line bg-card min-h-12 rounded-xl border px-4 py-3 font-bold print:hidden"
         >
           Start over and erase everything
         </button>
