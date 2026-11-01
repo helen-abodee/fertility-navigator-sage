@@ -5,7 +5,7 @@ describe("risk module placeholder", () => {
   it("returns 'coming soon' for any input until the clinical document arrives", () => {
     expect(assessRisk({})).toEqual({ status: "coming_soon" });
     expect(
-      assessRisk({ treatments: ["chemo", "radiation"], age: 24, anatomy: "ovaries_uterus", chemoDrugs: "cyclophosphamide" }),
+      assessRisk({ treatments: ["chemo", "radiation"], age: 24, anatomy: "ovaries_uterus", chemoAgents: ["cyclophosphamide"] }),
     ).toEqual({ status: "coming_soon" });
   });
 

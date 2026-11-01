@@ -13,7 +13,8 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.goto("/");
   await page.screenshot({ path: `${OUT}/01-welcome.png` });
 
-  await page.getByRole("link", { name: "Start" }).click();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Start" }).click();
   await page.screenshot({ path: `${OUT}/02-q-who.png` });
 
   await page.getByRole("button", { name: "Just me" }).click();
@@ -25,12 +26,16 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.screenshot({ path: `${OUT}/04-q-anatomy.png` });
 
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
-  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.screenshot({ path: `${OUT}/04b-q-diagnosis.png` });
+  await page.getByRole("button", { name: "Breast cancer" }).click();
   await page.getByRole("button", { name: "Chemotherapy" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.screenshot({ path: `${OUT}/04c-q-chemo.png` });
+  await page.getByRole("button", { name: "Cyclophosphamide (Cytoxan)" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page
-    .getByRole("button", { name: "A plan through a job, or a private plan, based in California" })
+    .getByRole("button", { name: "A job-based or private plan in California" })
     .click();
   await page.getByPlaceholder("5-digit ZIP").fill("91101");
   await page.getByRole("button", { name: "Continue" }).click();

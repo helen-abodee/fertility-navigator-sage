@@ -7,7 +7,8 @@ import { test, expect } from "@playwright/test";
  */
 test("the checkpoint path walks end to end on a phone", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Start" }).click();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Start" }).click();
 
   await expect(page.getByRole("heading", { name: "Who is this for?" })).toBeVisible();
   await page.getByRole("button", { name: "Just me" }).click();
@@ -20,16 +21,20 @@ test("the checkpoint path walks end to end on a phone", async ({ page }) => {
 
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
 
-  await expect(page.getByRole("heading", { name: "What type of cancer?" })).toBeVisible();
-  await page.getByRole("button", { name: "Skip this question" }).click();
+  await expect(page.getByRole("heading", { name: "What is your diagnosis?" })).toBeVisible();
+  await page.getByRole("button", { name: "Breast cancer" }).click();
 
   await page.getByRole("button", { name: "Chemotherapy" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+
+  await expect(page.getByRole("heading", { name: "Do you know which chemo medicines?" })).toBeVisible();
+  await page.getByRole("button", { name: "Cyclophosphamide (Cytoxan)" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
 
   await page.getByRole("button", { name: "Yes, I want to" }).click();
 
   await page
-    .getByRole("button", { name: "A plan through a job, or a private plan, based in California" })
+    .getByRole("button", { name: "A job-based or private plan in California" })
     .click();
 
   await expect(page.getByRole("heading", { name: "Your ZIP code" })).toBeVisible();
@@ -38,7 +43,7 @@ test("the checkpoint path walks end to end on a phone", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Options that may fit your situation" }),
   ).toBeVisible();
-  await expect(page.getByText("Your answers never left this device.", { exact: false })).toBeVisible();
+  await expect(page.getByText("Last reviewed", { exact: false })).toBeVisible();
 });
 
 test("back works and the survivor fork asks how long ago", async ({ page }) => {
@@ -52,9 +57,13 @@ test("back works and the survivor fork asks how long ago", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Where are you with treatment?" })).toBeVisible();
 });
 
-test("every question screen carries the privacy line", async ({ page }) => {
-  await page.goto("/questions");
-  await expect(page.getByText("Your answers never leave this device.")).toBeVisible();
+test("the welcome gate requires the privacy checkbox before Start", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: "Start" })).toBeDisabled();
+  await expect(page.getByRole("link", { name: "privacy policy" })).toBeVisible();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Start" }).click();
+  await expect(page.getByRole("heading", { name: "Who is this for?" })).toBeVisible();
 });
 
 test("the checkpoint path shows real, cited content", async ({ page }) => {
@@ -64,12 +73,14 @@ test("the checkpoint path shows real, cited content", async ({ page }) => {
   await page.getByPlaceholder("Your age").fill("24");
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
-  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "Breast cancer" }).click();
   await page.getByRole("button", { name: "Chemotherapy" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Cyclophosphamide (Cytoxan)" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page
-    .getByRole("button", { name: "A plan through a job, or a private plan, based in California" })
+    .getByRole("button", { name: "A job-based or private plan in California" })
     .click();
   await page.getByRole("button", { name: "Skip this question" }).click();
 

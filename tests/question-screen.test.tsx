@@ -67,10 +67,27 @@ describe("QuestionScreen", () => {
     expect(screen.getByText("← Back")).toBeInTheDocument();
   });
 
-  it("shows the privacy line on every screen", () => {
+  it("marks the ZIP question as optional", () => {
     render(
       <QuestionScreen def={questions.zip} stepIndex={8} stepCount={9} onAnswer={() => {}} onBack={() => {}} />,
     );
-    expect(screen.getByText("Your answers never leave this device.")).toBeInTheDocument();
+    expect(screen.getByText("optional")).toBeInTheDocument();
+  });
+
+  it("chemo medicines: picking a drug clears 'I don't know the names'", () => {
+    const onAnswer = vi.fn();
+    render(
+      <QuestionScreen
+        def={questions.chemo_drugs}
+        stepIndex={6}
+        stepCount={10}
+        onAnswer={onAnswer}
+        onBack={() => {}}
+      />,
+    );
+    fireEvent.click(screen.getByText("I don't know the names"));
+    fireEvent.click(screen.getByText("Cyclophosphamide (Cytoxan)"));
+    fireEvent.click(screen.getByText("Continue"));
+    expect(onAnswer).toHaveBeenCalledWith(["cyclophosphamide"]);
   });
 });

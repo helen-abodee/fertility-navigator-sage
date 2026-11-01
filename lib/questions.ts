@@ -1,8 +1,9 @@
 import type { Answers, QuestionId } from "./types";
 
 /**
- * UI copy for the click-through. Copy rules: plain language, no pressure,
- * "not sure" is a first-class answer, optional questions say why we ask.
+ * UI copy for the click-through. Kept deliberately spare: the question and the
+ * answers, nothing else. "Not sure" is a first-class answer. Optional
+ * questions are marked optional and skippable, not explained at length.
  */
 
 export type QuestionKind = "single" | "multi" | "number" | "text";
@@ -10,7 +11,6 @@ export type QuestionKind = "single" | "multi" | "number" | "text";
 export interface QuestionOption {
   value: string;
   label: string;
-  sub?: string;
   notSure?: boolean;
 }
 
@@ -19,7 +19,7 @@ export interface QuestionDef {
   field: keyof Answers;
   kind: QuestionKind;
   heading: string;
-  help?: string;
+  optional?: boolean;
   options?: QuestionOption[];
   skippable?: boolean;
   placeholder?: string;
@@ -32,7 +32,6 @@ export const questions: Record<QuestionId, QuestionDef> = {
     field: "whoFor",
     kind: "single",
     heading: "Who is this for?",
-    help: "Either answer works. Many people here are going through this on their own.",
     options: [
       { value: "me", label: "Just me" },
       { value: "me_and_partner", label: "Me and my partner" },
@@ -43,11 +42,10 @@ export const questions: Record<QuestionId, QuestionDef> = {
     field: "stage",
     kind: "single",
     heading: "Where are you with treatment?",
-    help: "This helps us show only what applies to you right now.",
     options: [
       { value: "not_started", label: "I haven't started treatment yet" },
       { value: "in_treatment", label: "I'm in treatment now" },
-      { value: "finished", label: "I finished treatment", sub: "We'll ask how long ago" },
+      { value: "finished", label: "I finished treatment" },
       { value: "not_sure", label: "I'm not sure", notSure: true },
     ],
   },
@@ -68,7 +66,6 @@ export const questions: Record<QuestionId, QuestionDef> = {
     field: "age",
     kind: "number",
     heading: "How old are you?",
-    help: "Age changes which options fit and which financial help you may qualify for.",
     skippable: true,
     placeholder: "Your age",
     inputMode: "numeric",
@@ -78,30 +75,40 @@ export const questions: Record<QuestionId, QuestionDef> = {
     field: "anatomy",
     kind: "single",
     heading: "Which describes your body?",
-    help: "Fertility options depend on the organs involved, not on identity. We ask so we only show what applies to you.",
     options: [
       { value: "ovaries_uterus", label: "I have ovaries, a uterus, or both" },
       { value: "testes", label: "I have testes" },
-      { value: "self_describe", label: "I'd describe it differently", sub: "We'll show information for every body" },
-      { value: "prefer_not_to_say", label: "I'd rather not say", sub: "We'll show information for every body", notSure: true },
+      { value: "self_describe", label: "I'd describe it differently" },
+      { value: "prefer_not_to_say", label: "I'd rather not say", notSure: true },
     ],
   },
   cancer_type: {
     id: "cancer_type",
     field: "cancerType",
-    kind: "text",
-    heading: "What type of cancer?",
-    help: "Optional. Only used to tailor the questions you might ask your doctor.",
+    kind: "single",
+    heading: "What is your diagnosis?",
     skippable: true,
-    placeholder: "For example: breast cancer, Hodgkin lymphoma",
-    inputMode: "text",
+    options: [
+      { value: "breast", label: "Breast cancer" },
+      { value: "hodgkin", label: "Hodgkin lymphoma" },
+      { value: "non_hodgkin", label: "Non-Hodgkin lymphoma" },
+      { value: "leukemia", label: "Leukemia" },
+      { value: "testicular", label: "Testicular cancer" },
+      { value: "thyroid", label: "Thyroid cancer" },
+      { value: "sarcoma", label: "Sarcoma (bone or soft tissue)" },
+      { value: "brain_cns", label: "Brain or spinal cord tumor" },
+      { value: "gyn", label: "Cervical, ovarian, or uterine cancer" },
+      { value: "colorectal", label: "Colorectal cancer" },
+      { value: "melanoma", label: "Melanoma" },
+      { value: "other", label: "Something else" },
+      { value: "not_sure", label: "I'm not sure", notSure: true },
+    ],
   },
   treatments: {
     id: "treatments",
     field: "treatments",
     kind: "multi",
     heading: "What treatment is planned, or what did you have?",
-    help: "Choose everything that applies. It's okay not to know yet.",
     options: [
       { value: "chemo", label: "Chemotherapy" },
       { value: "radiation", label: "Radiation" },
@@ -110,12 +117,42 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "not_sure", label: "I'm not sure yet", notSure: true },
     ],
   },
+  chemo_drugs: {
+    id: "chemo_drugs",
+    field: "chemoAgents",
+    kind: "multi",
+    heading: "Do you know which chemo medicines?",
+    options: [
+      { value: "cyclophosphamide", label: "Cyclophosphamide (Cytoxan)" },
+      { value: "ifosfamide", label: "Ifosfamide" },
+      { value: "busulfan", label: "Busulfan" },
+      { value: "melphalan", label: "Melphalan" },
+      { value: "procarbazine", label: "Procarbazine" },
+      { value: "carmustine_lomustine", label: "Carmustine or lomustine" },
+      { value: "cisplatin_carboplatin", label: "Cisplatin or carboplatin" },
+      { value: "other", label: "Different ones" },
+      { value: "not_sure", label: "I don't know the names", notSure: true },
+    ],
+  },
+  radiation_area: {
+    id: "radiation_area",
+    field: "radiationArea",
+    kind: "single",
+    heading: "Where is the radiation aimed?",
+    options: [
+      { value: "head", label: "Head or brain" },
+      { value: "chest", label: "Chest" },
+      { value: "abdomen_pelvis", label: "Belly or pelvis" },
+      { value: "arms_legs", label: "Arms or legs" },
+      { value: "other", label: "Somewhere else, or my whole body" },
+      { value: "not_sure", label: "I'm not sure", notSure: true },
+    ],
+  },
   feelings: {
     id: "feelings",
     field: "feelings",
     kind: "single",
     heading: "How do you feel about having children someday?",
-    help: "There is no right answer, and feelings can change.",
     options: [
       { value: "yes", label: "Yes, I want to" },
       { value: "maybe", label: "Maybe" },
@@ -128,13 +165,12 @@ export const questions: Record<QuestionId, QuestionDef> = {
     field: "insurance",
     kind: "single",
     heading: "What health insurance do you have?",
-    help: "We never ask for your member ID, policy number, or plan name.",
     options: [
-      { value: "ca_commercial", label: "A plan through a job, or a private plan, based in California" },
+      { value: "ca_commercial", label: "A job-based or private plan in California" },
       { value: "medi_cal", label: "Medi-Cal" },
-      { value: "other", label: "A different plan, or a plan from another state" },
+      { value: "other", label: "Another plan, or out of state" },
       { value: "none", label: "No insurance right now" },
-      { value: "unknown", label: "I don't know", sub: "We'll show you how to find out", notSure: true },
+      { value: "unknown", label: "I don't know", notSure: true },
     ],
   },
   partner_insurance: {
@@ -142,7 +178,6 @@ export const questions: Record<QuestionId, QuestionDef> = {
     field: "partnerInsurance",
     kind: "single",
     heading: "Does your partner have insurance through work?",
-    help: "A partner's plan can sometimes cover fertility care.",
     options: [
       { value: "yes", label: "Yes" },
       { value: "no", label: "No" },
@@ -154,7 +189,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
     field: "zip",
     kind: "text",
     heading: "Your ZIP code",
-    help: "Optional. Used only to measure distance to clinics, on this device. It never leaves your phone.",
+    optional: true,
     skippable: true,
     placeholder: "5-digit ZIP",
     inputMode: "numeric",

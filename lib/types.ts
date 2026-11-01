@@ -20,6 +20,18 @@ export type TreatmentType = "chemo" | "radiation" | "surgery" | "transplant" | "
 
 export type RadiationArea = "head" | "chest" | "abdomen_pelvis" | "arms_legs" | "other" | "not_sure";
 
+/** Common gonadotoxicity-relevant chemo agents a patient may know by name. */
+export type ChemoAgent =
+  | "cyclophosphamide"
+  | "ifosfamide"
+  | "busulfan"
+  | "melphalan"
+  | "procarbazine"
+  | "carmustine_lomustine"
+  | "cisplatin_carboplatin"
+  | "other"
+  | "not_sure";
+
 export type FeelingsAboutChildren = "yes" | "maybe" | "not_sure" | "no";
 
 export type InsuranceType = "ca_commercial" | "medi_cal" | "other" | "none" | "unknown";
@@ -36,7 +48,7 @@ export interface Answers {
   /** undefined = not reached, null = skipped */
   cancerType?: string | null;
   treatments?: TreatmentType[];
-  chemoDrugs?: string;
+  chemoAgents?: ChemoAgent[];
   radiationArea?: RadiationArea;
   feelings?: FeelingsAboutChildren;
   insurance?: InsuranceType;
@@ -53,6 +65,8 @@ export type QuestionId =
   | "anatomy"
   | "cancer_type"
   | "treatments"
+  | "chemo_drugs"
+  | "radiation_area"
   | "feelings"
   | "insurance"
   | "partner_insurance"

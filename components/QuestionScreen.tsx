@@ -74,8 +74,10 @@ export default function QuestionScreen({
         </div>
       </div>
 
-      <h1 className="text-2xl">{def.heading}</h1>
-      {def.help && <p className="text-muted mt-1 text-[0.95rem]">{def.help}</p>}
+      <h1 className="text-2xl">
+        {def.heading}
+        {def.optional && <span className="text-muted ml-2 align-middle text-sm font-normal">optional</span>}
+      </h1>
 
       <div className="mt-6 flex flex-col gap-3">
         {def.kind === "single" &&
@@ -91,7 +93,6 @@ export default function QuestionScreen({
               } ${opt.notSure ? "border-dashed font-normal" : ""}`}
             >
               {opt.label}
-              {opt.sub && <span className="text-muted block text-sm font-normal">{opt.sub}</span>}
             </button>
           ))}
 
@@ -152,9 +153,6 @@ export default function QuestionScreen({
         )}
       </div>
 
-      <p className="text-muted mt-auto pt-8 text-center text-xs">
-        Your answers never leave this device.
-      </p>
     </div>
   );
 }

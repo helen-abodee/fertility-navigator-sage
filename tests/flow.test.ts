@@ -23,6 +23,20 @@ describe("questionSequence", () => {
     ]);
   });
 
+  it("asks which chemo medicines only when chemo is selected, right after treatments", () => {
+    const answers: Answers = { whoFor: "me", stage: "not_started", treatments: ["chemo"] };
+    const seq = questionSequence(answers);
+    expect(seq.indexOf("chemo_drugs")).toBe(seq.indexOf("treatments") + 1);
+    expect(questionSequence({ treatments: ["surgery"] })).not.toContain("chemo_drugs");
+  });
+
+  it("asks where radiation was aimed only when radiation is selected", () => {
+    const answers: Answers = { treatments: ["chemo", "radiation"] };
+    const seq = questionSequence(answers);
+    expect(seq.indexOf("radiation_area")).toBe(seq.indexOf("chemo_drugs") + 1);
+    expect(questionSequence({ treatments: ["chemo"] })).not.toContain("radiation_area");
+  });
+
   it("asks how long ago only when treatment is finished", () => {
     const answers: Answers = { whoFor: "me", stage: "finished" };
     const seq = questionSequence(answers);

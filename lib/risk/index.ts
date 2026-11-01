@@ -1,4 +1,4 @@
-import type { Anatomy, TreatmentType } from "../types";
+import type { Anatomy, ChemoAgent, TreatmentType } from "../types";
 
 /**
  * Risk assessment module - PLACEHOLDER.
@@ -17,7 +17,7 @@ import type { Anatomy, TreatmentType } from "../types";
 
 export interface RiskInput {
   treatments?: TreatmentType[];
-  chemoDrugs?: string;
+  chemoAgents?: ChemoAgent[];
   age?: number;
   anatomy?: Anatomy;
 }
