@@ -97,3 +97,35 @@ h3 {
     max-width: none;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pop {
+    animation: pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.35) both;
+  }
+  @keyframes pop {
+    from {
+      transform: scale(0.45) rotate(-8deg);
+      opacity: 0;
+    }
+  }
+  .stagger > li {
+    animation: fade-up 0.4s ease-out both;
+  }
+  .stagger > li:nth-child(2) { animation-delay: 0.12s; }
+  .stagger > li:nth-child(3) { animation-delay: 0.24s; }
+  .stagger > li:nth-child(4) { animation-delay: 0.36s; }
+  .stagger > li:nth-child(5) { animation-delay: 0.48s; }
+  @keyframes fade-up {
+    from {
+      transform: translateY(8px);
+      opacity: 0;
+    }
+  }
+  .animate-breathe {
+    animation: breathe 3.2s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+}

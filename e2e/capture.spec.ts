@@ -40,13 +40,11 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.getByPlaceholder("5-digit ZIP").fill("91101");
   await page.getByRole("button", { name: "Continue" }).click();
 
-  await page.waitForTimeout(600);
-  await page.screenshot({ path: `${OUT}/05-results-top.png` });
-
-  await page
-    .getByRole("heading", { name: "Will treatment affect your fertility?" })
-    .scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/05b-risk.png` });
+  await page.waitForTimeout(700);
+  await page.screenshot({ path: `${OUT}/05-risk-reveal.png` });
+  await page.getByRole("button", { name: "See my options" }).click();
+  await page.waitForTimeout(400);
+  await page.screenshot({ path: `${OUT}/05b-results-top.png` });
 
   await page.getByRole("heading", { name: "Your options" }).scrollIntoViewIfNeeded();
   await page.screenshot({ path: `${OUT}/06-option-rows.png` });
@@ -63,10 +61,13 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.getByRole("button", { name: "Back to results" }).first().click();
   await page.waitForTimeout(300);
 
-  await page
-    .getByRole("heading", { name: "Your California plan should cover fertility preservation" })
-    .scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/07-insurance.png` });
+  await page.getByRole("heading", { name: "Will insurance pay for this?" }).scrollIntoViewIfNeeded();
+  await page.getByRole("button", { name: "My job" }).click();
+  await page.getByRole("button", { name: "Yes", exact: true }).click();
+  await page.getByRole("button", { name: "Fully insured" }).click();
+  await page.waitForTimeout(600);
+  await page.getByRole("heading", { name: "Will insurance pay for this?" }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${OUT}/07-coverage-verdict.png` });
 
   const aid = page.getByRole("heading", { name: "Help paying for it" });
   if (await aid.isVisible().catch(() => false)) {

@@ -54,7 +54,7 @@ export default function OptionDetail({
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="bg-accent-tint text-accent-ink flex h-12 w-12 items-center justify-center rounded-full">
+          <span className="bg-accent-tint text-accent-ink animate-breathe flex h-12 w-12 items-center justify-center rounded-full">
             <Icon name={optionIcon[option.id] ?? "clipboard"} size={26} />
           </span>
           <h1 className="text-2xl">{option.name}</h1>
@@ -77,7 +77,9 @@ export default function OptionDetail({
               key={i}
               className="border-line bg-card flex w-full shrink-0 snap-center flex-col items-center rounded-2xl border p-6 text-center"
             >
-              <span className="bg-accent-tint text-accent-ink flex h-14 w-14 items-center justify-center rounded-full">
+              <span
+                className={`bg-accent-tint text-accent-ink flex h-14 w-14 items-center justify-center rounded-full ${i === step ? "animate-pop" : ""}`}
+              >
                 <Icon name={s.icon ?? "clipboard"} size={30} />
               </span>
               <p className="text-muted mt-3 text-xs font-bold tracking-widest uppercase">
@@ -135,7 +137,7 @@ export default function OptionDetail({
             </button>
             {showPlan && (
               <div className="border-line bg-card mt-3 rounded-2xl border p-4">
-                <ol className="flex flex-col gap-0">
+                <ol className="stagger flex flex-col gap-0">
                   {option.plan.segments.map((seg, i) => (
                     <li key={i} className="relative flex gap-3 pb-4 last:pb-0">
                       {i < option.plan!.segments.length - 1 && (

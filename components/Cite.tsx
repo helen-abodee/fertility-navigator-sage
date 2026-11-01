@@ -6,23 +6,34 @@ function fmt(c: Citation): string {
   return `${c.sourceName}${date}${page}`;
 }
 
+/**
+ * Citations stay attached to every fact but out of the reading path: a small
+ * collapsed "Sources" disclosure on screen, expanded plain text in print.
+ */
 export default function Cite({ citations }: { citations: Citation[] }) {
   if (!citations || citations.length === 0) return null;
   const unique = Array.from(new Map(citations.map((c) => [fmt(c), c])).values());
+  const rendered = unique.map((c, i) => (
+    <span key={i}>
+      {i > 0 && "; "}
+      {c.url ? (
+        <a href={c.url} target="_blank" rel="noreferrer" className="underline">
+          {fmt(c)}
+        </a>
+      ) : (
+        fmt(c)
+      )}
+    </span>
+  ));
   return (
-    <p className="text-muted mt-1 text-xs">
-      Source: {unique.map((c, i) => (
-        <span key={i}>
-          {i > 0 && "; "}
-          {c.url ? (
-            <a href={c.url} target="_blank" rel="noreferrer" className="underline">
-              {fmt(c)}
-            </a>
-          ) : (
-            fmt(c)
-          )}
-        </span>
-      ))}
-    </p>
+    <>
+      <details className="mt-1 print:hidden">
+        <summary className="text-muted cursor-pointer list-none text-xs underline decoration-dotted">
+          Sources
+        </summary>
+        <p className="text-muted mt-1 text-xs">{rendered}</p>
+      </details>
+      <p className="text-muted hidden text-xs print:block">Sources: {rendered}</p>
+    </>
   );
 }

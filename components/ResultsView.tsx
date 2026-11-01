@@ -7,6 +7,7 @@ import type { RiskAssessment } from "../lib/risk";
 import type { Clinic, InsuranceType, TreatmentStage } from "../lib/types";
 import Cite from "./Cite";
 import ClinicsSection from "./ClinicsSection";
+import CoverageChecker from "./CoverageChecker";
 import OptionDetail from "./OptionDetail";
 import Icon, { optionIcon } from "./icons";
 
@@ -95,23 +96,16 @@ export default function ResultsView({
         </h1>
       </header>
 
-      <section className="border-line bg-card rounded-2xl border p-5" aria-label="Fertility risk">
-        <div className="flex items-start justify-between gap-3">
-          <h2 className="text-xl">Will treatment affect your fertility?</h2>
-          <span className="bg-accent-tint text-accent-ink rounded-full px-3 py-0.5 text-xs font-bold whitespace-nowrap">
-            {risk.label}
-          </span>
-        </div>
-        <p className="mt-2 font-bold">{risk.headline}</p>
-        <p className="mt-1 text-[0.98rem]">{risk.body}</p>
-        <p className="mt-2 text-[0.95rem]">{risk.askTeam}</p>
-        <Cite citations={risk.citations} />
+      <section className="border-line bg-card flex items-center justify-between gap-3 rounded-2xl border p-4" aria-label="Fertility risk">
+        <p className="font-bold">{risk.headline}</p>
+        <span className="bg-accent-tint text-accent-ink rounded-full px-3 py-0.5 text-xs font-bold whitespace-nowrap">
+          {risk.label}
+        </span>
       </section>
 
       {results.options.length > 0 && (
         <section className="flex flex-col gap-3">
           <h2 className="text-xl">Your options</h2>
-          <p className="text-muted -mt-2 text-sm">Tap one to see the steps, your timeline, and costs.</p>
           {results.options.map((o) => (
             <div key={o.id}>
               <OptionRow option={o} onOpen={() => setOpenOption(o)} />
@@ -121,9 +115,18 @@ export default function ResultsView({
         </section>
       )}
 
+      <section className="border-line bg-card rounded-2xl border p-5">
+        <h2 className="text-xl">Will insurance pay for this?</h2>
+        <p className="text-muted mt-1 mb-3 text-sm">A few taps. No member IDs, ever.</p>
+        <CoverageChecker insurance={insurance} stage={stage} />
+      </section>
+
       {results.guidance.map((g) => (
-        <section key={g.id} className="border-line bg-card rounded-2xl border p-5">
-          <h2 className="text-xl">{g.heading}</h2>
+        <details key={g.id} className="border-line bg-card rounded-2xl border p-5 print:hidden">
+          <summary className="cursor-pointer list-none">
+            <span className="font-heading text-xl font-semibold">{g.heading}</span>
+            <span className="text-accent-ink float-right" aria-hidden="true">+</span>
+          </summary>
           {g.paragraphs.map((p, i) => (
             <div key={i} className="mt-2">
               <p className="text-[0.98rem]">{p.text}</p>
@@ -137,8 +140,22 @@ export default function ResultsView({
               <Cite citations={a.citations} />
             </div>
           ))}
-        </section>
+        </details>
       ))}
+
+      <div className="hidden print:block">
+        {results.guidance.map((g) => (
+          <section key={g.id}>
+            <h2 className="text-lg">{g.heading}</h2>
+            {g.paragraphs.map((p, i) => (
+              <p key={i} className="text-sm">{p.text}</p>
+            ))}
+            {g.actions?.map((a, i) => (
+              <p key={i} className="text-sm"><strong>{a.label}.</strong> {a.detail}</p>
+            ))}
+          </section>
+        ))}
+      </div>
 
       {results.aid.length > 0 && (
         <section>

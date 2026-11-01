@@ -11,11 +11,12 @@ import clinicsData from "../../data/clinics.json";
 import type { Clinic } from "../../lib/types";
 import { eraseEverything, loadProgress, saveProgress } from "../../lib/storage";
 import QuestionScreen from "../../components/QuestionScreen";
+import RiskReveal from "../../components/RiskReveal";
 import ResultsView from "../../components/ResultsView";
 
 export default function QuestionsPage() {
   const [answers, setAnswers] = useState<Answers>({});
-  const [current, setCurrent] = useState<QuestionId | "results">("who_for");
+  const [current, setCurrent] = useState<QuestionId | "risk_reveal" | "results">("who_for");
   const [saveOptIn, setSaveOptIn] = useState(false);
   const [resumeOffer, setResumeOffer] = useState<{ answers: Answers; current: string } | null>(null);
 
@@ -45,7 +46,7 @@ export default function QuestionsPage() {
           className="bg-accent text-accent-contrast min-h-14 rounded-xl px-4 py-4 text-lg font-bold"
           onClick={() => {
             setAnswers(resumeOffer.answers);
-            setCurrent(resumeOffer.current as QuestionId | "results");
+            setCurrent(resumeOffer.current as QuestionId | "risk_reveal" | "results");
             setSaveOptIn(true);
             setResumeOffer(null);
           }}
@@ -64,6 +65,10 @@ export default function QuestionsPage() {
         </button>
       </main>
     );
+  }
+
+  if (current === "risk_reveal") {
+    return <RiskReveal risk={assessRisk(answers)} onContinue={() => setCurrent("results")} />;
   }
 
   if (current === "results") {
@@ -86,7 +91,8 @@ export default function QuestionsPage() {
   function answer(value: unknown) {
     const nextAnswers = { ...answers, [def.field]: value } as Answers;
     setAnswers(nextAnswers);
-    setCurrent(nextQuestion(nextAnswers, current as QuestionId));
+    const next = nextQuestion(nextAnswers, current as QuestionId);
+    setCurrent(next === "results" ? "risk_reveal" : next);
   }
 
   return (
