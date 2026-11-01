@@ -1,0 +1,75 @@
+<title>Navigator Iteration 3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 68ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin: 12px 0; }
+  .card.flag { border-left: 4px solid var(--accent); }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 3</h1>
+  <p class="sub">November 1, 2026. The options experience, rebuilt: less reading, more tapping.</p>
+
+  <h2>Options, redesigned</h2>
+  <ul>
+    <li><strong>Badges gone.</strong> Each option is now a simple row: icon, name, one line. Tap to go deeper. (The "not a replacement for freezing" caution for ovarian suppression survives inside its detail page, since that one is safety-relevant.)</li>
+    <li><strong>Steps are a swipe.</strong> Inside an option, the steps are swipeable cards: one icon, one step, a sentence or two. Swipe or tap the dots and arrows. Egg freezing is 4 swipes instead of a wall of text.</li>
+    <li><strong>Icons are built in.</strong> A consistent hand-drawn-feel line set (egg, embryo, syringe, snowflake, flask, and so on), all inline SVG, both themes. They're referenced by key, so if you ever get designer illustrations we swap files, not code. No need to go find icons unless you want a more illustrated look.</li>
+    <li><strong>"What would this look like for me?"</strong> opens a personal timeline: first visit and tests, about 10 to 12 days of shots with check-ins, retrieval (asleep for it), freezing, with the sourced durations and the honest note that it usually doesn't wait for a menstrual cycle.</li>
+  </ul>
+
+  <h2>The cost estimate</h2>
+  <div class="card flag">
+    <p>Each option now has <strong>"What could this cost you?"</strong>: it adds only the published prices (never an invented number), with a slider for years of storage, and then frames it by their insurance answer: CA commercial pre-treatment gets the SB 600 "your plan should cover this, ask what you'd owe" framing; survivors get the SB 729 framing; Medi-Cal gets the honest "not covered, plan around these prices, aid exists" framing. Lines with no published price are listed as "not included" instead of being guessed. The math is unit-tested, and everything carries its citation.</p>
+    <p>Example on the agreed path (egg freezing, 5 years of storage): $12,400 cycle + ~$5,000 medicines + 5 x $200 to $500 storage = <strong>$18,400 to $19,900</strong> if paying published prices, with the SB 600 note that insurance may change that to plan cost-sharing.</p>
+  </div>
+
+  <h2>Risk module, made swappable</h2>
+  <p>Per your ask: the clinical mapping now lives in one file, <code>lib/risk/rules.ts</code>, as an ordered list of rules, each with its copy and citations. When Hannah's guidelines arrive, we edit or replace that one file, run the tests, and the app follows. Nothing else touches it.</p>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/06-option-rows.png" alt="Option rows"><p>Options as tappable rows: icon, name, one line.</p></div>
+    <div class="shot"><img src="shots/06b-egg-detail.png" alt="Egg freezing detail with step card"><p>Inside egg freezing: swipeable step cards.</p></div>
+    <div class="shot"><img src="shots/06c-egg-step2.png" alt="Step 2 card"><p>Swipe: step 2, hormone shots, 10 to 12 days.</p></div>
+    <div class="shot"><img src="shots/06d-timeline-cost.png" alt="Personal timeline and cost estimator"><p>Personal timeline + the cost estimator with the storage slider and SB 600 framing.</p></div>
+    <div class="shot"><img src="shots/05b-risk.png" alt="Risk panel"><p>Risk panel unchanged, now backed by the swappable rules file.</p></div>
+  </div>
+
+  <h2>Notes</h2>
+  <ul>
+    <li>The printed/PDF summary still includes the full step and cost detail for every matching option, even though the screen shows compact rows.</li>
+    <li>42 unit + 4 e2e tests green, static build clean. The red "1 Issue" bubble in screenshots is Next.js's dev-mode indicator; the console is clean and it doesn't exist in production.</li>
+    <li>Possible next polish: swipe hints on first open, option-specific illustrations if you want more than line icons, and tightening the risk panel into a more visual band indicator.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · <code>npm run dev</code> to click through · estimator math in <code>components/CostEstimator.tsx</code>, tested in <code>tests/cost-estimator.test.ts</code>.</p>
+</main>
