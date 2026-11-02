@@ -13,10 +13,11 @@ import type { Clinic } from "../../lib/types";
 import { eraseEverything, loadProgress, saveProgress } from "../../lib/storage";
 import QuestionScreen from "../../components/QuestionScreen";
 import Milestone from "../../components/Milestone";
+import ReflectionFlow from "../../components/ReflectionFlow";
 import RiskReveal from "../../components/RiskReveal";
 import ResultsView from "../../components/ResultsView";
 
-type Screen = QuestionId | "milestone_2" | "milestone_3" | "risk_reveal" | "results";
+type Screen = QuestionId | "milestone_2" | "milestone_3" | "reflection" | "risk_reveal" | "results";
 
 export default function QuestionsPage() {
   const [answers, setAnswers] = useState<Answers>({});
@@ -41,6 +42,11 @@ export default function QuestionsPage() {
   }
 
   function advance(nextAnswers: Answers, from: QuestionId) {
+    // "I'm not sure" about children: offer the thinking-it-through path first.
+    if (from === "feelings" && nextAnswers.feelings === "not_sure") {
+      setCurrent("reflection");
+      return;
+    }
     const next = nextQuestion(nextAnswers, from);
     if (next === "results") {
       // "Just learning" browses the hub directly, skipping the risk screen.
@@ -123,6 +129,20 @@ export default function QuestionsPage() {
             const seq = questionSequence(answers);
             const next = seq.find((q) => sectionOf(q) === 3);
             setCurrent(next ?? "risk_reveal");
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (current === "reflection") {
+    return (
+      <div data-survey-section="2" className="bg-paper min-h-screen">
+        <ReflectionFlow
+          onDone={() => {
+            const next = nextQuestion(answers, "feelings");
+            if (next === "results") setCurrent("risk_reveal");
+            else setCurrent("milestone_3");
           }}
         />
       </div>

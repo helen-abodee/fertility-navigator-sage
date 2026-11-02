@@ -4,6 +4,7 @@ import { questions } from "../lib/questions";
 import { riskRules } from "../lib/risk/rules";
 import { assessCoverage, type CoverageInput } from "../lib/coverage";
 import { journeyStages, journeyOutcomes, emptyJourney, summaryLines, setOutcome } from "../lib/journey";
+import { reflectionIntro, reflectionSteps, reflectionAttribution } from "../content/app/reflection";
 
 /**
  * Ported from Dyad's cycle-education tone tests: the copy rules are enforced
@@ -74,6 +75,10 @@ function collectAllText(): string {
   for (const s of journeyStages) parts.push(s.label);
   for (const o of journeyOutcomes) parts.push(o.label);
   parts.push(...summaryLines(setOutcome(emptyJourney(), "decided_not_to")));
+  parts.push(reflectionIntro.heading, reflectionIntro.body, reflectionAttribution);
+  for (const r of reflectionSteps) {
+    parts.push(r.heading, r.body, ...(r.prompts ?? []), ...(r.scale ?? []), ...(r.chips ?? []));
+  }
   return parts.join(" ").toLowerCase();
 }
 

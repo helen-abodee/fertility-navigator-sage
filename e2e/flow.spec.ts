@@ -1,7 +1,7 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 /** Shared walk: the checkpoint persona through section 1. */
-async function walkSection1(page) {
+async function walkSection1(page: Page) {
   await page.getByRole("button", { name: "I have a treatment plan, or I'm in treatment" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Not yet" }).click();
@@ -160,4 +160,41 @@ test("the journey tracker records stages and respects deciding not to", async ({
     "aria-pressed",
     "true",
   );
+});
+
+test("'I'm not sure' about children offers the thinking-it-through path", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+
+  await expect(page.getByRole("heading", { name: "Not sure? That's worth taking seriously." })).toBeVisible();
+  await page.getByRole("button", { name: "Walk me through it" }).click();
+  await expect(page.getByRole("heading", { name: "This is two decisions, not one" })).toBeVisible();
+  await page.getByRole("button", { name: "Next thought" }).click();
+  await page.getByRole("button", { name: "Truly torn" }).click();
+  for (let i = 0; i < 6; i++) {
+    const next = page.getByRole("button", { name: "Next thought" });
+    if (await next.isVisible().catch(() => false)) await next.click();
+  }
+  await page.getByRole("button", { name: "I've thought about it, keep going" }).click();
+  // unsure keeps the practical section
+  await expect(page.getByRole("heading", { name: "Last stretch: the practical side" })).toBeVisible();
+});
+
+test("skipping the reflection also lands safely", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "I have testes" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Skip for now" }).click();
+  await expect(page.getByRole("heading", { name: "Last stretch: the practical side" })).toBeVisible();
 });
