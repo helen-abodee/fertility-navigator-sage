@@ -36,6 +36,19 @@ export function asco(rec: string): Citation {
   };
 }
 
+/**
+ * An aid organization's own website, read for the 2026-11-02 refresh of the
+ * financial aid directory. See content/sources/aid-provenance.md.
+ */
+export function orgSite(orgId: string, sourceName: string, url: string): Citation {
+  return {
+    sourceId: `org-${orgId}`,
+    sourceName,
+    url,
+    retrieved: "2026-11-02",
+  };
+}
+
 /** SB 729 / SB 600 research notes: cite the specific URL that backs the fact. */
 export function sb729(sourceName: string, url: string): Citation {
   return {
