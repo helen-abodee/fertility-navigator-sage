@@ -2,8 +2,7 @@ import { test } from "@playwright/test";
 
 /**
  * Screenshot capture for iteration reviews. Not an assertion suite.
- * Run: npx playwright test e2e/capture.setup.ts
- * Output: scratch/shots/*.png (gitignored)
+ * Run: SHOT_DIR=scratch/shots npx playwright test capture
  */
 const OUT = process.env.SHOT_DIR || "scratch/shots";
 
@@ -12,86 +11,59 @@ test("capture iteration screenshots", async ({ page }) => {
 
   await page.goto("/");
   await page.screenshot({ path: `${OUT}/01-welcome.png` });
-
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "Start" }).click();
-  await page.screenshot({ path: `${OUT}/02-q-who.png` });
+  await page.screenshot({ path: `${OUT}/02-entry.png` });
 
+  await page.getByRole("button", { name: "I have a treatment plan, or I'm in treatment" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
-  await page.screenshot({ path: `${OUT}/03-q-stage.png` });
-
-  await page.getByRole("button", { name: "I haven't started treatment yet" }).click();
+  await page.getByRole("button", { name: "Not yet" }).click();
   await page.getByPlaceholder("Your age").fill("24");
   await page.getByRole("button", { name: "Continue" }).click();
-  await page.screenshot({ path: `${OUT}/04-q-anatomy.png` });
-
+  await page.screenshot({ path: `${OUT}/03-anatomy-icons.png` });
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
-  await page.screenshot({ path: `${OUT}/04b-q-diagnosis.png` });
   await page.getByRole("button", { name: "Breast cancer" }).click();
+  await page.screenshot({ path: `${OUT}/04-treatments-icons.png` });
   await page.getByRole("button", { name: "Chemotherapy" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
-  await page.screenshot({ path: `${OUT}/04c-q-chemo.png` });
   await page.getByRole("button", { name: "Cyclophosphamide (Cytoxan)" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
-  await page.screenshot({ path: `${OUT}/04d-q-regimen.png` });
   await page.getByRole("button", { name: "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)" }).click();
-  await page.getByRole("button", { name: "Yes, I want to" }).click();
-  await page
-    .getByRole("button", { name: "A job-based or private plan in California" })
-    .click();
-  await page.getByPlaceholder("5-digit ZIP").fill("91101");
-  await page.getByRole("button", { name: "Continue" }).click();
 
-  await page.waitForTimeout(700);
-  await page.screenshot({ path: `${OUT}/05-risk-reveal.png` });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: `${OUT}/05-milestone-2.png` });
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: `${OUT}/06-feelings-warm.png` });
+  await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: `${OUT}/07-milestone-3.png` });
+  await page.getByRole("button", { name: "Finish up" }).click();
+  await page.screenshot({ path: `${OUT}/08-insurance-blue.png` });
+  await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+
+  await page.waitForTimeout(600);
+  await page.screenshot({ path: `${OUT}/09-risk-reveal.png` });
   await page.getByRole("button", { name: "See my options" }).click();
   await page.waitForTimeout(400);
-  await page.screenshot({ path: `${OUT}/05b-results-top.png` });
+  await page.screenshot({ path: `${OUT}/10-hub-start.png` });
 
-  await page.getByRole("heading", { name: "Your options" }).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/06-option-rows.png` });
+  await page.getByRole("button", { name: "Options", exact: true }).click();
+  await page.screenshot({ path: `${OUT}/11-hub-options.png` });
 
-  await page.getByRole("button", { name: /Egg freezing/ }).click();
-  await page.waitForTimeout(300);
-  await page.screenshot({ path: `${OUT}/06b-egg-detail.png` });
-  await page.getByRole("button", { name: "Go to step 2" }).click();
-  await page.waitForTimeout(500);
-  await page.screenshot({ path: `${OUT}/06c-egg-step2.png` });
-  await page.getByRole("button", { name: "What would this look like for me?" }).click();
-  await page.getByText("If you paid the published prices yourself").scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/06d-timeline-cost.png` });
-  await page.getByRole("button", { name: "Back to results" }).first().click();
-  await page.waitForTimeout(300);
-
-  await page.getByRole("heading", { name: "Will insurance pay for this?" }).scrollIntoViewIfNeeded();
+  await page.getByRole("button", { name: "Paying for it" }).click();
   await page.getByRole("button", { name: "My job" }).click();
   await page.getByRole("button", { name: "Yes", exact: true }).click();
   await page.getByRole("button", { name: "Fully insured" }).click();
-  await page.waitForTimeout(600);
-  await page.getByRole("heading", { name: "Will insurance pay for this?" }).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/07-coverage-verdict.png` });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: `${OUT}/12-hub-money.png` });
 
-  const aid = page.getByRole("heading", { name: "Help paying for it" });
-  if (await aid.isVisible().catch(() => false)) {
-    await aid.scrollIntoViewIfNeeded();
-    await page.screenshot({ path: `${OUT}/08-aid.png` });
-  }
+  await page.getByRole("button", { name: "Clinics", exact: true }).click();
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: `${OUT}/13-hub-clinics.png` });
 
-  const clinics = page.getByRole("heading", { name: "Fertility clinics" });
-  if (await clinics.isVisible().catch(() => false)) {
-    await clinics.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1500); // map tiles
-    await page.screenshot({ path: `${OUT}/09-clinics.png` });
-  }
-
-  await page.getByRole("heading", { name: "Everyday things that affect sperm and eggs" }).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/09b-health.png` });
-
+  await page.getByRole("button", { name: "Start here" }).click();
   await page.getByRole("heading", { name: "Where I am with this" }).scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Talked with my care team" }).click();
-  await page.getByRole("button", { name: "Contacted a clinic" }).click();
-  await page.screenshot({ path: `${OUT}/09c-journey.png` });
-
-  await page.getByRole("button", { name: "Download or print my summary" }).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/10-footer.png` });
+  await page.screenshot({ path: `${OUT}/14-journey.png` });
 });
