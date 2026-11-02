@@ -1,6 +1,7 @@
 "use client";
 
 import type { RiskAssessment } from "../lib/risk";
+import AskTeam from "./AskTeam";
 import Cite from "./Cite";
 
 /** The dedicated risk screen between the questions and the options. */
@@ -18,7 +19,7 @@ export default function RiskReveal({
       </span>
       <h1 className="text-3xl">{risk.headline}</h1>
       <p className="text-[1.02rem]">{risk.body}</p>
-      <p className="text-muted text-sm">{risk.askTeam}</p>
+      <AskTeam text={risk.askTeam} />
       <Cite citations={risk.citations} />
       <button
         type="button"

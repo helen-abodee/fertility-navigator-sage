@@ -107,6 +107,12 @@ const paths: Record<string, React.ReactNode> = {
       <path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" />
     </>
   ),
+  stethoscope: (
+    <>
+      <path d="M5 3v6a5 5 0 0 0 10 0V3M5 3h2M13 3h2M10 14v3a4 4 0 0 0 8 0v-3" />
+      <circle cx="18" cy="11" r="2.2" />
+    </>
+  ),
   dollar: (
     <>
       <circle cx="12" cy="12" r="8.5" />

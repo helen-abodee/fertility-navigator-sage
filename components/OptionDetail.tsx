@@ -2,10 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PreservationOption } from "../lib/content-schema";
-import type { InsuranceType, TreatmentStage } from "../lib/types";
 import Icon, { optionIcon } from "./icons";
 import Cite from "./Cite";
-import CostEstimator from "./CostEstimator";
 
 /**
  * Full-screen option walkthrough: swipeable step cards (scroll-snap), a
@@ -14,13 +12,9 @@ import CostEstimator from "./CostEstimator";
  */
 export default function OptionDetail({
   option,
-  insurance,
-  stage,
   onClose,
 }: {
   option: PreservationOption;
-  insurance?: InsuranceType;
-  stage?: TreatmentStage;
   onClose: () => void;
 }) {
   const [step, setStep] = useState(0);
@@ -166,10 +160,9 @@ export default function OptionDetail({
           </div>
         )}
 
-        {/* Cost */}
-        <div className="mt-6">
-          <CostEstimator option={option} insurance={insurance} stage={stage} />
-        </div>
+        <p className="text-muted mt-6 text-sm">
+          Costs and coverage live on the "Paying for it" tab, when you're ready for them.
+        </p>
 
         {/* Honest expectations */}
         <div className="mt-6">

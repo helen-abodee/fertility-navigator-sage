@@ -4,10 +4,12 @@ import { useState } from "react";
 import type { Results } from "../lib/results";
 import type { PreservationOption } from "../lib/content-schema";
 import type { RiskAssessment } from "../lib/risk";
-import type { Clinic, InsuranceType, TreatmentStage } from "../lib/types";
+import type { Clinic, FeelingsAboutChildren, InsuranceType, TreatmentStage } from "../lib/types";
 import Cite from "./Cite";
 import ClinicsSection from "./ClinicsSection";
+import CostEstimator from "./CostEstimator";
 import CoverageChecker from "./CoverageChecker";
+import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
 import Icon, { optionIcon } from "./icons";
@@ -67,6 +69,7 @@ export default function ResultsView({
   clinics,
   insurance,
   stage,
+  feelings,
   zip,
   browsing,
   onStartOver,
@@ -76,26 +79,31 @@ export default function ResultsView({
   clinics: Clinic[];
   insurance?: InsuranceType;
   stage?: TreatmentStage;
+  feelings?: FeelingsAboutChildren;
   zip?: string | null;
   browsing?: boolean;
   onStartOver: () => void;
 }) {
   const [openOption, setOpenOption] = useState<PreservationOption | null>(null);
   const [tab, setTab] = useState<Tab>("start");
+  const [reflecting, setReflecting] = useState(false);
+  const [costOption, setCostOption] = useState<PreservationOption | null>(null);
+  const moneyUnlocked = browsing || feelings !== "no";
 
   function downloadSummary() {
     setTimeout(() => window.print(), 50);
   }
 
-  if (openOption) {
+  if (reflecting) {
     return (
-      <OptionDetail
-        option={openOption}
-        insurance={insurance}
-        stage={stage}
-        onClose={() => setOpenOption(null)}
-      />
+      <div data-survey-section="2" className="bg-paper min-h-screen">
+        <ReflectionFlow onDone={() => setReflecting(false)} />
+      </div>
     );
+  }
+
+  if (openOption) {
+    return <OptionDetail option={openOption} onClose={() => setOpenOption(null)} />;
   }
 
   const show = (t: Tab) => (tab === t ? "" : "hidden print:block");
@@ -119,7 +127,9 @@ export default function ResultsView({
         className="bg-paper sticky top-0 z-10 -mx-1 flex gap-1 overflow-x-auto py-2 print:hidden"
         aria-label="Result sections"
       >
-        {tabs.map((t) => (
+        {tabs
+          .filter((t) => t.id !== "money" || moneyUnlocked)
+          .map((t) => (
           <button
             key={t.id}
             type="button"
@@ -132,7 +142,7 @@ export default function ResultsView({
             <Icon name={t.icon} size={16} />
             {t.label}
           </button>
-        ))}
+          ))}
       </nav>
 
       {/* Start here */}
@@ -147,6 +157,21 @@ export default function ResultsView({
         )}
 
         <JourneySection />
+
+        <button
+          type="button"
+          onClick={() => setReflecting(true)}
+          className="border-line bg-card flex w-full items-center gap-4 rounded-2xl border p-4 text-left print:hidden"
+        >
+          <span className="bg-accent-tint text-accent-ink flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
+            <Icon name="compass" size={26} />
+          </span>
+          <span className="flex-1">
+            <span className="block text-lg font-bold">Thinking about children, someday?</span>
+            <span className="text-muted block text-sm">An 8-screen walk through the decision, from published decision guides. Nothing saved.</span>
+          </span>
+          <span className="text-accent-ink text-xl" aria-hidden="true">&rsaquo;</span>
+        </button>
 
         {results.doctorQuestions.length > 0 && (
           <section className="border-line bg-card rounded-2xl border p-5">
@@ -176,12 +201,39 @@ export default function ResultsView({
       </div>
 
       {/* Paying for it */}
-      <div className={`flex flex-col gap-6 ${show("money")}`} data-survey-section="3">
+      <div className={`flex flex-col gap-6 ${moneyUnlocked ? show("money") : "hidden"}`} data-survey-section="3">
         <section className="border-line bg-card rounded-2xl border p-5">
           <h2 className="text-xl">Will insurance pay for this?</h2>
           <p className="text-muted mt-1 mb-3 text-sm">A few taps. No member IDs, ever.</p>
           <CoverageChecker insurance={insurance} stage={stage} />
         </section>
+
+        {results.options.length > 0 && (
+          <section className="border-line bg-card rounded-2xl border p-5 print:hidden">
+            <h2 className="text-xl">What could an option cost?</h2>
+            <p className="text-muted mt-1 mb-3 text-sm">Pick one. Coverage comes first; the full prices follow.</p>
+            <div className="flex flex-wrap gap-2">
+              {results.options.map((o) => (
+                <button
+                  key={o.id}
+                  type="button"
+                  aria-pressed={costOption?.id === o.id}
+                  onClick={() => setCostOption(costOption?.id === o.id ? null : o)}
+                  className={`rounded-full border-[1.5px] px-3.5 py-2 text-sm font-bold ${
+                    costOption?.id === o.id ? "border-accent bg-accent-tint text-accent-ink" : "border-line bg-card"
+                  }`}
+                >
+                  {o.name}
+                </button>
+              ))}
+            </div>
+            {costOption && (
+              <div className="mt-3">
+                <CostEstimator option={costOption} insurance={insurance} stage={stage} />
+              </div>
+            )}
+          </section>
+        )}
 
         {results.guidance.map((g) => (
           <details key={g.id} className="border-line bg-card rounded-2xl border p-5 print:hidden">

@@ -50,11 +50,41 @@ export default function CostEstimator({
 
   return (
     <div className="bg-paper rounded-xl p-4">
-      <p className="font-bold">What could this cost you?</p>
+      <p className="font-bold">The money picture</p>
+
+      <div className="mt-2 text-sm">
+        {insurance === "ca_commercial" && preTreatment && (
+          <p>
+            Good place to start: your California plan should cover fertility preservation before
+            cancer treatment (SB 600), so your cost may be your plan's usual deductible and copays,
+            not the full prices below. Ask your plan what you would owe, and whether storage is
+            covered.
+          </p>
+        )}
+        {insurance === "ca_commercial" && stage === "finished" && (
+          <p>
+            For plans renewing from January 1, 2026, large-group California plans must cover
+            infertility treatment including IVF (SB 729). Ask your plan what you would owe before
+            reading the prices below.
+          </p>
+        )}
+        {insurance === "medi_cal" && (
+          <p>
+            Medi-Cal does not cover fertility preservation right now. The aid programs on this tab
+            exist for exactly this, and many clinics have payment plans.
+          </p>
+        )}
+        {(insurance === "none" || insurance === "other" || insurance === "unknown" || !insurance) && (
+          <p>
+            Coverage can change these numbers a lot, so run the coverage check above first. Aid
+            programs and clinic payment plans can change them too.
+          </p>
+        )}
+      </div>
 
       {hasNumbers && (
         <>
-          <div className="mt-3 flex items-baseline justify-between gap-2">
+          <div className="border-line mt-3 flex items-baseline justify-between gap-2 border-t pt-3">
             <span className="text-sm">If you paid the published prices yourself</span>
             <span className="text-lg font-bold whitespace-nowrap">
               {min === max ? fmt(min) : `${fmt(min)} to ${fmt(max)}`}
@@ -83,36 +113,6 @@ export default function CostEstimator({
       {unpublished.length > 0 && hasNumbers && (
         <p className="text-muted mt-2 text-xs">Not included (no published price): {unpublished.join("; ")}.</p>
       )}
-
-      <div className="border-line mt-3 border-t pt-3 text-sm">
-        {insurance === "ca_commercial" && preTreatment && (
-          <p>
-            Your California plan should cover fertility preservation before cancer treatment (SB 600), so
-            your cost may be your plan's usual deductible and copays instead of the prices above.
-            Ask your plan what you would owe, and whether storage is covered and for how long.
-          </p>
-        )}
-        {insurance === "ca_commercial" && stage === "finished" && (
-          <p>
-            For plans renewing from January 1, 2026, large-group California plans must cover
-            infertility treatment including IVF (SB 729). Ask your plan what you would owe, and
-            whether storage is covered.
-          </p>
-        )}
-        {insurance === "medi_cal" && (
-          <p>
-            Medi-Cal does not cover fertility preservation right now, so the prices above are what
-            to plan around. The financial aid programs below exist for exactly this.
-          </p>
-        )}
-        {(insurance === "none" || insurance === "other" || insurance === "unknown" || !insurance) && (
-          <p>
-            If insurance doesn't cover this, the prices above are what to plan around. The aid
-            programs below can help, and many clinics have payment plans. If you're not sure what
-            your plan covers, the coverage section below shows exactly what to ask.
-          </p>
-        )}
-      </div>
 
       <p className="text-muted mt-2 text-xs">
         A rough range from published prices, not a quote. Your clinic's prices and your plan's

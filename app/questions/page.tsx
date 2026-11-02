@@ -43,7 +43,7 @@ export default function QuestionsPage() {
 
   function advance(nextAnswers: Answers, from: QuestionId) {
     // "I'm not sure" about children: offer the thinking-it-through path first.
-    if (from === "feelings" && nextAnswers.feelings === "not_sure") {
+    if (from === "feelings" && (nextAnswers.feelings === "not_sure" || nextAnswers.feelings === "maybe")) {
       setCurrent("reflection");
       return;
     }
@@ -161,6 +161,7 @@ export default function QuestionsPage() {
         clinics={clinicsData as unknown as Clinic[]}
         insurance={answers.insurance}
         stage={answers.stage}
+        feelings={answers.feelings}
         zip={answers.zip}
         browsing={answers.entry === "exploring"}
         onStartOver={startOver}

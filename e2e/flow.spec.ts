@@ -38,6 +38,7 @@ test("the checkpoint path walks end to end with section milestones", async ({ pa
   // CRISP-powered risk reveal
   await expect(page.getByText("Lower risk group", { exact: true })).toBeVisible();
   await expect(page.getByText("studies behind this tool", { exact: false })).toBeVisible();
+  await expect(page.getByText("For your care team")).toBeVisible();
   await page.getByRole("button", { name: "See my options" }).click();
 
   await expect(page.getByRole("heading", { name: "Your results, one piece at a time" })).toBeVisible();
@@ -102,7 +103,7 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await page.getByRole("button", { name: /Egg freezing/ }).click();
   await expect(page.getByText("Step 1 of 4")).toBeVisible();
   await page.getByRole("button", { name: "What would this look like for me?" }).click();
-  await expect(page.getByText("If you paid the published prices yourself")).toBeVisible();
+  await expect(page.getByText("about 10 to 12 days").first()).toBeVisible();
   await page.getByRole("button", { name: "Back to results" }).first().click();
 
   // Paying for it: coverage checker end to end
@@ -113,6 +114,11 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await expect(page.getByText("Likely covered")).toBeVisible();
   await expect(page.getByText("SB 600", { exact: false }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Help paying for it" })).toBeVisible();
+
+  // Per-option cost, coverage framing first
+  await page.getByRole("button", { name: "Egg freezing", exact: true }).click();
+  await expect(page.getByText("The money picture")).toBeVisible();
+  await expect(page.getByText("If you paid the published prices yourself")).toBeVisible();
 
   // Health tab
   await page.getByRole("button", { name: "Health", exact: true }).click();
@@ -139,6 +145,7 @@ test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Maybe" }).click();
+  await page.getByRole("button", { name: "Skip for now" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "Medi-Cal" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -197,4 +204,28 @@ test("skipping the reflection also lands safely", async ({ page }) => {
   await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
   await page.getByRole("button", { name: "Skip for now" }).click();
   await expect(page.getByRole("heading", { name: "Last stretch: the practical side" })).toBeVisible();
+});
+
+test("the money tab is hidden when children are a no", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "No", exact: true }).click();
+  await page.getByRole("button", { name: "See my options" }).click();
+  await expect(page.getByRole("button", { name: "Start here" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Paying for it" })).not.toBeVisible();
+});
+
+test("the risk screen carries the care-team callout", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Just learning for now" }).click();
+  await expect(page.getByRole("button", { name: "Thinking about children, someday?" })).toBeVisible();
+  await page.getByRole("button", { name: "Thinking about children, someday?" }).click();
+  await expect(page.getByRole("heading", { name: "Not sure? That's worth taking seriously." })).toBeVisible();
+  await page.getByRole("button", { name: "Skip for now" }).click();
+  await expect(page.getByRole("button", { name: "Start here" })).toBeVisible();
 });
