@@ -1,106 +1,91 @@
 import { describe, it, expect } from "vitest";
-import {
-  questionSequence,
-  nextQuestion,
-  prevQuestion,
-  progress,
-} from "../lib/flow";
+import { questionSequence, nextQuestion, prevQuestion, progress, sectionOf } from "../lib/flow";
 import type { Answers } from "../lib/types";
 
-describe("questionSequence", () => {
-  it("gives the base sequence for a single person who has not started treatment", () => {
-    const answers: Answers = { whoFor: "me", stage: "not_started" };
-    expect(questionSequence(answers)).toEqual([
-      "who_for",
-      "stage",
-      "age",
-      "anatomy",
-      "cancer_type",
-      "treatments",
-      "feelings",
-      "insurance",
-      "zip",
-    ]);
+describe("entry triage calibrates the depth", () => {
+  it("'just learning' goes straight to the hub, no personal questions", () => {
+    expect(questionSequence({ entry: "exploring" })).toEqual(["entry"]);
+    expect(nextQuestion({ entry: "exploring" }, "entry")).toBe("results");
   });
 
-  it("asks which chemo medicines only when chemo is selected, right after treatments", () => {
-    const answers: Answers = { whoFor: "me", stage: "not_started", treatments: ["chemo"] };
-    const seq = questionSequence(answers);
+  it("no treatment plan yet: no treatment-detail questions at all", () => {
+    const seq = questionSequence({ entry: "plan_no" });
+    expect(seq).toEqual(["entry", "who_for", "age", "anatomy", "cancer_type", "feelings", "insurance", "zip"]);
+  });
+
+  it("with a plan: asks whether treatment started, then the full detail", () => {
+    const seq = questionSequence({ entry: "plan_yes", treatments: ["chemo"], cancerType: "breast", anatomy: "ovaries_uterus" });
+    expect(seq.indexOf("stage")).toBe(seq.indexOf("who_for") + 1);
     expect(seq.indexOf("chemo_drugs")).toBe(seq.indexOf("treatments") + 1);
-    expect(questionSequence({ treatments: ["surgery"] })).not.toContain("chemo_drugs");
+    expect(seq.indexOf("chemo_regimen")).toBe(seq.indexOf("chemo_drugs") + 1);
   });
 
-  it("asks the regimen name only for CRISP-covered diagnoses, never for testes", () => {
-    const base: Answers = { treatments: ["chemo"], cancerType: "breast", anatomy: "ovaries_uterus" };
-    const seq = questionSequence(base);
-    expect(seq.indexOf("chemo_regimen")).toBe(seq.indexOf("chemo_drugs") + 1);
+  it("survivors get how-long-ago and the treatment detail", () => {
+    const seq = questionSequence({ entry: "finished", stage: "finished" });
+    expect(seq.indexOf("time_since")).toBe(seq.indexOf("who_for") + 1);
+    expect(seq).toContain("treatments");
+  });
+
+  it("caregivers walk the full flow on the person's behalf", () => {
+    const seq = questionSequence({ entry: "caregiver" });
+    expect(seq).toContain("anatomy");
+    expect(seq).toContain("feelings");
+  });
+});
+
+describe("the regimen question stays gated", () => {
+  it("never for testes, never without CRISP coverage", () => {
+    const base: Answers = { entry: "plan_yes", treatments: ["chemo"], cancerType: "breast", anatomy: "ovaries_uterus" };
+    expect(questionSequence(base)).toContain("chemo_regimen");
     expect(questionSequence({ ...base, anatomy: "testes" })).not.toContain("chemo_regimen");
     expect(questionSequence({ ...base, cancerType: "thyroid" })).not.toContain("chemo_regimen");
-    expect(questionSequence({ treatments: ["chemo"] })).not.toContain("chemo_regimen");
   });
+});
 
-  it("asks where radiation was aimed only when radiation is selected", () => {
-    const answers: Answers = { treatments: ["chemo", "radiation"] };
-    const seq = questionSequence(answers);
-    expect(seq.indexOf("radiation_area")).toBe(seq.indexOf("chemo_drugs") + 1);
-    expect(questionSequence({ treatments: ["chemo"] })).not.toContain("radiation_area");
-  });
-
-  it("asks how long ago only when treatment is finished", () => {
-    const answers: Answers = { whoFor: "me", stage: "finished" };
-    const seq = questionSequence(answers);
-    expect(seq.indexOf("time_since")).toBe(seq.indexOf("stage") + 1);
-  });
-
-  it("asks about partner insurance only when a partner is involved", () => {
-    const partnered: Answers = { whoFor: "me_and_partner", stage: "not_started" };
-    const single: Answers = { whoFor: "me", stage: "not_started" };
-    expect(questionSequence(partnered)).toContain("partner_insurance");
-    expect(questionSequence(single)).not.toContain("partner_insurance");
-    const seq = questionSequence(partnered);
-    expect(seq.indexOf("partner_insurance")).toBe(seq.indexOf("insurance") + 1);
-  });
-
-  it("keeps a stable sequence when nothing is answered yet (all questions skippable)", () => {
-    const seq = questionSequence({});
-    expect(seq[0]).toBe("who_for");
-    expect(seq[seq.length - 1]).toBe("zip");
-    expect(seq).not.toContain("time_since");
+describe("the practical section is gated on wanting children", () => {
+  it("answering 'no' to children skips insurance, partner, and ZIP", () => {
+    const seq = questionSequence({ entry: "plan_no", feelings: "no" });
+    expect(seq).not.toContain("insurance");
     expect(seq).not.toContain("partner_insurance");
+    expect(seq).not.toContain("zip");
+    expect(seq[seq.length - 1]).toBe("feelings");
+  });
+
+  it("yes, maybe, and not sure all keep the practical section", () => {
+    for (const feelings of ["yes", "maybe", "not_sure"] as const) {
+      expect(questionSequence({ entry: "plan_no", feelings })).toContain("insurance");
+    }
+  });
+
+  it("partner insurance still only appears when partnered", () => {
+    expect(questionSequence({ entry: "plan_no", whoFor: "me_and_partner", feelings: "yes" })).toContain("partner_insurance");
+    expect(questionSequence({ entry: "plan_no", whoFor: "me", feelings: "yes" })).not.toContain("partner_insurance");
   });
 });
 
-describe("navigation", () => {
-  it("advances to the next question even when the current one was skipped", () => {
-    expect(nextQuestion({}, "who_for")).toBe("stage");
-    expect(nextQuestion({}, "stage")).toBe("age");
-  });
-
-  it("returns 'results' after the last question", () => {
-    expect(nextQuestion({ whoFor: "me" }, "zip")).toBe("results");
-  });
-
-  it("inserts time_since after stage once 'finished' is chosen", () => {
-    expect(nextQuestion({ stage: "finished" }, "stage")).toBe("time_since");
-    expect(nextQuestion({ stage: "finished" }, "time_since")).toBe("age");
-  });
-
-  it("goes back without losing conditional questions", () => {
-    expect(prevQuestion({ stage: "finished" }, "age")).toBe("time_since");
-    expect(prevQuestion({}, "age")).toBe("stage");
-    expect(prevQuestion({}, "who_for")).toBe(null);
+describe("sections", () => {
+  it("maps questions to the three survey sections", () => {
+    expect(sectionOf("entry")).toBe(1);
+    expect(sectionOf("radiation_area")).toBe(1);
+    expect(sectionOf("feelings")).toBe(2);
+    expect(sectionOf("insurance")).toBe(3);
+    expect(sectionOf("zip")).toBe(3);
   });
 });
 
-describe("progress", () => {
-  it("is 0 at the first question and approaches 1 at the last", () => {
-    const answers: Answers = { whoFor: "me", stage: "not_started" };
-    expect(progress(answers, "who_for")).toBe(0);
-    expect(progress(answers, "zip")).toBeCloseTo(8 / 9);
+describe("navigation still works", () => {
+  it("advances and returns 'results' after the last question", () => {
+    expect(nextQuestion({}, "entry")).toBe("who_for");
+    expect(nextQuestion({ entry: "plan_no" }, "zip")).toBe("results");
   });
 
-  it("stays between 0 and 1 for every question in every branch", () => {
-    const answers: Answers = { whoFor: "me_and_partner", stage: "finished" };
+  it("back works across conditional questions", () => {
+    expect(prevQuestion({ entry: "finished", stage: "finished" }, "age")).toBe("time_since");
+    expect(prevQuestion({}, "entry")).toBe(null);
+  });
+
+  it("progress stays within [0, 1) everywhere", () => {
+    const answers: Answers = { entry: "plan_yes", whoFor: "me_and_partner", treatments: ["chemo", "radiation"], cancerType: "breast" };
     for (const q of questionSequence(answers)) {
       const p = progress(answers, q);
       expect(p).toBeGreaterThanOrEqual(0);

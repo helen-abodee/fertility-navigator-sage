@@ -87,6 +87,50 @@ h3 {
   text-wrap: balance;
 }
 
+/* Survey section palettes: 1 inherits the base (clinical, respectful);
+   2 turns warm and quietly hopeful; 3 is practical slate-blue. All AA. */
+[data-survey-section="2"] {
+  --paper: #f8f3ec;
+  --accent: #a8653a;
+  --accent-ink: #8f5430;
+  --accent-tint: #f3e3d3;
+  --accent-contrast: #ffffff;
+}
+[data-survey-section="3"] {
+  --accent: #2e5f86;
+  --accent-ink: #27516f;
+  --accent-tint: #e2ecf3;
+  --accent-contrast: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-survey-section="2"] {
+    --paper: #221e19;
+    --accent: #d9a273;
+    --accent-ink: #e2b48a;
+    --accent-tint: #3a2f24;
+    --accent-contrast: #211a12;
+  }
+  :root:not([data-theme="light"]) [data-survey-section="3"] {
+    --accent: #8db8cf;
+    --accent-ink: #a3c6da;
+    --accent-tint: #27343d;
+    --accent-contrast: #141d23;
+  }
+}
+:root[data-theme="dark"] [data-survey-section="2"] {
+  --paper: #221e19;
+  --accent: #d9a273;
+  --accent-ink: #e2b48a;
+  --accent-tint: #3a2f24;
+  --accent-contrast: #211a12;
+}
+:root[data-theme="dark"] [data-survey-section="3"] {
+  --accent: #8db8cf;
+  --accent-ink: #a3c6da;
+  --accent-tint: #27343d;
+  --accent-contrast: #141d23;
+}
+
 @media print {
   body {
     background: #ffffff;

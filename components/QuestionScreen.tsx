@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { QuestionDef } from "../lib/questions";
+import Icon from "./icons";
 
 interface Props {
   def: QuestionDef;
@@ -86,13 +87,18 @@ export default function QuestionScreen({
               key={opt.value}
               type="button"
               onClick={() => onAnswer(opt.value)}
-              className={`min-h-14 rounded-xl border-[1.5px] px-4 py-4 text-left text-[1.02rem] font-bold ${
+              className={`flex min-h-14 items-center gap-3 rounded-xl border-[1.5px] px-4 py-4 text-left text-[1.02rem] font-bold ${
                 initialValue === opt.value
                   ? "border-accent bg-accent-tint"
                   : "border-line bg-card"
               } ${opt.notSure ? "border-dashed font-normal" : ""}`}
             >
-              {opt.label}
+              {opt.icon && (
+                <span className="bg-accent-tint text-accent-ink flex h-9 w-9 shrink-0 items-center justify-center rounded-full">
+                  <Icon name={opt.icon} size={20} />
+                </span>
+              )}
+              <span>{opt.label}</span>
             </button>
           ))}
 
@@ -106,12 +112,19 @@ export default function QuestionScreen({
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggleMulti(opt.value)}
-                  className={`min-h-14 rounded-xl border-[1.5px] px-4 py-4 text-left text-[1.02rem] font-bold ${
+                  className={`flex min-h-14 items-center gap-3 rounded-xl border-[1.5px] px-4 py-4 text-left text-[1.02rem] font-bold ${
                     on ? "border-accent bg-accent-tint" : "border-line bg-card"
                   } ${opt.notSure ? "border-dashed font-normal" : ""}`}
                 >
-                  {on ? "✓ " : ""}
-                  {opt.label}
+                  {opt.icon && (
+                    <span className="bg-accent-tint text-accent-ink flex h-9 w-9 shrink-0 items-center justify-center rounded-full">
+                      <Icon name={opt.icon} size={20} />
+                    </span>
+                  )}
+                  <span>
+                    {on ? "✓ " : ""}
+                    {opt.label}
+                  </span>
                 </button>
               );
             })}

@@ -12,6 +12,8 @@ export interface QuestionOption {
   value: string;
   label: string;
   notSure?: boolean;
+  /** icon key from components/icons */
+  icon?: string;
 }
 
 export interface QuestionDef {
@@ -27,6 +29,19 @@ export interface QuestionDef {
 }
 
 export const questions: Record<QuestionId, QuestionDef> = {
+  entry: {
+    id: "entry",
+    field: "entry",
+    kind: "single",
+    heading: "Where are you right now?",
+    options: [
+      { value: "plan_no", label: "Diagnosed, no treatment plan yet", icon: "calendar" },
+      { value: "plan_yes", label: "I have a treatment plan, or I'm in treatment", icon: "clipboard" },
+      { value: "finished", label: "I finished cancer treatment", icon: "sprout" },
+      { value: "caregiver", label: "I'm here for someone I care about", icon: "heart" },
+      { value: "exploring", label: "Just learning for now", icon: "compass", notSure: true },
+    ],
+  },
   who_for: {
     id: "who_for",
     field: "whoFor",
@@ -41,12 +56,10 @@ export const questions: Record<QuestionId, QuestionDef> = {
     id: "stage",
     field: "stage",
     kind: "single",
-    heading: "Where are you with cancer treatment?",
+    heading: "Have you started treatment?",
     options: [
-      { value: "not_started", label: "I haven't started treatment yet" },
+      { value: "not_started", label: "Not yet" },
       { value: "in_treatment", label: "I'm in treatment now" },
-      { value: "finished", label: "I finished treatment" },
-      { value: "not_sure", label: "I'm not sure", notSure: true },
     ],
   },
   time_since: {
@@ -76,8 +89,8 @@ export const questions: Record<QuestionId, QuestionDef> = {
     kind: "single",
     heading: "Which describes your body?",
     options: [
-      { value: "ovaries_uterus", label: "I have ovaries, a uterus, or both" },
-      { value: "testes", label: "I have testes" },
+      { value: "ovaries_uterus", label: "I have ovaries, a uterus, or both", icon: "egg" },
+      { value: "testes", label: "I have testes", icon: "sperm" },
       { value: "self_describe", label: "I'd describe it differently" },
       { value: "prefer_not_to_say", label: "I'd rather not say", notSure: true },
     ],
@@ -113,10 +126,10 @@ export const questions: Record<QuestionId, QuestionDef> = {
     kind: "multi",
     heading: "What cancer treatment is planned, or what did you have?",
     options: [
-      { value: "chemo", label: "Chemotherapy" },
-      { value: "radiation", label: "Radiation" },
-      { value: "surgery", label: "Surgery" },
-      { value: "transplant", label: "Stem cell or bone marrow transplant" },
+      { value: "chemo", label: "Chemotherapy", icon: "syringe" },
+      { value: "radiation", label: "Radiation", icon: "radiation" },
+      { value: "surgery", label: "Surgery", icon: "scalpel" },
+      { value: "transplant", label: "Stem cell or bone marrow transplant", icon: "flask" },
       { value: "not_sure", label: "I'm not sure yet", notSure: true },
     ],
   },
@@ -166,10 +179,10 @@ export const questions: Record<QuestionId, QuestionDef> = {
     kind: "single",
     heading: "How do you feel about having children someday?",
     options: [
-      { value: "yes", label: "Yes, I want to" },
-      { value: "maybe", label: "Maybe" },
-      { value: "not_sure", label: "I'm not sure", notSure: true },
-      { value: "no", label: "No" },
+      { value: "yes", label: "Yes, I want to", icon: "sprout" },
+      { value: "maybe", label: "Maybe", icon: "compass" },
+      { value: "not_sure", label: "I'm not sure", notSure: true, icon: "door" },
+      { value: "no", label: "No", icon: "shield" },
     ],
   },
   insurance: {

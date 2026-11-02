@@ -19,11 +19,12 @@ describe("QuestionScreen", () => {
     expect(onAnswer).toHaveBeenCalledWith("in_treatment");
   });
 
-  it("always offers a 'not sure' style answer on the stage question", () => {
+  it("the entry triage offers a pressure-free 'just learning' lane", () => {
     render(
-      <QuestionScreen def={questions.stage} stepIndex={1} stepCount={9} onAnswer={() => {}} onBack={null} />,
+      <QuestionScreen def={questions.entry} stepIndex={0} stepCount={9} onAnswer={() => {}} onBack={null} />,
     );
-    expect(screen.getByText("I'm not sure")).toBeInTheDocument();
+    expect(screen.getByText("Just learning for now")).toBeInTheDocument();
+    expect(screen.getByText("Diagnosed, no treatment plan yet")).toBeInTheDocument();
   });
 
   it("multi-select: picking a treatment clears 'not sure', and Continue submits the picks", () => {

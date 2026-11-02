@@ -6,6 +6,14 @@
 
 export type WhoFor = "me" | "me_and_partner";
 
+/** Entry triage: calibrates depth to where the person actually is. */
+export type Entry =
+  | "plan_no"     /* diagnosed, no treatment plan yet: short flow, no treatment detail */
+  | "plan_yes"    /* has a plan or in treatment: full flow */
+  | "finished"    /* survivor spine */
+  | "caregiver"   /* answering for someone else */
+  | "exploring";  /* just learning: straight to the browse hub */
+
 export type TreatmentStage = "not_started" | "in_treatment" | "finished" | "not_sure";
 
 export type TimeSinceTreatment =
@@ -41,6 +49,7 @@ export type YesNoUnsure = "yes" | "no" | "not_sure";
 
 /** Every field optional: every question can be skipped or answered "not sure". */
 export interface Answers {
+  entry?: Entry;
   whoFor?: WhoFor;
   stage?: TreatmentStage;
   timeSince?: TimeSinceTreatment;
@@ -61,6 +70,7 @@ export interface Answers {
 }
 
 export type QuestionId =
+  | "entry"
   | "who_for"
   | "stage"
   | "time_since"
