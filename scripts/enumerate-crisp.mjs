@@ -12,7 +12,9 @@ import { writeFileSync, mkdirSync } from "node:fs";
 
 const BASE = "https://oncofertilityrisk.com/wp-admin/admin-ajax.php";
 const UA = "Mozilla/5.0 (research enumeration for a nonprofit oncofertility education tool; contact via UCSD collaboration)";
-const AGES = [20, 30, 38, 44];
+const AGES = process.env.CRISP_AGES
+  ? process.env.CRISP_AGES.split(",").map(Number)
+  : [20, 30, 38, 44];
 const DELAY_MS = 800;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -118,7 +120,7 @@ async function main() {
   }
 
   mkdirSync("content/sources/crisp", { recursive: true });
-  writeFileSync("content/sources/crisp/enumeration.json", JSON.stringify(out, null, 1));
+  writeFileSync(process.env.CRISP_OUT || "content/sources/crisp/enumeration.json", JSON.stringify(out, null, 1));
   console.log(`DONE: ${out.rows.length} treatment rows, ${out.errors.length} errors`);
 }
 

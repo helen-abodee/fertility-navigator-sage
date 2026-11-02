@@ -33,6 +33,8 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.screenshot({ path: `${OUT}/04c-q-chemo.png` });
   await page.getByRole("button", { name: "Cyclophosphamide (Cytoxan)" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
+  await page.screenshot({ path: `${OUT}/04d-q-regimen.png` });
+  await page.getByRole("button", { name: "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page
     .getByRole("button", { name: "A job-based or private plan in California" })

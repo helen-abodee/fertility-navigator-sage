@@ -50,6 +50,8 @@ export interface Answers {
   cancerType?: string | null;
   treatments?: TreatmentType[];
   chemoAgents?: ChemoAgent[];
+  /** exact regimen name from the CRISP list, "not_sure", or undefined */
+  chemoRegimen?: string;
   radiationArea?: RadiationArea;
   feelings?: FeelingsAboutChildren;
   insurance?: InsuranceType;
@@ -67,6 +69,7 @@ export type QuestionId =
   | "cancer_type"
   | "treatments"
   | "chemo_drugs"
+  | "chemo_regimen"
   | "radiation_area"
   | "feelings"
   | "insurance"

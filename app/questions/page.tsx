@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Answers, QuestionId } from "../../lib/types";
 import { nextQuestion, prevQuestion, questionSequence } from "../../lib/flow";
 import { questions } from "../../lib/questions";
+import { regimensFor } from "../../lib/crisp";
 import { buildResults } from "../../lib/results";
 import { assessRisk } from "../../lib/risk";
 import { appContent } from "../../content/app/content";
@@ -85,7 +86,17 @@ export default function QuestionsPage() {
     );
   }
 
-  const def = questions[current];
+  const baseDef = questions[current];
+  const def =
+    current === "chemo_regimen"
+      ? {
+          ...baseDef,
+          options: [
+            ...regimensFor(answers.cancerType).map((r) => ({ value: r, label: r })),
+            { value: "not_sure", label: "I don't know the name", notSure: true },
+          ],
+        }
+      : baseDef;
   const seq = questionSequence(answers);
 
   function answer(value: unknown) {

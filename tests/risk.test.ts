@@ -1,6 +1,36 @@
 import { describe, it, expect } from "vitest";
 import { assessRisk } from "../lib/risk";
 
+describe("CRISP regimen rule (most specific, wins when the regimen is known)", () => {
+  const base: import("../lib/types").Answers = {
+    anatomy: "ovaries_uterus",
+    cancerType: "breast",
+    treatments: ["chemo"],
+    chemoRegimen: "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)",
+  };
+
+  it("uses the CRISP band for the exact regimen and age", () => {
+    const young = assessRisk({ ...base, age: 24 });
+    expect(young.category).toBe("lower");
+    expect(young.citations.some((c) => c.sourceName.includes("CRISP"))).toBe(true);
+    expect(young.citations.some((c) => c.sourceName.includes("Sukumvanich"))).toBe(true);
+    const older = assessRisk({ ...base, age: 44 });
+    expect(older.category).toBe("intermediate");
+  });
+
+  it("falls back to the general rules when the regimen is unknown", () => {
+    const r = assessRisk({ ...base, chemoRegimen: "not_sure", chemoAgents: ["cyclophosphamide"], age: 24 });
+    expect(r.category).toBe("lower"); // the breast+cyclophosphamide+under-30 rule
+    expect(r.citations.some((c) => c.sourceName.includes("Livestrong"))).toBe(true);
+  });
+
+  it("an UNKNOWN CRISP band is honest, not a guess", () => {
+    const r = assessRisk({ ...base, chemoRegimen: "KP (TDM-1, pertuzumab)", age: 24 });
+    expect(r.category).toBe("variable");
+    expect(r.body).toContain("not about you");
+  });
+});
+
 describe("risk assessment (published-framework categories)", () => {
   it("transplant conditioning is in the high group for every anatomy", () => {
     for (const anatomy of ["ovaries_uterus", "testes", "prefer_not_to_say", undefined] as const) {

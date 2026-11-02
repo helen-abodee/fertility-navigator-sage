@@ -31,7 +31,23 @@ function collectAllText(): string {
     parts.push(def.heading, def.placeholder ?? "");
     for (const opt of def.options ?? []) parts.push(opt.label);
   }
-  for (const r of riskRules) parts.push(r.result.label, r.result.headline, r.result.body, r.result.askTeam);
+  const riskSamples = [
+    { anatomy: "ovaries_uterus", cancerType: "breast", chemoRegimen: "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)", age: 24, treatments: ["chemo"] },
+    { anatomy: "ovaries_uterus", cancerType: "breast", chemoRegimen: "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)", age: 44, treatments: ["chemo"] },
+    { anatomy: "ovaries_uterus", cancerType: "breast", chemoRegimen: "KP (TDM-1, pertuzumab)", age: 24, treatments: ["chemo"] },
+  ] as const;
+  for (const r of riskRules) {
+    if (typeof r.result === "function") {
+      for (const sample of riskSamples) {
+        if (r.applies(sample as never)) {
+          const res = r.result(sample as never);
+          parts.push(res.label, res.headline, res.body, res.askTeam);
+        }
+      }
+    } else {
+      parts.push(r.result.label, r.result.headline, r.result.body, r.result.askTeam);
+    }
+  }
   // Exercise every coverage branch.
   const coverageInputs: CoverageInput[] = [
     { channel: "medi_cal" },

@@ -1,5 +1,6 @@
 import type { Answers } from "../types";
 import type { RiskAssessment } from "./index";
+import { crispBandToCategory, crispLookup, crispMeta } from "../crisp";
 import {
   ALKYLATORS,
   citations,
@@ -17,7 +18,7 @@ import {
 export interface RiskRule {
   id: string;
   applies: (answers: Answers) => boolean;
-  result: Omit<RiskAssessment, "citations"> & { citations: RiskAssessment["citations"] };
+  result: RiskAssessment | ((answers: Answers) => RiskAssessment);
 }
 
 const helpers = {
@@ -29,7 +30,65 @@ const helpers = {
   pelvicRT: (a: Answers) => (a.treatments ?? []).includes("radiation") && a.radiationArea === "abdomen_pelvis",
 };
 
+const crispCitation = () => ({
+  sourceId: "crisp",
+  sourceName: "UCSD Cancer-Related Infertility Score Predictor (CRISP), the tool used in oncofertility counseling",
+  url: crispMeta.source,
+  retrieved: crispMeta.retrieved,
+});
+
+const bandLabel: Record<string, string> = {
+  LOW: "Lower risk group",
+  MODERATE: "In-between risk group",
+  HIGH: "Higher risk group",
+  UNKNOWN: "Not enough data",
+};
+const bandHeadline: Record<string, string> = {
+  LOW: "Your treatment plan is in the lower risk group",
+  MODERATE: "Your treatment plan is in the in-between risk group",
+  HIGH: "Your treatment plan is in the higher risk group",
+  UNKNOWN: "There isn't enough published data for your exact plan",
+};
+
 export const riskRules: RiskRule[] = [
+  {
+    // The most specific rule: the person named their exact regimen and the
+    // CRISP table (the tool City of Hope's team counsels with) covers it.
+    id: "crisp_regimen",
+    applies: (a) =>
+      a.anatomy === "ovaries_uterus" &&
+      !!a.chemoRegimen &&
+      a.chemoRegimen !== "not_sure" &&
+      crispLookup(a.cancerType, a.chemoRegimen, a.age) !== null,
+    result: (a) => {
+      const hit = crispLookup(a.cancerType, a.chemoRegimen, a.age)!;
+      const statLine =
+        hit.band !== "UNKNOWN" && hit.pct && hit.outcome
+          ? ` In the studies behind this tool, ${hit.pct} of women your age developed ${hit.outcome.toLowerCase()} after this treatment plan.`
+          : "";
+      const body =
+        hit.band === "UNKNOWN"
+          ? `The counseling tool your care team uses does not have enough published data to place ${a.chemoRegimen} for ${hit.crispCancer.toLowerCase()} cancer in a risk group. That is a fact about the research, not about you.`
+          : `This comes from the same tool many cancer-center teams use to counsel patients, matched to your diagnosis, your treatment plan, and your age.${statLine}`;
+      const citations: RiskAssessment["citations"] = [crispCitation()];
+      if (hit.refs) {
+        citations.push({
+          sourceId: "crisp-ref",
+          sourceName: `Study behind this estimate: ${hit.refs}`,
+          retrieved: crispMeta.retrieved,
+        });
+      }
+      return {
+        category: crispBandToCategory(hit.band),
+        label: bandLabel[hit.band],
+        headline: bandHeadline[hit.band],
+        body,
+        askTeam:
+          "Ask your care team: does this match the risk counseling for my exact plan? " + CONFIRM,
+        citations,
+      };
+    },
+  },
   {
     id: "transplant_conditioning",
     applies: (a) => helpers.treatments(a).includes("transplant"),

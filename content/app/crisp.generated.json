@@ -1,0 +1,2357 @@
+{
+ "generatedFrom": "content/sources/crisp/enumeration.json",
+ "retrieved": "2026-11-02",
+ "source": "https://oncofertilityrisk.com/en/infertility/",
+ "sampledAges": [
+  20,
+  30,
+  38,
+  44
+ ],
+ "cancers": {
+  "gastrointestinal": {
+   "CRS/HIPEC": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Appendiceal",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "FOLFOXIRI (Leucovorin, Fluorouracil, Oxaliplatin, Irinotecan)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "No references found"
+     }
+    ]
+   },
+   "UFT (Uracil, Tegafur)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "No references found"
+     }
+    ]
+   },
+   "XELOX (Capecitabine, Oxaliplatin)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Tunali et al. 2019. Preserving Fertility in Patients with Gastrointestinal Cancers. In: Yalcin S., Philip P. (eds) Textbook of Gastrointestinal Oncology."
+     }
+    ]
+   },
+   "Capecitabine + 5FU": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Tevhide et al. 2019. Anti-Cancer Drugs. DOI: 10.1097/CAD.0000000000000728"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Tevhide et al. 2019. Anti-Cancer Drugs. DOI: 10.1097/CAD.0000000000000728"
+     }
+    ]
+   },
+   "FOLFIRI (Leucovorin, Fluorouracil, Irinotecan)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "No references found"
+     }
+    ]
+   },
+   "FOLFOX (Leucovorin, Fluorouracil, Oxaliplatin)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Cercek et al. 2013. Clin Colorectal Cancer. DOI: 10.1016/j.clcc.2013.04.007"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Cercek et al. 2013. Clin Colorectal Cancer. DOI: 10.1016/j.clcc.2013.04.007"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Cercek et al. 2013. Clin Colorectal Cancer. DOI: 10.1016/j.clcc.2013.04.007"
+     }
+    ]
+   },
+   "Pelvic radiation < 10 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Pelvic radiation > 20Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "100%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Wallace et al. 2005. Int J Radiat Oncol Biol Phys. DOI: 10.1016/j.ijrobp.2004.11.038"
+     }
+    ]
+   },
+   "Pelvic radiation 10 - 20 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Premature menopause",
+      "refs": "Chemaitilly et al. 2017. Journal of Clinical Endocrinology and Metabolism. DOI: 10.1210/jc.2016-3723"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Chemaitilly et al. 2017. Journal of Clinical Endocrinology and Metabolism. DOI: 10.1210/jc.2016-3723"
+     }
+    ]
+   },
+   "5-FU (Fluorouracil)": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2016/012209s040lbl.pdf"
+     }
+    ]
+   },
+   "Albumin bound Paclitaxel": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/021660s037lbl.pdf"
+     }
+    ]
+   },
+   "Capecitabine": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Oktem et al. 2010. Obstet Gynecol Surv. DOI: 10.1097/OGX.0b013e3181f8c0aa Drug Package Insert: https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf"
+     }
+    ]
+   },
+   "Irinotecan": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Gastrointestinal (esophagus, stomach, intestines)",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Utsunomiya et al. 2008. Int J Oncol 32.5 (991-1000)."
+     }
+    ]
+   }
+  },
+  "brain_cns": {
+   "Vorasidenib": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Brain",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/218784s000lbl.pdf"
+     }
+    ]
+   },
+   "Pituitary radiation 1-20 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Brain",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility",
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     }
+    ]
+   },
+   "Pituitary radiation 20-30 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Brain",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility",
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     }
+    ]
+   },
+   "CSI Radiation + VCC": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Medulloblastoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Merchant et al. 2022. Int J Radiat Oncol Biol Phys. DOI: 10.1016/j.ijrobp.2023.01.001"
+     }
+    ]
+   }
+  },
+  "breast": {
+   "Bevacizumab (Avastin)": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Pembrolizumab": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "TH (taxane, trastuzumab)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Ruddy et al. 2015. Breast Cancer Research and Treatment. DOI:10.1007/s10549-015-3426-z"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Ruddy et al. 2015. Breast Cancer Research and Treatment. DOI:10.1007/s10549-015-3426-z"
+     }
+    ]
+   },
+   "CEF (Cyclophosphamide, Epirubicin, Fluorouracil)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Parulekar et al. 2005. Journal of Clinical Oncology. DOI: 10.1200/JCO.2005.07.096"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "50%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Parulekar et al. 2005. Journal of Clinical Oncology. DOI: 10.1200/JCO.2005.07.096"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "90%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Parulekar et al. 2005. Journal of Clinical Oncology. DOI: 10.1200/JCO.2005.07.096"
+     }
+    ]
+   },
+   "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "0%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "MODERATE",
+      "pct": "50%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     }
+    ]
+   },
+   "FAC (Fluorouracil, Adriamycin, Cyclophosphamide)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Martin et al. 2005. New England Journal of Medicine. DOI:10.1056/NEJMoa043681"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "60%",
+      "outcome": "Amenorrhea (3 months)",
+      "refs": "Martin et al. 2005. New England Journal of Medicine. DOI:10.1056/NEJMoa043681"
+     }
+    ]
+   },
+   "KP (TDM-1, pertuzumab)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Hurvitz et al. 2021. Cancer Research. DOI: 10.1158/1538-7445.SABCS20-PD12-06 Hurvitz et al. 2018. The Lancet. Oncology. DOI:10.1016/S1470-2045(17)30716-7"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Hurvitz et al. 2021. Cancer Research. DOI: 10.1158/1538-7445.SABCS20-PD12-06 Hurvitz et al. 2018. The Lancet. Oncology. DOI:10.1016/S1470-2045(17)30716-7"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "MODERATE",
+      "pct": "40%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Hurvitz et al. 2021. Cancer Research. DOI: 10.1158/1538-7445.SABCS20-PD12-06 Hurvitz et al. 2018. The Lancet. Oncology. DOI:10.1016/S1470-2045(17)30716-7"
+     }
+    ]
+   },
+   "TAC (taxane, doxorubicin, cyclophosphamide)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Martin et al. 2005. New England Journal of Medicine. DOI:10.1056/NEJMoa043681"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "70%",
+      "outcome": "Amenorrhea (3 months)",
+      "refs": "Martin et al. 2005. New England Journal of Medicine. DOI:10.1056/NEJMoa043681"
+     }
+    ]
+   },
+   "TC (taxane, cyclophosphamide)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Zhao et al. 2014. Breast Cancer Research and Treatment. DOI: 10.1007/s10549-014-2914-x"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "100%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Zhao et al. 2014. Breast Cancer Research and Treatment. DOI: 10.1007/s10549-014-2914-x"
+     }
+    ]
+   },
+   "TCH (taxane, carboplatin, trastuzumab)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Lambertini et al. 2019. Journal of the National Cancer Institute DOI: 10.1093/jnci/djy094 Lambertini et al. 2019. Oncotarget DOI: 10.18632/oncotarget.26565 Piccart-Gebhart et al. 2016. Journal of Clinical Oncology DOI: 10.1200/JCO.2015.62.1797"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Amenorrhea (9 months)",
+      "refs": "Lambertini et al. 2019. Journal of the National Cancer Institute DOI: 10.1093/jnci/djy094 Lambertini et al. 2019. Oncotarget DOI: 10.18632/oncotarget.26565 Piccart-Gebhart et al. 2016. Journal of Clinical Oncology DOI: 10.1200/JCO.2015.62.1797"
+     }
+    ]
+   },
+   "TCHP (taxane, carboplatin, trastuzumab, pertuzumab)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Hurvitz et al. 2021. Cancer Research. DOI: 10.1158/1538-7445.SABCS20-PD12-06 Hurvitz et al. 2018. The Lancet. Oncology. DOI:10.1016/S1470-2045(17)30716-7"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "40%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Hurvitz et al. 2021. Cancer Research. DOI: 10.1158/1538-7445.SABCS20-PD12-06 Hurvitz et al. 2018. The Lancet. Oncology. DOI:10.1016/S1470-2045(17)30716-7"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Hurvitz et al. 2021. Cancer Research. DOI: 10.1158/1538-7445.SABCS20-PD12-06 Hurvitz et al. 2018. The Lancet. Oncology. DOI:10.1016/S1470-2045(17)30716-7"
+     }
+    ]
+   },
+   "TDM1 (trastuzumab emantasine)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Ruddy et al. 2021. Breast cancer research and treatment. DOI:10.1007/s10549-021-06267-8 Tolaney et al. 2021. Journal of clinical oncology: official journal of the American Society of Clinical Oncology. DOI:10.1200/JCO.20.03398"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "0%",
+      "outcome": "Amenorrhea (6 months)",
+      "refs": "Ruddy et al. 2021. Breast cancer research and treatment. DOI:10.1007/s10549-021-06267-8 Tolaney et al. 2021. Journal of clinical oncology: official journal of the American Society of Clinical Oncology. DOI:10.1200/JCO.20.03398"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Ruddy et al. 2021. Breast cancer research and treatment. DOI:10.1007/s10549-021-06267-8 Tolaney et al. 2021. Journal of clinical oncology: official journal of the American Society of Clinical Oncology. DOI:10.1200/JCO.20.03398"
+     }
+    ]
+   },
+   "AC (Adriamycin, Cyclophosphamide)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "0%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "MODERATE",
+      "pct": "40%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     }
+    ]
+   },
+   "AC-T (Adriamycin, Cyclophosphamide, Taxol)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "60%",
+      "outcome": "Amenorrhea (12 months)",
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     }
+    ]
+   },
+   "Carboplatin and Taxane": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Lambertini et al. 2019. Journal of the National Cancer Institute DOI: 10.1093/jnci/djy094 Lambertini et al. 2019. Oncotarget DOI: 10.18632/oncotarget.26565 Piccart-Gebhart et al. 2016. Journal of Clinical Oncology DOI: 10.1200/JCO.2015.62.1797"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Amenorrhea (9 months)",
+      "refs": "Lambertini et al. 2019. Journal of the National Cancer Institute DOI: 10.1093/jnci/djy094 Lambertini et al. 2019. Oncotarget DOI: 10.18632/oncotarget.26565 Piccart-Gebhart et al. 2016. Journal of Clinical Oncology DOI: 10.1200/JCO.2015.62.1797"
+     }
+    ]
+   },
+   "Aromatase Inhibitor": {
+    "exposure": "Hormone",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "60%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     }
+    ]
+   },
+   "GnRH Agonist": {
+    "exposure": "Hormone",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": null,
+      "refs": null
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": null,
+      "refs": null
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": null,
+      "refs": null
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "60%",
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Tamoxifen": {
+    "exposure": "Hormone",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "60%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     }
+    ]
+   },
+   "Chest radiation": {
+    "exposure": "Radiation",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 38,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "60%",
+      "outcome": "Infertility (No direct ovarian toxicity except age related increase in infertility risk)",
+      "refs": null
+     }
+    ]
+   },
+   "5-FU (Fluorouracil)": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2016/012209s040lbl.pdf"
+     }
+    ]
+   },
+   "Albumin bound Paclitaxel": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/021660s037lbl.pdf"
+     }
+    ]
+   },
+   "Capecitabine": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Oktem et al. 2010. Obstet Gynecol Surv. DOI: 10.1097/OGX.0b013e3181f8c0aa Drug Package Insert: https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf"
+     }
+    ]
+   },
+   "Adriamycin": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Sukumvanich et al. 2010. Cancer. DOI: 10.1002/cncr.25106"
+     }
+    ]
+   },
+   "Xeloda (capecitabine)": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Breast",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2015/020896s037lbl.pdf"
+     }
+    ]
+   }
+  },
+  "cervical": {
+   "Bevacizumab (Avastin)": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Pelvic radiation < 10 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Pelvic radiation > 20Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "100%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Wallace et al. 2005. Int J Radiat Oncol Biol Phys. DOI: 10.1016/j.ijrobp.2004.11.038"
+     }
+    ]
+   },
+   "Pelvic radiation 10 - 20 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Premature menopause",
+      "refs": "Chemaitilly et al. 2017. Journal of Clinical Endocrinology and Metabolism. DOI: 10.1210/jc.2016-3723"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Chemaitilly et al. 2017. Journal of Clinical Endocrinology and Metabolism. DOI: 10.1210/jc.2016-3723"
+     }
+    ]
+   },
+   "5-FU (Fluorouracil)": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2016/012209s040lbl.pdf"
+     }
+    ]
+   },
+   "Albumin bound Paclitaxel": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/021660s037lbl.pdf"
+     }
+    ]
+   },
+   "Irinotecan": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Utsunomiya et al. 2008. Int J Oncol 32.5 (991-1000)."
+     }
+    ]
+   },
+   "Ifosfamide Cycle": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Cervical",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "Brade et al. 1991. J Cancer Res Clin Oncology. DOI: 10.1007/BF01613224 Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Brade et al. 1991. J Cancer Res Clin Oncology. DOI: 10.1007/BF01613224 Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     }
+    ]
+   }
+  },
+  "germ_cell": {
+   "Carboplatin and Taxane": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Germ Cell Tumor",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "No live birth after pregnancy attempt",
+      "refs": "Chu et al. 2022.J Gynecol Oncol. DOI: 10.3802/jgo.2023.34.e12"
+     }
+    ]
+   }
+  },
+  "hodgkin": {
+   "Stanford V": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Edwards-Bennett et al. 2010. Annals of Oncology. DOI: 10.1093/annonc/mdp337"
+     }
+    ]
+   },
+   "COPP (Cyclophosphamide, Oncovin, Procarbazine, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Kreuser et al. 1987. Journal of Cancer Research and Clinical Oncology. DOI: 10.1007/BF00396383"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 38,
+      "band": "HIGH",
+      "pct": "90%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Kreuser et al. 1987. Journal of Cancer Research and Clinical Oncology. DOI: 10.1007/BF00396383"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Kreuser et al. 1987. Journal of Cancer Research and Clinical Oncology. DOI: 10.1007/BF00396383"
+     }
+    ]
+   },
+   "BEACOPP (Bleomycin, Etoposide, Adriamycin, Cyclophosphamide, Oncovin, Procarbazine, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "HIGH",
+      "pct": "70%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Behringer et al. 2013. Journal of Clinical Oncology. DOI: 10.1200/JCO.2012.44.3721 Behringer et al. 2005. Journal of Clinical Oncology. DOI: 10.1200/JCO.2005.08.138"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Behringer et al. 2013. Journal of Clinical Oncology. DOI: 10.1200/JCO.2012.44.3721 Behringer et al. 2005. Journal of Clinical Oncology. DOI: 10.1200/JCO.2005.08.138"
+     }
+    ]
+   },
+   "EBVP": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     }
+    ]
+   },
+   "ABVE-PC (Adriamycin, Bleomycin, Vincristine, Etoposide, Prednisone, Cyclophosphamide) with CED >7 gm/m2": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility",
+      "refs": "Pinson et al. 2019. American Society for Reproductive Medicine Conference."
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Pinson et al. 2019. American Society for Reproductive Medicine Conference."
+     }
+    ]
+   },
+   "ABVE-PC (Adriamycin, Bleomycin, Vincristine, Etoposide, Prednisone, Cyclophosphamide) with CED <7 gm/m2": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Nivolimumab and AVD": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "MOPP (1.5 to 3 cycles)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Premature menopause",
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     }
+    ]
+   },
+   "MOPP (> 4 cycles)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "HIGH",
+      "pct": "60%",
+      "outcome": "Premature menopause",
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     }
+    ]
+   },
+   "ABVD (Adriamycin, Bleomycin, Vinblastine, Dacarbazine)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     }
+    ]
+   },
+   "COPP": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Mauz-Korholz C et al. 2022. Lancet Oncol. DOI: 10.1016/S1470-2045(21)00470-8"
+     }
+    ]
+   },
+   "COPDAC": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Mauz-Korholz C et al. 2022. Lancet Oncol. DOI: 10.1016/S1470-2045(21)00470-8"
+     }
+    ]
+   },
+   "Brentuximab (BV) and AVEPC": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Brentuximab (BV) and AVD": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "BEACOPP X 2 then ABVD x 4": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Demeestere, et al. 2021. J Clin Oncol. DOI: 10.1200/JCO.21.00068 van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     }
+    ]
+   },
+   "BEACOPP": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Demeestere, et al. 2021. J Clin Oncol. DOI: 10.1200/JCO.21.00068 van der Kaaij, et al. 2012. J Clin Oncol. DOI: 10.1200/JCO.2011.37.1989"
+     }
+    ]
+   },
+   "AVPC": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "AOPE/OEPA": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "BEAM (Carmstine, Etoposide, Cytarabine, Melphalan) + Autologous transplant": {
+    "exposure": "Transplant",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "MODERATE",
+      "pct": "50%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Lasica et al. 2016. European journal of haematology. DOI:10.1111/ejh.12737 Swerdlow et al. 2014. Journal of the National Cancer Institute. DOI:10.1093/jnci/dju207"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Lasica et al. 2016. European journal of haematology. DOI:10.1111/ejh.12737 Swerdlow et al. 2014. Journal of the National Cancer Institute. DOI:10.1093/jnci/dju207"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Transplant - all conditioning": {
+    "exposure": "Transplant",
+    "crispCancer": "Hodgkin's Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "HIGH",
+      "pct": "90%",
+      "outcome": "Primary ovarian insufficiency",
+      "refs": "Molinari et al. 2021. Eur J Endocrinol. DOI: 10.1530/EJE-21-0351"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Molinari et al. 2021. Eur J Endocrinol. DOI: 10.1530/EJE-21-0351"
+     }
+    ]
+   }
+  },
+  "leukemia": {
+   "Alemtuzumab": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2001/alemmil050701LB.htm"
+     }
+    ]
+   },
+   "Bevacizumab (Avastin)": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Blinotunumab": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Gemtuzumab": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Inotuzumab": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "POMP (Purinethol, Oncovin, Methotrexate, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "No references found"
+     }
+    ]
+   },
+   "7 plus 3": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "No references found"
+     }
+    ]
+   },
+   "BFM (Berlin-Frankfurt-Munster)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     }
+    ]
+   },
+   "HDAC (High-Dose Cytarabine)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "No references found"
+     }
+    ]
+   },
+   "HyperCVAD (Cyclophosphamide, Vincristine, Adriamycin, Dexamethasone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     }
+    ]
+   },
+   "Pituitary radiation 1-20 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility",
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     }
+    ]
+   },
+   "Pituitary radiation 20-30 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility",
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Barton et al. 2013. Lancet Oncol. DOI: 10.1016/S1470-2045(13)70251-1"
+     }
+    ]
+   },
+   "6-MP (Mercaptopurine)": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2014/205919s000lbl.pdf"
+     }
+    ]
+   },
+   "6-Thioguanine": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2003/12429slr021_tabloid_lbl.pdf"
+     }
+    ]
+   },
+   "Midostaurain": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "TBI- or Busulfan-based transplant (allo and auto)": {
+    "exposure": "Transplant",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Chabut et al. 2023. Transplant Cell Ther. DOI: 10.1016/j.jtct.2023.02.019"
+     }
+    ]
+   },
+   "Transplant - all conditioning": {
+    "exposure": "Transplant",
+    "crispCancer": "Leukemia",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "HIGH",
+      "pct": "90%",
+      "outcome": "Primary ovarian insufficiency",
+      "refs": "Molinari et al. 2021. Eur J Endocrinol. DOI: 10.1530/EJE-21-0351"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Molinari et al. 2021. Eur J Endocrinol. DOI: 10.1530/EJE-21-0351"
+     }
+    ]
+   }
+  },
+  "non_hodgkin": {
+   "CEPP": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "DHAP Protocol": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "EPOCH-Rituximab": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Gharwin et al. 2016. Leuk Lymphoma. DOI: 10.3109/10428194.2015.1118476"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": null,
+      "refs": "Gharwin et al. 2016. Leuk Lymphoma. DOI: 10.3109/10428194.2015.1118476"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "100%",
+      "outcome": null,
+      "refs": "Gharwin et al. 2016. Leuk Lymphoma. DOI: 10.3109/10428194.2015.1118476"
+     }
+    ]
+   },
+   "ICE Protocol": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "LNH 87": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "CHOP (Cyclophosphamide, Hydroxydaunorubicin, Oncovin, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Elis et al. 2006. Leuk Lymphoma. DOI: 10.1080/10428190500353877 Dann et al. 2005. Hum Reprod. DOI: 10.1093/humrep/dei018"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Elis et al. 2006. Leuk Lymphoma. DOI: 10.1080/10428190500353877 Dann et al. 2005. Hum Reprod. DOI: 10.1093/humrep/dei018"
+     }
+    ]
+   },
+   "COP (Cyclophosphamide, Oncovin, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Hudson et al. 1993. Journal of Clinical Oncology 11.1 (100-108)."
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Hudson et al. 1993. Journal of Clinical Oncology 11.1 (100-108)."
+     }
+    ]
+   },
+   "COP Protocol 1 or Protocol 2": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "COPP (Cyclophosphamide, Oncovin, Procarbazine, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "DHAP (Dexamethasone, Cytarabine, Cisplatin)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "ICE (Ifosfamide, Carboplatin, Etoposide)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "Zelenetz et al. 2003. Annals of Oncology. DOI: 10.1093/annonc/mdg702 Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Zelenetz et al. 2003. Annals of Oncology. DOI: 10.1093/annonc/mdg702 Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     }
+    ]
+   },
+   "R-ACVBP (Rituximab, Adriamycin, Cyclophosphamide, Vindesine, Bleomycin, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "Andre et al. 2004. Blood. DOI: 10.1182/blood-2003-04-1124 Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Andre et al. 2004. Blood. DOI: 10.1182/blood-2003-04-1124 Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679"
+     }
+    ]
+   },
+   "R-CEPP (Rituximab, Cyclophosphamide, Etoposide, Procarbazine, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Premature menopause",
+      "refs": "Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679 https://www.cancertherapyadvisor.com/home/cancer-topics/lymphoma/non-hodgkin-lymphoma-nhl-treatment-regimens-diffuse-large-b-cell-lymphoma/"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Green et al. 2013. Pediatric Blood and Cancer. DOI: 10.1002/pbc.24679 https://www.cancertherapyadvisor.com/home/cancer-topics/lymphoma/non-hodgkin-lymphoma-nhl-treatment-regimens-diffuse-large-b-cell-lymphoma/"
+     }
+    ]
+   },
+   "R-CHOP (Rituximab, Cyclophosphamide, Hydroxydaunorubicin, Oncovin, Prednisone)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Dann et al. 2005. Hum Reprod. DOI: 10.1093/humrep/dei018 Elis et al. 2006. Leuk Lymphoma. DOI: 10.1080/10428190500353877"
+     }
+    ]
+   },
+   "BEAM (Carmstine, Etoposide, Cytarabine, Melphalan)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "MODERATE",
+      "pct": "50%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Lasica et al. 2016. European journal of haematology. DOI:10.1111/ejh.12737"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Lasica et al. 2016. European journal of haematology. DOI:10.1111/ejh.12737"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Lasica et al. 2016. European journal of haematology. DOI:10.1111/ejh.12737"
+     }
+    ]
+   },
+   "6-MP (Mercaptopurine)": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2014/205919s000lbl.pdf"
+     }
+    ]
+   },
+   "Transplant - all conditioning": {
+    "exposure": "Transplant",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "HIGH",
+      "pct": "90%",
+      "outcome": "Primary ovarian insufficiency",
+      "refs": "Molinari et al. 2021. Eur J Endocrinol. DOI: 10.1530/EJE-21-0351"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Molinari et al. 2021. Eur J Endocrinol. DOI: 10.1530/EJE-21-0351"
+     }
+    ]
+   },
+   "BEAM (Carmstine, Etoposide, Cytarabine, Melphalan) + Autologous transplant": {
+    "exposure": "Transplant",
+    "crispCancer": "Non Hodgkin’s Lymphoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "MODERATE",
+      "pct": "50%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Lasica et al. 2016. European journal of haematology. DOI:10.1111/ejh.12737 Swerdlow et al. 2014. Journal of the National Cancer Institute. DOI:10.1093/jnci/dju207"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 30,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Lasica et al. 2016. European journal of haematology. DOI:10.1111/ejh.12737 Swerdlow et al. 2014. Journal of the National Cancer Institute. DOI:10.1093/jnci/dju207"
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   }
+  },
+  "ovarian": {
+   "Bevacizumab (Avastin)": {
+    "exposure": "Biologic/Immunotherapy",
+    "crispCancer": "Ovarian",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "BEP (Bleomycin, Etoposide, Cisplatin)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Ovarian",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "10%",
+      "outcome": "Primary ovarian insufficiency",
+      "refs": "Tamauchi et al. 2018. American Journal of Obstetrics and Gynecology. DOI: 10.1016/j.ajog.2018.07.021"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Tamauchi et al. 2018. American Journal of Obstetrics and Gynecology. DOI: 10.1016/j.ajog.2018.07.021"
+     }
+    ]
+   },
+   "Carboplatin and Taxane": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Ovarian",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Seiden et al. 2001. Gynecologic Oncology. DOI: 10.1006/gyno.2001.6373"
+     }
+    ]
+   },
+   "CRS/HIPEC": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Ovarian",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Albumin bound Paclitaxel": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Ovarian",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "FDA Package Insert: https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/021660s037lbl.pdf"
+     }
+    ]
+   },
+   "Capecitabine": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Ovarian",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Oktem et al. 2010. Obstet Gynecol Surv. DOI: 10.1097/OGX.0b013e3181f8c0aa Drug Package Insert: https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf"
+     }
+    ]
+   },
+   "Irinotecan": {
+    "exposure": "Single Chemotherapy Drug",
+    "crispCancer": "Ovarian",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Utsunomiya et al. 2008. Int J Oncol 32.5 (991-1000)."
+     }
+    ]
+   }
+  },
+  "sarcoma": {
+   "AIM (Adriamycin, Ifosfamide, Mesna)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Sarcoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "MAP (Methotrexate, Adriamycin, Cisplatin)": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Sarcoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 38,
+      "band": "LOW",
+      "pct": "0%",
+      "outcome": "Amenorrhea (unknown duration)",
+      "refs": "Bacci et al. 2000. Journal of Clinical Oncology. DOI: 10.1200/JCO.2000.18.24.4016"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Bacci et al. 2000. Journal of Clinical Oncology. DOI: 10.1200/JCO.2000.18.24.4016"
+     }
+    ]
+   },
+   "VAC (Vincristine, Dactinomycin, Cyclophosphamide) with CED <7 gm/m2": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Sarcoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "VAC (Vincristine, Dactinomycin, Cyclophosphamide) with CED >7 gm/m2": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Sarcoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility",
+      "refs": "Pinson et al. 2019. American Society for Reproductive Medicine Conference."
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Pinson et al. 2019. American Society for Reproductive Medicine Conference."
+     }
+    ]
+   },
+   "VDC/IE (Vincristine, Doxorubicin, Cyclophosphamide, Ifosfamide, Etoposide) with CED <7 gm/m2": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Sarcoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "VDC/IE (Vincristine, Doxorubicin, Cyclophosphamide, Ifosfamide, Etoposide) with CED >7 gm/m2": {
+    "exposure": "Chemotherapy Regimen",
+    "crispCancer": "Sarcoma",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 30,
+      "band": "LOW",
+      "pct": "20%",
+      "outcome": "Infertility",
+      "refs": "Pinson et al. 2019. American Society for Reproductive Medicine Conference."
+     },
+     {
+      "minAge": 38,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Pinson et al. 2019. American Society for Reproductive Medicine Conference."
+     }
+    ]
+   }
+  },
+  "uterine": {
+   "Continuous Progestin Therapy": {
+    "exposure": "Hormone",
+    "crispCancer": "Uterine",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Park et al. 2013. Obstet Gynecol. DOI: 10.1097/aog.0b013e31827a0643 Hahn et al. 2009 Int J Gynecol Cancer. DOI: 10.1111/IGC.0b013e3181aae1fb"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 38,
+      "band": "MODERATE",
+      "pct": "30%",
+      "outcome": "Infertility",
+      "refs": "Park et al. 2013. Obstet Gynecol. DOI: 10.1097/aog.0b013e31827a0643 Hahn et al. 2009 Int J Gynecol Cancer. DOI: 10.1111/IGC.0b013e3181aae1fb"
+     },
+     {
+      "minAge": 44,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Park et al. 2013. Obstet Gynecol. DOI: 10.1097/aog.0b013e31827a0643 Hahn et al. 2009 Int J Gynecol Cancer. DOI: 10.1111/IGC.0b013e3181aae1fb"
+     }
+    ]
+   },
+   "Pelvic radiation < 10 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Uterine",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": null
+     }
+    ]
+   },
+   "Pelvic radiation > 20Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Uterine",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 120,
+      "band": "HIGH",
+      "pct": "100%",
+      "outcome": "Acute ovarian failure",
+      "refs": "Wallace et al. 2005. Int J Radiat Oncol Biol Phys. DOI: 10.1016/j.ijrobp.2004.11.038"
+     }
+    ]
+   },
+   "Pelvic radiation 10 - 20 Gy": {
+    "exposure": "Radiation",
+    "crispCancer": "Uterine",
+    "bands": [
+     {
+      "minAge": 0,
+      "maxAge": 20,
+      "band": "HIGH",
+      "pct": "80%",
+      "outcome": "Premature menopause",
+      "refs": "Chemaitilly et al. 2017. Journal of Clinical Endocrinology and Metabolism. DOI: 10.1210/jc.2016-3723"
+     },
+     {
+      "minAge": 30,
+      "maxAge": 120,
+      "band": "UNKNOWN",
+      "pct": null,
+      "outcome": null,
+      "refs": "Chemaitilly et al. 2017. Journal of Clinical Endocrinology and Metabolism. DOI: 10.1210/jc.2016-3723"
+     }
+    ]
+   }
+  }
+ }
+}

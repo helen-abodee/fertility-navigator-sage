@@ -97,8 +97,11 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "thyroid", label: "Thyroid cancer" },
       { value: "sarcoma", label: "Sarcoma (bone or soft tissue)" },
       { value: "brain_cns", label: "Brain or spinal cord tumor" },
-      { value: "gyn", label: "Cervical, ovarian, or uterine cancer" },
-      { value: "colorectal", label: "Colorectal cancer" },
+      { value: "cervical", label: "Cervical cancer" },
+      { value: "ovarian", label: "Ovarian cancer" },
+      { value: "uterine", label: "Uterine cancer" },
+      { value: "gastrointestinal", label: "Stomach, intestinal, or colorectal cancer" },
+      { value: "germ_cell", label: "Germ cell tumor" },
       { value: "melanoma", label: "Melanoma" },
       { value: "other", label: "Something else" },
       { value: "not_sure", label: "I'm not sure", notSure: true },
@@ -134,6 +137,14 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "other", label: "Different ones" },
       { value: "not_sure", label: "I don't know the names", notSure: true },
     ],
+  },
+  chemo_regimen: {
+    id: "chemo_regimen",
+    field: "chemoRegimen",
+    kind: "single",
+    heading: "Do you know the name of your chemo plan?",
+    // options are filled at runtime from the CRISP list for the chosen diagnosis
+    options: [],
   },
   radiation_area: {
     id: "radiation_area",

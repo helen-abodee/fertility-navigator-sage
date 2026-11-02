@@ -31,6 +31,9 @@ test("the checkpoint path walks end to end on a phone", async ({ page }) => {
   await page.getByRole("button", { name: "Cyclophosphamide (Cytoxan)" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
 
+  await expect(page.getByRole("heading", { name: "Do you know the name of your chemo plan?" })).toBeVisible();
+  await page.getByRole("button", { name: "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)" }).click();
+
   await page.getByRole("button", { name: "Yes, I want to" }).click();
 
   await page
@@ -82,15 +85,17 @@ test("the checkpoint path shows real, cited content", async ({ page }) => {
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Cyclophosphamide (Cytoxan)" }).click();
   await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "CMF (Cyclophosphamide, Methotrexate, Fluorouracil)" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page
     .getByRole("button", { name: "A job-based or private plan in California" })
     .click();
   await page.getByRole("button", { name: "Skip this question" }).click();
 
-  // Dedicated risk screen: group, short text, continue
+  // Dedicated risk screen: CRISP band for the exact regimen
   await expect(page.getByText("Lower risk group", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: /lower risk group/ })).toBeVisible();
+  await expect(page.getByText("studies behind this tool", { exact: false })).toBeVisible();
   await page.getByRole("button", { name: "See my options" }).click();
 
   // Options as tappable rows: egg freezing shown, sperm banking hidden

@@ -26,7 +26,9 @@ export interface RiskAssessment {
 
 export function assessRisk(answers: Answers): RiskAssessment {
   for (const rule of riskRules) {
-    if (rule.applies(answers)) return rule.result;
+    if (rule.applies(answers)) {
+      return typeof rule.result === "function" ? rule.result(answers) : rule.result;
+    }
   }
   // riskRules ends with a catch-all; this line is unreachable.
   throw new Error("risk rules must end with a catch-all rule");

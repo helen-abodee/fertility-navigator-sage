@@ -30,6 +30,15 @@ describe("questionSequence", () => {
     expect(questionSequence({ treatments: ["surgery"] })).not.toContain("chemo_drugs");
   });
 
+  it("asks the regimen name only for CRISP-covered diagnoses, never for testes", () => {
+    const base: Answers = { treatments: ["chemo"], cancerType: "breast", anatomy: "ovaries_uterus" };
+    const seq = questionSequence(base);
+    expect(seq.indexOf("chemo_regimen")).toBe(seq.indexOf("chemo_drugs") + 1);
+    expect(questionSequence({ ...base, anatomy: "testes" })).not.toContain("chemo_regimen");
+    expect(questionSequence({ ...base, cancerType: "thyroid" })).not.toContain("chemo_regimen");
+    expect(questionSequence({ treatments: ["chemo"] })).not.toContain("chemo_regimen");
+  });
+
   it("asks where radiation was aimed only when radiation is selected", () => {
     const answers: Answers = { treatments: ["chemo", "radiation"] };
     const seq = questionSequence(answers);
