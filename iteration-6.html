@@ -1,0 +1,90 @@
+<title>Navigator Iteration 6</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 1020px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 70ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 16px; }
+  .stat b { font-family: Literata, Georgia, serif; font-size: 1.2rem; display: block; }
+  .stat span { font-size: .8rem; color: var(--muted); }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 6</h1>
+  <p class="sub">November 2, 2026. The risk engine now runs on CRISP, the UCSD tool City of Hope counsels with.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Walk through it:</strong><br>
+    <a href="https://navigator-pvdrb75zq-helen-abodees-projects.vercel.app">navigator-pvdrb75zq-helen-abodees-projects.vercel.app</a></p>
+    <p style="margin-bottom:0">Try the main path: 24, breast cancer, chemo, cyclophosphamide, then pick "CMF" on the new regimen question, and watch the risk screen speak CRISP's language.</p>
+  </div>
+
+  <h2>What we recovered from oncofertilityrisk.com</h2>
+  <div class="stats">
+    <div class="stat"><b>135</b><span>treatments across 17 cancer types</span></div>
+    <div class="stat"><b>540</b><span>age-banded results, zero errors</span></div>
+    <div class="stat"><b>45</b><span>underlying literature references harvested</span></div>
+    <div class="stat"><b>0</b><span>clicks: enumerated via the tool's own API, politely rate-limited</span></div>
+  </div>
+  <p>The tool runs on three plain server endpoints, so instead of auto-clicking I queried them directly, one request per second: every cancer x exposure x treatment at four ages. Each result carries its band (Low / Moderate / High / Unknown), the percentage, the outcome measured, and the study it rests on, which answers your "where do they get their data" at the per-regimen level. Everything lives in <code>content/sources/crisp/enumeration.json</code> with full provenance, and a converter (<code>scripts/build-crisp-rules.mjs</code>) turns it into the app's table, so re-running against their site anytime refreshes us.</p>
+
+  <h2>How it's wired in</h2>
+  <ul>
+    <li><strong>New question, only when it earns its place:</strong> after the chemo medicines, people whose diagnosis is in the CRISP table (and who didn't answer testes) see "Do you know the name of your chemo plan?" with their cancer's actual regimen list. "I don't know the name" falls back to the previous rules, so nothing is lost.</li>
+    <li><strong>The diagnosis list now matches CRISP's cancers</strong> (cervical, ovarian, and uterine split out; gastrointestinal and germ cell tumor added).</li>
+    <li><strong>CRISP outranks everything else</strong> when the regimen is known: ovaries + regimen + age returns UCSD's exact band, cited to the tool and to the specific study behind that row (your path cites Sukumvanich 2010). A CRISP "Unknown" is shown honestly: "a fact about the research, not about you."</li>
+    <li><strong>Age dependence is real now:</strong> breast CMF reads 0% amenorrhea at 24 (lower group) and 50% at 44 (in-between group), exactly as the UCSD tool returns.</li>
+    <li><strong>One flag for you:</strong> the risk screen now quotes the study statistic ("In the studies behind this tool, 0% of women your age developed amenorrhea"). That's a published figure, not a personal prediction, which I read as inside your no-personal-probability rule; if you want category-only, it's a one-line removal.</li>
+  </ul>
+
+  <h2>Honest limits, and the Nov 11 briefing</h2>
+  <ul>
+    <li><strong>Methodology</strong> (full memo: <code>content/sources/crisp-methodology.md</code>): UCSD built the 60-plus-regimen table by per-regimen literature review seeded from their own 763-survivor cohort, with two clinicians reaching consensus per risk; the Low cutoff is anchored to the general-population infertility rate, the Moderate/High boundary was clinician judgment; no outcome validation is published yet, and the table itself is unpublished. The memo ends with 8 questions for your meeting, led by: can they share the table and its reference mapping; is validation underway; what's the pathway to cite/embed it, and is a male version planned.</li>
+    <li><strong>Female outcomes only:</strong> CRISP measures amenorrhea and ovarian failure, so the male side keeps our ASCO/ESMO-lineage rules. Worth raising on the 11th.</li>
+    <li><strong>Age cutoffs are sampled, not exact:</strong> I queried at ages 20, 30, 38, and 44; ages in between resolve to the nearest sampled result rather than inventing values. A finer every-single-age pass was running to recover the exact cutoffs but was stopped before finishing; say the word and I'll rerun it (about an hour of polite requests), and the table rebuilds automatically.</li>
+    <li><strong>Permission:</strong> we're citing their public tool with attribution on a private preview. The embed/license question is on the Nov 11 list so this becomes a collaboration, not a surprise.</li>
+  </ul>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/04d-q-regimen.png" alt="Regimen question"><p>The regimen question, listing the diagnosis's actual CRISP plans.</p></div>
+    <div class="shot"><img src="shots/05-risk-reveal.png" alt="CRISP-powered risk reveal"><p>The risk screen on CRISP: band, the study statistic, and the ask-your-team line.</p></div>
+  </div>
+
+  <h2>QA</h2>
+  <ul>
+    <li>92 unit + 7 e2e green, including CRISP precedence, the not-sure fallback to the old rules, the honest UNKNOWN band, and the tone gate over the new copy.</li>
+    <li>Livestrong/ESMO rules remain as the fallback layer (regimen unknown, male anatomy, radiation, surgery, transplant), so nothing got less safe.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · recovered table <code>content/sources/crisp/enumeration.json</code> · methodology and meeting questions <code>content/sources/crisp-methodology.md</code>.</p>
+</main>
