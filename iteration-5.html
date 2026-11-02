@@ -1,0 +1,97 @@
+<title>Navigator Iteration 5</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 1020px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 70ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  th { text-align: left; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 8px 12px 6px 0; border-bottom: 1px solid var(--ink); }
+  td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:first-child { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .chip { display: inline-block; border-radius: 99px; padding: 1px 10px; font-size: .74rem; font-weight: 700; background: var(--tint); color: var(--accent-ink); white-space: nowrap; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 5</h1>
+  <p class="sub">November 2, 2026. Your walkthrough build, plus the risk matrix you asked to see.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Walk through it here:</strong><br>
+    <a href="https://navigator-jgpz80oq8-helen-abodees-projects.vercel.app">navigator-jgpz80oq8-helen-abodees-projects.vercel.app</a><br>
+    (Sign in with your Vercel account once; protection stays on until you want to share it.)</p>
+  </div>
+
+  <h2>Your question first: which treatment?</h2>
+  <p>Cancer treatment, everywhere. The flow now says "Where are you with cancer treatment?", "What cancer treatment is planned?", and the risk screen says "Cancer treatments like yours are in the lower risk group." The word "treatment" alone no longer appears anywhere it could read as fertility treatment.</p>
+
+  <h2>The risk calculation, laid out</h2>
+  <p>Ten rules, checked top to bottom; the first match wins. Everything the published frameworks key to dose or cycle count honestly lands in "depends on your dose" instead of guessing.</p>
+  <div class="table-wrap"><table>
+    <tr><th>#</th><th>If the person told us</th><th>They see</th><th>Backed by</th></tr>
+    <tr><td>1</td><td>Stem cell or bone marrow transplant (any anatomy)</td><td><span class="chip">Higher risk group</span></td><td>Livestrong charts (both), ESMO 2020</td></tr>
+    <tr><td>2</td><td>An alkylating chemo drug AND radiation to belly/pelvis</td><td><span class="chip">Higher risk group</span></td><td>Livestrong charts (both)</td></tr>
+    <tr><td>3</td><td>Ovaries + breast cancer + cyclophosphamide + under 30</td><td><span class="chip">Lower risk group</span></td><td>Livestrong women, ESMO 2020</td></tr>
+    <tr><td>4</td><td>Ovaries + chemo containing cisplatin</td><td><span class="chip">In-between risk group</span></td><td>Livestrong women</td></tr>
+    <tr><td>5</td><td>Any alkylating drug named, without 1-4</td><td><span class="chip">Depends on your dose</span> + "ask for your CED"</td><td>Livestrong, COG survivorship guidelines</td></tr>
+    <tr><td>6</td><td>Testes + cisplatin or carboplatin</td><td><span class="chip">Depends on your dose</span></td><td>Livestrong men, ESMO 2020</td></tr>
+    <tr><td>7</td><td>Radiation without a known dose</td><td><span class="chip">Depends on the dose</span>, area-aware wording</td><td>Livestrong charts, COG</td></tr>
+    <tr><td>8</td><td>Chemo with unknown or unlisted medicines</td><td><span class="chip">Depends on the medicines</span></td><td>ESMO 2020, Livestrong</td></tr>
+    <tr><td>9</td><td>Surgery only</td><td><span class="chip">Depends on the surgery</span></td><td>COG</td></tr>
+    <tr><td>10</td><td>Nothing yet</td><td><span class="chip">Not enough to say</span>, options still shown</td><td>ESMO 2020</td></tr>
+  </table></div>
+  <p>Example: your walkthrough path (24, breast cancer, cyclophosphamide, ovaries) hits rule 3 and sees the lower risk group. A Hodgkin patient naming procarbazine hits rule 5 and is asked to get their dose. All of it lives in one swappable file (<code>lib/risk/rules.ts</code>) for Hannah's guidelines.</p>
+
+  <h2>Care-team tracking: built what's safe, designed the rest</h2>
+  <ul>
+    <li><strong>Shipped now: "Where I am with this."</strong> A patient-held checklist on the results page (learned my risk, talked with my care team, checked coverage, contacted a clinic, had a consult, started preservation), with two equal endings: "I completed preservation" and "I decided not to preserve." It saves on-device and prints into the summary, so a social worker sees structured status the moment a patient shares it. No scores, no percentages, by test.</li>
+    <li><strong>Designed for Estella: check-in codes.</strong> <code>docs/DATA-ARCHITECTURE.md</code> lays out three tiers. The recommended v2: the social worker generates a code per patient, the patient opts in, and ONLY stage checkmarks (never answers, diagnosis, or risk inputs) sync to a small staff dashboard. Honest catch for that conversation: even stage-only data linked to a code is PHI, so it needs a HIPAA business associate agreement and City of Hope sign-off before anything is built. The full platform (tier 3, Dyad-shaped on Supabase's HIPAA tier) stays on ice until the program commits.</li>
+  </ul>
+
+  <h2>Egg and sperm health, Dyad-style</h2>
+  <p>A new results section, "Everyday things that affect sperm and eggs," opens with "Information, not homework. Nothing here is a goal." Ten facts, every one sourced to ASRM fact sheets or Cleveland Clinic urology pages, each teaching the mechanism: sperm take about 2.5 months to develop; testes run cooler on purpose, so heat matters; testosterone and steroids shut sperm production down; your cannabis fact, stated with its honest caveat (mechanism via THC and testosterone; clinic-population studies are mixed); smoking speeds up egg loss that can't be undone; and a debunk card (supplements and after-sex positions have no evidence) to save people money and worry. Anatomy-gated like everything else.</p>
+  <p>And Dyad's enforcement came with the content: the banned-phrase test is ported and expanded, so CI now fails on any wellness platitude ("be gentle with yourself", "self-care", "listen to your body"), any fertility-improvement claim, any urgency phrase, any em dash, across every string in the app including the new facts.</p>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/09c-journey.png" alt="Journey tracker"><p>"Where I am with this": tappable stages, two equal endings, prints with the summary.</p></div>
+    <div class="shot"><img src="shots/09b-health.png" alt="Health facts section"><p>Everyday egg/sperm facts, mechanism-first, sources tucked away.</p></div>
+    <div class="shot"><img src="shots/05-risk-reveal.png" alt="Risk reveal"><p>The risk screen, now explicitly "cancer treatments like yours."</p></div>
+  </div>
+
+  <h2>QA</h2>
+  <ul>
+    <li>84 unit tests + 7 end-to-end journeys green, including the new journey-tracker e2e (checks that "I decided not to preserve" works as a first-class ending) and 26 tone/claim-discipline checks.</li>
+    <li>Static build clean; deployed preview above.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · journey model <code>lib/journey.ts</code> · architecture <code>docs/DATA-ARCHITECTURE.md</code> · health facts sourced in <code>content/sources/fertility-health-source-notes.md</code>.</p>
+</main>

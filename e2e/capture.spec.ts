@@ -82,6 +82,14 @@ test("capture iteration screenshots", async ({ page }) => {
     await page.screenshot({ path: `${OUT}/09-clinics.png` });
   }
 
+  await page.getByRole("heading", { name: "Everyday things that affect sperm and eggs" }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${OUT}/09b-health.png` });
+
+  await page.getByRole("heading", { name: "Where I am with this" }).scrollIntoViewIfNeeded();
+  await page.getByRole("button", { name: "Talked with my care team" }).click();
+  await page.getByRole("button", { name: "Contacted a clinic" }).click();
+  await page.screenshot({ path: `${OUT}/09c-journey.png` });
+
   await page.getByRole("button", { name: "Download or print my summary" }).scrollIntoViewIfNeeded();
   await page.screenshot({ path: `${OUT}/10-footer.png` });
 });
