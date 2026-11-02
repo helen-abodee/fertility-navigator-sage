@@ -168,3 +168,26 @@ test("Medi-Cal gets an honest verdict and aid, never false hope", async ({ page 
   await expect(page.getByText("Medi-Cal does not cover this right now")).toBeVisible();
   await expect(page.getByText("Likely not covered")).toBeVisible();
 });
+
+test("the journey tracker records stages and respects deciding not to", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByRole("button", { name: "I haven't started treatment yet" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "I'm not sure yet" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Maybe" }).click();
+  await page.getByRole("button", { name: "I don't know", exact: true }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "See my options" }).click();
+
+  await page.getByRole("button", { name: "Contacted a clinic" }).click();
+  await expect(page.getByRole("button", { name: "✓ Contacted a clinic" })).toBeVisible();
+  await page.getByRole("button", { name: "I decided not to preserve" }).click();
+  await expect(page.getByRole("button", { name: "I decided not to preserve" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+});
