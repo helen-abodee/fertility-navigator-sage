@@ -1,0 +1,79 @@
+<title>Navigator Iteration 8</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 1020px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 70ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 8</h1>
+  <p class="sub">November 2, 2026. The money experience, the care-team callout, and the deep aid directory.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Walk through it:</strong><br>
+    <a href="https://navigator-7e5wqlo1x-helen-abodees-projects.vercel.app">navigator-7e5wqlo1x-helen-abodees-projects.vercel.app</a></p>
+    <p style="margin-bottom:0"><strong>The literature you asked to see:</strong><br>
+    <a href="https://claude.ai/code/artifact/87652f2b-acd9-4f49-ae36-96403716c5bc">Parenthood decision-aid literature</a> (Ottawa, BEFORE, Cancer-Fertility-and-Me, CDC, with licensing and the 8-screen mapping).</p>
+  </div>
+
+  <h2>Your notes, answered</h2>
+  <ul>
+    <li><strong>"Only one question about kids?"</strong> Not anymore: the full decision tree is offered to anyone answering "maybe" or "I'm not sure," and lives permanently on the hub's Start-here tab as "Thinking about children, someday?" so it can be taken (or retaken) anytime.</li>
+    <li><strong>The care-team callout</strong>: "ask your care team" is now a distinct blue-tinted box with a stethoscope badge and a FOR YOUR CARE TEAM label, the same recognizable shape everywhere it appears, starting with the risk screen.</li>
+    <li><strong>Money, no longer a jump scare</strong>: "Paying for it" is a separate tab that simply doesn't exist for someone who answered "no" to children. Option pages no longer show prices at all (they point to the tab "when you're ready"). And the estimator now opens with "The money picture" and your coverage first: a 24-year-old on a California plan reads "your cost may be your plan's usual deductible and copays" before any $18,000 figure appears.</li>
+    <li><strong>The aid directory got real</strong>: every one of the 11 toolkit organizations was re-verified on its own site today, so the info matches what patients would actually find.</li>
+  </ul>
+
+  <h2>What the aid re-verification found</h2>
+  <ul>
+    <li><strong>Real numbers now shown</strong>: Allyson Whitney $500 to $1,500 (facility must apply, spring cycle); NMDP up to $10,000 (sickle cell, pre-transplant); Team Maggie's up to $2,500 (insurance denial required); Worth the Wait $500 to $2,500 (emergency track reviewed twice monthly); Livestrong at least 25% off plus free stim meds (income caps listed); ReUnite up to 100% off three meds; Walgreens/Ferring "Heart Beat" free meds for 2 cycles (not in MA, NJ, AR).</li>
+    <li><strong>Who pays whom</strong>: most programs pay clinics or pharmacies directly, now marked, so the "pay first and get reimbursed" warning only shows where it's true.</li>
+    <li><strong>Timing reality</strong>: application windows and closed-cycle notices are in the copy (SAMFund's fall cycle is closed until early 2027; Chick Mission grew to 10 states).</li>
+    <li><strong>One flag for Estella</strong>: Fertility Within Reach's website went dark as of today (it was live mid-October); the entry now tells patients to confirm through a social worker, and <code>content/sources/aid-provenance.md</code> tracks it for re-check. Two other orgs moved URLs (NMDP's sickle-cell site, Verna's Purse) and now point at the live pages.</li>
+    <li>Every updated fact carries a citation to the org's own page retrieved today, alongside the original toolkit citation. Unbranded as always, pending City of Hope's written permission.</li>
+  </ul>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/16-reveal-callout.png" alt="Risk screen with care-team callout"><p>The care-team callout: stethoscope badge, distinct shade, memorable shape.</p></div>
+    <div class="shot"><img src="shots/16b-money-picture.png" alt="Money picture"><p>"The money picture": coverage first, published prices after.</p></div>
+    <div class="shot"><img src="shots/16c-aid-detail.png" alt="Aid detail"><p>Aid entries with real amounts, who applies, and who gets paid.</p></div>
+  </div>
+
+  <h2>QA</h2>
+  <ul>
+    <li>92 unit + 12 e2e green, including: the money tab absent after a "no," the care-team callout on the reveal, the hub decision-tree entry, and the coverage-first estimator on the Paying-for-it tab.</li>
+    <li>The tone gate passed over all rewritten aid copy.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · aid provenance <code>content/sources/aid-provenance.md</code> · literature memo <code>content/sources/parenthood-decision-aids.md</code>.</p>
+</main>
