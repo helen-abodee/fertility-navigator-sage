@@ -1,0 +1,99 @@
+<title>Navigator Iteration 7</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+    --warm: #A8653A; --warmtint: #F3E3D3; --blue: #2E5F86; --bluetint: #E2ECF3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+      --warm: #D9A273; --warmtint: #3A2F24; --blue: #8DB8CF; --bluetint: #27343D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    --warm: #D9A273; --warmtint: #3A2F24; --blue: #8DB8CF; --bluetint: #27343D;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 1020px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 70ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .scheme { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 14px; }
+  .sc { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--card); }
+  .sc .band { height: 10px; border-radius: 6px; margin-bottom: 8px; }
+  .sc b { font-family: Literata, Georgia, serif; }
+  .sc p { font-size: .85rem; color: var(--muted); margin: 4px 0 0; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 7</h1>
+  <p class="sub">November 2, 2026. The sectioned survey, the entry groups, the tabbed hub, and the thinking-it-through path.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Walk through it:</strong><br>
+    <a href="https://navigator-5q29wbmoa-helen-abodees-projects.vercel.app">navigator-5q29wbmoa-helen-abodees-projects.vercel.app</a></p>
+    <p style="margin-bottom:0">Two walks worth doing: the full path (treatment plan, breast, CMF), and a second one answering "I'm not sure" to the children question to meet the reflection path.</p>
+  </div>
+
+  <h2>The entry groups</h2>
+  <p>The first screen is now "Where are you right now?" with five lanes, each calibrating depth:</p>
+  <ul>
+    <li><strong>Diagnosed, no treatment plan yet</strong>: a short flow with zero treatment-detail questions, an honest "we can't place your risk yet," and the questions to bring to the planning appointment.</li>
+    <li><strong>I have a treatment plan / in treatment</strong>: the full flow, including the CRISP regimen question.</li>
+    <li><strong>I finished cancer treatment</strong>: the survivor spine.</li>
+    <li><strong>I'm here for someone I care about</strong>: caregivers walk the flow on the person's behalf.</li>
+    <li><strong>Just learning for now</strong>: straight to the browse hub, no personal questions at all.</li>
+  </ul>
+  <p>Also fixed per your question: the first screen and every ambiguous spot say <strong>cancer</strong> treatment. And on the lymphoma name: your memory is right that it used to be "non-Hodgkin's"; NCI's current style drops the apostrophe, which is what we use (the UCSD tool still uses the older form).</p>
+
+  <h2>The design scheme: three sections, three moods</h2>
+  <div class="scheme">
+    <div class="sc"><div class="band" style="background:var(--accent)"></div><b>1 · You and your treatment</b><p>The existing fir-on-paper: clinical, calm, respectful. Icons joined the answers (egg, syringe, radiation, scalpel).</p></div>
+    <div class="sc"><div class="band" style="background:var(--warm)"></div><b>2 · Children, someday</b><p>Warm clay and soft amber tints on a warmer paper. Quietly hopeful, never pushy; the milestone into it says "there is no wrong answer."</p></div>
+    <div class="sc"><div class="band" style="background:var(--blue)"></div><b>3 · The practical side</b><p>Slate blue: matter-of-fact money-and-logistics mood. Only shown at all if children are wanted or possible; a "no" ends the survey with dignity.</p></div>
+  </div>
+  <p>Between sections, a milestone screen takes a breath, names what's done, and carries the next section's palette. Progress dots and all controls re-theme per section automatically (dark mode included).</p>
+
+  <h2>The thinking-it-through path</h2>
+  <p>Answering "I'm not sure" to the children question now offers an optional 8-screen reflection, every prompt traceable to a published decision aid (<code>content/sources/parenthood-decision-aids.md</code>): the Ottawa Personal Decision Guide as the backbone (free with attribution), CDC's reproductive life plan (public domain), and the BEFORE and Cancer-Fertility-and-Me oncofertility aids. The spine: it's two decisions with two clocks; locate yourself (torn is a legal square); what parenthood could mean; plans are allowed to change; what preserving does and doesn't promise; the other roads to parenthood; a what-matters slider exercise (nothing saved, nothing scored); who to talk with, the Ottawa pressure check, and deciding-later-on-purpose. Skippable at the door, and "unsure" stays a finished answer.</p>
+
+  <h2>The hub</h2>
+  <p>Results are no longer one long scroll: five tabs ("Start here" with your risk line, journey, and doctor questions; Options; Paying for it; Clinics; Health), take them in any order, nothing expires. The journey card also gained <strong>"Message my care team"</strong>: the patient saves their social worker's number or email once (on device), and every stuck moment becomes a one-tap text or email from their own phone, prefilled with which step they're on. That ships now with zero backend; the passive stage-sync version stays in the data-architecture doc pending the BAA conversation.</p>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/02-entry.png" alt="Entry groups"><p>The five entry lanes.</p></div>
+    <div class="shot"><img src="shots/05-milestone-2.png" alt="Milestone into section 2"><p>The breath between sections, in the warm palette.</p></div>
+    <div class="shot"><img src="shots/06-feelings-warm.png" alt="Children question, warm"><p>The children question: warm, iconized, four honest answers.</p></div>
+    <div class="shot"><img src="shots/15-reflection-offer.png" alt="Reflection offer"><p>"Not sure" gets taken seriously, not skipped past.</p></div>
+    <div class="shot"><img src="shots/15c-reflection-locate.png" alt="Locate yourself step"><p>Locating yourself: torn is a legal square.</p></div>
+    <div class="shot"><img src="shots/07-milestone-3.png" alt="Milestone into section 3"><p>Into the practical section, slate blue.</p></div>
+    <div class="shot"><img src="shots/10-hub-start.png" alt="Hub start tab"><p>The hub: tabs, risk line, journey.</p></div>
+    <div class="shot"><img src="shots/12-hub-money.png" alt="Money tab"><p>"Paying for it" with the coverage checker.</p></div>
+  </div>
+
+  <h2>QA</h2>
+  <ul>
+    <li>92 unit + 10 e2e green, including new journeys: the no-plan short flow, just-learning browse mode, "no" skipping the practical section, the reflection walk and its skip, and the tabbed hub content checks.</li>
+    <li>The tone gate now also covers every reflection prompt.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · reflection sources <code>content/sources/parenthood-decision-aids.md</code> · design tokens per section in <code>app/globals.css</code>.</p>
+</main>
