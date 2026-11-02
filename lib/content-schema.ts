@@ -112,6 +112,20 @@ export interface AidOrg {
   citations: Citation[];
 }
 
+/** A sourced fact about everyday egg/sperm health: information only, mechanism
+ * over platitude, never a goal, never tracking. */
+export interface HealthNote {
+  id: string;
+  /** the fact, stated plainly as information */
+  fact: string;
+  /** why it happens, when the source gives the mechanism */
+  mechanism?: string;
+  /** honest caveat when the evidence is mixed */
+  caveat?: string;
+  audience: Audience;
+  citations: Citation[];
+}
+
 export interface DoctorQuestion {
   id: string;
   text: string;
@@ -124,6 +138,7 @@ export interface AppContent {
   guidance: GuidanceSection[];
   aid: AidOrg[];
   doctorQuestions: DoctorQuestion[];
+  health: HealthNote[];
   /** shown on every page */
   lastReviewed: string; // ISO date
 }

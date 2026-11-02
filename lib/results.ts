@@ -5,6 +5,7 @@ import type {
   Audience,
   DoctorQuestion,
   GuidanceSection,
+  HealthNote,
   PreservationOption,
 } from "./content-schema";
 
@@ -38,6 +39,7 @@ export interface Results {
   guidance: GuidanceSection[];
   aid: AidOrg[];
   doctorQuestions: DoctorQuestion[];
+  health: HealthNote[];
   /** finished treatment: results lead with testing and current options */
   survivorSpine: boolean;
   lastReviewed: string;
@@ -49,6 +51,7 @@ export function buildResults(answers: Answers, content: AppContent): Results {
     guidance: content.guidance.filter((g) => matchesAudience(g.audience, answers)),
     aid: content.aid.filter((a) => matchesAudience(a.audience, answers)),
     doctorQuestions: content.doctorQuestions.filter((q) => matchesAudience(q.audience, answers)),
+    health: content.health.filter((h) => matchesAudience(h.audience, answers)),
     survivorSpine: answers.stage === "finished",
     lastReviewed: content.lastReviewed,
   };

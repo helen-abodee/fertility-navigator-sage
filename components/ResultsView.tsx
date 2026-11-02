@@ -198,6 +198,25 @@ export default function ResultsView({
         </section>
       )}
 
+      {results.health.length > 0 && (
+        <section>
+          <h2 className="text-xl">Everyday things that affect sperm and eggs</h2>
+          <p className="text-muted mt-1 text-sm">
+            Information, not homework. Nothing here is a goal.
+          </p>
+          <div className="mt-3 flex flex-col gap-3">
+            {results.health.map((h) => (
+              <div key={h.id} className="border-line bg-card rounded-xl border p-4">
+                <p className="font-bold">{h.fact}</p>
+                {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
+                {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
+                <Cite citations={h.citations} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {clinics.length > 0 && <ClinicsSection clinics={clinics} zip={zip} />}
 
       <JourneySection />

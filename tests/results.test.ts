@@ -11,6 +11,14 @@ const cite: Citation = {
 
 const fixture: AppContent = {
   lastReviewed: "2026-10-30",
+  health: [
+    {
+      id: "heat",
+      fact: "Heat lowers sperm production.",
+      audience: { anatomy: ["testes"] },
+      citations: [cite],
+    },
+  ],
   options: [
     {
       id: "egg_freezing",
@@ -134,5 +142,11 @@ describe("buildResults", () => {
   it("always includes financial aid that has no audience restriction", () => {
     const r = buildResults(checkpointPath, fixture);
     expect(r.aid.map((a) => a.id)).toEqual(["worth_the_wait"]);
+  });
+
+  it("gates health notes by anatomy like everything else", () => {
+    expect(buildResults(checkpointPath, fixture).health).toEqual([]);
+    expect(buildResults({ anatomy: "testes" }, fixture).health.map((h) => h.id)).toEqual(["heat"]);
+    expect(buildResults({}, fixture).health.map((h) => h.id)).toEqual(["heat"]);
   });
 });

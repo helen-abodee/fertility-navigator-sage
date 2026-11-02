@@ -26,6 +26,7 @@ function collectAllText(): string {
   }
   for (const a of appContent.aid) parts.push(a.name, a.what, a.eligibility, a.cap);
   for (const q of appContent.doctorQuestions) parts.push(q.text);
+  for (const h of appContent.health) parts.push(h.fact, h.mechanism ?? "", h.caveat ?? "");
   for (const def of Object.values(questions)) {
     parts.push(def.heading, def.placeholder ?? "");
     for (const opt of def.options ?? []) parts.push(opt.label);
