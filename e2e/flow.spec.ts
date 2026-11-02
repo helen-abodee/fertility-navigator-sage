@@ -105,7 +105,7 @@ test("the checkpoint path shows real, cited content", async ({ page }) => {
   await page.getByRole("button", { name: "What would this look like for me?" }).click();
   await expect(page.getByText("about 10 to 12 days").first()).toBeVisible();
   await expect(page.getByText("If you paid the published prices yourself")).toBeVisible();
-  await expect(page.getByText("Your California plan should cover fertility preservation before treatment", { exact: false })).toBeVisible();
+  await expect(page.getByText("Your California plan should cover fertility preservation before cancer treatment", { exact: false })).toBeVisible();
   await page.getByText("Sources", { exact: true }).first().click();
   await expect(page.getByText("ASCO 2025", { exact: false }).first()).toBeVisible();
   await page.getByRole("button", { name: "Back to results" }).first().click();
