@@ -236,7 +236,7 @@ export function assessCoverage(input: CoverageInput): CoverageVerdict {
   return {
     verdict: "likely_covered",
     headline: "California law is on your side (SB 600)",
-    body: "Since 2019, SB 600 makes fertility preservation a covered basic benefit on state-regulated California plans when treatment could cause infertility. Your cost becomes your plan's usual share, not the full price. Verify it with one call before scheduling.",
+    body: "Since 2019, SB 600 makes fertility preservation a covered basic benefit on state-regulated California plans when cancer treatment could cause infertility. Your cost becomes your plan's usual share, not the full price. Verify it with one call before scheduling.",
     steps: [CALL_SCRIPT, WRITE_IT_DOWN, { label: "Ask about storage", detail: "Ask whether storage is covered and for how many years." }, URGENT_APPEAL],
     citations: [d4(36), sb600Text(), d4(22), d4(35)],
   };

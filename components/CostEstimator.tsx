@@ -87,7 +87,7 @@ export default function CostEstimator({
       <div className="border-line mt-3 border-t pt-3 text-sm">
         {insurance === "ca_commercial" && preTreatment && (
           <p>
-            Your California plan should cover fertility preservation before treatment (SB 600), so
+            Your California plan should cover fertility preservation before cancer treatment (SB 600), so
             your cost may be your plan's usual deductible and copays instead of the prices above.
             Ask your plan what you would owe, and whether storage is covered and for how long.
           </p>

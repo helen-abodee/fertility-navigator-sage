@@ -41,7 +41,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
     id: "stage",
     field: "stage",
     kind: "single",
-    heading: "Where are you with treatment?",
+    heading: "Where are you with cancer treatment?",
     options: [
       { value: "not_started", label: "I haven't started treatment yet" },
       { value: "in_treatment", label: "I'm in treatment now" },
@@ -53,7 +53,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
     id: "time_since",
     field: "timeSince",
     kind: "single",
-    heading: "How long ago did you finish treatment?",
+    heading: "How long ago did you finish cancer treatment?",
     options: [
       { value: "under_1_year", label: "Less than a year ago" },
       { value: "one_to_five_years", label: "1 to 5 years ago" },
@@ -108,7 +108,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
     id: "treatments",
     field: "treatments",
     kind: "multi",
-    heading: "What treatment is planned, or what did you have?",
+    heading: "What cancer treatment is planned, or what did you have?",
     options: [
       { value: "chemo", label: "Chemotherapy" },
       { value: "radiation", label: "Radiation" },

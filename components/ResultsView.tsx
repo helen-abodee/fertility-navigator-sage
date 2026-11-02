@@ -8,6 +8,7 @@ import type { Clinic, InsuranceType, TreatmentStage } from "../lib/types";
 import Cite from "./Cite";
 import ClinicsSection from "./ClinicsSection";
 import CoverageChecker from "./CoverageChecker";
+import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
 import Icon, { optionIcon } from "./icons";
 
@@ -198,6 +199,8 @@ export default function ResultsView({
       )}
 
       {clinics.length > 0 && <ClinicsSection clinics={clinics} zip={zip} />}
+
+      <JourneySection />
 
       <footer className="border-line mt-2 flex flex-col gap-4 border-t pt-5">
         <button

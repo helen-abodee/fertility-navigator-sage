@@ -40,3 +40,22 @@ export function eraseEverything(): void {
 export function hasSavedProgress(): boolean {
   return loadProgress() !== null;
 }
+
+const JOURNEY_KEY = "navigator.journey.v1";
+
+export function saveJourney(journey: unknown): void {
+  try {
+    localStorage.setItem(JOURNEY_KEY, JSON.stringify(journey));
+  } catch {
+    /* storage unavailable: in-memory only */
+  }
+}
+
+export function loadJourney<T>(): T | null {
+  try {
+    const raw = localStorage.getItem(JOURNEY_KEY);
+    return raw ? (JSON.parse(raw) as T) : null;
+  } catch {
+    return null;
+  }
+}

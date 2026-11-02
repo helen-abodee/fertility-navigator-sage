@@ -36,7 +36,7 @@ export const riskRules: RiskRule[] = [
     result: {
       category: "high",
       label: "Higher risk group",
-      headline: "Treatments like yours are in the higher risk group",
+      headline: "Cancer treatments like yours are in the higher risk group",
       body:
         "The strong chemotherapy and radiation used to prepare the body for a stem cell or bone marrow transplant are placed in the highest risk group for affecting fertility by every published guideline we cite.",
       askTeam:
@@ -50,7 +50,7 @@ export const riskRules: RiskRule[] = [
     result: {
       category: "high",
       label: "Higher risk group",
-      headline: "Treatments like yours are in the higher risk group",
+      headline: "Cancer treatments like yours are in the higher risk group",
       body:
         "Getting an alkylating chemotherapy medicine (like the one you named) together with radiation aimed at the belly or pelvis is placed in the highest risk group for affecting fertility.",
       askTeam:
@@ -69,7 +69,7 @@ export const riskRules: RiskRule[] = [
     result: {
       category: "lower",
       label: "Lower risk group",
-      headline: "Treatments like yours are often in the lower risk group",
+      headline: "Cancer treatments like yours are often in the lower risk group",
       body:
         "Breast cancer treatment plans that include cyclophosphamide are placed in the lower risk group for women under 30. Lower risk is not no risk: these treatments can still bring menopause earlier in life.",
       askTeam:
@@ -83,7 +83,7 @@ export const riskRules: RiskRule[] = [
     result: {
       category: "intermediate",
       label: "In-between risk group",
-      headline: "Treatments like yours are in the in-between risk group",
+      headline: "Cancer treatments like yours are in the in-between risk group",
       body:
         "Treatment plans that contain cisplatin are placed in the intermediate risk group for affecting the ovaries. Roughly, that means fertility is affected for some people and not others.",
       askTeam: "Ask your care team: what is my total cisplatin dose, and what does it mean for my ovaries? " + CONFIRM,
@@ -163,10 +163,10 @@ export const riskRules: RiskRule[] = [
     result: {
       category: "unknown",
       label: "Not enough to say",
-      headline: "We can't place your treatment in a risk group yet",
+      headline: "We can't place your cancer treatment in a risk group yet",
       body:
-        "That is okay. Risk depends on the specific treatments, medicines, and doses, and it is common not to know them yet. The options below still apply, and your care team can tell you your risk group when the plan is set.",
-      askTeam: "Ask your care team: will my treatment plan affect my fertility, and when will we know enough to say? " + CONFIRM,
+        "That is okay. Risk depends on the specific cancer treatments, medicines, and doses, and it is common not to know them yet. The options below still apply, and your care team can tell you your risk group when the plan is set.",
+      askTeam: "Ask your care team: will my cancer treatment plan affect my fertility, and when will we know enough to say? " + CONFIRM,
       citations: [citations.esmo2020],
     },
   },

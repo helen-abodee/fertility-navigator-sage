@@ -55,10 +55,10 @@ test("back works and the survivor fork asks how long ago", async ({ page }) => {
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "I finished treatment" }).click();
   await expect(
-    page.getByRole("heading", { name: "How long ago did you finish treatment?" }),
+    page.getByRole("heading", { name: "How long ago did you finish cancer treatment?" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "← Back" }).click();
-  await expect(page.getByRole("heading", { name: "Where are you with treatment?" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Where are you with cancer treatment?" })).toBeVisible();
 });
 
 test("the welcome gate requires the privacy checkbox before Start", async ({ page }) => {
