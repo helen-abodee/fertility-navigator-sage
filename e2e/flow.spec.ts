@@ -288,5 +288,5 @@ test("partner insurance is asked only when partnered, and the LGBTQ+ card shows"
 
   await page.getByRole("button", { name: "Paying for it", exact: true }).click();
   await expect(page.getByText("If you're LGBTQ+").first()).toBeVisible();
-  await expect(page.getByText("Check your partner's plan too")).toBeVisible();
+  await expect(page.getByText("Check your partner's plan too").first()).toBeVisible();
 });
