@@ -88,7 +88,16 @@ export default function ResultsView({
   const [tab, setTab] = useState<Tab>("start");
   const [reflecting, setReflecting] = useState(false);
   const [costOption, setCostOption] = useState<PreservationOption | null>(null);
+  const [visited, setVisited] = useState<Tab[]>(["start"]);
   const moneyUnlocked = browsing || feelings !== "no";
+  const activeTabs = tabs.filter((t) => t.id !== "money" || moneyUnlocked);
+
+  function goTab(next: Tab) {
+    setTab(next);
+    setVisited((v) => (v.includes(next) ? v : [...v, next]));
+    window.scrollTo({ top: 0 });
+  }
+  const nextTab = activeTabs[activeTabs.findIndex((t) => t.id === tab) + 1];
 
   function downloadSummary() {
     setTimeout(() => window.print(), 50);
@@ -123,26 +132,38 @@ export default function ResultsView({
         </p>
       </header>
 
-      <nav
-        className="bg-paper sticky top-0 z-10 -mx-1 flex gap-1 overflow-x-auto py-2 print:hidden"
-        aria-label="Result sections"
-      >
-        {tabs
-          .filter((t) => t.id !== "money" || moneyUnlocked)
-          .map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            aria-current={tab === t.id ? "page" : undefined}
-            onClick={() => setTab(t.id)}
-            className={`flex shrink-0 items-center gap-1.5 rounded-full border-[1.5px] px-3.5 py-2 text-sm font-bold ${
-              tab === t.id ? "border-accent bg-accent-tint text-accent-ink" : "border-line bg-card"
-            }`}
-          >
-            <Icon name={t.icon} size={16} />
-            {t.label}
-          </button>
-          ))}
+      <nav className="bg-paper sticky top-0 z-10 py-2 print:hidden" aria-label="Result sections">
+        <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${activeTabs.length}, 1fr)` }}>
+          {activeTabs.map((t, i) => {
+            const isCurrent = tab === t.id;
+            const isVisited = visited.includes(t.id);
+            return (
+              <button
+                key={t.id}
+                type="button"
+                aria-current={isCurrent ? "page" : undefined}
+                onClick={() => goTab(t.id)}
+                className={`flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-xl border-[1.5px] px-1 py-1.5 ${
+                  isCurrent
+                    ? "border-accent bg-accent text-accent-contrast"
+                    : isVisited
+                      ? "border-accent/40 bg-accent-tint text-accent-ink"
+                      : "border-line bg-card text-muted"
+                }`}
+              >
+                <Icon name={t.icon} size={17} />
+                <span className="text-[0.62rem] leading-tight font-bold">{t.label}</span>
+                <span className="sr-only">{isVisited && !isCurrent ? " (visited)" : ""}</span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="bg-line mt-1.5 h-1 overflow-hidden rounded-full" aria-hidden="true">
+          <div
+            className="bg-accent h-full rounded-full transition-all"
+            style={{ width: `${(visited.length / activeTabs.length) * 100}%` }}
+          />
+        </div>
       </nav>
 
       {/* Start here */}
@@ -321,6 +342,16 @@ export default function ResultsView({
           </section>
         )}
       </div>
+
+      {nextTab && (
+        <button
+          type="button"
+          onClick={() => goTab(nextTab.id)}
+          className="border-accent text-accent-ink flex min-h-12 items-center justify-center gap-2 rounded-xl border-[1.5px] px-4 py-3 font-bold print:hidden"
+        >
+          Continue to {nextTab.label} <span aria-hidden="true">&rarr;</span>
+        </button>
+      )}
 
       <footer className="border-line mt-2 flex flex-col gap-4 border-t pt-5">
         <button

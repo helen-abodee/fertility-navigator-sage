@@ -27,8 +27,35 @@ function show<T>(f?: SourcedField<T>): string {
   return String(f.value);
 }
 
+const RADII = [
+  { label: "Within 15 mi", miles: 15 },
+  { label: "Within 40 mi", miles: 40 },
+  { label: "Any distance", miles: Infinity },
+];
+
+const BUDGETS = [
+  { label: "Under $2,000", max: 2000 },
+  { label: "Under $15,000", max: 15000 },
+  { label: "Any budget", max: Infinity },
+];
+
+function minPublishedPrice(c: Clinic): number | null {
+  const field = c.publishedPrices;
+  if (!field || field.value === "not_published" || !Array.isArray(field.value)) return null;
+  const nums = field.value
+    .map((p) => {
+      const m = String(p).replace(/,/g, "").match(/\$(\d{2,6})/);
+      return m ? parseInt(m[1], 10) : null;
+    })
+    .filter((n): n is number => n !== null);
+  return nums.length ? Math.min(...nums) : null;
+}
+
 export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zip?: string | null }) {
   const [filters, setFilters] = useState<ServiceFilter[]>([]);
+  const [radius, setRadius] = useState<number>(Infinity);
+  const [budget, setBudget] = useState<number>(Infinity);
+  const [showMap, setShowMap] = useState(false);
   const home = zip ? zipToCoords(zip) : null;
 
   const rows = useMemo(() => {
@@ -46,14 +73,24 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
       }
       return { clinic: c, miles };
     });
-    withDistance.sort((a, b) => {
+    const inRadius = withDistance.filter(
+      (r) => radius === Infinity || r.miles === null || r.miles <= radius,
+    );
+    // Budget keeps clinics whose cheapest published price fits, and keeps
+    // unpublished-price clinics honestly labeled rather than hiding them.
+    const inBudget = inRadius.filter((r) => {
+      if (budget === Infinity) return true;
+      const min = minPublishedPrice(r.clinic);
+      return min === null || min <= budget;
+    });
+    inBudget.sort((a, b) => {
       if (a.miles === null && b.miles === null) return a.clinic.name.localeCompare(b.clinic.name);
       if (a.miles === null) return 1;
       if (b.miles === null) return -1;
       return a.miles - b.miles;
     });
-    return withDistance;
-  }, [clinics, filters, home]);
+    return inBudget;
+  }, [clinics, filters, home, radius, budget]);
 
   function toggle(f: ServiceFilter) {
     setFilters((prev) => (prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f]));
@@ -85,12 +122,63 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
         ))}
       </div>
 
+      {home && (
+        <div className="flex flex-wrap gap-2 print:hidden">
+          {RADII.map((r) => (
+            <button
+              key={r.label}
+              type="button"
+              aria-pressed={radius === r.miles}
+              onClick={() => setRadius(r.miles)}
+              className={`rounded-full border px-3 py-1.5 text-sm font-bold ${
+                radius === r.miles ? "border-accent bg-accent-tint text-accent-ink" : "border-line bg-card"
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
+      )}
+      <div className="flex flex-wrap items-center gap-2 print:hidden">
+        <span className="text-muted text-sm font-bold">My budget:</span>
+        {BUDGETS.map((b) => (
+          <button
+            key={b.label}
+            type="button"
+            aria-pressed={budget === b.max}
+            onClick={() => setBudget(b.max)}
+            className={`rounded-full border px-3 py-1.5 text-sm font-bold ${
+              budget === b.max ? "border-accent bg-accent-tint text-accent-ink" : "border-line bg-card"
+            }`}
+          >
+            {b.label}
+          </button>
+        ))}
+        {budget !== Infinity && (
+          <span className="text-muted w-full text-xs">
+            Clinics without published prices stay listed, marked "not published", because unlisted
+            is not the same as unaffordable. Aid programs can also change the math.
+          </span>
+        )}
+      </div>
+
       <div className="print:hidden">
-        <ClinicMap clinics={rows.map((r) => r.clinic)} home={home} />
+        <button
+          type="button"
+          onClick={() => setShowMap(!showMap)}
+          aria-expanded={showMap}
+          className="border-accent text-accent-ink w-full rounded-xl border-[1.5px] px-4 py-3 font-bold"
+        >
+          {showMap ? "Hide the map" : "Show these on a map"}
+        </button>
+        {showMap && (
+          <div className="mt-3">
+            <ClinicMap clinics={rows.map((r) => r.clinic)} home={home} />
+          </div>
+        )}
         {zip && !home && (
           <p className="text-muted mt-1 text-xs">
-            We couldn't place that ZIP code, so distances are hidden. The map still shows every
-            clinic.
+            We couldn't place that ZIP code, so distances are hidden.
           </p>
         )}
       </div>

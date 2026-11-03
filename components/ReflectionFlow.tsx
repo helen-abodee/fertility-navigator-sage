@@ -14,6 +14,8 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
   const [step, setStep] = useState(-1); // -1 = offer screen
   const [chip, setChip] = useState<string | null>(null);
   const [scales, setScales] = useState<Record<string, number>>({});
+  const [picked, setPicked] = useState<Record<string, boolean>>({});
+  const [ownWords, setOwnWords] = useState<Record<string, string>>({});
 
   if (step === -1) {
     return (
@@ -86,13 +88,36 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
       )}
 
       {s.prompts && (
-        <ul className="stagger mt-4 flex flex-col gap-3">
+        <div className="stagger mt-4 flex flex-col gap-3">
           {s.prompts.map((p) => (
-            <li key={p} className="border-line bg-card rounded-xl border p-3 text-[0.98rem]">
+            <button
+              key={p}
+              type="button"
+              aria-pressed={!!picked[p]}
+              onClick={() => setPicked({ ...picked, [p]: !picked[p] })}
+              className={`rounded-xl border-[1.5px] p-3 text-left text-[0.98rem] ${
+                picked[p] ? "border-accent bg-accent-tint font-bold" : "border-line bg-card"
+              }`}
+            >
+              {picked[p] ? "✓ " : ""}
               {p}
-            </li>
+            </button>
           ))}
-        </ul>
+          <p className="text-muted text-xs">Tap the ones that land. Nothing is saved.</p>
+        </div>
+      )}
+
+      {(s.id === "locate" || s.id === "meaning") && (
+        <label className="mt-4 block">
+          <span className="text-muted text-sm font-bold">Or put it in your own words</span>
+          <textarea
+            value={ownWords[s.id] ?? ""}
+            onChange={(e) => setOwnWords({ ...ownWords, [s.id]: e.target.value })}
+            rows={3}
+            placeholder="Just for you. It disappears when you leave."
+            className="border-line bg-card mt-1 w-full rounded-xl border-[1.5px] p-3 text-[0.95rem]"
+          />
+        </label>
       )}
 
       {s.scale && (

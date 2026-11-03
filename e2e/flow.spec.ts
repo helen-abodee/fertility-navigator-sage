@@ -61,7 +61,7 @@ test("'just learning' goes straight to the browse hub", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Just learning for now" }).click();
   await expect(page.getByRole("heading", { name: "Explore at your own pace" })).toBeVisible();
-  await page.getByRole("button", { name: "Options" }).click();
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await expect(page.getByRole("button", { name: /Egg freezing/ })).toBeVisible();
   await expect(page.getByRole("button", { name: /Sperm banking/ })).toBeVisible();
 });
@@ -107,7 +107,7 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await page.getByRole("button", { name: "Back to results" }).first().click();
 
   // Paying for it: coverage checker end to end
-  await page.getByRole("button", { name: "Paying for it" }).click();
+  await page.getByRole("button", { name: "Paying for it", exact: true }).click();
   await page.getByRole("button", { name: "My job" }).click();
   await page.getByRole("button", { name: "Yes", exact: true }).click();
   await page.getByRole("button", { name: "Fully insured" }).click();
@@ -152,7 +152,7 @@ test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
   await page.getByRole("button", { name: "See my options" }).click();
 
   await expect(page.getByRole("heading", { name: "Where you stand, and what can help" })).toBeVisible();
-  await page.getByRole("button", { name: "Paying for it" }).click();
+  await page.getByRole("button", { name: "Paying for it", exact: true }).click();
   await expect(page.getByText("Medi-Cal does not cover this right now")).toBeVisible();
   await expect(page.getByText("Likely not covered")).toBeVisible();
 });
@@ -228,4 +228,40 @@ test("the risk screen carries the care-team callout", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Not sure? That's worth taking seriously." })).toBeVisible();
   await page.getByRole("button", { name: "Skip for now" }).click();
   await expect(page.getByRole("button", { name: "Start here" })).toBeVisible();
+});
+
+test("the share code round-trips from patient to the team board", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Just learning for now" }).click();
+  await page.getByRole("button", { name: "Talked with my care team" }).click();
+  await page.getByRole("button", { name: "Share my progress with my care team" }).click();
+  const code = (await page.locator("p.font-mono").textContent())?.trim() ?? "";
+  expect(code.startsWith("FPN1.")).toBeTruthy();
+
+  await page.goto("/team");
+  await page.getByLabel("Progress code").fill(code);
+  await page.getByRole("button", { name: "Add", exact: true }).click();
+  await expect(page.getByText("Added ✓")).toBeVisible();
+  await expect(page.getByText("1/6", { exact: false })).toBeVisible();
+  await expect(page.getByText("In motion")).toBeVisible();
+});
+
+test("clinic filters narrow by radius and budget, map behind a toggle", async ({ page }) => {
+  await page.goto("/questions");
+  await walkSection1(page);
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Finish up" }).click();
+  await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
+  await page.getByPlaceholder("5-digit ZIP").fill("91101");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "See my options" }).click();
+
+  await page.getByRole("button", { name: "Clinics", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Within 15 mi" })).toBeVisible();
+  await page.getByRole("button", { name: "Within 15 mi" }).click();
+  await expect(page.getByRole("button", { name: "Show these on a map" })).toBeVisible();
+  await page.getByRole("button", { name: "Under $2,000" }).click();
+  await page.getByRole("button", { name: "Show these on a map" }).click();
+  await expect(page.getByRole("region", { name: "Map of fertility clinics" })).toBeVisible();
 });

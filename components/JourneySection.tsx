@@ -11,6 +11,7 @@ import {
   toggleStage,
 } from "../lib/journey";
 import { loadJourney, saveJourney } from "../lib/storage";
+import { encodeShareCode } from "../lib/share";
 
 const CONTACT_KEY = "navigator.team-contact.v1";
 
@@ -47,6 +48,9 @@ export default function JourneySection() {
   const [journey, setJourney] = useState<Journey>(emptyJourney());
   const [contact, setContact] = useState("");
   const [editingContact, setEditingContact] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
+  const [shareCode, setShareCode] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const saved = loadJourney<Journey>();
@@ -106,6 +110,38 @@ export default function JourneySection() {
       </div>
 
       <div className="border-line mt-4 border-t pt-4 print:hidden">
+        <button
+          type="button"
+          onClick={() => setShareCode(shareCode ? null : encodeShareCode(journey))}
+          aria-expanded={!!shareCode}
+          className="border-accent text-accent-ink mb-3 w-full rounded-xl border-[1.5px] px-4 py-3 font-bold"
+        >
+          {shareCode ? "Hide my progress code" : "Share my progress with my care team"}
+        </button>
+        {shareCode && (
+          <div className="bg-paper mb-3 rounded-xl p-3">
+            <p className="text-sm">
+              This code holds only your checklist above, nothing else. Text or email it to your
+              social worker; their board turns it back into your checklist.
+            </p>
+            <p className="border-line bg-card mt-2 rounded-lg border p-2 font-mono text-xs break-all">{shareCode}</p>
+            <button
+              type="button"
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(shareCode);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                } catch {
+                  /* clipboard blocked: the code is visible to copy by hand */
+                }
+              }}
+              className="bg-accent text-accent-contrast mt-2 rounded-lg px-4 py-2 text-sm font-bold"
+            >
+              {copied ? "Copied ✓" : "Copy code"}
+            </button>
+          </div>
+        )}
         {contact && !editingContact ? (
           <div className="flex flex-wrap items-center gap-2">
             <a
@@ -113,7 +149,7 @@ export default function JourneySection() {
                 contact,
                 `Hi, I'm using the fertility navigator. I'm at the step "${
                   journeyStages.find((s) => !journey.done.includes(s.id))?.label ?? "finishing up"
-                }" and I have a question.`,
+                }" and I have a question. My progress code: ${encodeShareCode(journey)}`,
               )}
               className="bg-accent text-accent-contrast rounded-xl px-4 py-2.5 text-sm font-bold"
             >
@@ -126,6 +162,11 @@ export default function JourneySection() {
             >
               change contact
             </button>
+            {justSaved && (
+              <span className="text-accent-ink animate-pop text-sm font-bold" role="status">
+                Saved ✓
+              </span>
+            )}
           </div>
         ) : (
           <div>
@@ -146,6 +187,8 @@ export default function JourneySection() {
                 onClick={() => {
                   saveContact(contact);
                   setEditingContact(false);
+                  setJustSaved(true);
+                  setTimeout(() => setJustSaved(false), 2500);
                 }}
                 className="border-accent text-accent-ink rounded-lg border-[1.5px] px-3 text-sm font-bold"
               >

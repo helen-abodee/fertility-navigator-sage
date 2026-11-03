@@ -26,7 +26,13 @@ export default function ClinicMap({ clinics, home }: Props) {
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
+    // The map can mount inside a hidden tab; Leaflet then sizes to zero and
+    // renders blank. Re-measure whenever the container becomes visible.
+    const observer = new ResizeObserver(() => map.invalidateSize());
+    observer.observe(el.current);
+    setTimeout(() => map.invalidateSize(), 50);
     return () => {
+      observer.disconnect();
       map.remove();
       mapRef.current = null;
     };
