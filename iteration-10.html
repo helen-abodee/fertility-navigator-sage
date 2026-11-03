@@ -1,0 +1,75 @@
+<title>Navigator Iteration 10</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2; --info: #2E5F86;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31; --info: #8DB8CF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31; --info: #8DB8CF;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 860px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2, h3 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 44px 0 10px; }
+  h3 { font-size: 1.05rem; margin: 20px 0 6px; }
+  p { max-width: 70ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .hipaa { background: color-mix(in srgb, var(--info) 8%, var(--card)); border: 1.5px solid color-mix(in srgb, var(--info) 35%, var(--card)); border-radius: 12px; padding: 18px 22px; margin: 14px 0; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 10</h1>
+  <p class="sub">November 3, 2026. The physician view, the HIPAA line, and the full feedback round.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Patient app:</strong> <a href="https://navigator-9qv302j92-helen-abodees-projects.vercel.app">navigator-9qv302j92-helen-abodees-projects.vercel.app</a><br>
+    <strong>Physician view:</strong> same link + <code>/team</code>, then tap <strong>"Load 5 sample patients (demo)"</strong> to see a populated caseload instantly, including a still-deciding patient and the follow-up ordering. For the real loop: in the patient app, check a journey step, tap "Share my progress", copy the code, paste it on /team.</p>
+  </div>
+
+  <h2>The HIPAA line, made very clear</h2>
+  <div class="hipaa">
+    <h3 style="margin-top:0">The one-sentence rule</h3>
+    <p>HIPAA binds providers and anyone handling patient data on a provider's behalf. It does not bind patients: a patient texting their own progress to a social worker can never violate HIPAA.</p>
+    <h3>What we can do with zero HIPAA exposure (and did)</h3>
+    <ul>
+      <li>Everything shipped so far: answers on-device, codes made on the patient's phone and sent by the patient, the clinician board decoding them in the clinician's own browser.</li>
+      <li><strong>Your care-team directory idea: yes, safely.</strong> A built-in picker of the program's social workers is just public staff contact info, like a hospital website footer. The patient taps their person instead of typing a number; sending still happens from their own phone. Shipped now with clearly labeled sample entries, because the real constraint isn't HIPAA, it's our unbranded rule: listing City of Hope staff needs their written permission.</li>
+      <li>What the social worker keeps after receiving a text falls under City of Hope's existing compliance, not ours.</li>
+    </ul>
+    <h3>What would trigger HIPAA</h3>
+    <p>The moment any server we run receives identifiable patient info to deliver it to the care team (a send button routing through our backend, a database linking patients to social workers with progress attached, push notifications of stage changes), we become a <strong>business associate</strong>. Pseudonyms don't escape it. Then the checklist is: a BAA with City of Hope (which requires an operating legal entity on our side), HIPAA-eligible hosting with its own BAA, encryption in transit and at rest, real staff authentication, audit logs, minimum-necessary design, a retention policy, breach notification within 60 days, and City of Hope's security review. Not prohibitive, just a sequencing decision. Full brief: <code>docs/HIPAA-BRIEF.md</code>.</p>
+  </div>
+
+  <h2>Everything else from your notes</h2>
+  <ul>
+    <li><strong>Where did you land:</strong> now three side-by-side icon chips, with your middle option added: "I preserved" (snowflake), "Still deciding" (compass), "Not preserving" (shield). "Still deciding, on purpose" flows through the share code and shows on the clinician board. Those three plus "no answer yet" genuinely cover the space; anything finer (e.g., "waiting on insurance") is better captured by the stage checklist above them.</li>
+    <li><strong>Care-team questions:</strong> now five collapsed topics (My risk and timing, My options, Where I stand now, Insurance and cost, Support) with counts, under the stethoscope badge. Tap to expand.</li>
+    <li><strong>Paying for it, de-scared:</strong> the estimator now starts at <strong>zero years of storage</strong>, so the first number is the procedure alone at published prices; storage is an add-on slider with its own per-year line. Coverage framing still comes first.</li>
+    <li><strong>Financial aid:</strong> opens with the care-team callout ("your social worker connects patients to these programs; ask yours to help you apply"), and your eligibility-checker idea is live: each program's published rules (age windows, pre vs post treatment, body) are checked against their answers, splitting the list into "May fit you" and a collapsed "Probably not a fit (and why)". Unknown answers never exclude, and the copy says the final word belongs to the program.</li>
+    <li><strong>Clinics:</strong> budget filter removed, as you called it. The map is now the first thing on the tab (the rendering bug is fixed, so it can live there), with radius chips, and the list below is compact rows (name, address, distance) that open a per-clinic detail page with each fact in its own labeled card.</li>
+    <li><strong>Health tab, built out:</strong> now opens with the honest line you asked for, also placed at the top of Options: "preservation keeps a possibility open; frozen eggs, sperm, and embryos do not guarantee a child later." Then "Getting ready to preserve" (heat, testosterone, cannabis, smoking, alcohol, the 2.5-month sperm cycle, each with its mechanism) and "Also good to know." One wording note: our own tone gate bans "improve your chances," so it is framed as what affects sperm and egg quality, which is also what the sources actually support.</li>
+    <li><strong>Options copy:</strong> suggestions rather than silent edits, since the content is cited: (a) give each step card a bold five-word lead and tuck the rest behind one more tap; (b) a tappable mini-glossary for terms like ICSI instead of inline explanations; (c) per-option "60-second version" toggle. Pick one and I'll do that pass everywhere.</li>
+  </ul>
+
+  <h2>QA</h2>
+  <ul>
+    <li>101 unit + 16 e2e green on Chromium and WebKit, including the demo board, the aid fit check (a 19-year-old pre-treatment correctly sees SAMFund under "probably not a fit, ages 21 to 39"), the clinic detail pages, and the storage-at-zero math.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · HIPAA brief <code>docs/HIPAA-BRIEF.md</code> · fit engine <code>lib/aid-fit.ts</code> · sample directory <code>data/care-team.json</code>.</p>
+</main>
