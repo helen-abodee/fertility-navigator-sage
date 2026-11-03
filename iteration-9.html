@@ -1,0 +1,80 @@
+<title>Navigator Iteration 9</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 1020px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 48px 0 10px; }
+  p { max-width: 70ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 9</h1>
+  <p class="sub">November 3, 2026. Your bug list, the stepper, the working map, and the clinician board.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Patient app:</strong> <a href="https://navigator-ren3qev1q-helen-abodees-projects.vercel.app">navigator-ren3qev1q-helen-abodees-projects.vercel.app</a><br>
+    <strong>Clinician board:</strong> same link + <code>/team</code></p>
+    <p style="margin-bottom:0">To feel the clinician loop: in the app, check a journey step, tap "Share my progress", copy the code, then open /team and paste it.</p>
+  </div>
+
+  <h2>The bugs you hit, diagnosed</h2>
+  <ul>
+    <li><strong>Reflection taps not selecting:</strong> real. The "what parenthood could mean" cards were static text. They're now tappable (check and tint on tap), with your type-in idea added: an "or put it in your own words" box on the locate and meaning steps, which disappears when they leave, like everything else there.</li>
+    <li><strong>Contact save felt dead:</strong> real. Saving worked, but silently. Now a "Saved ✓" pops, and your rule is applied app-wide: every button press gives a visible press response (motion-safe).</li>
+    <li><strong>The map didn't work:</strong> real, and the diagnosis is satisfying: when the hub became tabs, the map initialized inside a hidden tab, so Leaflet sized itself to zero and drew nothing. Fixed with a resize observer, and the map now only loads when asked for.</li>
+    <li><strong>Thorough check, as asked:</strong> the whole end-to-end suite now also runs on WebKit, the engine inside iPhone Safari. 14 of 14 journeys pass on both engines.</li>
+  </ul>
+
+  <h2>The top bar, chronological</h2>
+  <p>No more sideways scrolling: all five steps fit the phone width as a stepper, in walking order, with a shaded progress bar underneath that fills as sections are visited. The current step is solid, visited steps are tinted, and every section ends with a "Continue to [next] &rarr;" button, so it reads as a path while staying freely navigable backward.</p>
+
+  <h2>Clinics, calmer</h2>
+  <p>List first, sorted by distance, with one-tap filters: radius (within 15 mi / 40 mi / any), and your budget idea as a toggle row (under $2,000 / under $15,000 / any). Honesty rule: clinics with no published price stay listed and labeled, since unlisted is not the same as unaffordable, with a nudge that aid programs change the math. The map is now opt-in behind "Show these on a map", and it works.</p>
+
+  <h2>The clinician view</h2>
+  <p>Built in the only shape that needs no HIPAA backend today: <strong>progress codes</strong>. The patient taps "Share my progress" and gets a short code containing only their checklist stages, a date, and nothing else (unit-tested: the payload cannot carry answers). They text it to their social worker like any message. The clinician opens <code>/team</code>, pastes codes, and gets a caseload board: each person's stage dots, an "In motion / Completed / Decided not to" chip, and <strong>follow-up ordering</strong>: people still deciding float to the top, least-recently-updated first, so the stalled ones get the next call. Finished journeys, either outcome, settle down the list with equal dignity. The board lives in the clinician's own browser. When City of Hope signs a BAA, the same stage model syncs automatically instead of by text; that upgrade path is already in <code>docs/DATA-ARCHITECTURE.md</code>.</p>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/17-stepper.png" alt="Stepper navigation"><p>All five steps visible, progress shading below, no sideways scroll.</p></div>
+    <div class="shot"><img src="shots/17b-clinics-filters.png" alt="Clinic filters"><p>Clinics: radius and budget toggles, list first.</p></div>
+    <div class="shot"><img src="shots/17c-map-working.png" alt="Working map"><p>The map, opt-in and actually rendering.</p></div>
+    <div class="shot"><img src="shots/17d-share-code.png" alt="Share code"><p>"Share my progress": the code and what it does and doesn't contain.</p></div>
+    <div class="shot"><img src="shots/17e-team-board.png" alt="Team board"><p>/team: paste a code, get the caseload view.</p></div>
+  </div>
+
+  <h2>QA</h2>
+  <ul>
+    <li>96 unit + 14 e2e green on Chromium AND WebKit, including the full share-code round trip (patient app to team board) and the clinic filter and map journey.</li>
+    <li>Share codes are tamper-tested: garbage input is rejected, and the payload is structurally incapable of carrying answers.</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · share codes <code>lib/share.ts</code> · board <code>app/team/page.tsx</code> · architecture <code>docs/DATA-ARCHITECTURE.md</code>.</p>
+</main>
