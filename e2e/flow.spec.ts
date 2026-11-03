@@ -265,3 +265,28 @@ test("clinic filters narrow by radius and budget, map behind a toggle", async ({
   await page.getByRole("button", { name: "Show these on a map" }).click();
   await expect(page.getByRole("region", { name: "Map of fertility clinics" })).toBeVisible();
 });
+
+test("partner insurance is asked only when partnered, and the LGBTQ+ card shows", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Me and my partner" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Finish up" }).click();
+  await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
+
+  // the partnered-only question
+  await expect(
+    page.getByRole("heading", { name: "Does your partner have insurance through work?" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Yes", exact: true }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "See my options" }).click();
+
+  await page.getByRole("button", { name: "Paying for it", exact: true }).click();
+  await expect(page.getByText("If you're LGBTQ+").first()).toBeVisible();
+  await expect(page.getByText("Check your partner's plan too")).toBeVisible();
+});

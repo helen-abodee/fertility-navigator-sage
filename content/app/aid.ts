@@ -12,6 +12,16 @@ import { d4, orgSite } from "./citations";
  */
 export const aid: AidOrg[] = [
   {
+    id: "men_having_babies",
+    name: "Men Having Babies",
+    what: "Discounted or free fertility and surrogacy services, plus grants, for gay prospective parents. The program runs in two stages.",
+    eligibility: "Gay men and transgender women becoming first-time parents.",
+    cap: "not published",
+    url: "https://menhavingbabies.org/assistance/",
+    audience: {},
+    citations: [d4(16)],
+  },
+  {
     id: "allyson_whitney",
     name: "Allyson Whitney Foundation",
     what: "Life Interrupted Grants of $500 to $1,500 for young adults with rare cancers. Grants can go toward fertility costs like egg retrieval and sperm banking, as well as rent and medical bills.",

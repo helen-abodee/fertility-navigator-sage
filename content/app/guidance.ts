@@ -36,6 +36,21 @@ const menjivarDelay = () =>
 
 export const guidance: GuidanceSection[] = [
   {
+    id: "lgbtq_coverage",
+    audience: {},
+    heading: "If you're LGBTQ+",
+    paragraphs: [
+      {
+        text: "California's SB 729 defines infertility to include the inability to reproduce either as an individual or with your partner, and bars plans from limiting coverage based on marital status or sexual orientation. In plain terms: not having a partner who produces the other half of an embryo counts, by law.",
+        citations: [calmattersSb729(), resolveFaq()],
+      },
+      {
+        text: "Donor agreements, parentage, and surrogacy are legal questions, and the answers are state-specific. A family-formation attorney is the right person for them; many offer one free consult, and your social worker may know local ones.",
+        citations: [],
+      },
+    ],
+  },
+  {
     id: "insurance_ca_commercial_pre",
     audience: {
       insurance: ["ca_commercial"],
