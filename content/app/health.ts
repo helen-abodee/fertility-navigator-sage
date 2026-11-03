@@ -48,6 +48,8 @@ const ageSheet = asrmSheet("Does My Age Affect My Fertility?", "does-my-age-affe
 export const health: HealthNote[] = [
   {
     id: "sperm_cycle",
+    icon: "calendar",
+    readMore: [{ label: "ASRM: Optimizing male fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/optimizing-male-fertility-factsheet/" }],
     group: "prep",
     fact: "Sperm take about 2 and a half months to develop.",
     mechanism:
@@ -57,6 +59,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "heat",
+    icon: "radiation",
+    readMore: [{ label: "ASRM: Optimizing male fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/optimizing-male-fertility-factsheet/" }],
     group: "prep",
     fact: "Heat lowers sperm production.",
     mechanism:
@@ -66,6 +70,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "testosterone",
+    icon: "syringe",
+    readMore: [{ label: "ASRM: Testosterone and male fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/testosterone-use-and-male-infertility/" }],
     group: "prep",
     fact: "Taking testosterone or anabolic steroids shuts down sperm production.",
     mechanism:
@@ -75,6 +81,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "cannabis",
+    icon: "flask",
+    readMore: [{ label: "Cleveland Clinic: Drugs and sperm count", url: "https://health.clevelandclinic.org/can-drugs-lower-sperm-count" }],
     group: "prep",
     fact: "Cannabis can lower sperm count.",
     mechanism: "THC can interfere with testosterone production, which sperm making depends on.",
@@ -85,6 +93,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "smoking_eggs",
+    icon: "shield",
+    readMore: [{ label: "ASRM: Smoking and fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/smoking-and-infertility/" }],
     group: "prep",
     fact: "Smoking speeds up the loss of eggs, and lost eggs do not come back.",
     mechanism:
@@ -94,6 +104,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "smoking_sperm",
+    icon: "shield",
+    readMore: [{ label: "ASRM: Smoking and fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/smoking-and-infertility/" }],
     group: "prep",
     fact: "Smoking lowers sperm count and movement.",
     mechanism:
@@ -103,6 +115,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "eggs_fixed",
+    icon: "egg",
+    readMore: [{ label: "ASRM: Age and fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/does-my-age-affect-my-fertility/" }],
     group: "general",
     fact: "Egg supply is set at birth; age and egg count are not things anyone can change.",
     mechanism:
@@ -112,6 +126,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "opioids",
+    icon: "clipboard",
+    readMore: [{ label: "Cleveland Clinic: Drugs and sperm count", url: "https://health.clevelandclinic.org/can-drugs-lower-sperm-count" }],
     group: "general",
     fact: "Long-term opioid use can lower sperm quantity and quality.",
     mechanism: "Opioids disrupt the brain signals that control testosterone.",
@@ -120,6 +136,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "alcohol",
+    icon: "door",
+    readMore: [{ label: "ASRM: Optimizing natural fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/optimizing-natural-fertility/" }],
     group: "prep",
     fact: "Heavy drinking is linked to reduced fertility.",
     mechanism:
@@ -129,6 +147,8 @@ export const health: HealthNote[] = [
   },
   {
     id: "debunks",
+    icon: "compass",
+    readMore: [{ label: "ASRM: Optimizing natural fertility", url: "https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/optimizing-natural-fertility/" }],
     group: "general",
     fact: "Some popular advice has no evidence behind it.",
     mechanism:

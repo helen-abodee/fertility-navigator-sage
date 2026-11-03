@@ -12,17 +12,20 @@ import { aidFit } from "../lib/aid-fit";
 import type { Answers } from "../lib/types";
 import ClinicsSection from "./ClinicsSection";
 import CostEstimator from "./CostEstimator";
+import CompareTab from "./CompareTab";
 import CoverageChecker from "./CoverageChecker";
+import ReadMore from "./ReadMore";
 import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
 import Icon, { optionIcon } from "./icons";
 
-type Tab = "start" | "options" | "money" | "clinics" | "health";
+type Tab = "start" | "options" | "compare" | "money" | "clinics" | "health";
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: "start", label: "Start here", icon: "compass" },
   { id: "options", label: "Options", icon: "egg" },
+  { id: "compare", label: "Compare", icon: "clipboard" },
   { id: "money", label: "Paying for it", icon: "dollar" },
   { id: "clinics", label: "Clinics", icon: "door" },
   { id: "health", label: "Health", icon: "sprout" },
@@ -255,6 +258,11 @@ export default function ResultsView({
         )}
       </div>
 
+      {/* Compare */}
+      <div className={show("compare")}>
+        <CompareTab options={results.options} />
+      </div>
+
       {/* Paying for it */}
       <div className={`flex flex-col gap-6 ${moneyUnlocked ? show("money") : "hidden"}`} data-survey-section="3">
         <section className="border-line bg-card rounded-2xl border p-5">
@@ -401,11 +409,17 @@ export default function ResultsView({
             </p>
             <div className="mt-3 flex flex-col gap-3">
               {results.health.filter((h) => h.group === "prep").map((h) => (
-                <div key={h.id} className="border-line bg-card rounded-xl border p-4">
-                  <p className="font-bold">{h.fact}</p>
-                  {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
-                  {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
-                  <Cite citations={h.citations} />
+                <div key={h.id} className="border-line bg-card flex gap-3 rounded-xl border p-4">
+                  <span className="bg-accent-tint text-accent-ink flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+                    <Icon name={h.icon ?? "sprout"} size={20} />
+                  </span>
+                  <div>
+                    <p className="font-bold">{h.fact}</p>
+                    {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
+                    {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
+                    <ReadMore links={h.readMore} />
+                    <Cite citations={h.citations} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -416,11 +430,17 @@ export default function ResultsView({
             <h2 className="text-xl">Also good to know</h2>
             <div className="mt-3 flex flex-col gap-3">
               {results.health.filter((h) => h.group !== "prep").map((h) => (
-                <div key={h.id} className="border-line bg-card rounded-xl border p-4">
-                  <p className="font-bold">{h.fact}</p>
-                  {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
-                  {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
-                  <Cite citations={h.citations} />
+                <div key={h.id} className="border-line bg-card flex gap-3 rounded-xl border p-4">
+                  <span className="bg-accent-tint text-accent-ink flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+                    <Icon name={h.icon ?? "sprout"} size={20} />
+                  </span>
+                  <div>
+                    <p className="font-bold">{h.fact}</p>
+                    {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
+                    {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
+                    <ReadMore links={h.readMore} />
+                    <Cite citations={h.citations} />
+                  </div>
                 </div>
               ))}
             </div>

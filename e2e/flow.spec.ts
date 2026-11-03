@@ -315,3 +315,13 @@ test("the team board demo and the aid fit check work", async ({ page }) => {
   await expect(page.getByText("Probably not a fit for you", { exact: false })).toBeVisible();
   await expect(page.getByText("May fit you").first()).toBeVisible();
 });
+
+test("the compare tab grades options side by side in words", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Just learning for now" }).click();
+  await page.getByRole("button", { name: "Compare", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Compare options side by side" })).toBeVisible();
+  await expect(page.getByText("Takes a couple of weeks and real money", { exact: false })).toBeVisible();
+  await page.getByRole("button", { name: /Ovarian tissue freezing/ }).first().click();
+  await expect(page.getByText("surgery under anesthesia")).toBeVisible();
+});

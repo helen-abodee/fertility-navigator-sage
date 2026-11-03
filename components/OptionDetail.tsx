@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { PreservationOption } from "../lib/content-schema";
 import Icon, { optionIcon } from "./icons";
 import Cite from "./Cite";
+import ReadMore from "./ReadMore";
 
 /**
  * Full-screen option walkthrough: swipeable step cards (scroll-snap), a
@@ -54,6 +55,7 @@ export default function OptionDetail({
           <h1 className="text-2xl">{option.name}</h1>
         </div>
         <p className="mt-2">{option.shortDescription}</p>
+        <ReadMore links={option.readMore} />
         {option.statusNote && (
           <p className="bg-accent-tint text-accent-ink mt-2 rounded-xl p-3 text-sm">{option.statusNote}</p>
         )}

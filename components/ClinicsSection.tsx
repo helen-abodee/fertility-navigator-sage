@@ -80,6 +80,13 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
         </p>
       </div>
 
+      <div className="print:hidden">
+        <ClinicMap clinics={rows.map((r) => r.clinic)} home={home} />
+        {zip && !home && (
+          <p className="text-muted mt-1 text-xs">We couldn't place that ZIP code, so distances are hidden.</p>
+        )}
+      </div>
+
       <div className="flex flex-wrap gap-2 print:hidden">
         {(Object.keys(filterLabels) as ServiceFilter[]).map((f) => (
           <button
@@ -113,15 +120,6 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
           ))}
         </div>
       )}
-      <div className="print:hidden">
-        <ClinicMap clinics={rows.map((r) => r.clinic)} home={home} />
-        {zip && !home && (
-          <p className="text-muted mt-1 text-xs">
-            We couldn't place that ZIP code, so distances are hidden.
-          </p>
-        )}
-      </div>
-
       <div className="flex flex-col gap-2">
         {rows.map(({ clinic, miles }) => (
           <button

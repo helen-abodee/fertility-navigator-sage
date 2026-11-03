@@ -41,6 +41,7 @@ const cfm: Citation = {
 
 export interface ReflectionStep {
   id: string;
+  icon: string;
   heading: string;
   body: string;
   /** open prompts to sit with; never scored */
@@ -62,12 +63,14 @@ export const reflectionIntro = {
 export const reflectionSteps: ReflectionStep[] = [
   {
     id: "two_clocks",
+    icon: "calendar",
     heading: "This is two decisions, not one",
     body: "Whether to preserve fertility now is a decision with a clock, set by your treatment schedule. Whether to become a parent someday has no clock. You can answer the first without answering the second.",
     citations: [opdg, beforeAid],
   },
   {
     id: "locate",
+    icon: "compass",
     heading: "Where are you, honestly?",
     body: "Tap the one that fits today. Every square on this board is a fine place to stand.",
     chips: ["Leaning toward yes", "Leaning toward no", "Truly torn", "Haven't let myself think about it"],
@@ -75,6 +78,7 @@ export const reflectionSteps: ReflectionStep[] = [
   },
   {
     id: "meaning",
+    icon: "heart",
     heading: "What could being a parent mean to you?",
     body: "People mean different things by it. Sitting with these for a minute is the work.",
     prompts: [
@@ -87,24 +91,28 @@ export const reflectionSteps: ReflectionStep[] = [
   },
   {
     id: "plans_change",
+    icon: "sprout",
     heading: "Plans are allowed to change",
     body: "Public health guidance on reproductive life planning is built on one observation: people's plans change. What you feel during cancer treatment does not have to be your final answer, in either direction.",
     citations: [cdcRlp],
   },
   {
     id: "honest_promise",
+    icon: "shield",
     heading: "What preserving does, and doesn't, promise",
     body: "Preserving keeps a possibility open. It does not guarantee a child later, and storage costs continue each year. Deciding with that honest picture beats deciding with a hopeful blur.",
     citations: [beforeAid, cfm],
   },
   {
     id: "many_roads",
+    icon: "door",
     heading: "There is more than one road to parenthood",
     body: "Donor eggs or sperm, surrogacy, adoption, fostering. Preserving your own eggs or sperm is one road, not the only one. Some people find this the single most relieving fact on these screens.",
     citations: [beforeAid, cfm],
   },
   {
     id: "what_matters",
+    icon: "dollar",
     heading: "What matters most to you?",
     body: "Slide each one. There is no score and nothing is saved; the point is noticing which sliders you push hard.",
     scale: [
@@ -117,6 +125,7 @@ export const reflectionSteps: ReflectionStep[] = [
   },
   {
     id: "talk_and_time",
+    icon: "stethoscope",
     heading: "Who to talk with, and the pressure check",
     body: "A partner, a parent, a close friend, a counselor, your care team. One more question worth asking yourself, from the Ottawa guide: is anyone pressuring you? Your answer belongs to you. And deciding later is itself a decision you are allowed to make: waiting keeps survivor options and aid programs open, while some pre-treatment options need time before treatment starts. Your care team can tell you how much time you actually have.",
     citations: [opdg, beforeAid],

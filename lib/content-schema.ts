@@ -79,6 +79,7 @@ export interface PreservationOption {
   plan?: { segments: PlanSegment[]; note?: string; citations: Citation[] };
   /** honest expectations: results vary, storage continues yearly, etc. */
   expectations: string;
+  readMore?: ReadMoreLink[];
   expectationsCitations: Citation[];
   costs: CostLine[];
 }
@@ -123,10 +124,18 @@ export interface AidOrg {
 
 /** A sourced fact about everyday egg/sperm health: information only, mechanism
  * over platitude, never a goal, never tracking. */
+/** A patient-facing link, distinct from audit citations. */
+export interface ReadMoreLink {
+  label: string;
+  url: string;
+}
+
 export interface HealthNote {
   id: string;
   /** "prep" notes surface under getting-ready-to-preserve; others under good-to-know */
   group?: "prep" | "general";
+  icon?: string;
+  readMore?: ReadMoreLink[];
   /** the fact, stated plainly as information */
   fact: string;
   /** why it happens, when the source gives the mechanism */

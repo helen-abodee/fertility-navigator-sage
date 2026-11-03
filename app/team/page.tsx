@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { TeamEntry } from "../../lib/share";
 import { decodeShareCode, prioritize } from "../../lib/share";
+import { fetchJourney, isLinkCode, syncEnabled } from "../../lib/sync";
 import { journeyStages } from "../../lib/journey";
 import Icon from "../../components/icons";
 
@@ -43,10 +44,27 @@ export default function TeamPage() {
     setEntries(loadBoard());
   }, []);
 
-  function addCode() {
+  async function addCode() {
+    // A short link code (ABC-123) pulls live from the sync service; a long
+    // FPN1 code decodes locally. Same board either way.
+    if (syncEnabled && isLinkCode(code)) {
+      const live = await fetchJourney(code);
+      if (!live) {
+        setError("No patient found under that code yet. Ask them to tap Send first.");
+        return;
+      }
+      setError("");
+      const next = [...entries, { label: live.nickname || code.toUpperCase(), journey: live.journey, addedAt: code.toUpperCase() }];
+      setEntries(next);
+      saveBoard(next);
+      setCode("");
+      setAdded(true);
+      setTimeout(() => setAdded(false), 2000);
+      return;
+    }
     const decoded = decodeShareCode(code);
     if (!decoded) {
-      setError("That doesn't look like a progress code. They start with FPN1.");
+      setError(syncEnabled ? "Enter a patient's link code (ABC-123) or a progress code (FPN1...)." : "That doesn't look like a progress code. They start with FPN1.");
       return;
     }
     setError("");
@@ -67,6 +85,19 @@ export default function TeamPage() {
 
   function remove(i: number) {
     const next = entries.filter((_, j) => j !== i);
+    setEntries(next);
+    saveBoard(next);
+  }
+
+  async function refreshAll() {
+    if (!syncEnabled) return;
+    const next = await Promise.all(
+      entries.map(async (e) => {
+        if (!isLinkCode(e.addedAt)) return e;
+        const live = await fetchJourney(e.addedAt);
+        return live ? { ...e, journey: live.journey } : e;
+      }),
+    );
     setEntries(next);
     saveBoard(next);
   }
@@ -121,6 +152,11 @@ export default function TeamPage() {
         </button>
       )}
       {added && <p className="text-accent-ink animate-pop mt-2 text-sm font-bold" role="status">Added ✓</p>}
+      {syncEnabled && entries.length > 0 && (
+        <button type="button" onClick={refreshAll} className="border-accent text-accent-ink mt-3 rounded-xl border-[1.5px] px-4 py-2 text-sm font-bold">
+          Refresh all connected patients
+        </button>
+      )}
 
       <div className="mt-8 flex flex-col gap-3">
         {ordered.length === 0 && (

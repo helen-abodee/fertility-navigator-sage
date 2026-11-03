@@ -51,5 +51,4 @@ export const ALKYLATORS: ChemoAgent[] = [
   "carmustine_lomustine",
 ];
 
-export const CONFIRM =
-  "This is a group from published guidelines, not a prediction about you. Your care team can place your exact treatment plan.";
+export const CONFIRM = "A guideline group, not a prediction. Your care team can confirm yours.";

@@ -14,6 +14,7 @@ import { loadJourney, saveJourney } from "../lib/storage";
 import Icon from "./icons";
 import careTeam from "../data/care-team.json";
 import { encodeShareCode } from "../lib/share";
+import { isLinkCode, newLinkCode, pushJourney, syncEnabled } from "../lib/sync";
 
 const CONTACT_KEY = "navigator.team-contact.v1";
 
@@ -53,6 +54,34 @@ export default function JourneySection() {
   const [justSaved, setJustSaved] = useState(false);
   const [shareCode, setShareCode] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [linkCode, setLinkCode] = useState("");
+  const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "failed">("idle");
+
+  useEffect(() => {
+    try {
+      const existing = localStorage.getItem("navigator.sync-code.v1");
+      if (existing && isLinkCode(existing)) setLinkCode(existing);
+    } catch {
+      /* fine */
+    }
+  }, []);
+
+  async function sendToTeam() {
+    let code = linkCode;
+    if (!isLinkCode(code)) {
+      code = newLinkCode();
+      setLinkCode(code);
+      try {
+        localStorage.setItem("navigator.sync-code.v1", code);
+      } catch {
+        /* fine */
+      }
+    }
+    setSendState("sending");
+    const ok = await pushJourney(code, journey);
+    setSendState(ok ? "sent" : "failed");
+    setTimeout(() => setSendState("idle"), 4000);
+  }
 
   useEffect(() => {
     const saved = loadJourney<Journey>();
@@ -113,6 +142,30 @@ export default function JourneySection() {
       </div>
 
       <div className="border-line mt-4 border-t pt-4 print:hidden">
+        {syncEnabled && (
+          <div className="mb-3">
+            <button
+              type="button"
+              onClick={sendToTeam}
+              disabled={sendState === "sending"}
+              className="bg-accent text-accent-contrast w-full rounded-xl px-4 py-3 font-bold disabled:opacity-60"
+            >
+              {sendState === "sending"
+                ? "Sending..."
+                : sendState === "sent"
+                  ? "Sent ✓"
+                  : sendState === "failed"
+                    ? "Couldn't send, tap to retry"
+                    : "Send my progress to my care team"}
+            </button>
+            {linkCode && (
+              <p className="text-muted mt-1 text-xs">
+                Your care team sees it under code <strong>{linkCode}</strong>. Tell them once; after
+                that, every send updates automatically. Only your checklist travels.
+              </p>
+            )}
+          </div>
+        )}
         <button
           type="button"
           onClick={() => setShareCode(shareCode ? null : encodeShareCode(journey))}

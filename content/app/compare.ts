@@ -1,0 +1,128 @@
+import type { Citation } from "../../lib/types";
+import type { OptionId } from "../../lib/content-schema";
+import { asco, d4 } from "./citations";
+
+/**
+ * The at-a-glance comparison matrix. Every cell carries words, not just color,
+ * and grades summarize facts that live, cited, in each option's own page.
+ * "tough" is honest, not scary: cost and involvement, stated plainly.
+ */
+
+export type Grade = "good" | "mid" | "tough" | "unknown";
+
+export const considerations = [
+  { id: "time_needed", label: "Time before treatment" },
+  { id: "what_it_involves", label: "What it involves" },
+  { id: "upfront_cost", label: "Upfront cost (published)" },
+  { id: "ongoing_cost", label: "Ongoing cost" },
+  { id: "evidence", label: "Evidence status" },
+  { id: "decisions_now", label: "Decisions needed now" },
+] as const;
+
+export type ConsiderationId = (typeof considerations)[number]["id"];
+
+export interface CompareCell {
+  grade: Grade;
+  note: string;
+}
+
+export interface CompareEntry {
+  optionId: OptionId;
+  cells: Record<ConsiderationId, CompareCell>;
+  summary: string;
+  citations: Citation[];
+}
+
+export const compare: CompareEntry[] = [
+  {
+    optionId: "egg_freezing",
+    cells: {
+      time_needed: { grade: "mid", note: "about 2 to 3 weeks" },
+      what_it_involves: { grade: "mid", note: "daily shots, then retrieval while asleep" },
+      upfront_cost: { grade: "tough", note: "$12,400 + about $5,000 medicines" },
+      ongoing_cost: { grade: "mid", note: "$200 to $500 per year storage" },
+      evidence: { grade: "good", note: "established" },
+      decisions_now: { grade: "good", note: "no sperm decision needed" },
+    },
+    summary: "Takes a couple of weeks and real money, keeps every later choice open.",
+    citations: [asco("4.2"), d4(3)],
+  },
+  {
+    optionId: "embryo_freezing",
+    cells: {
+      time_needed: { grade: "mid", note: "about 2 to 3 weeks" },
+      what_it_involves: { grade: "mid", note: "daily shots, retrieval, lab fertilization" },
+      upfront_cost: { grade: "tough", note: "$12,400 + about $5,000 medicines" },
+      ongoing_cost: { grade: "mid", note: "$200 to $500 per year storage" },
+      evidence: { grade: "good", note: "established" },
+      decisions_now: { grade: "mid", note: "sperm source decided now" },
+    },
+    summary: "Same path as egg freezing, plus deciding whose sperm, now.",
+    citations: [asco("4.1"), d4(3)],
+  },
+  {
+    optionId: "sperm_banking",
+    cells: {
+      time_needed: { grade: "good", note: "days, compressible to 1 or 2" },
+      what_it_involves: { grade: "good", note: "private collection, no procedure" },
+      upfront_cost: { grade: "good", note: "$500 to $1,000" },
+      ongoing_cost: { grade: "mid", note: "$200 to $500 per year storage" },
+      evidence: { grade: "good", note: "established" },
+      decisions_now: { grade: "good", note: "none beyond doing it" },
+    },
+    summary: "The fastest, simplest, cheapest option on this list.",
+    citations: [asco("3.1"), d4(3)],
+  },
+  {
+    optionId: "testicular_sperm_extraction",
+    cells: {
+      time_needed: { grade: "good", note: "one procedure visit" },
+      what_it_involves: { grade: "mid", note: "a surgeon retrieves sperm directly" },
+      upfront_cost: { grade: "unknown", note: "not published" },
+      ongoing_cost: { grade: "mid", note: "$200 to $500 per year storage" },
+      evidence: { grade: "good", note: "established" },
+      decisions_now: { grade: "good", note: "none beyond doing it" },
+    },
+    summary: "The surgical route when a sample isn't possible.",
+    citations: [asco("3.2"), d4(9)],
+  },
+  {
+    optionId: "ovarian_tissue_freezing",
+    cells: {
+      time_needed: { grade: "good", note: "no hormone-shot wait" },
+      what_it_involves: { grade: "tough", note: "surgery under anesthesia" },
+      upfront_cost: { grade: "unknown", note: "not published" },
+      ongoing_cost: { grade: "mid", note: "$200 to $500 per year storage" },
+      evidence: { grade: "good", note: "established" },
+      decisions_now: { grade: "good", note: "no sperm decision needed" },
+    },
+    summary: "Fast because it skips stimulation; the trade is surgery.",
+    citations: [asco("4.10"), d4(9)],
+  },
+  {
+    optionId: "ovarian_suppression",
+    cells: {
+      time_needed: { grade: "good", note: "given during chemo" },
+      what_it_involves: { grade: "good", note: "an injection" },
+      upfront_cost: { grade: "unknown", note: "not published" },
+      ongoing_cost: { grade: "good", note: "no storage" },
+      evidence: { grade: "mid", note: "an add-on, not a replacement" },
+      decisions_now: { grade: "good", note: "none" },
+    },
+    summary: "Easy to add, but guidelines say it never replaces freezing.",
+    citations: [asco("4.8")],
+  },
+  {
+    optionId: "ovarian_transposition",
+    cells: {
+      time_needed: { grade: "mid", note: "scheduled before radiation" },
+      what_it_involves: { grade: "mid", note: "surgery to move the ovaries" },
+      upfront_cost: { grade: "unknown", note: "not published" },
+      ongoing_cost: { grade: "good", note: "no storage" },
+      evidence: { grade: "good", note: "established for pelvic radiation" },
+      decisions_now: { grade: "good", note: "none beyond scheduling" },
+    },
+    summary: "For pelvic radiation specifically: shields rather than stores.",
+    citations: [asco("4.5")],
+  },
+];
