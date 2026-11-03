@@ -5,7 +5,11 @@ import type { Results } from "../lib/results";
 import type { PreservationOption } from "../lib/content-schema";
 import type { RiskAssessment } from "../lib/risk";
 import type { Clinic, FeelingsAboutChildren, InsuranceType, TreatmentStage } from "../lib/types";
+import AskTeam from "./AskTeam";
 import Cite from "./Cite";
+import { honestCaveat } from "../content/app/options";
+import { aidFit } from "../lib/aid-fit";
+import type { Answers } from "../lib/types";
 import ClinicsSection from "./ClinicsSection";
 import CostEstimator from "./CostEstimator";
 import CoverageChecker from "./CoverageChecker";
@@ -70,6 +74,7 @@ export default function ResultsView({
   insurance,
   stage,
   feelings,
+  age,
   zip,
   browsing,
   onStartOver,
@@ -80,6 +85,7 @@ export default function ResultsView({
   insurance?: InsuranceType;
   stage?: TreatmentStage;
   feelings?: FeelingsAboutChildren;
+  age?: number;
   zip?: string | null;
   browsing?: boolean;
   onStartOver: () => void;
@@ -196,10 +202,34 @@ export default function ResultsView({
 
         {results.doctorQuestions.length > 0 && (
           <section className="border-line bg-card rounded-2xl border p-5">
-            <h2 className="text-xl">Questions you could ask your care team</h2>
-            <ul className="mt-2 flex list-disc flex-col gap-2 pl-5">
+            <div className="flex items-center gap-2">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full" style={{ background: "color-mix(in srgb, var(--info) 18%, var(--card))", color: "var(--info)" }}>
+                <Icon name="stethoscope" size={18} />
+              </span>
+              <h2 className="text-xl">Questions for your care team</h2>
+            </div>
+            <p className="text-muted mt-1 text-sm">Tap a topic. Bring the ones that fit.</p>
+            <div className="mt-3 flex flex-col gap-2">
+              {Array.from(new Set(results.doctorQuestions.map((q) => q.category))).map((cat) => {
+                const qs = results.doctorQuestions.filter((q) => q.category === cat);
+                return (
+                  <details key={cat} className="border-line rounded-xl border px-4 py-3 print:hidden">
+                    <summary className="cursor-pointer list-none font-bold">
+                      {cat} <span className="text-muted text-sm font-normal">({qs.length})</span>
+                      <span className="text-accent-ink float-right" aria-hidden="true">+</span>
+                    </summary>
+                    <ul className="mt-2 flex list-disc flex-col gap-2 pl-5">
+                      {qs.map((q) => (
+                        <li key={q.id} className="text-[0.95rem]">{q.text}</li>
+                      ))}
+                    </ul>
+                  </details>
+                );
+              })}
+            </div>
+            <ul className="mt-2 hidden list-disc flex-col gap-2 pl-5 print:flex">
               {results.doctorQuestions.map((q) => (
-                <li key={q.id} className="text-[0.98rem]">{q.text}</li>
+                <li key={q.id} className="text-sm">{q.text}</li>
               ))}
             </ul>
           </section>
@@ -208,6 +238,10 @@ export default function ResultsView({
 
       {/* Options */}
       <div className={`flex flex-col gap-3 ${show("options")}`}>
+        <div className="border-line bg-card rounded-xl border p-3">
+          <p className="text-[0.92rem]">{honestCaveat.text}</p>
+          <Cite citations={honestCaveat.citations} />
+        </div>
         {results.options.length > 0 && (
           <>
             <h2 className="text-xl">Your options</h2>
@@ -292,30 +326,59 @@ export default function ResultsView({
           ))}
         </div>
 
-        {results.aid.length > 0 && (
-          <section>
-            <h2 className="text-xl">Help paying for it</h2>
-            <p className="text-muted mt-1 text-sm">
-              Many of these programs reimburse you after you pay, so ask each one about timing.
-            </p>
-            <div className="mt-3 flex flex-col gap-3">
-              {results.aid.map((a) => (
-                <div key={a.id} className="border-line bg-card rounded-xl border p-4">
-                  <p className="font-bold">
-                    <a href={a.url} target="_blank" rel="noreferrer" className="underline">{a.name}</a>
-                  </p>
-                  <p className="text-[0.95rem]">{a.what}</p>
-                  <p className="text-muted text-sm">Who it's for: {a.eligibility}</p>
-                  <p className="text-muted text-sm">Amount: {a.cap}</p>
-                  {a.payUpfront && (
-                    <p className="text-muted text-sm">You may need to pay first and be paid back.</p>
-                  )}
-                  <Cite citations={a.citations} />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+        {results.aid.length > 0 && (() => {
+          const answersForFit: Answers = { age, stage, anatomy: undefined };
+          const checked = results.aid.map((a) => ({ a, r: aidFit(a, { ...answersForFit }) }));
+          const mayFit = checked.filter((x) => x.r.fit === "may_fit");
+          const unlikely = checked.filter((x) => x.r.fit === "unlikely");
+          return (
+            <section>
+              <h2 className="text-xl">Help paying for it</h2>
+              <div className="mt-2">
+                <AskTeam text="You don't have to sort these alone. Social workers connect patients to these programs every week; ask yours to help you apply." />
+              </div>
+              <p className="text-muted mt-2 text-sm">
+                Checked against your age and treatment stage. The final word always belongs to the
+                program, so "unlikely" is worth confirming, not a closed door.
+              </p>
+              <div className="mt-3 flex flex-col gap-3">
+                {mayFit.map(({ a }) => (
+                  <div key={a.id} className="border-line bg-card rounded-xl border p-4">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="font-bold">
+                        <a href={a.url} target="_blank" rel="noreferrer" className="underline">{a.name}</a>
+                      </p>
+                      <span className="bg-accent-tint text-accent-ink rounded-full px-2.5 py-0.5 text-xs font-bold whitespace-nowrap">May fit you</span>
+                    </div>
+                    <p className="text-[0.95rem]">{a.what}</p>
+                    <p className="text-muted text-sm">Who it's for: {a.eligibility}</p>
+                    <p className="text-muted text-sm">Amount: {a.cap}</p>
+                    {a.payUpfront && (
+                      <p className="text-muted text-sm">You may need to pay first and be paid back.</p>
+                    )}
+                    <Cite citations={a.citations} />
+                  </div>
+                ))}
+              </div>
+              {unlikely.length > 0 && (
+                <details className="border-line bg-card mt-3 rounded-xl border p-4 print:hidden">
+                  <summary className="text-muted cursor-pointer list-none text-sm font-bold">
+                    Probably not a fit for you ({unlikely.length}), and why
+                    <span className="text-accent-ink float-right" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="mt-2 flex flex-col gap-3">
+                    {unlikely.map(({ a, r }) => (
+                      <div key={a.id} className="border-line border-t pt-2">
+                        <p className="text-sm font-bold">{a.name}</p>
+                        <p className="text-muted text-sm">Why: {r.reasons.join("; ")}.</p>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )}
+            </section>
+          );
+        })()}
       </div>
 
       {/* Clinics */}
@@ -324,13 +387,35 @@ export default function ResultsView({
       </div>
 
       {/* Health */}
-      <div className={show("health")}>
-        {results.health.length > 0 && (
+      <div className={`flex flex-col gap-6 ${show("health")}`}>
+        <div className="border-line bg-card rounded-xl border p-3">
+          <p className="text-[0.92rem]">{honestCaveat.text}</p>
+          <Cite citations={honestCaveat.citations} />
+        </div>
+        {results.health.some((h) => h.group === "prep") && (
           <section>
-            <h2 className="text-xl">Everyday things that affect sperm and eggs</h2>
-            <p className="text-muted mt-1 text-sm">Information, not homework. Nothing here is a goal.</p>
+            <h2 className="text-xl">Getting ready to preserve</h2>
+            <p className="text-muted mt-1 text-sm">
+              These everyday things affect sperm and egg quality going into preservation. Information,
+              not homework; your care team can say which matter for your timeline.
+            </p>
             <div className="mt-3 flex flex-col gap-3">
-              {results.health.map((h) => (
+              {results.health.filter((h) => h.group === "prep").map((h) => (
+                <div key={h.id} className="border-line bg-card rounded-xl border p-4">
+                  <p className="font-bold">{h.fact}</p>
+                  {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
+                  {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
+                  <Cite citations={h.citations} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {results.health.some((h) => h.group !== "prep") && (
+          <section>
+            <h2 className="text-xl">Also good to know</h2>
+            <div className="mt-3 flex flex-col gap-3">
+              {results.health.filter((h) => h.group !== "prep").map((h) => (
                 <div key={h.id} className="border-line bg-card rounded-xl border p-4">
                   <p className="font-bold">{h.fact}</p>
                   {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}

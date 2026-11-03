@@ -43,7 +43,7 @@ export default function CostEstimator({
   insurance?: InsuranceType;
   stage?: TreatmentStage;
 }) {
-  const [years, setYears] = useState(5);
+  const [years, setYears] = useState(0);
   const { min, max, unpublished } = cashRange(option, years);
   const hasNumbers = max > 0;
   const preTreatment = stage === "not_started" || stage === "in_treatment";
@@ -85,22 +85,27 @@ export default function CostEstimator({
       {hasNumbers && (
         <>
           <div className="border-line mt-3 flex items-baseline justify-between gap-2 border-t pt-3">
-            <span className="text-sm">If you paid the published prices yourself</span>
+            <span className="text-sm">
+              {years === 0 ? "The procedure, at published prices" : "Procedure plus storage, at published prices"}
+            </span>
             <span className="text-lg font-bold whitespace-nowrap">
               {min === max ? fmt(min) : `${fmt(min)} to ${fmt(max)}`}
             </span>
           </div>
           <label className="mt-3 block text-sm">
-            Years of storage: <strong>{years}</strong>
+            Add years of storage: <strong>{years === 0 ? "none yet" : years}</strong>
             <input
               type="range"
-              min={1}
+              min={0}
               max={15}
               value={years}
               onChange={(e) => setYears(parseInt(e.target.value, 10))}
               className="accent-[var(--accent)] mt-1 w-full"
               aria-label="Years of storage"
             />
+            <span className="text-muted block text-xs">
+              Storage runs $200 to $500 per year, billed yearly, whenever you add it.
+            </span>
           </label>
         </>
       )}

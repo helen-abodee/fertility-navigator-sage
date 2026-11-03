@@ -162,6 +162,7 @@ export default function QuestionsPage() {
         insurance={answers.insurance}
         stage={answers.stage}
         feelings={answers.feelings}
+        age={answers.age}
         zip={answers.zip}
         browsing={answers.entry === "exploring"}
         onStartOver={startOver}

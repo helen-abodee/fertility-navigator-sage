@@ -13,6 +13,9 @@ describe("cost estimator math (published numbers only)", () => {
     expect(r5.max).toBe(12400 + 5000 + 5 * 500);
     const r1 = cashRange(egg, 1);
     expect(r1.min).toBe(12400 + 5000 + 200);
+    const r0 = cashRange(egg, 0);
+    expect(r0.min).toBe(12400 + 5000);
+    expect(r0.max).toBe(12400 + 5000);
   });
 
   it("lists unpublished lines instead of inventing numbers for them", () => {

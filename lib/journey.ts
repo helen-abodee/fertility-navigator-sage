@@ -16,7 +16,7 @@ export type JourneyStageId =
   | "had_consult"
   | "started_preservation";
 
-export type JourneyOutcome = "completed" | "decided_not_to" | null;
+export type JourneyOutcome = "completed" | "still_deciding" | "decided_not_to" | null;
 
 export interface Journey {
   done: JourneyStageId[];
@@ -34,9 +34,10 @@ export const journeyStages: { id: JourneyStageId; label: string }[] = [
   { id: "started_preservation", label: "Started preservation" },
 ];
 
-export const journeyOutcomes: { id: Exclude<JourneyOutcome, null>; label: string }[] = [
-  { id: "completed", label: "I completed preservation" },
-  { id: "decided_not_to", label: "I decided not to preserve" },
+export const journeyOutcomes: { id: Exclude<JourneyOutcome, null>; label: string; icon: string }[] = [
+  { id: "completed", label: "I preserved", icon: "snowflake" },
+  { id: "still_deciding", label: "Still deciding", icon: "compass" },
+  { id: "decided_not_to", label: "Not preserving", icon: "shield" },
 ];
 
 export function emptyJourney(): Journey {
@@ -63,6 +64,8 @@ export function summaryLines(j: Journey): string[] {
     if (j.done.includes(s.id)) lines.push(`Done: ${s.label}`);
   }
   if (j.outcome === "completed") lines.push("Where I landed: I completed fertility preservation.");
+  if (j.outcome === "still_deciding")
+    lines.push("Where I landed: still deciding, on purpose. That is a valid place to be.");
   if (j.outcome === "decided_not_to")
     lines.push("Where I landed: I decided not to preserve. This was my decision to make.");
   if (lines.length > 0) lines.push(`As of ${j.updated}.`);

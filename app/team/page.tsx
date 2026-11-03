@@ -101,6 +101,25 @@ export default function TeamPage() {
         </button>
       </div>
       {error && <p className="mt-2 text-sm font-bold" role="alert">{error}</p>}
+      {entries.length === 0 && (
+        <button
+          type="button"
+          onClick={() => {
+            const demo: TeamEntry[] = [
+              { label: "Demo: J.R.", journey: { done: ["learned_risk"], outcome: null, updated: "2026-10-18" }, addedAt: "demo" },
+              { label: "Demo: A.M.", journey: { done: ["learned_risk", "talked_care_team", "checked_coverage", "contacted_clinic"], outcome: null, updated: "2026-11-01" }, addedAt: "demo" },
+              { label: "Demo: K.T.", journey: { done: ["learned_risk", "talked_care_team"], outcome: "still_deciding", updated: "2026-10-26" }, addedAt: "demo" },
+              { label: "Demo: S.B.", journey: { done: ["learned_risk", "talked_care_team", "checked_coverage", "contacted_clinic", "had_consult", "started_preservation"], outcome: "completed", updated: "2026-10-29" }, addedAt: "demo" },
+              { label: "Demo: L.P.", journey: { done: ["learned_risk", "talked_care_team"], outcome: "decided_not_to", updated: "2026-10-22" }, addedAt: "demo" },
+            ];
+            setEntries(demo);
+            saveBoard(demo);
+          }}
+          className="border-accent text-accent-ink mt-3 rounded-xl border-[1.5px] px-4 py-2.5 text-sm font-bold"
+        >
+          Load 5 sample patients (demo)
+        </button>
+      )}
       {added && <p className="text-accent-ink animate-pop mt-2 text-sm font-bold" role="status">Added ✓</p>}
 
       <div className="mt-8 flex flex-col gap-3">
@@ -129,9 +148,11 @@ export default function TeamPage() {
                     ? "Completed preservation"
                     : e.journey.outcome === "decided_not_to"
                       ? "Decided not to"
-                      : doneCount === 0
-                        ? "Just started"
-                        : "In motion"}
+                      : e.journey.outcome === "still_deciding"
+                        ? "Still deciding, on purpose"
+                        : doneCount === 0
+                          ? "Just started"
+                          : "In motion"}
                 </span>
               </div>
               <div className="mt-3 flex items-center gap-1.5" aria-label={`${doneCount} of ${journeyStages.length} steps`}>

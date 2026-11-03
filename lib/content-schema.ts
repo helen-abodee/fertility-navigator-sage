@@ -103,6 +103,15 @@ export interface AidOrg {
   name: string;
   what: string;
   eligibility: string;
+  /** structured rules for the soft eligibility check; omit when rules are complex */
+  fit?: {
+    minAge?: number;
+    maxAge?: number;
+    stage?: "not_started" | "finished";
+    anatomy?: Anatomy[];
+    /** a hard scope note that always marks the org unlikely, e.g. a different diagnosis */
+    note?: string;
+  };
   /** dollar cap or coverage description; "not published" when unknown */
   cap: string;
   /** true when the org reimburses after upfront payment */
@@ -116,6 +125,8 @@ export interface AidOrg {
  * over platitude, never a goal, never tracking. */
 export interface HealthNote {
   id: string;
+  /** "prep" notes surface under getting-ready-to-preserve; others under good-to-know */
+  group?: "prep" | "general";
   /** the fact, stated plainly as information */
   fact: string;
   /** why it happens, when the source gives the mechanism */
@@ -129,6 +140,8 @@ export interface HealthNote {
 export interface DoctorQuestion {
   id: string;
   text: string;
+  /** accordion grouping on the results page */
+  category: string;
   audience: Audience;
   citations?: Citation[];
 }

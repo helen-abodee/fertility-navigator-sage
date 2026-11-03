@@ -118,7 +118,7 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   // Per-option cost, coverage framing first
   await page.getByRole("button", { name: "Egg freezing", exact: true }).click();
   await expect(page.getByText("The money picture")).toBeVisible();
-  await expect(page.getByText("If you paid the published prices yourself")).toBeVisible();
+  await expect(page.getByText("The procedure, at published prices")).toBeVisible();
 
   // Health tab
   await page.getByRole("button", { name: "Health", exact: true }).click();
@@ -127,7 +127,7 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   // Start here: journey + doctor questions + download
   await page.getByRole("button", { name: "Start here" }).click();
   await expect(page.getByRole("heading", { name: "Where I am with this" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Questions you could ask your care team" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Questions for your care team" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Download or print my summary" })).toBeVisible();
 });
 
@@ -162,8 +162,8 @@ test("the journey tracker records stages and respects deciding not to", async ({
   await page.getByRole("button", { name: "Just learning for now" }).click();
   await page.getByRole("button", { name: "Contacted a clinic" }).click();
   await expect(page.getByRole("button", { name: "✓ Contacted a clinic" })).toBeVisible();
-  await page.getByRole("button", { name: "I decided not to preserve" }).click();
-  await expect(page.getByRole("button", { name: "I decided not to preserve" })).toHaveAttribute(
+  await page.getByRole("button", { name: "Still deciding" }).click();
+  await expect(page.getByRole("button", { name: "Still deciding" })).toHaveAttribute(
     "aria-pressed",
     "true",
   );
@@ -246,7 +246,7 @@ test("the share code round-trips from patient to the team board", async ({ page 
   await expect(page.getByText("In motion")).toBeVisible();
 });
 
-test("clinic filters narrow by radius and budget, map behind a toggle", async ({ page }) => {
+test("clinics: map first, radius filter, tappable detail pages", async ({ page }) => {
   await page.goto("/questions");
   await walkSection1(page);
   await page.getByRole("button", { name: "Keep going" }).click();
@@ -258,12 +258,12 @@ test("clinic filters narrow by radius and budget, map behind a toggle", async ({
   await page.getByRole("button", { name: "See my options" }).click();
 
   await page.getByRole("button", { name: "Clinics", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Within 15 mi" })).toBeVisible();
-  await page.getByRole("button", { name: "Within 15 mi" }).click();
-  await expect(page.getByRole("button", { name: "Show these on a map" })).toBeVisible();
-  await page.getByRole("button", { name: "Under $2,000" }).click();
-  await page.getByRole("button", { name: "Show these on a map" }).click();
   await expect(page.getByRole("region", { name: "Map of fertility clinics" })).toBeVisible();
+  await page.getByRole("button", { name: "Within 40 mi" }).click();
+  await page.getByRole("button", { name: /HRC Fertility/ }).first().click();
+  await expect(page.getByRole("heading", { name: /HRC Fertility/ }).first()).toBeVisible();
+  await expect(page.getByText("Published prices", { exact: false }).first()).toBeVisible();
+  await page.getByRole("button", { name: "Back to clinics" }).first().click();
 });
 
 test("partner insurance is asked only when partnered, and the LGBTQ+ card shows", async ({ page }) => {
@@ -289,4 +289,29 @@ test("partner insurance is asked only when partnered, and the LGBTQ+ card shows"
   await page.getByRole("button", { name: "Paying for it", exact: true }).click();
   await expect(page.getByText("If you're LGBTQ+").first()).toBeVisible();
   await expect(page.getByText("Check your partner's plan too").first()).toBeVisible();
+});
+
+test("the team board demo and the aid fit check work", async ({ page }) => {
+  await page.goto("/team");
+  await page.getByRole("button", { name: "Load 5 sample patients (demo)" }).click();
+  await expect(page.getByRole("textbox", { name: "Patient label" }).first()).toHaveValue(/Demo/);
+  await expect(page.getByText("Still deciding, on purpose")).toBeVisible();
+
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByPlaceholder("Your age").fill("19");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Finish up" }).click();
+  await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "See my options" }).click();
+  await page.getByRole("button", { name: "Paying for it", exact: true }).click();
+  // a 19-year-old pre-treatment: SAMFund (21-39, survivors) lands in unlikely with reasons
+  await expect(page.getByText("Probably not a fit for you", { exact: false })).toBeVisible();
+  await expect(page.getByText("May fit you").first()).toBeVisible();
 });

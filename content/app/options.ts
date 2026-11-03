@@ -419,3 +419,9 @@ export const options: PreservationOption[] = [
     ],
   },
 ];
+
+/** The standing honesty line shown above the options and on the health tab. */
+export const honestCaveat = {
+  text: "Honest first: preservation keeps a possibility open. Frozen eggs, sperm, and embryos do not guarantee a child later, and results vary from person to person.",
+  citations: [asrmJourney(), mskPreTreatment(), mskSpermBanking()],
+};

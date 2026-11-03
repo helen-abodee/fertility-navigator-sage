@@ -79,11 +79,13 @@ const fixture: AppContent = {
     {
       id: "timing",
       text: "Is there time for fertility preservation before treatment starts?",
+      category: "My risk and timing",
       audience: { stages: ["not_started"] },
     },
     {
       id: "testing",
       text: "Which tests would tell us about my fertility now?",
+      category: "Where I stand now",
       audience: { stages: ["finished"] },
     },
   ],

@@ -48,6 +48,7 @@ const ageSheet = asrmSheet("Does My Age Affect My Fertility?", "does-my-age-affe
 export const health: HealthNote[] = [
   {
     id: "sperm_cycle",
+    group: "prep",
     fact: "Sperm take about 2 and a half months to develop.",
     mechanism:
       "A sperm cell takes over 70 days to grow and mature. So anything that harms sperm, or stops harming them, takes about 3 months to show up in a sample.",
@@ -56,6 +57,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "heat",
+    group: "prep",
     fact: "Heat lowers sperm production.",
     mechanism:
       "The testicles hang outside the body to stay a few degrees cooler than the rest of you, because sperm develop best at 97 to 99 degrees. Hot tubs, saunas, and a laptop resting on the lap all add heat.",
@@ -64,6 +66,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "testosterone",
+    group: "prep",
     fact: "Taking testosterone or anabolic steroids shuts down sperm production.",
     mechanism:
       "Outside testosterone switches off the brain signals that tell the testicles to make sperm, often driving counts very low or to zero. Production usually returns over about 3 to 12 months after stopping.",
@@ -72,6 +75,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "cannabis",
+    group: "prep",
     fact: "Cannabis can lower sperm count.",
     mechanism: "THC can interfere with testosterone production, which sperm making depends on.",
     caveat:
@@ -81,6 +85,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "smoking_eggs",
+    group: "prep",
     fact: "Smoking speeds up the loss of eggs, and lost eggs do not come back.",
     mechanism:
       "Chemicals in cigarette smoke, including nicotine, cyanide, and carbon monoxide, speed up the rate eggs are lost. Menopause comes 1 to 4 years earlier in people who smoke.",
@@ -89,6 +94,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "smoking_sperm",
+    group: "prep",
     fact: "Smoking lowers sperm count and movement.",
     mechanism:
       "Smoke chemicals can damage sperm DNA and increase the share of abnormally shaped sperm.",
@@ -97,6 +103,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "eggs_fixed",
+    group: "general",
     fact: "Egg supply is set at birth; age and egg count are not things anyone can change.",
     mechanism:
       "A person is born with all the eggs they will ever have. No treatment grows new ones. Of the everyday factors, smoking is the clearly proven harm to avoid.",
@@ -105,6 +112,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "opioids",
+    group: "general",
     fact: "Long-term opioid use can lower sperm quantity and quality.",
     mechanism: "Opioids disrupt the brain signals that control testosterone.",
     audience: { anatomy: ["testes"] },
@@ -112,6 +120,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "alcohol",
+    group: "prep",
     fact: "Heavy drinking is linked to reduced fertility.",
     mechanism:
       "ASRM defines heavy as more than 2 drinks a day. In men, heavy alcohol use can lower testosterone, which sperm production depends on.",
@@ -120,6 +129,7 @@ export const health: HealthNote[] = [
   },
   {
     id: "debunks",
+    group: "general",
     fact: "Some popular advice has no evidence behind it.",
     mechanism:
       "There is no proof that fertility supplements work, and position or lying down after sex does not change the odds of conception. Skipping those saves money and worry.",

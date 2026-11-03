@@ -23,6 +23,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "allyson_whitney",
+    fit: { minAge: 16, maxAge: 36 },
     name: "Allyson Whitney Foundation",
     what: "Life Interrupted Grants of $500 to $1,500 for young adults with rare cancers. Grants can go toward fertility costs like egg retrieval and sperm banking, as well as rent and medical bills.",
     eligibility:
@@ -41,6 +42,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "chick_mission",
+    fit: { minAge: 18, maxAge: 40, stage: "not_started", anatomy: ["ovaries_uterus"] },
     name: "Chick Mission",
     what: "Hope Grants that cover the costs of one egg freezing cycle before cancer treatment. Medication costs are not included. The grant is paid directly to a fertility clinic in their network, so you do not pay first and wait for repayment.",
     eligibility:
@@ -60,6 +62,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "expect_miracles_samfund",
+    fit: { minAge: 21, maxAge: 39, stage: "finished" },
     name: "Expect Miracles Foundation SAMFund",
     what: "Grants for young adult cancer survivors who have finished active treatment. Family Building grants can help pay for fertility treatment and other paths to parenthood after cancer. Grant amounts vary, and not every applicant can be funded.",
     eligibility:
@@ -115,6 +118,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "nmdp",
+    fit: { note: "it is for people with sickle cell disease, not cancer" },
     name: "NMDP (formerly Be The Match)",
     what: "Fertility preservation grants of up to $10,000 for people with sickle cell disease before a transplant. Covers egg retrieval and freezing, semen analysis and freezing, storage fees, and medication.",
     eligibility:
@@ -133,6 +137,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "reunite_oncofertility",
+    fit: { anatomy: ["ovaries_uterus"], stage: "not_started" },
     name: "ReUnite Oncofertility",
     what: "Discounted fertility medication for cancer patients preserving fertility before treatment. The discount can cover up to 100 percent of what you would pay for covered medicines, based on income and clinical need, and is applied when the pharmacy fills the order.",
     eligibility:
@@ -152,6 +157,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "team_maggies_dream",
+    fit: { minAge: 15, maxAge: 37 },
     name: "Team Maggie's Dream",
     what: "Fertility assistance grants of up to $2,500 for teens and young adults with cancer, for preservation costs like egg retrieval and sperm banking. Funds are paid directly to the medical provider, not to you.",
     eligibility:
@@ -191,6 +197,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "walgreens_specialty",
+    fit: { maxAge: 43, anatomy: ["ovaries_uterus"], stage: "not_started" },
     name: "Walgreens Specialty Pharmacy fertility preservation program",
     what: "Free fertility medication, donated by Ferring Pharmaceuticals through its Heart Beat program, for women preserving fertility before cancer treatment. Covers up to 2 preservation cycles, and the pharmacy supplies the medication at no cost.",
     eligibility:
@@ -210,6 +217,7 @@ export const aid: AidOrg[] = [
   },
   {
     id: "worth_the_wait",
+    fit: { minAge: 13, maxAge: 39 },
     name: "Worth the Wait",
     what: "Grants of $500 to $2,500 for fertility preservation before cancer treatment (Emergency Preservation Grants) and for family building after treatment, including frozen embryo transfer, egg, embryo, or semen preservation, storage fees, adoption, and surrogacy. Grants are paid directly to the clinic or agency.",
     eligibility:

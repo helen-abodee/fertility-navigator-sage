@@ -11,6 +11,8 @@ import {
   toggleStage,
 } from "../lib/journey";
 import { loadJourney, saveJourney } from "../lib/storage";
+import Icon from "./icons";
+import careTeam from "../data/care-team.json";
 import { encodeShareCode } from "../lib/share";
 
 const CONTACT_KEY = "navigator.team-contact.v1";
@@ -92,19 +94,20 @@ export default function JourneySection() {
       </div>
 
       <p className="mt-4 text-sm font-bold print:hidden">Where did you land?</p>
-      <p className="text-muted text-xs print:hidden">Both answers are real endings. Tap again to clear.</p>
-      <div className="mt-2 flex flex-wrap gap-2 print:hidden">
+      <p className="text-muted text-xs print:hidden">All three are real answers. Tap again to clear.</p>
+      <div className="mt-2 grid grid-cols-3 gap-2 print:hidden">
         {journeyOutcomes.map((o) => (
           <button
             key={o.id}
             type="button"
             aria-pressed={journey.outcome === o.id}
             onClick={() => update(setOutcome(journey, o.id))}
-            className={`rounded-full border-[1.5px] px-4 py-2.5 text-sm font-bold ${
+            className={`flex min-h-20 flex-col items-center justify-center gap-1 rounded-xl border-[1.5px] px-2 py-2 text-center ${
               journey.outcome === o.id ? "border-accent bg-accent-tint" : "border-line bg-card"
             }`}
           >
-            {o.label}
+            <span className="text-accent-ink"><Icon name={o.icon} size={22} /></span>
+            <span className="text-xs leading-tight font-bold">{o.label}</span>
           </button>
         ))}
       </div>
@@ -172,8 +175,27 @@ export default function JourneySection() {
           <div>
             <p className="text-sm font-bold">Stuck on a step? Your social worker can help.</p>
             <p className="text-muted text-xs">
-              Add their number or email (kept on this device) and this becomes a one-tap message.
+              Pick your care team member, or add a number or email. Kept on this device only.
             </p>
+            <div className="mt-2 flex flex-col gap-2">
+              {(careTeam as { id: string; name: string; role: string; contact: string }[]).map((m) => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => {
+                    setContact(m.contact);
+                    saveContact(m.contact);
+                    setEditingContact(false);
+                    setJustSaved(true);
+                    setTimeout(() => setJustSaved(false), 2500);
+                  }}
+                  className="border-line bg-card rounded-xl border-[1.5px] px-3 py-2.5 text-left"
+                >
+                  <span className="block text-sm font-bold">{m.name}</span>
+                  <span className="text-muted block text-xs">{m.role}</span>
+                </button>
+              ))}
+            </div>
             <div className="mt-2 flex gap-2">
               <input
                 value={contact}

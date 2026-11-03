@@ -46,7 +46,8 @@ export function decodeShareCode(code: string): { nickname: string; journey: Jour
     const p = JSON.parse(raw);
     if (!Array.isArray(p.d) || !("o" in p) || typeof p.u !== "string") return null;
     const done = p.d.filter((x: unknown): x is JourneyStageId => validStages.has(x as JourneyStageId));
-    const outcome: JourneyOutcome = p.o === "completed" || p.o === "decided_not_to" ? p.o : null;
+    const outcome: JourneyOutcome =
+      p.o === "completed" || p.o === "decided_not_to" || p.o === "still_deciding" ? p.o : null;
     return {
       nickname: typeof p.n === "string" ? p.n.slice(0, 40) : "",
       journey: { done, outcome, updated: p.u.slice(0, 10) },
