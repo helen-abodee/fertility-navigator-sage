@@ -1,0 +1,104 @@
+<title>Navigator Iteration 11</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    --paper: #F6F3ED; --card: #FFFFFF; --ink: #283029; --muted: #5F6962;
+    --line: #E0DDD4; --accent: #38654C; --accent-ink: #2C523D; --tint: #E2EBE2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+      --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B201D; --card: #242B26; --ink: #E9E7DF; --muted: #A7B0A8;
+    --line: #39423B; --accent: #8FBF9F; --accent-ink: #A5CDB2; --tint: #2C3A31;
+  }
+  body { background: var(--paper); color: var(--ink); margin: 0; font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1, h2, h3 { font-family: Literata, Georgia, serif; font-weight: 600; text-wrap: balance; }
+  h1 { font-size: 2rem; margin: 6px 0 2px; }
+  h2 { font-size: 1.35rem; margin: 44px 0 10px; }
+  h3 { font-size: 1.02rem; margin: 16px 0 4px; }
+  p { max-width: 70ch; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; color: var(--accent-ink); margin: 0; }
+  .sub { color: var(--muted); margin-top: 2px; }
+  .cta { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+  .cta a, a { color: var(--accent-ink); font-weight: 700; word-break: break-all; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin-top: 16px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .shot img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .shot p { font-size: .82rem; color: var(--muted); margin: 8px 2px 2px; }
+  ul, ol { padding-left: 22px; } li { margin: 6px 0; }
+  code { background: var(--tint); border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+  .pick { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 10px 0; }
+  .footer { margin-top: 56px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Iteration 11</h1>
+  <p class="sub">November 3, 2026. Copy audit, Compare, one-tap sync, Read more, and your pick lists.</p>
+
+  <div class="cta">
+    <p style="margin-top:0"><strong>Walk through it:</strong> <a href="https://navigator-60xg037n7-helen-abodees-projects.vercel.app">navigator-60xg037n7-helen-abodees-projects.vercel.app</a><br>
+    <strong>Source map for your slides:</strong> <a href="https://claude.ai/code/artifact/91c905fb-3581-4200-93f0-ec7b8c098b14">every screen and input, mapped to its source</a> (66 rows, grouped by area; also <code>content/SOURCE-MAP.csv</code> for Google Sheets, regenerates from the app's own content).</p>
+  </div>
+
+  <h2>The children survey's original resources</h2>
+  <ol>
+    <li><strong>Ottawa Personal Decision Guide</strong> (our backbone): <a href="https://decisionaid.ohri.ca/docs/das/OPDG.pdf">the 2-page guide PDF</a> · <a href="https://decisionaid.ohri.ca/decguide.html">overview</a></li>
+    <li><strong>BEFORE decision aid</strong> (breast cancer, Canada): <a href="https://fertilityaid.rethinkbreastcancer.com/">the live tool</a></li>
+    <li><strong>Cancer, Fertility and Me</strong> (UK, most AYA-relevant): <a href="https://eprints.leedsbeckett.ac.uk/id/eprint/8691/7/CancerFertilityAndMePV-JONES.pdf">the 40-page booklet</a></li>
+    <li><strong>CDC Reproductive Life Plan</strong>: <a href="https://beforeandbeyond.org/toolkit/reproductive-life-plan-assessment/">the assessment</a></li>
+  </ol>
+  <p>Full extraction with verbatim items and licensing: <code>content/sources/parenthood-decision-aids.md</code>, summarized in the <a href="https://claude.ai/code/artifact/87652f2b-acd9-4f49-ae36-96403716c5bc">literature page</a>.</p>
+
+  <h2>On imagery of children: my honest take</h2>
+  <p>Skip it. The decision-aid standards we built on (IPDAS) require not nudging a direction, and the Cancer-Fertility-and-Me team explicitly rejected emotionally loaded material as biasing. Baby imagery leans "yes" on a page whose whole job is equipoise, and it can wound the person who ends up unable to, or chooses not to. What shipped instead: each reflection step now opens with a large icon in our own warm line style (calendar for the two clocks, heart for meaning, compass for locating yourself), which gives the visual anchor you wanted without the thumb on the scale. If you want more art, the right move is abstract illustration in this same language (seeds, paths, horizons), not photography.</p>
+
+  <h2>The copy audit</h2>
+  <ul>
+    <li>Every risk screen rewrote shorter: the care-team line is now one short question ("Does this match the risk counseling for my plan?") plus a one-line reminder ("A guideline group, not a prediction. Your care team can confirm yours."), which also kills the "exact treatment plan" wrap. "When the plan is set" is gone, replaced by "once you have a treatment plan, this screen can place it."</li>
+    <li>Bodies across all ten risk rules trimmed 30 to 50 percent, same facts, same citations.</li>
+    <li>Health and reflection got icons; health facts now also carry <strong>"Read more"</strong> chips, patient-facing links distinct from the audit "Sources" tap, currently pointing at the ASRM and Cleveland Clinic patient pages we already verified.</li>
+  </ul>
+
+  <h2>UCSD "Read more" candidates, for your pick</h2>
+  <div class="pick">
+    <ol>
+      <li><a href="https://health.ucsd.edu/care/cancer/fertility-preservation-counseling/">UCSD Health: Fertility Preservation and Counseling</a> (their core oncofertility page, options by sex, phone lines)</li>
+      <li><a href="https://www.oncofertilityrisk.com/en/infertility/">CRISP: Fertility preservation tool</a> (the one your care team uses)</li>
+      <li><a href="https://www.oncofertilityrisk.com/en/pregnancy/">CRISP: Pregnancy after cancer</a></li>
+      <li><a href="https://www.oncofertilityrisk.com/en/birth-control/">CRISP: Birth control during and after treatment</a></li>
+      <li><a href="https://health.ucsd.edu/globalassets/content/primary-specialty-care/fertility-care/fertilitypreservationtoolkit.pdf">UCSD + AFP: Using insurance for fertility preservation (patient PDF)</a></li>
+      <li><a href="https://health.ucsd.edu/care/fertility/male-fertility/">UCSD Health: Male fertility tests and treatment</a></li>
+      <li><a href="https://www.oncofertilityrisk.com/">CRISP home</a> (has a full Spanish mirror, relevant if we localize)</li>
+    </ol>
+    <p>Skipped: their menopause page (PDFs frozen at 2019, broken links) and the Su lab's old patient site (domain is dead). Tell me which numbers go on which pages and I'll wire them.</p>
+  </div>
+
+  <h2>One-tap "Send to my care team", no SMS ever</h2>
+  <p>Built and flag-gated. Your Bodi instinct is exactly right, and this design never touches text-messaging infrastructure: the patient taps <strong>Send my progress to my care team</strong>; the checklist (and only the checklist, the same tamper-tested payload as the codes) lands in a database under a short speakable code like <code>MKT-4R7</code>; the social worker enters that code once on /team and from then on taps <strong>Refresh all</strong>. The long FPN1 copy-paste remains as the no-backend fallback.</p>
+  <p><strong>What I need from you (10 minutes):</strong> create a NEW Supabase project (never the existing ones), run <code>supabase/migrations/0001_journey_sync.sql</code> in its SQL editor, and set the two env vars from <code>.env.example</code> in Vercel. The feature appears the moment they exist. And per <code>docs/HIPAA-BRIEF.md</code>: fine for your demos and pilots with test data now; a BAA before real patients use it with the care team.</p>
+
+  <h2>The Compare tab</h2>
+  <p>New tab between Options and Paying for it. Pick up to three options; a matrix grades six considerations, each cell carrying words, never color alone: <strong>time before treatment, what it involves, upfront cost, ongoing cost, evidence status, decisions needed now</strong>. Three honest levels (easier / in between / bigger lift, plus unknown for unpublished prices), with a one-line summary per option ("Sperm banking: the fastest, simplest, cheapest option on this list"). Every row cites the same sources as the option's own page.</p>
+
+  <h2>Clinics and the map</h2>
+  <p>The map now sits at the very top of the Clinics tab, before any filters. On hosting: there is nothing to host or pay for; the map is Leaflet (open-source) drawing free OpenStreetMap tiles, no API key, no tracking. If traffic ever grows beyond OSM's fair-use policy, we'd switch the tile URL to a free-tier provider, a one-line change.</p>
+
+  <h2>Screens</h2>
+  <div class="gallery">
+    <div class="shot"><img src="shots/18-compare.png" alt="Compare matrix"><p>Compare: worded traffic-light matrix plus per-option summaries.</p></div>
+    <div class="shot"><img src="shots/18b-health-icons.png" alt="Health with icons and read-more"><p>Health: icons per fact, "Read more" chips, honest caveat on top.</p></div>
+    <div class="shot"><img src="shots/18c-map-top.png" alt="Map at top of clinics"><p>Clinics: map first, filters after, tappable rows below.</p></div>
+  </div>
+
+  <h2>QA</h2>
+  <ul>
+    <li>106 unit + 17 e2e green on Chromium and WebKit. New: link-code format tests, sync payload cannot carry answers, compare matrix e2e, and a standing test that every patient-facing content item carries at least one source (which is also what regenerates the source map).</li>
+  </ul>
+
+  <p class="footer">Repo <code>~/navigator</code> · sync <code>lib/sync.ts</code> + <code>supabase/migrations/</code> · compare <code>content/app/compare.ts</code> · UCSD survey <code>content/sources/ucsd-patient-resources.md</code>.</p>
+</main>
