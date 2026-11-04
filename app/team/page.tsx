@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import type { TeamEntry } from "../../lib/share";
 import { decodeShareCode, prioritize } from "../../lib/share";
-import { fetchJourney, isLinkCode, syncEnabled } from "../../lib/sync";
+import { fetchInbox, fetchJourney, isLinkCode, syncEnabled } from "../../lib/sync";
+
+const INBOX_KEY = "navigator.team-own-inbox.v1";
 import { journeyStages } from "../../lib/journey";
 import Icon from "../../components/icons";
 
@@ -39,10 +41,54 @@ export default function TeamPage() {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [added, setAdded] = useState(false);
+  const [ownInbox, setOwnInbox] = useState("");
+  const [inboxInput, setInboxInput] = useState("");
 
   useEffect(() => {
     setEntries(loadBoard());
+    try {
+      const ib = localStorage.getItem(INBOX_KEY);
+      if (ib) setOwnInbox(ib);
+    } catch {
+      /* fine */
+    }
   }, []);
+
+  async function pullInbox(inbox: string) {
+    const live = await fetchInbox(inbox);
+    if (live.length === 0) return 0;
+    setEntries((prev) => {
+      const byCode = new Map(prev.map((e) => [e.addedAt, e]));
+      for (const row of live) {
+        const existing = byCode.get(row.code);
+        byCode.set(row.code, {
+          label: existing?.label || row.nickname || row.code,
+          journey: row.journey,
+          addedAt: row.code,
+        });
+      }
+      const next = Array.from(byCode.values());
+      saveBoard(next);
+      return next;
+    });
+    return live.length;
+  }
+
+  async function connectInbox() {
+    const code = inboxInput.trim().toUpperCase();
+    if (!isLinkCode(code)) {
+      setError("Team codes look like ABC-123.");
+      return;
+    }
+    setError("");
+    setOwnInbox(code);
+    try {
+      localStorage.setItem(INBOX_KEY, code);
+    } catch {
+      /* fine */
+    }
+    await pullInbox(code);
+  }
 
   async function addCode() {
     // A short link code (ABC-123) pulls live from the sync service; a long
@@ -91,6 +137,7 @@ export default function TeamPage() {
 
   async function refreshAll() {
     if (!syncEnabled) return;
+    if (ownInbox) await pullInbox(ownInbox);
     const next = await Promise.all(
       entries.map(async (e) => {
         if (!isLinkCode(e.addedAt)) return e;
@@ -98,8 +145,13 @@ export default function TeamPage() {
         return live ? { ...e, journey: live.journey } : e;
       }),
     );
-    setEntries(next);
-    saveBoard(next);
+    setEntries((prev) => {
+      const byKey = new Map(prev.map((e) => [e.addedAt + e.label, e]));
+      for (const e of next) byKey.set(e.addedAt + e.label, e);
+      const merged = Array.from(byKey.values());
+      saveBoard(merged);
+      return merged;
+    });
   }
 
   const ordered = prioritize(entries);
@@ -113,6 +165,38 @@ export default function TeamPage() {
         nickname the patient chose: no answers, no diagnosis, nothing they didn't send. This board
         lives only in your browser.
       </p>
+
+      {syncEnabled && (
+        <div className="border-accent/40 bg-accent-tint/40 mt-6 rounded-xl border-[1.5px] p-4">
+          <p className="text-sm font-bold">Your team code</p>
+          <p className="text-muted text-xs">
+            Enter it once. Every patient who picked you in the app shows up here automatically on
+            each refresh; no per-patient codes needed.
+          </p>
+          {ownInbox ? (
+            <p className="mt-2 text-sm">
+              Connected as <strong>{ownInbox}</strong>{" "}
+              <button type="button" className="text-muted ml-2 text-xs underline" onClick={() => { setOwnInbox(""); try { localStorage.removeItem(INBOX_KEY); } catch {} }}>
+                change
+              </button>
+            </p>
+          ) : (
+            <div className="mt-2 flex gap-2">
+              <input
+                value={inboxInput}
+                onChange={(e) => setInboxInput(e.target.value)}
+                placeholder="ABC-123"
+                aria-label="Team code"
+                className="border-line bg-card min-h-10 flex-1 rounded-lg border px-3 text-sm"
+                onKeyDown={(e) => e.key === "Enter" && connectInbox()}
+              />
+              <button type="button" onClick={connectInbox} className="border-accent text-accent-ink rounded-lg border-[1.5px] px-3 text-sm font-bold">
+                Connect
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="mt-6 flex gap-2">
         <input
@@ -210,6 +294,9 @@ export default function TeamPage() {
                   {doneCount}/{journeyStages.length} · as of {e.journey.updated}
                 </span>
               </div>
+              {"riskLabel" in e && (e as TeamEntry & { riskLabel?: string }).riskLabel && (
+                <p className="text-muted mt-1 text-xs">Shared risk group: {(e as TeamEntry & { riskLabel?: string }).riskLabel}</p>
+              )}
               <div className="mt-2 text-sm">
                 {e.journey.done.length > 0 ? (
                   <span>

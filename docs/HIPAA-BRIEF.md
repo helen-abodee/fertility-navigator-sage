@@ -28,6 +28,21 @@ Required, roughly in order:
 
 None of this is prohibitive; it is a sequencing decision. The product's current design intentionally gets the full patient value and most of the clinician value without any of it.
 
+## How much data can we share without triggering HIPAA? (Helen's question)
+
+The surprising answer: **granularity is not the trigger. Custody is.**
+
+| Data | Patient sends it themselves (print, their own text/email, a code they hand over) | It passes through a server we run |
+|---|---|---|
+| Journey stages only | No HIPAA | HIPAA (business associate) |
+| Stages + risk group | No HIPAA | HIPAA |
+| Stages + options considered + coverage status | No HIPAA | HIPAA |
+| The entire results summary, answers and all | No HIPAA | HIPAA |
+
+So if social workers need MORE granular information in a no-BAA MVP, the lever is not shrinking the payload; it is keeping the patient as the sender. The product pattern for that is **per-field consent at the moment of sharing**: checkboxes like "also include my risk group," "include the options I'm considering," "include my coverage status," each off by default, each added to the printed summary and the share code only when ticked. Unlimited richness, zero HIPAA, because the patient is doing the sharing.
+
+The one-tap sync database is the opposite trade: minimal data, maximal convenience, but it IS our server in the middle, so real-patient use needs the BAA no matter how small the payload. Current status: it carries stages plus any ticked extras, and it is gated for demos and pilots until that agreement exists.
+
 ## Recommendation
 
 Ship the on-device care-team directory now (sample entries until City of Hope approves names). Bring the v2 check-in-code sync to Estella as a one-page proposal with this brief attached. Decide on an operating entity before signing anything.

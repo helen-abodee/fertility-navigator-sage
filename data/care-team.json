@@ -1,5 +1,23 @@
 [
-  { "id": "sw-sample-1", "name": "Sample Social Worker A (replace when the center approves names)", "role": "Oncology social worker", "contact": "555-0100" },
-  { "id": "sw-sample-2", "name": "Sample Social Worker B (replace when the center approves names)", "role": "AYA program social worker", "contact": "555-0101" },
-  { "id": "np-sample-1", "name": "Sample Survivorship NP (replace when the center approves names)", "role": "Survivorship nurse practitioner", "contact": "sample@example.org" }
+  {
+    "id": "sw-sample-1",
+    "name": "Sample Social Worker A (replace when the center approves names)",
+    "role": "Oncology social worker",
+    "contact": "555-0100",
+    "inbox": "SWA-742"
+  },
+  {
+    "id": "sw-sample-2",
+    "name": "Sample Social Worker B (replace when the center approves names)",
+    "role": "AYA program social worker",
+    "contact": "555-0101",
+    "inbox": "SWB-394"
+  },
+  {
+    "id": "np-sample-1",
+    "name": "Sample Survivorship NP (replace when the center approves names)",
+    "role": "Survivorship nurse practitioner",
+    "contact": "sample@example.org",
+    "inbox": "NPC-285"
+  }
 ]

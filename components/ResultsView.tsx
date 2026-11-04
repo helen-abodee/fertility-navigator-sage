@@ -186,7 +186,7 @@ export default function ResultsView({
           </section>
         )}
 
-        <JourneySection />
+        <JourneySection riskLabel={browsing ? undefined : risk.label} />
 
         <button
           type="button"

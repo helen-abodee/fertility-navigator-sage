@@ -141,3 +141,11 @@ IMPORTANT caveat: these are the references cited IN THE PAPER. The per-regimen p
 6. **Male version:** The tool is explicitly female-only. Is a male/testicular gonadotoxicity version planned, and would they collaborate on one? (Directly relevant to our product's male-fertility focus.)
 7. **Licensing/embedding:** Can third parties cite, link, deep-link, or embed CRISP (or consume its database via an API)? Is there a license, data-use agreement, or collaboration pathway — and who owns the IP (UCSD, the lab, CBCRP terms)?
 8. **Scope boundaries:** How should a downstream product handle the "Unknown" category and newer regimens (e.g., immunotherapy, targeted agents) that the 60-regimen set may not cover — and is expanding beyond the original cohort-seeded regimen list on the roadmap?
+
+## Added 2026-11-04: intake-triage question for the Nov 11 meeting
+
+9. When a patient decides they want to act, what intake criteria does your team use to
+   triage and fast-track oncofertility referrals (days until treatment starts, age,
+   regimen, payer)? We want to build a "ready to act" mini-intake that asks the same
+   questions and orders the patient's next steps the way your navigators would, and we
+   would rather mirror your triage logic than invent one.

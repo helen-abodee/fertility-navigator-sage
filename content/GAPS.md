@@ -19,6 +19,10 @@ Last reviewed: 2026-10-30. Things the product spec needs that the current source
 
 16. **LGBTQ+ family-formation legal module.** Helen interviewed an LGBTQ+ family-formation lawyer (2026-11-03). Decision: do NOT generate legal guidance from model knowledge; legal claims need an attorney-reviewed source document, exactly like the clinical risk module needed Hannah's. Shipped now (sourced): an "If you're LGBTQ+" coverage card citing SB 729's inclusive infertility definition and nondiscrimination clause, plus Men Having Babies in the aid list (D4 p.16). To request from the lawyer, as a reviewed document: donor agreement basics (known vs anonymous), parentage orders in California, surrogacy legality and process in CA, consent and disposition agreements for stored embryos when there is a partner (disposition disputes are the classic failure mode), and anything specific to trans patients' stored gametes and name/gender-marker changes. When the document arrives it becomes a cited content module with the attorney named as reviewer.
 
+## New (2026-11-04): "Ready to act" intake
+
+17. **Action-mode intake and fast-track recommendations.** Helen wants: when a patient says they want to move, ask a short set of triage questions (how soon treatment starts, how fast they want an appointment, travel radius, payer) and output prioritized next steps, possibly flagging urgency to the care team. Deliberately NOT built yet: the triage criteria should mirror what oncofertility navigators actually use, which is question 9 for the Dr. Su meeting (Nov 11). Build after that conversation.
+
 ## Blocking for checkpoint 2 (the one real-content path)
 
 1. **Which options fit which situations.** No document maps age / reproductive organs / treatment stage to the options that apply (for example: egg freezing requires time before treatment starts; ovarian tissue freezing can be done without stimulation; sperm banking before treatment). D4 lists the four service routes but not eligibility or timing logic. Need: the relevant ASCO/ASRM guideline text (D3 and D4 cite ASCO 2025, doi 10.1200/JCO-24-02782) or a document from Hannah/Estella.

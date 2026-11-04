@@ -25,19 +25,26 @@ function b64urlDecode(s: string): string | null {
   }
 }
 
-export function encodeShareCode(journey: Journey, nickname?: string): string {
-  const payload = {
+export function encodeShareCode(
+  journey: Journey,
+  nickname?: string,
+  extras?: { riskLabel?: string },
+): string {
+  const payload: Record<string, unknown> = {
     n: nickname ?? "",
     d: journey.done,
     o: journey.outcome,
     u: journey.updated,
   };
+  // Per-field, patient-chosen extras. Each is opt-in at the moment of sharing;
+  // nothing is ever included by default.
+  if (extras?.riskLabel) payload.r = extras.riskLabel.slice(0, 60);
   return PREFIX + b64urlEncode(JSON.stringify(payload));
 }
 
 const validStages = new Set(journeyStages.map((s) => s.id));
 
-export function decodeShareCode(code: string): { nickname: string; journey: Journey } | null {
+export function decodeShareCode(code: string): { nickname: string; journey: Journey; riskLabel?: string } | null {
   const trimmed = code.trim();
   if (!trimmed.startsWith(PREFIX)) return null;
   const raw = b64urlDecode(trimmed.slice(PREFIX.length));
@@ -51,6 +58,7 @@ export function decodeShareCode(code: string): { nickname: string; journey: Jour
     return {
       nickname: typeof p.n === "string" ? p.n.slice(0, 40) : "",
       journey: { done, outcome, updated: p.u.slice(0, 10) },
+      riskLabel: typeof p.r === "string" ? p.r.slice(0, 60) : undefined,
     };
   } catch {
     return null;

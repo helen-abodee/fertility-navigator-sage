@@ -16,6 +16,8 @@ import careTeam from "../data/care-team.json";
 import { encodeShareCode } from "../lib/share";
 import { isLinkCode, newLinkCode, pushJourney, syncEnabled } from "../lib/sync";
 
+const INBOX_KEY = "navigator.team-inbox.v1";
+
 const CONTACT_KEY = "navigator.team-contact.v1";
 
 function loadContact(): string {
@@ -47,7 +49,7 @@ function contactHref(contact: string, body: string): string {
  * shows up in the printed summary so the patient can hand their status to a
  * social worker or care team if they choose to.
  */
-export default function JourneySection() {
+export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
   const [journey, setJourney] = useState<Journey>(emptyJourney());
   const [contact, setContact] = useState("");
   const [editingContact, setEditingContact] = useState(false);
@@ -56,11 +58,20 @@ export default function JourneySection() {
   const [copied, setCopied] = useState(false);
   const [linkCode, setLinkCode] = useState("");
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "failed">("idle");
+  const [inbox, setInbox] = useState("");
+  const [teamName, setTeamName] = useState("");
+  const [shareRisk, setShareRisk] = useState(false);
 
   useEffect(() => {
     try {
       const existing = localStorage.getItem("navigator.sync-code.v1");
       if (existing && isLinkCode(existing)) setLinkCode(existing);
+      const ib = localStorage.getItem(INBOX_KEY);
+      if (ib) {
+        const parsed = JSON.parse(ib);
+        if (parsed?.inbox) setInbox(parsed.inbox);
+        if (parsed?.name) setTeamName(parsed.name);
+      }
     } catch {
       /* fine */
     }
@@ -78,7 +89,7 @@ export default function JourneySection() {
       }
     }
     setSendState("sending");
-    const ok = await pushJourney(code, journey);
+    const ok = await pushJourney(code, journey, undefined, inbox || undefined, shareRisk && riskLabel ? { riskLabel } : undefined);
     setSendState(ok ? "sent" : "failed");
     setTimeout(() => setSendState("idle"), 4000);
   }
@@ -144,6 +155,12 @@ export default function JourneySection() {
       <div className="border-line mt-4 border-t pt-4 print:hidden">
         {syncEnabled && (
           <div className="mb-3">
+            {riskLabel && (
+              <label className="text-muted mb-2 flex items-center gap-2 text-sm">
+                <input type="checkbox" checked={shareRisk} onChange={(e) => setShareRisk(e.target.checked)} />
+                Also include my risk group ({riskLabel})
+              </label>
+            )}
             <button
               type="button"
               onClick={sendToTeam}
@@ -156,16 +173,20 @@ export default function JourneySection() {
                   ? "Sent ✓"
                   : sendState === "failed"
                     ? "Couldn't send, tap to retry"
-                    : "Send my progress to my care team"}
+                    : teamName
+                      ? `Send my progress to ${teamName.split(" (")[0]}`
+                      : "Send my progress to my care team"}
             </button>
-            {linkCode && (
-              <p className="text-muted mt-1 text-xs">
-                Your care team sees it under code <strong>{linkCode}</strong>. Tell them once; after
-                that, every send updates automatically. Only your checklist travels.
-              </p>
-            )}
+            <p className="text-muted mt-1 text-xs">
+              {inbox
+                ? "Goes straight to your care team member's board. No codes to exchange."
+                : linkCode
+                  ? `Your care team sees it under code ${linkCode}. Pick your care team member below and even that step disappears.`
+                  : "Only your checklist travels, plus anything you tick above."}
+            </p>
           </div>
         )}
+        {!syncEnabled && (
         <button
           type="button"
           onClick={() => setShareCode(shareCode ? null : encodeShareCode(journey))}
@@ -174,7 +195,8 @@ export default function JourneySection() {
         >
           {shareCode ? "Hide my progress code" : "Share my progress with my care team"}
         </button>
-        {shareCode && (
+        )}
+        {!syncEnabled && shareCode && (
           <div className="bg-paper mb-3 rounded-xl p-3">
             <p className="text-sm">
               This code holds only your checklist above, nothing else. Text or email it to your
@@ -231,13 +253,22 @@ export default function JourneySection() {
               Pick your care team member, or add a number or email. Kept on this device only.
             </p>
             <div className="mt-2 flex flex-col gap-2">
-              {(careTeam as { id: string; name: string; role: string; contact: string }[]).map((m) => (
+              {(careTeam as { id: string; name: string; role: string; contact: string; inbox?: string }[]).map((m) => (
                 <button
                   key={m.id}
                   type="button"
                   onClick={() => {
                     setContact(m.contact);
                     saveContact(m.contact);
+                    if (m.inbox) {
+                      setInbox(m.inbox);
+                      setTeamName(m.name);
+                      try {
+                        localStorage.setItem(INBOX_KEY, JSON.stringify({ inbox: m.inbox, name: m.name }));
+                      } catch {
+                        /* fine */
+                      }
+                    }
                     setEditingContact(false);
                     setJustSaved(true);
                     setTimeout(() => setJustSaved(false), 2500);

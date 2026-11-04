@@ -32,14 +32,27 @@ export function isLinkCode(s: string): boolean {
   return /^[A-Z2-9]{3}-[A-Z2-9]{3}$/.test(s.trim().toUpperCase());
 }
 
-/** The wire payload is exactly the share code: stages, outcome, date, nothing else. */
-export function syncPayload(journey: Journey, nickname?: string): string {
-  return encodeShareCode(journey, nickname);
+/** The wire payload is exactly the share code: stages, outcome, date, plus
+ * only the extras the patient toggled on at share time. */
+export function syncPayload(journey: Journey, nickname?: string, extras?: { riskLabel?: string }): string {
+  return encodeShareCode(journey, nickname, extras);
 }
 
-export async function pushJourney(code: string, journey: Journey, nickname?: string): Promise<boolean> {
+export async function pushJourney(
+  code: string,
+  journey: Journey,
+  nickname?: string,
+  inbox?: string,
+  extras?: { riskLabel?: string },
+): Promise<boolean> {
   if (!syncEnabled) return false;
   try {
+    const row = {
+      code: code.toUpperCase(),
+      payload: syncPayload(journey, nickname, extras),
+      updated_at: new Date().toISOString(),
+      inbox: inbox && isLinkCode(inbox) ? inbox.toUpperCase() : null,
+    };
     const res = await fetch(`${SYNC_URL}/rest/v1/journey_sync?on_conflict=code`, {
       method: "POST",
       headers: {
@@ -48,11 +61,37 @@ export async function pushJourney(code: string, journey: Journey, nickname?: str
         "Content-Type": "application/json",
         Prefer: "resolution=merge-duplicates",
       },
-      body: JSON.stringify({ code: code.toUpperCase(), payload: syncPayload(journey), updated_at: new Date().toISOString() }),
+      body: JSON.stringify(row),
     });
     return res.ok;
   } catch {
     return false;
+  }
+}
+
+/** Everything patients sent into one care-team member's inbox. */
+export async function fetchInbox(
+  inbox: string,
+): Promise<{ code: string; nickname: string; journey: Journey; riskLabel?: string; updatedAt: string }[]> {
+  if (!syncEnabled) return [];
+  try {
+    const res = await fetch(
+      `${SYNC_URL}/rest/v1/journey_sync?inbox=eq.${encodeURIComponent(inbox.toUpperCase())}&select=code,payload,updated_at`,
+      { headers: { apikey: SYNC_KEY!, Authorization: `Bearer ${SYNC_KEY!}` } },
+    );
+    if (!res.ok) return [];
+    const rows = await res.json();
+    if (!Array.isArray(rows)) return [];
+    const out = [];
+    for (const r of rows) {
+      const decoded = decodeShareCode(r.payload);
+      if (decoded) {
+        out.push({ code: String(r.code), ...decoded, updatedAt: String(r.updated_at ?? "").slice(0, 10) });
+      }
+    }
+    return out;
+  } catch {
+    return [];
   }
 }
 
