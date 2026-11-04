@@ -1,0 +1,74 @@
+<title>Navigator HIPAA Brief</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root { --paper:#F6F3ED; --card:#FFFFFF; --ink:#283029; --muted:#5F6962; --line:#E0DDD4; --accent:#38654C; --accent-ink:#2C523D; --tint:#E2EBE2; --info:#2E5F86; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#1B201D; --card:#242B26; --ink:#E9E7DF; --muted:#A7B0A8; --line:#39423B; --accent:#8FBF9F; --accent-ink:#A5CDB2; --tint:#2C3A31; --info:#8DB8CF; } }
+  :root[data-theme="dark"] { --paper:#1B201D; --card:#242B26; --ink:#E9E7DF; --muted:#A7B0A8; --line:#39423B; --accent:#8FBF9F; --accent-ink:#A5CDB2; --tint:#2C3A31; --info:#8DB8CF; }
+  body { background:var(--paper); color:var(--ink); margin:0; font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:17px; line-height:1.65; }
+  main { max-width:760px; margin:0 auto; padding:48px 20px 96px; }
+  h1,h2 { font-family:Literata,Georgia,serif; font-weight:600; text-wrap:balance; }
+  h1 { font-size:1.9rem; margin:6px 0 2px; }
+  h2 { font-size:1.25rem; margin:38px 0 8px; }
+  p,li { max-width:70ch; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:.72rem; font-weight:700; color:var(--accent-ink); margin:0; }
+  .sub { color:var(--muted); margin-top:2px; }
+  .rule { background:color-mix(in srgb, var(--info) 9%, var(--card)); border:1.5px solid color-mix(in srgb, var(--info) 35%, var(--card)); border-radius:12px; padding:16px 20px; font-size:1.05rem; }
+  ol,ul { padding-left:22px; } li { margin:7px 0; }
+  .table-wrap { overflow-x:auto; background:var(--card); border:1px solid var(--line); border-radius:10px; margin:14px 0; }
+  table { border-collapse:collapse; width:100%; font-size:.9rem; }
+  th { text-align:left; font-size:.68rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); padding:10px 12px; border-bottom:1px solid var(--ink); }
+  td { padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  .ok { color:var(--accent-ink); font-weight:700; }
+  .no { color:#85402e; font-weight:700; }
+  .footer { margin-top:48px; padding-top:14px; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted); }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>HIPAA, in plain terms</h1>
+  <p class="sub">What the product can do today, what would trigger HIPAA, and what that would require. November 4, 2026.</p>
+
+  <div class="rule" style="margin-top:18px">
+    <strong>The one-sentence rule:</strong> HIPAA binds providers, health plans, and anyone handling patient data on their behalf. It does not bind patients. A patient doing anything with their own information, including texting their progress to a social worker, can never violate HIPAA.
+  </div>
+
+  <h2>What we do today with zero HIPAA exposure</h2>
+  <ul>
+    <li>All survey answers live and die on the patient's device. No account, no server, no analytics on answers.</li>
+    <li>The patient's progress checklist is shared only by the patient: printed with their summary, sent from their own phone, or handed over as a code. The clinician's board decodes codes in the clinician's own browser.</li>
+    <li>A built-in care-team directory (public staff contact info, like a hospital website footer) lets the patient pick their social worker; the choice is stored on the device. The real gate on listing actual names is the center's branding permission, not HIPAA.</li>
+    <li>Whatever a social worker keeps after a patient shares with them falls under the health system's existing HIPAA program, as with any patient text or voicemail. That is their normal world, not a new obligation created by this tool.</li>
+  </ul>
+
+  <h2>How much data can be shared without triggering HIPAA?</h2>
+  <p><strong>Granularity is not the trigger. Custody is.</strong></p>
+  <div class="table-wrap"><table>
+    <tr><th>Data being shared with the care team</th><th>Patient sends it themselves</th><th>It passes through a server we run</th></tr>
+    <tr><td>Journey checklist stages only</td><td class="ok">No HIPAA</td><td class="no">HIPAA</td></tr>
+    <tr><td>Stages + risk group</td><td class="ok">No HIPAA</td><td class="no">HIPAA</td></tr>
+    <tr><td>Stages + options considered + coverage status</td><td class="ok">No HIPAA</td><td class="no">HIPAA</td></tr>
+    <tr><td>The entire results summary, answers and all</td><td class="ok">No HIPAA</td><td class="no">HIPAA</td></tr>
+  </table></div>
+  <p>So if the social work team wants richer information in a no-agreement MVP, the lever is keeping the patient as the sender, not shrinking the data. The product pattern is per-field consent at the moment of sharing: checkboxes like "also include my risk group," each off by default. Unlimited richness, zero HIPAA, because the patient does the sharing.</p>
+
+  <h2>What triggers HIPAA for us</h2>
+  <p>The moment any server we operate receives identifiable patient information in order to deliver it to the care team, we become a <strong>business associate</strong> of the health system. That includes a send button routing through our backend, a database linking patients to social workers with progress attached, or push notifications of stage changes. Pseudonyms and short codes do not escape it, and the smallness of the payload does not matter. Vendors in the chain (a hosting provider, an email/SMS API) then need agreements too.</p>
+
+  <h2>If we cross that line on purpose</h2>
+  <ol>
+    <li>A business associate agreement (BAA) between the health system and an operating legal entity on our side.</li>
+    <li>HIPAA-eligible hosting with its own BAA (Supabase, AWS, and GCP offer this on specific tiers).</li>
+    <li>Safeguards: encryption in transit and at rest, real staff authentication, role-based access, audit logs, minimum-necessary data design, retention policy, breach notification within 60 days.</li>
+    <li>The health system's own security and privacy review, possibly IRB if the data is studied.</li>
+  </ol>
+  <p>None of this is prohibitive; it is sequencing. The current one-tap sync feature exists behind a flag with minimal, structurally limited data (the client cannot send survey answers), and is used for demos and pilots with test data until the agreement exists.</p>
+
+  <h2>Current posture</h2>
+  <ul>
+    <li><strong>Live and HIPAA-free:</strong> the entire patient experience, printed summaries, patient-sent codes, the clinician board reading them.</li>
+    <li><strong>Built, gated, pre-BAA:</strong> one-tap send into a pilot database (stages plus explicitly ticked extras only), one-code team inboxes.</li>
+    <li><strong>Designed, not built:</strong> the full staff platform (SSO, caseloads, audit) in docs/DATA-ARCHITECTURE.md.</li>
+  </ul>
+
+  <p class="footer">Companion documents in the repo: docs/HIPAA-BRIEF.md (this content), docs/DATA-ARCHITECTURE.md (the three-tier design), PRIVACY.md (the patient-facing promise). Unbranded pending the center's written permission.</p>
+</main>
