@@ -47,12 +47,14 @@ export async function pushJourney(
 ): Promise<boolean> {
   if (!syncEnabled) return false;
   try {
-    const row = {
+    const row: Record<string, string> = {
       code: code.toUpperCase(),
       payload: syncPayload(journey, nickname, extras),
       updated_at: new Date().toISOString(),
-      inbox: inbox && isLinkCode(inbox) ? inbox.toUpperCase() : null,
     };
+    // Only include the inbox field when routing to one, so databases that
+    // haven't run migration 0002 yet still accept plain sends.
+    if (inbox && isLinkCode(inbox)) row.inbox = inbox.toUpperCase();
     const res = await fetch(`${SYNC_URL}/rest/v1/journey_sync?on_conflict=code`, {
       method: "POST",
       headers: {
