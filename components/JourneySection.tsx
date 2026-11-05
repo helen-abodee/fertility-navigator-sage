@@ -15,6 +15,7 @@ import Icon from "./icons";
 import careTeam from "../data/care-team.json";
 import { encodeShareCode } from "../lib/share";
 import { isLinkCode, newLinkCode, pushJourney, syncEnabled } from "../lib/sync";
+import { contactHref } from "../lib/contact";
 
 const INBOX_KEY = "navigator.team-inbox.v1";
 
@@ -34,14 +35,6 @@ function saveContact(v: string) {
   } catch {
     /* in-memory only */
   }
-}
-
-/** sms: for phone-looking contacts, mailto: otherwise. Patient-initiated,
- * through their own messenger; nothing routes through us. */
-function contactHref(contact: string, body: string): string {
-  const isPhone = /^[+\d][\d\s().-]{6,}$/.test(contact.trim());
-  if (isPhone) return `sms:${contact.replace(/[^+\d]/g, "")}?&body=${encodeURIComponent(body)}`;
-  return `mailto:${contact.trim()}?subject=${encodeURIComponent("A question about fertility preservation")}&body=${encodeURIComponent(body)}`;
 }
 
 /**

@@ -163,6 +163,7 @@ export default function QuestionsPage() {
         stage={answers.stage}
         feelings={answers.feelings}
         age={answers.age}
+        anatomy={answers.anatomy}
         zip={answers.zip}
         browsing={answers.entry === "exploring"}
         onStartOver={startOver}

@@ -149,3 +149,8 @@ IMPORTANT caveat: these are the references cited IN THE PAPER. The per-regimen p
    regimen, payer)? We want to build a "ready to act" mini-intake that asks the same
    questions and orders the patient's next steps the way your navigators would, and we
    would rather mirror your triage logic than invent one.
+
+10. Should a patient-facing tool include "getting ready to preserve" lifestyle content at all
+    (heat, smoking, testosterone, cannabis effects on sample and egg quality)? We built it,
+    sourced to ASRM and Cleveland Clinic patient pages, but want your read on whether it helps
+    preparation or adds stress for newly diagnosed patients.

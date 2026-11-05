@@ -29,11 +29,11 @@ export default function Cite({ citations }: { citations: Citation[] }) {
     <>
       <details className="mt-1 print:hidden">
         <summary className="text-muted cursor-pointer list-none text-xs underline decoration-dotted">
-          Sources
+          Where this comes from
         </summary>
         <p className="text-muted mt-1 text-xs">{rendered}</p>
       </details>
-      <p className="text-muted hidden text-xs print:block">Sources: {rendered}</p>
+      <p className="text-muted hidden text-xs print:block">Where this comes from: {rendered}</p>
     </>
   );
 }

@@ -15,6 +15,7 @@ import CostEstimator from "./CostEstimator";
 import CompareTab from "./CompareTab";
 import CoverageChecker from "./CoverageChecker";
 import ReadMore from "./ReadMore";
+import ReachOut from "./ReachOut";
 import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
@@ -25,8 +26,8 @@ type Tab = "start" | "options" | "compare" | "money" | "clinics" | "health";
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: "start", label: "Start here", icon: "compass" },
   { id: "options", label: "Options", icon: "egg" },
-  { id: "compare", label: "Compare", icon: "clipboard" },
   { id: "money", label: "Paying for it", icon: "dollar" },
+  { id: "compare", label: "Compare", icon: "clipboard" },
   { id: "clinics", label: "Clinics", icon: "door" },
   { id: "health", label: "Health", icon: "sprout" },
 ];
@@ -78,6 +79,7 @@ export default function ResultsView({
   stage,
   feelings,
   age,
+  anatomy,
   zip,
   browsing,
   onStartOver,
@@ -89,6 +91,7 @@ export default function ResultsView({
   stage?: TreatmentStage;
   feelings?: FeelingsAboutChildren;
   age?: number;
+  anatomy?: Answers["anatomy"];
   zip?: string | null;
   browsing?: boolean;
   onStartOver: () => void;
@@ -98,6 +101,7 @@ export default function ResultsView({
   const [reflecting, setReflecting] = useState(false);
   const [costOption, setCostOption] = useState<PreservationOption | null>(null);
   const [visited, setVisited] = useState<Tab[]>(["start"]);
+  const [panel, setPanel] = useState<"progress" | "reach" | null>(null);
   const moneyUnlocked = browsing || feelings !== "no";
   const activeTabs = tabs.filter((t) => t.id !== "money" || moneyUnlocked);
 
@@ -124,10 +128,30 @@ export default function ResultsView({
     return <OptionDetail option={openOption} onClose={() => setOpenOption(null)} />;
   }
 
+  if (panel === "reach") {
+    return <ReachOut clinics={clinics} zip={zip} stage={stage} onClose={() => setPanel(null)} />;
+  }
+
+  if (panel === "progress") {
+    return (
+      <div className="bg-paper fixed inset-0 z-50 overflow-y-auto">
+        <div className="mx-auto flex min-h-screen w-full max-w-md flex-col gap-4 px-6 py-6">
+          <button type="button" onClick={() => setPanel(null)} className="text-accent-ink -ml-2 self-start rounded-lg px-2 py-2 text-sm font-bold">
+            &larr; Back
+          </button>
+          <JourneySection riskLabel={browsing ? undefined : risk.label} />
+          <button type="button" onClick={() => setPanel(null)} className="border-line bg-card min-h-12 rounded-xl border px-4 py-3 font-bold">
+            Back
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const show = (t: Tab) => (tab === t ? "" : "hidden print:block");
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-col gap-6 px-6 pt-6 pb-10">
+    <main className="mx-auto flex w-full max-w-md flex-col gap-6 px-6 pt-6 pb-28">
       <header>
         <h1 className="text-2xl">
           {browsing
@@ -185,8 +209,6 @@ export default function ResultsView({
             </span>
           </section>
         )}
-
-        <JourneySection riskLabel={browsing ? undefined : risk.label} />
 
         <button
           type="button"
@@ -335,13 +357,13 @@ export default function ResultsView({
         </div>
 
         {results.aid.length > 0 && (() => {
-          const answersForFit: Answers = { age, stage, anatomy: undefined };
+          const answersForFit: Answers = { age, stage, anatomy };
           const checked = results.aid.map((a) => ({ a, r: aidFit(a, { ...answersForFit }) }));
           const mayFit = checked.filter((x) => x.r.fit === "may_fit");
           const unlikely = checked.filter((x) => x.r.fit === "unlikely");
           return (
             <section>
-              <h2 className="text-xl">Help paying for it</h2>
+              <h2 className="text-xl">Financial aid programs</h2>
               <div className="mt-2">
                 <AskTeam text="You don't have to sort these alone. Social workers connect patients to these programs every week; ask yours to help you apply." />
               </div>
@@ -352,15 +374,16 @@ export default function ResultsView({
               <div className="mt-3 flex flex-col gap-3">
                 {mayFit.map(({ a }) => (
                   <div key={a.id} className="border-line bg-card rounded-xl border p-4">
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start justify-between gap-3">
                       <p className="font-bold">
                         <a href={a.url} target="_blank" rel="noreferrer" className="underline">{a.name}</a>
                       </p>
-                      <span className="bg-accent-tint text-accent-ink rounded-full px-2.5 py-0.5 text-xs font-bold whitespace-nowrap">May fit you</span>
+                      <p className="text-accent-ink text-right text-sm leading-tight font-bold whitespace-nowrap" style={{ fontVariantNumeric: "tabular-nums" }}>
+                        {a.cap === "not published" ? "amount varies" : a.cap}
+                      </p>
                     </div>
                     <p className="text-[0.95rem]">{a.what}</p>
                     <p className="text-muted text-sm">Who it's for: {a.eligibility}</p>
-                    <p className="text-muted text-sm">Amount: {a.cap}</p>
                     {a.payUpfront && (
                       <p className="text-muted text-sm">You may need to pay first and be paid back.</p>
                     )}
@@ -458,6 +481,10 @@ export default function ResultsView({
         </button>
       )}
 
+      <div className="hidden print:block">
+        <JourneySection riskLabel={browsing ? undefined : risk.label} />
+      </div>
+
       <footer className="border-line mt-2 flex flex-col gap-4 border-t pt-5">
         <button
           type="button"
@@ -482,6 +509,25 @@ export default function ResultsView({
           <a className="underline" href="/privacy">Privacy policy</a>
         </p>
       </footer>
+      <nav
+        className="border-line bg-card fixed right-0 bottom-0 left-0 z-20 border-t print:hidden"
+        aria-label="Quick actions"
+      >
+        <div className="mx-auto grid max-w-md grid-cols-3">
+          <button type="button" onClick={() => setPanel("progress")} className="flex flex-col items-center gap-0.5 py-2.5">
+            <span className="text-accent-ink"><Icon name="sprout" size={20} /></span>
+            <span className="text-[0.68rem] font-bold">My progress</span>
+          </button>
+          <button type="button" onClick={() => setPanel("reach")} className="flex flex-col items-center gap-0.5 py-2.5">
+            <span className="text-accent-ink"><Icon name="heart" size={20} /></span>
+            <span className="text-[0.68rem] font-bold">Reach out</span>
+          </button>
+          <button type="button" onClick={downloadSummary} className="flex flex-col items-center gap-0.5 py-2.5">
+            <span className="text-accent-ink"><Icon name="clipboard" size={20} /></span>
+            <span className="text-[0.68rem] font-bold">My summary</span>
+          </button>
+        </div>
+      </nav>
     </main>
   );
 }
