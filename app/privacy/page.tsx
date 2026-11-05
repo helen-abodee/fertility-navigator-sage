@@ -4,7 +4,7 @@ export default function PrivacyPage() {
   return (
     <main className="mx-auto max-w-md px-6 py-10">
       <h1 className="text-3xl">How this tool protects your privacy</h1>
-      <p className="text-muted mt-1 text-sm">Last reviewed November 1, 2026</p>
+      <p className="text-muted mt-1 text-sm">Last reviewed November 5, 2026</p>
 
       <div className="mt-6 flex flex-col gap-5">
         <section>
@@ -50,6 +50,29 @@ export default function PrivacyPage() {
           <p>
             We cannot see your answers, your age, your diagnosis, or your results, because they are
             never sent to us.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-lg">"Send my progress" is the one thing that leaves, and only when you tap it</h2>
+          <p>
+            If you choose to send your progress to your care team, exactly one thing travels: your
+            checklist from "Where I am with this" (which steps you checked, where you landed, the
+            date), plus anything you specifically tick to include, like your risk group. It is
+            stored in a secure database under a short code so your care team can see it. Your
+            survey answers, diagnosis, age, and ZIP code are never part of it; the app is built so
+            they cannot be sent.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-lg">Where HIPAA fits in</h2>
+          <p>
+            HIPAA is the law that governs how health care providers and insurers handle your
+            information. It binds them, not you: sharing your own information is always your right
+            and never a violation. This tool is not run by your health care provider, and your
+            answers never reach us or them, so there is nothing here for HIPAA to restrict. When
+            you share your summary or send your progress, you are the one doing the sharing, which
+            the law fully allows. Once your care team receives it, they protect it under their own
+            HIPAA obligations, the same as anything you tell them.
           </p>
         </section>
         <section>
