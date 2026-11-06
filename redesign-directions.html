@@ -1,0 +1,133 @@
+<title>Navigator Redesign Directions</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@500&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;600&family=Public+Sans:wght@400;600;700&family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root { --paper:#F6F3ED; --card:#FFFFFF; --ink:#283029; --muted:#5F6962; --line:#E0DDD4; --accent:#38654C; --accent-ink:#2C523D; --tint:#E2EBE2; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#1B201D; --card:#242B26; --ink:#E9E7DF; --muted:#A7B0A8; --line:#39423B; --accent:#8FBF9F; --accent-ink:#A5CDB2; --tint:#2C3A31; } }
+  :root[data-theme="dark"] { --paper:#1B201D; --card:#242B26; --ink:#E9E7DF; --muted:#A7B0A8; --line:#39423B; --accent:#8FBF9F; --accent-ink:#A5CDB2; --tint:#2C3A31; }
+  body { background:var(--paper); color:var(--ink); margin:0; font-family:"Atkinson Hyperlegible",Arial,sans-serif; font-size:17px; line-height:1.6; }
+  main { max-width:1120px; margin:0 auto; padding:48px 20px 96px; }
+  h1,h2,h3 { font-family:Literata,Georgia,serif; font-weight:600; text-wrap:balance; }
+  h1 { font-size:2rem; margin:6px 0 2px; }
+  h2 { font-size:1.35rem; margin:44px 0 10px; }
+  p { max-width:72ch; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:.72rem; font-weight:700; color:var(--accent-ink); margin:0; }
+  .sub { color:var(--muted); margin-top:2px; }
+  .finding { background:var(--card); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:12px; padding:16px 20px; margin:18px 0; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:26px; margin-top:20px; }
+  .dir { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px; }
+  .dir h2 { margin:0 0 4px; }
+  .dir p.desc { font-size:.92rem; color:var(--muted); min-height:6.5em; }
+  .rec { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; background:var(--accent); color:var(--card); border-radius:99px; padding:3px 10px; margin-left:6px; vertical-align:3px; }
+  .phone { border-radius:26px; border:1px solid rgba(0,0,0,.14); box-shadow:0 10px 26px rgba(0,0,0,.12); padding:18px 16px 20px; max-width:320px; margin:0 auto; }
+  ul { padding-left:22px; } li { margin:6px 0; }
+  code { background:var(--tint); border-radius:4px; padding:1px 5px; font-size:.88em; }
+  .footer { margin-top:56px; padding-top:14px; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted); }
+
+  /* Direction 1: Clinical Calm */
+  .d1 { background:#FAFAF8; color:#1C2126; font-family:Figtree,Arial,sans-serif; }
+  .d1 .q { font-weight:700; font-size:1.25rem; letter-spacing:-0.01em; }
+  .d1 .opt { background:#FFFFFF; border:1px solid #E7E8E4; border-radius:10px; padding:13px 14px; font-weight:600; font-size:.95rem; margin-top:8px; }
+  .d1 .opt.sel { border-color:#4F5D9E; box-shadow:0 0 0 1px #4F5D9E inset; }
+  .d1 .spine { display:flex; gap:4px; margin-bottom:14px; }
+  .d1 .spine span { height:4px; flex:1; border-radius:2px; background:#E7E8E4; }
+  .d1 .spine span.on { background:#4F5D9E; }
+  .d1 .num { font-family:"IBM Plex Mono",monospace; font-weight:500; color:#4F5D9E; }
+  .d1 .chip { font-size:.68rem; font-weight:700; color:#4F5D9E; background:#EDEFF7; border-radius:99px; padding:3px 9px; }
+
+  /* Direction 2: Quiet Night */
+  .d2 { background:#101726; color:#F2F3F0; font-family:Inter,Arial,sans-serif; }
+  .d2 .q { font-family:Fraunces,Georgia,serif; font-weight:600; font-size:1.3rem; }
+  .d2 .opt { background:#19223466; border:1px solid #2A3650; border-radius:12px; padding:13px 14px; font-weight:600; font-size:.95rem; margin-top:8px; }
+  .d2 .opt.sel { border-color:#7FA8E8; box-shadow:0 0 14px #7FA8E833; }
+  .d2 .ring { width:74px; height:74px; border-radius:50%; border:5px solid #2A3650; border-top-color:#7FA8E8; border-right-color:#7FA8E8; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:.62rem; text-align:center; color:#AEB9CE; padding:8px; }
+  .d2 .muted2 { color:#8E99AF; font-size:.82rem; }
+
+  /* Direction 3: Editorial Warmth */
+  .d3 { background:#FDFCFA; color:#26221E; font-family:"Public Sans",Arial,sans-serif; }
+  .d3 .band { background:#F6F0E6; border-radius:12px; padding:10px 12px; margin-bottom:12px; font-size:.8rem; color:#6E6356; }
+  .d3 .q { font-family:Fraunces,Georgia,serif; font-weight:600; font-size:1.35rem; letter-spacing:-0.02em; }
+  .d3 .opt { background:#FFFFFF; border:1.5px solid #EAE4DA; border-radius:12px; padding:13px 14px; font-weight:600; font-size:.95rem; margin-top:8px; }
+  .d3 .opt.sel { border-color:#6D3B5D; background:#F7EFF4; }
+  .d3 .invert { background:#26221E; color:#FDFCFA; border-radius:12px; padding:16px; font-family:Fraunces,Georgia,serif; font-size:1.15rem; margin-top:12px; }
+  .d3 .plum { color:#6D3B5D; font-weight:700; }
+
+  .cliniccard { background:#FFFFFF; border:1px solid #E7E8E4; border-radius:12px; padding:12px; color:#1C2126; font-family:Figtree,Arial,sans-serif; display:flex; gap:10px; max-width:320px; margin:10px auto 0; }
+  .cliniccard .mono { width:46px; height:46px; border-radius:10px; background:#EDEFF7; color:#4F5D9E; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1rem; flex:none; }
+  .cliniccard .map { width:62px; height:46px; border-radius:8px; background:linear-gradient(135deg,#DDE7DC,#C8D8E8); flex:none; display:flex; align-items:center; justify-content:center; font-size:.55rem; color:#5F6962; }
+</style>
+<main>
+  <p class="eyebrow">Fertility Preservation Navigator</p>
+  <h1>Redesign directions</h1>
+  <p class="sub">From a survey of Oura, Flo, Clue, Maven, One Medical, Headspace, Calm, Natural Cycles, K Health, and Zocdoc. Full research with URLs: <code>docs/REDESIGN-RESEARCH.md</code>.</p>
+
+  <div class="finding">
+    <p style="margin:6px 0"><strong>The honest finding first:</strong> cream and serif aren't the sin. Oura's brand ground is literally warm cream with a serif display, and One Medical chose its serif on purpose. What reads "AI-generated" is indecision: cream washed over everything, a default-tracked generic serif, and a green accent doing trust work that real health brands do with evidence (study counts, guideline badges, institution names). All three directions below fix the execution; they differ in temperament.</p>
+  </div>
+
+  <div class="grid">
+    <section class="dir">
+      <h2>1 · Clinical Calm</h2>
+      <p class="desc">Clue and Maven's lineage. Near-white ground, pure white hairline cards, one desaturated indigo, a single geometric sans (Figtree) with a mono face reserved for numbers and evidence chips. No photography anywhere. The most "professional product" of the three; coolest in temperature.</p>
+      <div class="phone d1">
+        <div class="spine"><span class="on"></span><span class="on"></span><span></span></div>
+        <div class="chip">EVIDENCE: UCSD CRISP · ROTZ 2024</div>
+        <p class="q" style="margin:10px 0 2px">Where are you with cancer treatment?</p>
+        <div class="opt sel">I have a treatment plan</div>
+        <div class="opt">I finished treatment</div>
+        <p style="font-size:.8rem;color:#687076;margin:10px 0 0">Egg freezing cycle <span class="num">$12,400</span> · storage <span class="num">$200–500</span>/yr</p>
+      </div>
+    </section>
+
+    <section class="dir">
+      <h2>2 · Quiet Night</h2>
+      <p class="desc">Oura and Calm's lineage, dark-first: built for the 1 a.m. research session this audience actually has. Deep blue-black, soft-glow blue accent, Fraunces display over Inter. Signature: a three-arc ring for survey progress whose center is always a sentence, never a score. Boldest; least like anything else in oncofertility.</p>
+      <div class="phone d2">
+        <div class="ring">section 2 of 3</div>
+        <p class="q" style="text-align:center;margin:4px 0">How do you feel about children, someday?</p>
+        <div class="opt sel">Maybe</div>
+        <div class="opt">I'm not sure</div>
+        <p class="muted2" style="text-align:center;margin-top:10px">No wrong answers. Unsure is a real place to land.</p>
+      </div>
+    </section>
+
+    <section class="dir">
+      <h2>3 · Editorial Warmth, Done Right<span class="rec">Recommended</span></h2>
+      <p class="desc">One Medical's lineage. Keeps your warmth instinct but confines cream to one section band on paper-white; Fraunces tightened like a magazine over Public Sans; deep plum replaces green. Signature: ink-inversion moments where the screen's single most important sentence becomes quiet display type. Your three-section mood system survives intact.</p>
+      <div class="phone d3">
+        <div class="band">SECTION 2 · CHILDREN, SOMEDAY</div>
+        <p class="q" style="margin:0 0 4px">How do you feel about having children someday?</p>
+        <div class="opt sel">Maybe</div>
+        <div class="opt">I'm not sure</div>
+        <div class="invert">You have <span class="plum" style="color:#C99CB8">time to decide</span>, and both answers stay real.</div>
+      </div>
+    </section>
+  </div>
+
+  <h2>Why 3 is the recommendation</h2>
+  <p>It cures the exact complaint (all-over cream, generic-feeling type, green-does-everything) without discarding what's working: the warm section-2 mood your testers will meet at the most emotional question, the milestone system, and the existing content design. Direction 1 is the safe pick if you want maximum clinical credibility for the Dr. Su and mentor meetings; direction 2 is the memorable pick but commits the whole product to a dark identity. All three keep WCAG AA and the anti-anxiety rules.</p>
+
+  <h2>Clinic pictures: the licensing reality</h2>
+  <ul>
+    <li><strong>Scraping clinic sites' photos is out</strong>: their photos are copyrighted, and we'd be burning relationships with the exact clinics we want as partners.</li>
+    <li><strong>Google Places photos are technically allowed</strong> in third-party apps, but require per-photo attribution, a Google Maps linkback, no caching, and they're unart-directed user shots (parking lots, waiting rooms), which would undermine the redesign.</li>
+    <li><strong>No fertility clinic we checked publishes a press kit.</strong></li>
+    <li><strong>The credible plan</strong>: ship designed clinic cards now (monogram mark + a small live map thumbnail with attribution + the structured facts: distance, oncofertility services, tap-to-call), and send all 17 clinics a short permission request for 2 or 3 photos. Swap real photos in as permissions arrive; a permissioned photo also doubles as the start of a partnership conversation. Mock below.</li>
+  </ul>
+  <div class="cliniccard">
+    <div class="mono">HR</div>
+    <div class="map">map thumb</div>
+    <div style="font-size:.8rem"><strong>HRC Fertility</strong><br><span style="color:#687076">Pasadena · 3 mi · oncofertility · tap to call</span></div>
+  </div>
+
+  <h2>What changes first (impact order)</h2>
+  <ol>
+    <li>Ground and surfaces: paper-white base, cream demoted to section bands (kills the biggest "AI" tell in one move).</li>
+    <li>Type discipline: tighten the display face's tracking and size jumps; mono or tabular figures for every number.</li>
+    <li>Evidence as a visual element: small "UCSD CRISP · ASCO 2025" chips where trust matters, instead of green doing all the work.</li>
+    <li>Accent swap per the chosen direction; section moods re-tuned to it.</li>
+    <li>Clinic cards redesigned (monogram + map thumb + facts), photo permissions letter out.</li>
+    <li>Micro-polish: consistent corner radii, hairline borders, one shadow level.</li>
+  </ol>
+
+  <p class="footer">Pick a direction (or a blend) and I'll implement it behind the scenes against the full app, with before/after screens for your review. Research with sources: <code>docs/REDESIGN-RESEARCH.md</code>.</p>
+</main>
