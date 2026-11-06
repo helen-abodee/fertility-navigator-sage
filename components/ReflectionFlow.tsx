@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { reflectionAttribution, reflectionIntro, reflectionSteps } from "../content/app/reflection";
 import Cite from "./Cite";
+import { track } from "../lib/analytics";
 import Icon from "./icons";
 
 /**
@@ -147,7 +148,7 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
         <Cite citations={s.citations} />
         <button
           type="button"
-          onClick={() => (last ? onDone() : setStep(step + 1))}
+          onClick={() => { if (last) { track("reflection_complete"); onDone(); } else setStep(step + 1); }}
           className="bg-accent text-accent-contrast mt-3 min-h-14 w-full rounded-xl px-6 py-4 text-lg font-bold"
         >
           {last ? "I've thought about it, keep going" : "Next thought"}

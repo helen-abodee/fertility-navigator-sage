@@ -10,7 +10,7 @@ Last reviewed: November 5, 2026.
 
 **Your ZIP code never leaves your phone.** If you enter a ZIP code, it is used only to measure the distance to clinics on the map, and only on your device.
 
-**No trackers.** This site has no advertising trackers, no social media pixels, and no third-party analytics SDKs. If we ever add usage analytics, they will count page views only and will never receive any of your answers.
+**No trackers, and only anonymous usage events.** This site has no advertising trackers, no social media pixels, and no third-party advertising SDKs. It records anonymous usage events (a screen opened, a feature used) with a random token not linked to you; by design these events cannot contain your answers, diagnosis, results, or which specific content you viewed.
 
 **What we can see:** nothing about you. We cannot see your answers, your age, your diagnosis, or your results, because they are never sent to us.
 

@@ -52,10 +52,12 @@ export default function PrivacyPage() {
             by you.
           </p>
           <p className="mt-2">
-            <strong>Technical information.</strong> The Service does not use advertising trackers,
-            social media pixels, or third-party advertising or analytics SDKs. If aggregate,
-            page-level usage analytics are introduced, they will not receive survey responses or
-            results.
+            <strong>Usage events.</strong> The Service records anonymous usage events, such as a
+            screen being opened or a feature being used, together with a random session token that
+            is not linked to your name, contact information, or any account. These events are
+            restricted by design to a fixed list that cannot describe your answers, diagnosis,
+            results, or which specific content you viewed. The Service does not use advertising
+            trackers, social media pixels, or third-party advertising SDKs.
           </p>
         </section>
 

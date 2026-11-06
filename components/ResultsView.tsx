@@ -16,6 +16,7 @@ import CompareTab from "./CompareTab";
 import CoverageChecker from "./CoverageChecker";
 import ReadMore from "./ReadMore";
 import ReachOut from "./ReachOut";
+import { track } from "../lib/analytics";
 import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
@@ -106,6 +107,8 @@ export default function ResultsView({
   const activeTabs = tabs.filter((t) => t.id !== "money" || moneyUnlocked);
 
   function goTab(next: Tab) {
+    track("tab_viewed");
+    if (next === "compare") track("compare_used");
     setTab(next);
     setVisited((v) => (v.includes(next) ? v : [...v, next]));
     window.scrollTo({ top: 0 });
@@ -113,6 +116,7 @@ export default function ResultsView({
   const nextTab = activeTabs[activeTabs.findIndex((t) => t.id === tab) + 1];
 
   function downloadSummary() {
+    track("summary_downloaded");
     setTimeout(() => window.print(), 50);
   }
 
@@ -272,7 +276,7 @@ export default function ResultsView({
             <h2 className="text-xl">Your options</h2>
             {results.options.map((o) => (
               <div key={o.id}>
-                <OptionRow option={o} onOpen={() => setOpenOption(o)} />
+                <OptionRow option={o} onOpen={() => { track("option_opened"); setOpenOption(o); }} />
                 <OptionPrint option={o} />
               </div>
             ))}
@@ -441,7 +445,13 @@ export default function ResultsView({
                     {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
                     {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
                     <ReadMore links={h.readMore} />
-                    <Cite citations={h.citations} />
+                    {h.readMore && h.readMore.length > 0 ? (
+                      <div className="hidden print:block">
+                        <Cite citations={h.citations} />
+                      </div>
+                    ) : (
+                      <Cite citations={h.citations} />
+                    )}
                   </div>
                 </div>
               ))}
@@ -462,7 +472,13 @@ export default function ResultsView({
                     {h.mechanism && <p className="mt-1 text-[0.95rem]">{h.mechanism}</p>}
                     {h.caveat && <p className="text-muted mt-1 text-sm">{h.caveat}</p>}
                     <ReadMore links={h.readMore} />
-                    <Cite citations={h.citations} />
+                    {h.readMore && h.readMore.length > 0 ? (
+                      <div className="hidden print:block">
+                        <Cite citations={h.citations} />
+                      </div>
+                    ) : (
+                      <Cite citations={h.citations} />
+                    )}
                   </div>
                 </div>
               ))}
@@ -518,7 +534,7 @@ export default function ResultsView({
             <span className="text-accent-ink"><Icon name="sprout" size={20} /></span>
             <span className="text-[0.68rem] font-bold">My progress</span>
           </button>
-          <button type="button" onClick={() => setPanel("reach")} className="flex flex-col items-center gap-0.5 py-2.5">
+          <button type="button" onClick={() => { track("reach_out_opened"); setPanel("reach"); }} className="flex flex-col items-center gap-0.5 py-2.5">
             <span className="text-accent-ink"><Icon name="heart" size={20} /></span>
             <span className="text-[0.68rem] font-bold">Reach out</span>
           </button>

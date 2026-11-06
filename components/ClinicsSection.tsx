@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import type { Clinic, SourcedField } from "../lib/types";
 import { milesBetween, zipToCoords } from "../lib/distance";
 import ClinicDetail from "./ClinicDetail";
+import { track } from "../lib/analytics";
 
 const ClinicMap = dynamic(() => import("./ClinicMap"), { ssr: false });
 
@@ -125,7 +126,7 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
           <button
             key={clinic.id}
             type="button"
-            onClick={() => setOpen({ clinic, miles })}
+            onClick={() => { track("clinic_detail_opened"); setOpen({ clinic, miles }); }}
             className="border-line bg-card flex w-full items-center gap-3 rounded-2xl border p-4 text-left"
           >
             <span className="flex-1">

@@ -5,6 +5,7 @@ import type { CoverageInput } from "../lib/coverage";
 import { assessCoverage } from "../lib/coverage";
 import type { InsuranceType, TreatmentStage } from "../lib/types";
 import Cite from "./Cite";
+import { track } from "../lib/analytics";
 
 /**
  * Granular coverage walkthrough: a few taps, then a likely-coverage verdict
@@ -72,6 +73,7 @@ export default function CoverageChecker({
   }
 
   if (phase === "verdict") {
+    track("coverage_checked");
     const v = assessCoverage(input);
     const chipStyle =
       v.verdict === "likely_covered"

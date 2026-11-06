@@ -16,6 +16,7 @@ import careTeam from "../data/care-team.json";
 import { encodeShareCode } from "../lib/share";
 import { isLinkCode, newLinkCode, pushJourney, syncEnabled } from "../lib/sync";
 import { contactHref } from "../lib/contact";
+import { track } from "../lib/analytics";
 
 const INBOX_KEY = "navigator.team-inbox.v1";
 
@@ -83,6 +84,7 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
     }
     setSendState("sending");
     const ok = await pushJourney(code, journey, undefined, inbox || undefined, shareRisk && riskLabel ? { riskLabel } : undefined);
+    if (ok) track("send_progress");
     setSendState(ok ? "sent" : "failed");
     setTimeout(() => setSendState("idle"), 4000);
   }
@@ -114,7 +116,10 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
               key={s.id}
               type="button"
               aria-pressed={on}
-              onClick={() => update(toggleStage(journey, s.id))}
+              onClick={() => {
+                track("journey_step_toggled");
+                update(toggleStage(journey, s.id));
+              }}
               className={`min-h-12 rounded-xl border-[1.5px] px-4 py-3 text-left text-[0.98rem] font-bold ${
                 on ? "border-accent bg-accent-tint" : "border-line bg-card"
               }`}
@@ -232,6 +237,21 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
               className="text-muted text-xs underline"
             >
               change contact
+            </button>
+            <button
+              type="button"
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(contact);
+                  setJustSaved(true);
+                  setTimeout(() => setJustSaved(false), 2000);
+                } catch {
+                  /* visible below to copy by hand */
+                }
+              }}
+              className="text-muted text-xs underline"
+            >
+              copy {contact}
             </button>
             {justSaved && (
               <span className="text-accent-ink animate-pop text-sm font-bold" role="status">

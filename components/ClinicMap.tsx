@@ -69,7 +69,16 @@ export default function ClinicMap({ clinics, home }: Props) {
         .bindPopup("Your area")
         .addTo(layer);
     }
-    if (points.length > 0) map.fitBounds(L.latLngBounds(points).pad(0.15));
+    if (home) {
+      // Zoom to the user's area: home plus clinics within roughly 40 miles.
+      const near = points.filter((pt) => {
+        const [lat, lng] = pt as [number, number];
+        return Math.abs(lat - home.lat) < 0.6 && Math.abs(lng - home.lng) < 0.7;
+      });
+      map.fitBounds(L.latLngBounds(near.length > 1 ? near : points).pad(0.12), { maxZoom: 11 });
+    } else if (points.length > 0) {
+      map.fitBounds(L.latLngBounds(points).pad(0.1), { maxZoom: 9 });
+    }
     return () => {
       layer.remove();
     };
@@ -78,7 +87,8 @@ export default function ClinicMap({ clinics, home }: Props) {
   return (
     <div
       ref={el}
-      className="border-line h-72 w-full rounded-2xl border"
+      className="border-line relative z-0 h-72 w-full overflow-hidden rounded-2xl border"
+      style={{ isolation: "isolate" }}
       role="region"
       aria-label="Map of fertility clinics"
     />

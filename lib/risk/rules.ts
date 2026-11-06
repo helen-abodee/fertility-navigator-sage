@@ -92,15 +92,37 @@ export const riskRules: RiskRule[] = [
   {
     id: "transplant_conditioning",
     applies: (a) => helpers.treatments(a).includes("transplant"),
-    result: {
-      category: "high",
-      label: "Higher risk group",
-      headline: "Cancer treatments like yours are in the higher risk group",
-      body:
-        "The conditioning treatment before a stem cell or bone marrow transplant sits in the highest risk group in every guideline we cite.",
-      askTeam:
-        "Is there time to preserve before conditioning starts? " + CONFIRM,
-      citations: [citations.livestrongWomen, citations.livestrongMen, citations.esmo2020],
+    // Vetted language only: CRISP's own transplant output for ovaries,
+    // Livestrong's verbatim category definition otherwise.
+    result: (a) => {
+      if (a.anatomy === "ovaries_uterus") {
+        return {
+          category: "high" as const,
+          label: "Higher risk group",
+          headline: "Your treatment plan is in the higher risk group",
+          body:
+            "This comes from the same tool many cancer-center teams use to counsel patients. In the studies behind it, conditioning treatment for a transplant carried an 80 to 90% risk of amenorrhea at 1 to 2 years post-transplant.",
+          askTeam: "Is there time to preserve before conditioning starts? " + CONFIRM,
+          citations: [
+            crispCitation(),
+            {
+              sourceId: "crisp-ref-transplant",
+              sourceName:
+                "Studies behind this estimate: Rotz et al. 2024, Transplant Cell Ther; Bormann-Staudt et al. 2012, Bone Marrow Transplant",
+              retrieved: crispMeta.retrieved,
+            },
+          ],
+        };
+      }
+      return {
+        category: "high" as const,
+        label: "Higher risk group",
+        headline: "Your treatment plan is in the higher risk group",
+        body:
+          'The Livestrong fertility risk chart places transplant conditioning in its high risk group, which it defines as "prolonged/permanent azoospermia is common after treatment."',
+        askTeam: "Is there time to preserve before conditioning starts? " + CONFIRM,
+        citations: [citations.livestrongMen],
+      };
     },
   },
   {

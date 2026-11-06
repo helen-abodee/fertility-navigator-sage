@@ -145,11 +145,13 @@ export default function OptionDetail({
                       <div>
                         <p className="font-bold">{seg.label}</p>
                         <p className="text-muted text-sm">
-                          {seg.days
-                            ? seg.days[0] === seg.days[1]
-                              ? `about ${seg.days[0]} ${seg.days[0] === 1 ? "day" : "days"}`
-                              : `about ${seg.days[0]} to ${seg.days[1]} days`
-                            : "one visit"}
+                          {seg.duration
+                            ? seg.duration
+                            : seg.days
+                              ? seg.days[0] === seg.days[1]
+                                ? `about ${seg.days[0]} ${seg.days[0] === 1 ? "day" : "days"}`
+                                : `about ${seg.days[0]} to ${seg.days[1]} days`
+                              : "about one visit"}
                         </p>
                       </div>
                     </li>

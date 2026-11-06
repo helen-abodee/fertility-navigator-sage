@@ -56,11 +56,12 @@ export const options: PreservationOption[] = [
     plan: {
       segments: [
         { label: "First visit and tests", icon: "clipboard", days: [1, 3] },
+        { label: "Scheduling time in between", icon: "calendar", duration: "varies by clinic" },
         { label: "Hormone shots with check-ins", icon: "syringe", days: [10, 12] },
         { label: "Egg retrieval, asleep for it", icon: "rest" },
         { label: "Freezing", icon: "snowflake" },
       ],
-      note: "First visit to freezing is often about 2 to 3 weeks, and it usually does not have to wait for your cycle.",
+      note: "First visit to freezing is often about 2 to 3 weeks, and scheduling in between can stretch that. Every clinic moves at its own pace, so ask yours for their real timeline.",
       citations: [mskPreTreatment(), asrmJourney()],
     },
 
@@ -136,11 +137,12 @@ export const options: PreservationOption[] = [
     plan: {
       segments: [
         { label: "First visit and tests", icon: "clipboard", days: [1, 3] },
+        { label: "Scheduling time in between", icon: "calendar", duration: "varies by clinic" },
         { label: "Hormone shots with check-ins", icon: "syringe", days: [10, 12] },
         { label: "Egg retrieval, asleep for it", icon: "rest" },
         { label: "Fertilization in the lab, then freezing", icon: "flask", days: [5, 6] },
       ],
-      note: "The whole process takes about 2 to 3 weeks.",
+      note: "The whole process is often about 2 to 3 weeks, and scheduling in between can stretch that. Ask the clinic for their real timeline.",
       citations: [mskPreTreatment(), asrmJourney()],
     },
 

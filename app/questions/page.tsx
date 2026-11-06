@@ -11,6 +11,7 @@ import { appContent } from "../../content/app/content";
 import clinicsData from "../../data/clinics.json";
 import type { Clinic } from "../../lib/types";
 import { eraseEverything, loadProgress, saveProgress } from "../../lib/storage";
+import { track } from "../../lib/analytics";
 import QuestionScreen from "../../components/QuestionScreen";
 import Milestone from "../../components/Milestone";
 import ReflectionFlow from "../../components/ReflectionFlow";
@@ -28,6 +29,8 @@ export default function QuestionsPage() {
   useEffect(() => {
     const saved = loadProgress();
     if (saved) setResumeOffer(saved);
+    track("app_open");
+    track("survey_start");
   }, []);
 
   useEffect(() => {
@@ -44,12 +47,15 @@ export default function QuestionsPage() {
   function advance(nextAnswers: Answers, from: QuestionId) {
     // "I'm not sure" about children: offer the thinking-it-through path first.
     if (from === "feelings" && (nextAnswers.feelings === "not_sure" || nextAnswers.feelings === "maybe")) {
+      track("reflection_start");
       setCurrent("reflection");
       return;
     }
     const next = nextQuestion(nextAnswers, from);
     if (next === "results") {
       // "Just learning" browses the hub directly, skipping the risk screen.
+      track("survey_complete");
+      if (nextAnswers.entry !== "exploring") track("risk_viewed");
       setCurrent(nextAnswers.entry === "exploring" ? "results" : "risk_reveal");
       return;
     }

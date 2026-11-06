@@ -39,6 +39,8 @@ export interface PlanSegment {
   icon?: string;
   /** duration in days, [min, max]; omit for same-day moments */
   days?: [number, number];
+  /** free-text duration when days don't fit, e.g. "varies by clinic" */
+  duration?: string;
 }
 
 /** Conditions are data, matched by the results engine. Empty array = any. */
