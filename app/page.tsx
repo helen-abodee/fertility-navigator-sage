@@ -1,24 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "../components/icons";
 
 export default function Home() {
   const [agreed, setAgreed] = useState(false);
-  const [hasArt, setHasArt] = useState(true);
+  // Probe for the optional artwork after mount: an <img onError> rendered at
+  // hydration time can miss the error event entirely and leave a broken frame.
+  const [hasArt, setHasArt] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    const probe = new window.Image();
+    probe.onload = () => setHasArt(true);
+    probe.src = "/landing.jpg";
+  }, []);
 
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6 py-10">
       {hasArt && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src="/landing.jpg"
-          alt=""
-          onError={() => setHasArt(false)}
-          className="border-line mb-6 h-44 w-full rounded-2xl border object-cover"
-        />
+        <img src="/landing.jpg" alt="" className="border-line mb-6 h-44 w-full rounded-2xl border object-cover" />
       )}
 
       <p className="text-accent-ink text-xs font-bold tracking-[0.14em] uppercase">

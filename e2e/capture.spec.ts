@@ -10,8 +10,13 @@ test("capture iteration screenshots", async ({ page }) => {
   test.setTimeout(120000);
 
   await page.goto("/");
+  await page.waitForTimeout(600);
   await page.screenshot({ path: `${OUT}/01-welcome.png` });
   await page.getByRole("checkbox").check();
+  if (await page.getByRole("button", { name: "Start" }).isDisabled()) {
+    await page.getByRole("checkbox").uncheck();
+    await page.getByRole("checkbox").check();
+  }
   await page.getByRole("button", { name: "Start" }).click();
   await page.screenshot({ path: `${OUT}/02-entry.png` });
 
@@ -52,7 +57,7 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.getByRole("button", { name: "Options", exact: true }).click();
   await page.screenshot({ path: `${OUT}/11-hub-options.png` });
 
-  await page.getByRole("button", { name: "Financing" }).click();
+  await page.getByRole("button", { name: "Financing", exact: true }).click();
   await page.getByRole("button", { name: "My job" }).click();
   await page.getByRole("button", { name: "Yes", exact: true }).click();
   await page.getByRole("button", { name: "Fully insured" }).click();
