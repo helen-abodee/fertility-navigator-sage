@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import type { Clinic, TreatmentStage } from "../lib/types";
+import type { GuidanceSection } from "../lib/content-schema";
+import Cite from "./Cite";
 import { contactHref } from "../lib/contact";
 import { milesBetween, zipToCoords } from "../lib/distance";
 import Icon from "./icons";
@@ -16,11 +18,13 @@ export default function ReachOut({
   clinics,
   zip,
   stage,
+  guidance = [],
   onClose,
 }: {
   clinics: Clinic[];
   zip?: string | null;
   stage?: TreatmentStage;
+  guidance?: GuidanceSection[];
   onClose: () => void;
 }) {
   const [contact, setContact] = useState("");
@@ -152,6 +156,35 @@ export default function ReachOut({
             </div>
           )}
         </section>
+
+        {guidance.length > 0 && (
+          <section className="mt-5">
+            <h2 className="text-lg">Common questions</h2>
+            <div className="mt-2 flex flex-col gap-2">
+              {guidance.map((g) => (
+                <details key={g.id} className="border-line bg-card rounded-xl border px-4 py-3">
+                  <summary className="cursor-pointer list-none font-bold">
+                    {g.heading}
+                    <span className="text-accent-ink float-right" aria-hidden="true">+</span>
+                  </summary>
+                  {g.paragraphs.map((p, i) => (
+                    <div key={i} className="mt-2">
+                      <p className="text-[0.95rem]">{p.text}</p>
+                      <Cite citations={p.citations} />
+                    </div>
+                  ))}
+                  {g.actions?.map((a, i) => (
+                    <div key={i} className="border-line mt-3 border-t pt-3">
+                      <p className="text-sm font-bold">{a.label}</p>
+                      <p className="text-[0.9rem]">{a.detail}</p>
+                      <Cite citations={a.citations} />
+                    </div>
+                  ))}
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
 
         <button type="button" onClick={onClose} className="border-line bg-card mt-6 min-h-12 rounded-xl border px-4 py-3 font-bold">
           Back

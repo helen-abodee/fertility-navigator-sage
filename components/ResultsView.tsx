@@ -133,7 +133,15 @@ export default function ResultsView({
   }
 
   if (panel === "reach") {
-    return <ReachOut clinics={clinics} zip={zip} stage={stage} onClose={() => setPanel(null)} />;
+    return (
+      <ReachOut
+        clinics={clinics}
+        zip={zip}
+        stage={stage}
+        guidance={results.guidance}
+        onClose={() => setPanel(null)}
+      />
+    );
   }
 
   if (panel === "progress") {
@@ -324,28 +332,6 @@ export default function ResultsView({
           </section>
         )}
 
-        {results.guidance.map((g) => (
-          <details key={g.id} className="border-line bg-card rounded-2xl border p-5 print:hidden">
-            <summary className="cursor-pointer list-none">
-              <span className="font-heading text-xl font-semibold">{g.heading}</span>
-              <span className="text-accent-ink float-right" aria-hidden="true">+</span>
-            </summary>
-            {g.paragraphs.map((p, i) => (
-              <div key={i} className="mt-2">
-                <p className="text-[0.98rem]">{p.text}</p>
-                <Cite citations={p.citations} />
-              </div>
-            ))}
-            {g.actions?.map((a, i) => (
-              <div key={i} className="border-line mt-3 border-t pt-3">
-                <p className="font-bold">{a.label}</p>
-                <p className="text-[0.95rem]">{a.detail}</p>
-                <Cite citations={a.citations} />
-              </div>
-            ))}
-          </details>
-        ))}
-
         <div className="hidden print:block">
           {results.guidance.map((g) => (
             <section key={g.id}>
@@ -382,10 +368,13 @@ export default function ResultsView({
                       <p className="font-bold">
                         <a href={a.url} target="_blank" rel="noreferrer" className="underline">{a.name}</a>
                       </p>
-                      <p className="text-accent-ink text-right text-sm leading-tight font-bold whitespace-nowrap" style={{ fontVariantNumeric: "tabular-nums" }}>
-                        {a.cap === "not published" ? "amount varies" : a.cap}
+                      <p className="text-accent-ink max-w-[45%] text-right text-sm leading-tight font-bold" style={{ fontVariantNumeric: "tabular-nums" }}>
+                        {a.cap === "not published" ? "amount varies" : a.cap.length <= 26 ? a.cap : ""}
                       </p>
                     </div>
+                    {a.cap !== "not published" && a.cap.length > 26 && (
+                      <p className="text-accent-ink text-sm font-bold">{a.cap}</p>
+                    )}
                     <p className="text-[0.95rem]">{a.what}</p>
                     <p className="text-muted text-sm">Who it's for: {a.eligibility}</p>
                     {a.payUpfront && (
