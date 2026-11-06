@@ -62,3 +62,15 @@ date, optional nickname), and a timestamp. It is structurally incapable of
 carrying survey answers, diagnosis, age, or ZIP; the client only ever sends
 the same payload as the offline share code, which is unit-tested to contain
 nothing else.
+
+## Enabling profiles (lane 2 pilot)
+
+1. Run `supabase/migrations/0004_profiles.sql` in the SQL Editor (say "copy the
+   profiles migration" to get it on your clipboard).
+2. In Supabase: Authentication → Sign In / Up → make sure Email is enabled
+   (it is by default). Under Email, the default magic-link template also sends
+   a 6-digit OTP token; our UI uses the code.
+3. In Vercel env vars, add `NEXT_PUBLIC_PROFILES` = `1` (Production + Preview),
+   then redeploy.
+4. Before REAL patients create profiles: counsel review of the authorization
+   wording, under the LLC as operator (see docs/PROFILES-LAW-BRIEF.md).

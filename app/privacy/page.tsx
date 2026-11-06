@@ -62,6 +62,19 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <h2 className="text-lg">2a. Optional profiles (pilot)</h2>
+          <p>
+            Where the optional profile feature is available and you create a profile, your survey
+            responses and progress checklist are stored in a secured database, associated with your
+            account, only after you grant express authorization on a dated authorization screen.
+            Profile information is accessible to you alone, is never shared with third parties, and
+            is never used for advertising. You may delete your profile at any time from within the
+            Service; deletion is immediate and removes your account and all stored information.
+            California residents: information stored in a profile is treated as medical information
+            subject to the Confidentiality of Medical Information Act.
+          </p>
+        </section>
+        <section>
           <h2 className="text-lg">3. How information is used</h2>
           <p>
             Locally stored information is used solely to restore your session on your device.

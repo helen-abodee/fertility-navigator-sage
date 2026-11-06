@@ -20,6 +20,7 @@ import { track } from "../lib/analytics";
 import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
+import ProfileSection from "./ProfileSection";
 import Icon, { optionIcon } from "./icons";
 
 type Tab = "start" | "options" | "compare" | "money" | "clinics" | "health";
@@ -103,6 +104,7 @@ export default function ResultsView({
   const [costOption, setCostOption] = useState<PreservationOption | null>(null);
   const [visited, setVisited] = useState<Tab[]>(["start"]);
   const [panel, setPanel] = useState<"progress" | "reach" | null>(null);
+  const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip };
   const moneyUnlocked = browsing || feelings !== "no";
   const activeTabs = tabs.filter((t) => t.id !== "money" || moneyUnlocked);
 
@@ -152,6 +154,7 @@ export default function ResultsView({
             &larr; Back
           </button>
           <JourneySection riskLabel={browsing ? undefined : risk.label} />
+          <ProfileSection answers={answersForProfile} />
           <button type="button" onClick={() => setPanel(null)} className="border-line bg-card min-h-12 rounded-xl border px-4 py-3 font-bold">
             Back
           </button>
