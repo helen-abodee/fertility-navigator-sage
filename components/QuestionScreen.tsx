@@ -65,11 +65,11 @@ export default function QuestionScreen({
         ) : (
           <span />
         )}
-        <div className="flex gap-1.5" aria-label={`Question ${stepIndex + 1} of ${stepCount}`}>
+        <div className="flex flex-1 gap-1 pl-6" aria-label={`Question ${stepIndex + 1} of ${stepCount}`}>
           {Array.from({ length: stepCount }).map((_, i) => (
             <span
               key={i}
-              className={`h-1.5 w-1.5 rounded-full ${i <= stepIndex ? "bg-accent" : "bg-line"}`}
+              className={`h-1 flex-1 rounded-full ${i <= stepIndex ? "bg-accent" : "bg-line"}`}
             />
           ))}
         </div>

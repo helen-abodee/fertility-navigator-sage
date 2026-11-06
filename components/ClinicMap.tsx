@@ -48,8 +48,8 @@ export default function ClinicMap({ clinics, home }: Props) {
         points.push([loc.lat, loc.lng]);
         L.circleMarker([loc.lat, loc.lng], {
           radius: 8,
-          color: "#2c523d",
-          fillColor: "#38654c",
+          color: "#125a69",
+          fillColor: "#16697a",
           fillOpacity: 0.85,
           weight: 2,
         })
@@ -61,8 +61,8 @@ export default function ClinicMap({ clinics, home }: Props) {
       points.push([home.lat, home.lng]);
       L.circleMarker([home.lat, home.lng], {
         radius: 7,
-        color: "#27516f",
-        fillColor: "#2e5f86",
+        color: "#a8653a",
+        fillColor: "#c17d4e",
         fillOpacity: 0.9,
         weight: 2,
       })

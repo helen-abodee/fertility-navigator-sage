@@ -1,18 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Literata, Atkinson_Hyperlegible } from "next/font/google";
+import { Figtree, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const literata = Literata({
+const figtree = Figtree({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-literata",
+  weight: ["400", "600", "700"],
+  variable: "--font-figtree",
 });
 
-const atkinson = Atkinson_Hyperlegible({
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-atkinson",
+  weight: ["500"],
+  variable: "--font-plex-mono",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +27,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${literata.variable} ${atkinson.variable}`}>
+    <html lang="en" className={`${figtree.variable} ${plexMono.variable}`}>
       <body>{children}</body>
     </html>
   );

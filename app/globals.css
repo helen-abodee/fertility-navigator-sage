@@ -6,14 +6,14 @@
  * only; components must reference tokens, never literals.
  */
 :root {
-  --paper: #f6f3ed;
+  --paper: #fafaf8;
   --card: #ffffff;
-  --ink: #283029;
-  --muted: #5f6962;
-  --line: #e0ddd4;
-  --accent: #38654c;
-  --accent-ink: #2c523d;
-  --accent-tint: #e2ebe2;
+  --ink: #1c2126;
+  --muted: #687076;
+  --line: #e7e8e4;
+  --accent: #16697a;
+  --accent-ink: #125a69;
+  --accent-tint: #e2eef1;
   --accent-contrast: #ffffff;
   --info: #31576e; /* secondary blue, links/info callouts */
   --warn-bg: #f4e9dc;
@@ -29,15 +29,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #1b201d;
-    --card: #242b26;
-    --ink: #e9e7df;
-    --muted: #a7b0a8;
-    --line: #39423b;
-    --accent: #8fbf9f;
-    --accent-ink: #a5cdb2;
-    --accent-tint: #2c3a31;
-    --accent-contrast: #16201a;
+    --paper: #11181c;
+    --card: #19232a;
+    --ink: #e8edef;
+    --muted: #9aa7ae;
+    --line: #2b3840;
+    --accent: #6fc3d6;
+    --accent-ink: #8ed2e2;
+    --accent-tint: #16323b;
+    --accent-contrast: #0c1a1f;
     --info: #8db8cf;
     --warn-bg: #3a3127;
     --warn-ink: #dcb888;
@@ -52,15 +52,15 @@
 }
 
 :root[data-theme="dark"] {
-  --paper: #1b201d;
-  --card: #242b26;
-  --ink: #e9e7df;
-  --muted: #a7b0a8;
-  --line: #39423b;
-  --accent: #8fbf9f;
-  --accent-ink: #a5cdb2;
-  --accent-tint: #2c3a31;
-  --accent-contrast: #16201a;
+  --paper: #11181c;
+  --card: #19232a;
+  --ink: #e8edef;
+  --muted: #9aa7ae;
+  --line: #2b3840;
+  --accent: #6fc3d6;
+  --accent-ink: #8ed2e2;
+  --accent-tint: #16323b;
+  --accent-contrast: #0c1a1f;
   --info: #8db8cf;
   --warn-bg: #3a3127;
   --warn-ink: #dcb888;
@@ -84,8 +84,9 @@
   --color-accent-tint: var(--accent-tint);
   --color-accent-contrast: var(--accent-contrast);
   --color-info: var(--info);
-  --font-heading: var(--font-literata), Georgia, serif;
-  --font-body: var(--font-atkinson), "Helvetica Neue", Arial, sans-serif;
+  --font-heading: var(--font-figtree), "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--font-figtree), "Helvetica Neue", Arial, sans-serif;
+  --font-num: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 body {
@@ -100,15 +101,21 @@ h1,
 h2,
 h3 {
   font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.22;
   text-wrap: balance;
+}
+
+.num {
+  font-family: var(--font-num);
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 /* Survey section palettes: 1 inherits the base (clinical, respectful);
    2 turns warm and quietly hopeful; 3 is practical slate-blue. All AA. */
 [data-survey-section="2"] {
-  --paper: #f8f3ec;
   --accent: #a8653a;
   --accent-ink: #8f5430;
   --accent-tint: #f3e3d3;
@@ -122,7 +129,6 @@ h3 {
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) [data-survey-section="2"] {
-    --paper: #221e19;
     --accent: #d9a273;
     --accent-ink: #e2b48a;
     --accent-tint: #3a2f24;
@@ -136,7 +142,6 @@ h3 {
   }
 }
 :root[data-theme="dark"] [data-survey-section="2"] {
-  --paper: #221e19;
   --accent: #d9a273;
   --accent-ink: #e2b48a;
   --accent-tint: #3a2f24;

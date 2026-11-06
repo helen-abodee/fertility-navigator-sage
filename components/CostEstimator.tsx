@@ -88,7 +88,7 @@ export default function CostEstimator({
             <span className="text-sm">
               {years === 0 ? "The procedure, at published prices" : "Procedure plus storage, at published prices"}
             </span>
-            <span className="text-lg font-bold whitespace-nowrap">
+            <span className="num text-lg font-bold whitespace-nowrap">
               {min === max ? fmt(min) : `${fmt(min)} to ${fmt(max)}`}
             </span>
           </div>

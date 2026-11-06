@@ -17,6 +17,23 @@ export default function RiskReveal({
       <span className="bg-accent-tint text-accent-ink animate-pop self-start rounded-full px-4 py-1.5 text-sm font-bold">
         {risk.label}
       </span>
+      <div className="flex flex-wrap gap-1.5">
+        {Array.from(
+          new Set(
+            risk.citations.map((c) => {
+              const n = c.sourceName;
+              if (n.toLowerCase().startsWith("study behind") || n.toLowerCase().startsWith("studies behind")) {
+                return n.split(":")[1]?.split(",")[0]?.trim() ?? n;
+              }
+              return n.split(" (")[0].split(":")[0];
+            }),
+          ),
+        ).slice(0, 2).map((name) => (
+          <span key={name} className="border-line bg-card text-muted rounded-full border px-2.5 py-0.5 text-[0.65rem] font-bold tracking-wide uppercase">
+            Evidence: {name}
+          </span>
+        ))}
+      </div>
       <h1 className="text-3xl">{risk.headline}</h1>
       <p className="text-[1.02rem]">{risk.body}</p>
       <AskTeam text={risk.askTeam} />

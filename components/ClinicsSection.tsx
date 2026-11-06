@@ -7,6 +7,19 @@ import { milesBetween, zipToCoords } from "../lib/distance";
 import ClinicDetail from "./ClinicDetail";
 import { track } from "../lib/analytics";
 
+/** Slippy-map tile coordinates for a small location thumbnail. */
+function tileFor(lat: number, lng: number, z = 11): { x: number; y: number } {
+  const x = Math.floor(((lng + 180) / 360) * 2 ** z);
+  const latRad = (lat * Math.PI) / 180;
+  const y = Math.floor(((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * 2 ** z);
+  return { x, y };
+}
+
+function monogram(name: string): string {
+  const words = name.replace(/\(.*\)/, "").trim().split(/\s+/);
+  return (words[0]?.[0] ?? "") + (words[1]?.[0] ?? "");
+}
+
 const ClinicMap = dynamic(() => import("./ClinicMap"), { ssr: false });
 
 type ServiceFilter = "oncofertility" | "spermBanking" | "ovarianTissueFreezing";
@@ -122,25 +135,52 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
         </div>
       )}
       <div className="flex flex-col gap-2">
-        {rows.map(({ clinic, miles }) => (
-          <button
-            key={clinic.id}
-            type="button"
-            onClick={() => { track("clinic_detail_opened"); setOpen({ clinic, miles }); }}
-            className="border-line bg-card flex w-full items-center gap-3 rounded-2xl border p-4 text-left"
-          >
-            <span className="flex-1">
-              <span className="block font-bold">{clinic.name}</span>
-              <span className="text-muted block text-sm">
-                {clinic.locations[0]?.address ?? "Address on their site"}
+        {rows.map(({ clinic, miles }) => {
+          const loc = clinic.locations[0];
+          const tile = loc ? tileFor(loc.lat, loc.lng) : null;
+          return (
+            <button
+              key={clinic.id}
+              type="button"
+              onClick={() => { track("clinic_detail_opened"); setOpen({ clinic, miles }); }}
+              className="border-line bg-card flex w-full items-center gap-3 rounded-2xl border p-3 text-left"
+            >
+              {tile ? (
+                <span className="border-line relative block h-14 w-14 shrink-0 overflow-hidden rounded-xl border">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`https://tile.openstreetmap.org/11/${tile.x}/${tile.y}.png`}
+                    alt=""
+                    loading="lazy"
+                    className="h-full w-full object-cover opacity-90"
+                  />
+                  <span className="bg-accent absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-white" />
+                </span>
+              ) : (
+                <span className="bg-accent-tint text-accent-ink flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-lg font-bold">
+                  {monogram(clinic.name)}
+                </span>
+              )}
+              <span className="min-w-0 flex-1">
+                <span className="block truncate font-bold">{clinic.name}</span>
+                <span className="text-muted block truncate text-sm">
+                  {loc?.address ?? "Address on their site"}
+                </span>
+                {fieldTrue(clinic.oncofertility) && (
+                  <span className="bg-accent-tint text-accent-ink mt-1 inline-block rounded-full px-2 py-0.5 text-[0.65rem] font-bold">
+                    oncofertility
+                  </span>
+                )}
               </span>
-            </span>
-            {miles !== null && (
-              <span className="text-muted text-sm whitespace-nowrap">{Math.round(miles)} mi</span>
-            )}
-            <span className="text-accent-ink text-xl" aria-hidden="true">&rsaquo;</span>
-          </button>
-        ))}
+              <span className="flex flex-col items-end gap-0.5">
+                {miles !== null && (
+                  <span className="num text-muted text-sm whitespace-nowrap">{Math.round(miles)} mi</span>
+                )}
+                <span className="text-accent-ink text-xl" aria-hidden="true">&rsaquo;</span>
+              </span>
+            </button>
+          );
+        })}
         {rows.length === 0 && (
           <p className="text-muted text-sm">
             No listed clinic matches those filters. Try widening the distance or removing a service
@@ -148,6 +188,8 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
           </p>
         )}
       </div>
+
+      <p className="text-muted text-xs print:hidden">Map and thumbnails &copy; OpenStreetMap contributors.</p>
 
       {open && <ClinicDetail clinic={open.clinic} miles={open.miles} onClose={() => setOpen(null)} />}
     </section>

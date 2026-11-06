@@ -371,7 +371,7 @@ export default function ResultsView({
                       <p className="font-bold">
                         <a href={a.url} target="_blank" rel="noreferrer" className="underline">{a.name}</a>
                       </p>
-                      <p className="text-accent-ink max-w-[45%] text-right text-sm leading-tight font-bold" style={{ fontVariantNumeric: "tabular-nums" }}>
+                      <p className="num text-accent-ink max-w-[45%] text-right text-sm leading-tight font-bold" style={{ fontVariantNumeric: "tabular-nums" }}>
                         {a.cap === "not published" ? "amount varies" : a.cap.length <= 26 ? a.cap : ""}
                       </p>
                     </div>
