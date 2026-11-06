@@ -31,7 +31,7 @@ function buildRows(): string[][] {
   }
   for (const g of appContent.guidance) {
     const all = [...g.paragraphs.flatMap((p) => p.citations), ...(g.actions ?? []).flatMap((a) => a.citations)];
-    rows.push(["Paying for it / guidance", g.heading, g.paragraphs[0]?.text.slice(0, 90) ?? "", srcs(all), latest(all)]);
+    rows.push(["Financing / guidance", g.heading, g.paragraphs[0]?.text.slice(0, 90) ?? "", srcs(all), latest(all)]);
   }
   for (const a of appContent.aid) {
     rows.push(["Financial aid", a.name, `${a.what} ${a.cap !== "not published" ? "Cap: " + a.cap : ""}`.trim(), srcs(a.citations), latest(a.citations)]);

@@ -27,7 +27,7 @@ export default function CompareTab({ options }: { options: PreservationOption[] 
   return (
     <section className="flex flex-col gap-4">
       <div>
-        <h2 className="text-xl">Compare options side by side</h2>
+        <h2 className="text-lg">Compare options side by side</h2>
         <p className="text-muted mt-1 text-sm">Pick up to 3. Every cell says it in words, not just color.</p>
       </div>
 

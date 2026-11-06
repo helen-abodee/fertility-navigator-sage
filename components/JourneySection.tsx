@@ -102,7 +102,7 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
 
   return (
     <section className="border-line bg-card rounded-2xl border p-5">
-      <h2 className="text-xl">Where I am with this</h2>
+      <div className="flex items-center gap-2.5"><span className="bg-accent-tint text-accent-ink flex h-10 w-10 shrink-0 items-center justify-center rounded-full"><Icon name="sprout" size={20} /></span><h2 className="text-lg leading-tight">Where I am with this</h2></div>
       <p className="text-muted mt-1 text-sm">
         For you. Saved on this device, printed with your summary if you want your care team to see
         it.

@@ -165,7 +165,7 @@ export default function OptionDetail({
         )}
 
         <p className="text-muted mt-6 text-sm">
-          Costs and coverage live on the "Paying for it" tab, when you're ready for them.
+          Costs and coverage live on the "Financing" tab, when you're ready for them.
         </p>
 
         {/* Honest expectations */}

@@ -23,16 +23,32 @@ import OptionDetail from "./OptionDetail";
 import ProfileSection from "./ProfileSection";
 import Icon, { optionIcon } from "./icons";
 
-type Tab = "start" | "options" | "compare" | "money" | "clinics" | "health";
+type Tab = "options" | "compare" | "money" | "clinics" | "health";
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
-  { id: "start", label: "Start here", icon: "compass" },
   { id: "options", label: "Options", icon: "egg" },
-  { id: "money", label: "Paying for it", icon: "dollar" },
+  { id: "money", label: "Financing", icon: "dollar" },
   { id: "compare", label: "Compare", icon: "clipboard" },
   { id: "clinics", label: "Clinics", icon: "door" },
   { id: "health", label: "Health", icon: "sprout" },
 ];
+
+/** One header pattern for every card: same circle, same icon size, same type size. */
+function CardHeader({ icon, title, badge }: { icon: string; title: string; badge?: string }) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <span className="bg-accent-tint text-accent-ink flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+        <Icon name={icon} size={20} />
+      </span>
+      <h2 className="text-lg leading-tight">{title}</h2>
+      {badge && (
+        <span className="bg-accent-tint text-accent-ink ml-auto rounded-full px-2.5 py-0.5 text-xs font-bold whitespace-nowrap">
+          {badge}
+        </span>
+      )}
+    </div>
+  );
+}
 
 function OptionRow({ option, onOpen }: { option: PreservationOption; onOpen: () => void }) {
   return (
@@ -99,10 +115,10 @@ export default function ResultsView({
   onStartOver: () => void;
 }) {
   const [openOption, setOpenOption] = useState<PreservationOption | null>(null);
-  const [tab, setTab] = useState<Tab>("start");
+  const [tab, setTab] = useState<Tab>("options");
   const [reflecting, setReflecting] = useState(false);
   const [costOption, setCostOption] = useState<PreservationOption | null>(null);
-  const [visited, setVisited] = useState<Tab[]>(["start"]);
+  const [visited, setVisited] = useState<Tab[]>(["options"]);
   const [panel, setPanel] = useState<"progress" | "reach" | null>(null);
   const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip };
   const moneyUnlocked = browsing || feelings !== "no";
@@ -153,7 +169,62 @@ export default function ResultsView({
           <button type="button" onClick={() => setPanel(null)} className="text-accent-ink -ml-2 self-start rounded-lg px-2 py-2 text-sm font-bold">
             &larr; Back
           </button>
+          {!browsing && (
+            <section className="border-line bg-card flex items-center justify-between gap-3 rounded-2xl border p-4" aria-label="Fertility risk">
+              <p className="text-lg leading-tight font-bold">{risk.headline}</p>
+              <span className="bg-accent-tint text-accent-ink rounded-full px-3 py-0.5 text-xs font-bold whitespace-nowrap">
+                {risk.label}
+              </span>
+            </section>
+          )}
+
           <JourneySection riskLabel={browsing ? undefined : risk.label} />
+
+          <button
+            type="button"
+            onClick={() => { setPanel(null); setReflecting(true); }}
+            className="border-line bg-card flex w-full items-center gap-2.5 rounded-2xl border p-4 text-left print:hidden"
+          >
+            <span className="bg-accent-tint text-accent-ink flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+              <Icon name="compass" size={20} />
+            </span>
+            <span className="flex-1">
+              <span className="block text-lg leading-tight font-bold">Thinking about children, someday?</span>
+              <span className="text-muted block text-sm">An 8-screen walk, from published decision guides. Nothing saved.</span>
+            </span>
+            <span className="text-accent-ink text-xl" aria-hidden="true">&rsaquo;</span>
+          </button>
+
+          {results.doctorQuestions.length > 0 && (
+            <section className="border-line bg-card rounded-2xl border p-5">
+              <CardHeader icon="stethoscope" title="Questions for your care team" />
+              <p className="text-muted mt-1 text-sm">Tap a topic. Bring the ones that fit.</p>
+              <div className="mt-3 flex flex-col gap-2">
+                {Array.from(new Set(results.doctorQuestions.map((q) => q.category))).map((cat) => {
+                  const qs = results.doctorQuestions.filter((q) => q.category === cat);
+                  return (
+                    <details key={cat} className="border-line rounded-xl border px-4 py-3 print:hidden">
+                      <summary className="cursor-pointer list-none font-bold">
+                        {cat} <span className="text-muted text-sm font-normal">({qs.length})</span>
+                        <span className="text-accent-ink float-right" aria-hidden="true">+</span>
+                      </summary>
+                      <ul className="mt-2 flex list-disc flex-col gap-2 pl-5">
+                        {qs.map((q) => (
+                          <li key={q.id} className="text-[0.95rem]">{q.text}</li>
+                        ))}
+                      </ul>
+                    </details>
+                  );
+                })}
+              </div>
+              <ul className="mt-2 hidden list-disc flex-col gap-2 pl-5 print:flex">
+                {results.doctorQuestions.map((q) => (
+                  <li key={q.id} className="text-sm">{q.text}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           <ProfileSection answers={answersForProfile} />
           <button type="button" onClick={() => setPanel(null)} className="border-line bg-card min-h-12 rounded-xl border px-4 py-3 font-bold">
             Back
@@ -214,68 +285,6 @@ export default function ResultsView({
         </div>
       </nav>
 
-      {/* Start here */}
-      <div className={`flex flex-col gap-6 ${show("start")}`}>
-        {!browsing && (
-          <section className="border-line bg-card flex items-center justify-between gap-3 rounded-2xl border p-4" aria-label="Fertility risk">
-            <p className="font-bold">{risk.headline}</p>
-            <span className="bg-accent-tint text-accent-ink rounded-full px-3 py-0.5 text-xs font-bold whitespace-nowrap">
-              {risk.label}
-            </span>
-          </section>
-        )}
-
-        <button
-          type="button"
-          onClick={() => setReflecting(true)}
-          className="border-line bg-card flex w-full items-center gap-4 rounded-2xl border p-4 text-left print:hidden"
-        >
-          <span className="bg-accent-tint text-accent-ink flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
-            <Icon name="compass" size={26} />
-          </span>
-          <span className="flex-1">
-            <span className="block text-lg font-bold">Thinking about children, someday?</span>
-            <span className="text-muted block text-sm">An 8-screen walk through the decision, from published decision guides. Nothing saved.</span>
-          </span>
-          <span className="text-accent-ink text-xl" aria-hidden="true">&rsaquo;</span>
-        </button>
-
-        {results.doctorQuestions.length > 0 && (
-          <section className="border-line bg-card rounded-2xl border p-5">
-            <div className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full" style={{ background: "color-mix(in srgb, var(--info) 18%, var(--card))", color: "var(--info)" }}>
-                <Icon name="stethoscope" size={18} />
-              </span>
-              <h2 className="text-xl">Questions for your care team</h2>
-            </div>
-            <p className="text-muted mt-1 text-sm">Tap a topic. Bring the ones that fit.</p>
-            <div className="mt-3 flex flex-col gap-2">
-              {Array.from(new Set(results.doctorQuestions.map((q) => q.category))).map((cat) => {
-                const qs = results.doctorQuestions.filter((q) => q.category === cat);
-                return (
-                  <details key={cat} className="border-line rounded-xl border px-4 py-3 print:hidden">
-                    <summary className="cursor-pointer list-none font-bold">
-                      {cat} <span className="text-muted text-sm font-normal">({qs.length})</span>
-                      <span className="text-accent-ink float-right" aria-hidden="true">+</span>
-                    </summary>
-                    <ul className="mt-2 flex list-disc flex-col gap-2 pl-5">
-                      {qs.map((q) => (
-                        <li key={q.id} className="text-[0.95rem]">{q.text}</li>
-                      ))}
-                    </ul>
-                  </details>
-                );
-              })}
-            </div>
-            <ul className="mt-2 hidden list-disc flex-col gap-2 pl-5 print:flex">
-              {results.doctorQuestions.map((q) => (
-                <li key={q.id} className="text-sm">{q.text}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
-
       {/* Options */}
       <div className={`flex flex-col gap-3 ${show("options")}`}>
         <div className="border-line bg-card rounded-xl border p-3">
@@ -284,7 +293,7 @@ export default function ResultsView({
         </div>
         {results.options.length > 0 && (
           <>
-            <h2 className="text-xl">Your options</h2>
+            <h2 className="text-lg">Your options</h2>
             {results.options.map((o) => (
               <div key={o.id}>
                 <OptionRow option={o} onOpen={() => { track("option_opened"); setOpenOption(o); }} />
@@ -300,17 +309,17 @@ export default function ResultsView({
         <CompareTab options={results.options} />
       </div>
 
-      {/* Paying for it */}
+      {/* Financing */}
       <div className={`flex flex-col gap-6 ${moneyUnlocked ? show("money") : "hidden"}`} data-survey-section="3">
         <section className="border-line bg-card rounded-2xl border p-5">
-          <h2 className="text-xl">Will insurance pay for this?</h2>
+          <h2 className="text-lg">Will insurance pay for this?</h2>
           <p className="text-muted mt-1 mb-3 text-sm">A few taps. No member IDs, ever.</p>
           <CoverageChecker insurance={insurance} stage={stage} />
         </section>
 
         {results.options.length > 0 && (
           <section className="border-line bg-card rounded-2xl border p-5 print:hidden">
-            <h2 className="text-xl">What could an option cost?</h2>
+            <h2 className="text-lg">What could an option cost?</h2>
             <p className="text-muted mt-1 mb-3 text-sm">Pick one. Coverage comes first; the full prices follow.</p>
             <div className="flex flex-wrap gap-2">
               {results.options.map((o) => (
@@ -356,7 +365,7 @@ export default function ResultsView({
           const unlikely = checked.filter((x) => x.r.fit === "unlikely");
           return (
             <section>
-              <h2 className="text-xl">Financial aid programs</h2>
+              <h2 className="text-lg">Financial aid programs</h2>
               <div className="mt-2">
                 <AskTeam text="You don't have to sort these alone. Social workers connect patients to these programs every week; ask yours to help you apply." />
               </div>
@@ -421,7 +430,7 @@ export default function ResultsView({
         </div>
         {results.health.some((h) => h.group === "prep") && (
           <section>
-            <h2 className="text-xl">Getting ready to preserve</h2>
+            <h2 className="text-lg">Getting ready to preserve</h2>
             <p className="text-muted mt-1 text-sm">
               These everyday things affect sperm and egg quality going into preservation. Information,
               not homework; your care team can say which matter for your timeline.
@@ -452,7 +461,7 @@ export default function ResultsView({
         )}
         {results.health.some((h) => h.group !== "prep") && (
           <section>
-            <h2 className="text-xl">Also good to know</h2>
+            <h2 className="text-lg">Also good to know</h2>
             <div className="mt-3 flex flex-col gap-3">
               {results.health.filter((h) => h.group !== "prep").map((h) => (
                 <div key={h.id} className="border-line bg-card flex gap-3 rounded-xl border p-4">

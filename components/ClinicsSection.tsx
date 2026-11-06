@@ -87,7 +87,7 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
   return (
     <section className="flex flex-col gap-4">
       <div>
-        <h2 className="text-xl">Fertility clinics</h2>
+        <h2 className="text-lg">Fertility clinics</h2>
         <p className="text-muted mt-1 text-sm">
           These clinics appear on resource lists used by cancer-center social workers. Being listed
           is not an endorsement. Prices shown are only what each clinic publishes itself.

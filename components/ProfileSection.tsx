@@ -53,10 +53,10 @@ export default function ProfileSection({ answers }: { answers: Answers }) {
   return (
     <section className="border-line bg-card rounded-2xl border p-5 print:hidden">
       <div className="flex items-center gap-2">
-        <span className="bg-accent-tint text-accent-ink flex h-9 w-9 items-center justify-center rounded-full">
-          <Icon name="heart" size={18} />
+        <span className="bg-accent-tint text-accent-ink flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+          <Icon name="heart" size={20} />
         </span>
-        <h2 className="text-xl">My profile</h2>
+        <h2 className="text-lg leading-tight">My profile</h2>
         <span className="bg-accent-tint text-accent-ink ml-auto rounded-full px-2.5 py-0.5 text-xs font-bold">Pilot</span>
       </div>
 

@@ -106,8 +106,8 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await expect(page.getByText("about 10 to 12 days").first()).toBeVisible();
   await page.getByRole("button", { name: "Back to results" }).first().click();
 
-  // Paying for it: coverage checker end to end
-  await page.getByRole("button", { name: "Paying for it", exact: true }).click();
+  // Financing: coverage checker end to end
+  await page.getByRole("button", { name: "Financing", exact: true }).click();
   await page.getByRole("button", { name: "My job" }).click();
   await page.getByRole("button", { name: "Yes", exact: true }).click();
   await page.getByRole("button", { name: "Fully insured" }).click();
@@ -124,11 +124,10 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await page.getByRole("button", { name: "Health", exact: true }).click();
   await expect(page.getByText("Smoking speeds up the loss of eggs", { exact: false })).toBeVisible();
 
-  // Start here: doctor questions; journey lives under the bottom bar now
-  await page.getByRole("button", { name: "Start here" }).click();
-  await expect(page.getByRole("heading", { name: "Questions for your care team" })).toBeVisible();
+  // My progress panel now carries the journey, risk recap, and doctor questions
   await page.getByRole("button", { name: "My progress" }).click();
   await expect(page.getByRole("heading", { name: "Where I am with this" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Questions for your care team" })).toBeVisible();
   await page.getByRole("button", { name: "Back", exact: true }).click();
   await expect(page.getByRole("button", { name: "My summary", exact: true })).toBeVisible();
 });
@@ -154,7 +153,7 @@ test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
   await page.getByRole("button", { name: "See my options" }).click();
 
   await expect(page.getByRole("heading", { name: "Where you stand, and what can help" })).toBeVisible();
-  await page.getByRole("button", { name: "Paying for it", exact: true }).click();
+  await page.getByRole("button", { name: "Financing", exact: true }).click();
   await expect(page.getByText("Medi-Cal does not cover this right now")).toBeVisible();
   await expect(page.getByText("Likely not covered")).toBeVisible();
 });
@@ -219,18 +218,19 @@ test("the money tab is hidden when children are a no", async ({ page }) => {
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "No", exact: true }).click();
   await page.getByRole("button", { name: "See my options" }).click();
-  await expect(page.getByRole("button", { name: "Start here" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Paying for it" })).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "Options", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Financing" })).not.toBeVisible();
 });
 
 test("the risk screen carries the care-team callout", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Just learning for now" }).click();
+  await page.getByRole("button", { name: "My progress" }).click();
   await expect(page.getByRole("button", { name: "Thinking about children, someday?" })).toBeVisible();
   await page.getByRole("button", { name: "Thinking about children, someday?" }).click();
   await expect(page.getByRole("heading", { name: "Not sure? That's worth taking seriously." })).toBeVisible();
   await page.getByRole("button", { name: "Skip for now" }).click();
-  await expect(page.getByRole("button", { name: "Start here" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Options", exact: true })).toBeVisible();
 });
 
 test("the share code round-trips from patient to the team board", async ({ page }) => {
@@ -314,7 +314,7 @@ test("the team board demo and the aid fit check work", async ({ page }) => {
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "See my options" }).click();
-  await page.getByRole("button", { name: "Paying for it", exact: true }).click();
+  await page.getByRole("button", { name: "Financing", exact: true }).click();
   // a 19-year-old pre-treatment: SAMFund (21-39, survivors) lands in unlikely with reasons
   await expect(page.getByText("Probably not a fit for you", { exact: false })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Financial aid programs" })).toBeVisible();
@@ -336,6 +336,8 @@ test("reach out drafts a clinic message with copy and call", async ({ page }) =>
   await page.getByRole("button", { name: "Reach out" }).click();
   await expect(page.getByRole("heading", { name: "A fertility clinic" })).toBeVisible();
   await page.getByRole("button", { name: /HRC Fertility/ }).first().click();
-  await expect(page.getByText("fertility preservation before treatment begins", { exact: false })).toBeVisible();
+  // no stage was given on this lane, so the message must NOT claim "recently diagnosed"
+  await expect(page.getByText("interested in fertility preservation", { exact: false })).toBeVisible();
+  await expect(page.getByText("recently diagnosed")).not.toBeVisible();
   await expect(page.getByRole("button", { name: /Copy message/ })).toBeVisible();
 });
