@@ -154,3 +154,20 @@ IMPORTANT caveat: these are the references cited IN THE PAPER. The per-regimen p
     (heat, smoking, testosterone, cannabis effects on sample and egg quality)? We built it,
     sourced to ASRM and Cleveland Clinic patient pages, but want your read on whether it helps
     preparation or adds stress for newly diagnosed patients.
+
+## Added 2026-11-09: measurement questions for the meeting (RCAC and trial design)
+
+11. **RCAC in a decision-stage tool:** You are an author on both RCAC papers. Could we
+    have permission to use the items in the tool, and which subscales would you use for
+    a tool that serves newly diagnosed patients as well as survivors? The becoming-pregnant
+    items read oddly pre-treatment, and RCAC-M failed structure confirmation in its only
+    validation. What should newly diagnosed users and users with testes get instead?
+12. **Outcome matching:** Which instruments do your telehealth and rural trials use
+    (decisional conflict, knowledge, RCAC, regret, concordance)? We want our pilot's
+    outcomes to match yours so comparison stays possible.
+13. **Sponsorship:** Our mentor suggested a clinician-sponsored pilot (IRB study). Would
+    UCSD or your team sponsor or co-sponsor it, or is the City of Hope survivorship/social
+    work side the right home? We would keep all study data in the sponsor's systems.
+14. **The 4+ flag:** The 2014 paper proposes a subscale mean of 4 or above as a provisional
+    flag. Is that appropriate for routing a consumer-tool user toward mental health
+    resources (per Gorman 2015 on depression), given clinical cutoffs are not validated?
