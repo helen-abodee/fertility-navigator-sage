@@ -16,6 +16,7 @@ import CompareTab from "./CompareTab";
 import CoverageChecker from "./CoverageChecker";
 import ReadMore from "./ReadMore";
 import ReachOut from "./ReachOut";
+import AskSection from "./AskSection";
 import { track } from "../lib/analytics";
 import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
@@ -119,7 +120,7 @@ export default function ResultsView({
   const [reflecting, setReflecting] = useState(false);
   const [costOption, setCostOption] = useState<PreservationOption | null>(null);
   const [visited, setVisited] = useState<Tab[]>(["options"]);
-  const [panel, setPanel] = useState<"progress" | "reach" | null>(null);
+  const [panel, setPanel] = useState<"progress" | "reach" | "ask" | null>(null);
   const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip };
   const moneyUnlocked = browsing || feelings !== "no";
   const activeTabs = tabs.filter((t) => t.id !== "money" || moneyUnlocked);
@@ -148,6 +149,26 @@ export default function ResultsView({
 
   if (openOption) {
     return <OptionDetail option={openOption} onClose={() => setOpenOption(null)} />;
+  }
+
+  if (panel === "ask") {
+    return (
+      <AskSection
+        answers={answersForProfile}
+        onClose={() => setPanel(null)}
+        onNavigate={(target) => {
+          if (target === "progress") {
+            setPanel("progress");
+          } else if (target === "reflect") {
+            setPanel(null);
+            setReflecting(true);
+          } else {
+            setPanel(null);
+            goTab(target as Tab);
+          }
+        }}
+      />
+    );
   }
 
   if (panel === "reach") {
@@ -539,9 +560,9 @@ export default function ResultsView({
             <span className="text-accent-ink"><Icon name="heart" size={20} /></span>
             <span className="text-[0.68rem] font-bold">Reach out</span>
           </button>
-          <button type="button" onClick={downloadSummary} className="flex flex-col items-center gap-0.5 py-2.5">
-            <span className="text-accent-ink"><Icon name="clipboard" size={20} /></span>
-            <span className="text-[0.68rem] font-bold">My summary</span>
+          <button type="button" onClick={() => { track("chat_opened"); setPanel("ask"); }} className="flex flex-col items-center gap-0.5 py-2.5">
+            <span className="text-accent-ink"><Icon name="chat" size={20} /></span>
+            <span className="text-[0.68rem] font-bold">Ask</span>
           </button>
         </div>
       </nav>

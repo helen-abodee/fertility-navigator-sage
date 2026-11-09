@@ -129,7 +129,32 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Where I am with this" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Questions for your care team" })).toBeVisible();
   await page.getByRole("button", { name: "Back", exact: true }).click();
-  await expect(page.getByRole("button", { name: "My summary", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Ask", exact: true })).toBeVisible();
+});
+
+test("the ask panel answers from cited sources only", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Just learning for now" }).click();
+  await page.getByRole("button", { name: "Ask", exact: true }).click();
+
+  // a canned question gets a cited card
+  await page.getByRole("button", { name: "Will insurance cover it?" }).click();
+  await expect(page.getByText("California law", { exact: false }).first()).toBeVisible();
+  await expect(page.getByText("Where this comes from").first()).toBeVisible();
+
+  // free text about risk routes to the pointer, never a number
+  await page.getByRole("textbox", { name: "Type a question" }).fill("what are my chances of being infertile");
+  await page.getByRole("button", { name: "Send question" }).click();
+  await expect(page.getByText("not a personal prediction", { exact: false })).toBeVisible();
+
+  // out-of-corpus is an honest no
+  await page.getByRole("textbox", { name: "Type a question" }).fill("zxcvb plugh");
+  await page.getByRole("button", { name: "Send question" }).click();
+  await expect(page.getByText("no sourced answer", { exact: false })).toBeVisible();
+
+  // deep link lands on the Financing tab
+  await page.getByRole("button", { name: /Open Financing/ }).first().click();
+  await expect(page.getByRole("heading", { name: "Will insurance pay for this?" })).toBeVisible();
 });
 
 test("Medi-Cal survivors get the honest verdict", async ({ page }) => {

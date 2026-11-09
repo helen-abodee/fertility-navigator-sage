@@ -25,6 +25,9 @@ export const ALLOWED_EVENTS = [
   "send_progress",
   "reach_out_opened",
   "summary_downloaded",
+  "chat_opened",
+  "chat_question_answered",
+  "chat_no_answer",
 ] as const;
 
 export type AppEvent = (typeof ALLOWED_EVENTS)[number];

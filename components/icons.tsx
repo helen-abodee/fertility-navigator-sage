@@ -113,6 +113,12 @@ const paths: Record<string, React.ReactNode> = {
       <circle cx="18" cy="11" r="2.2" />
     </>
   ),
+  chat: (
+    <>
+      <path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-5 4v-4" />
+      <path d="M8 9h8M8 12.5h5" />
+    </>
+  ),
   dollar: (
     <>
       <circle cx="12" cy="12" r="8.5" />
