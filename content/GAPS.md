@@ -66,3 +66,14 @@ Facts the spec or drafts wanted that no approved source supports. Each was left 
 
 - Sending patient data to the care team (needs BAA + backend).
 - Any personal probability or recommendation output from the risk module.
+
+## 18. ASCO 2025 methods deliberately not in the tool yet (mapped 2026-11-09)
+From the recommendation-by-recommendation map against Su et al., JCO 2025 (10.1200/JCO-24-02782):
+- In vitro maturation of oocytes (Rec 4.4, emerging, conditional). Low availability; unknown live-birth rates in cancer survivors. Decide with Dr. Su whether to list it as "emerging."
+- Uterine transposition (Rec 4.6): experimental, clinical trials only. Out of scope.
+- Fertility-sparing cancer surgery (Rec 4.7: trachelectomy, progestin therapy for early endometrial cancer, fertility-sparing surgery for early ovarian cancer). These are treatment-selection decisions made with the oncologist, not preservation procedures a patient initiates; the tool does not cover them. Worth a pointer for cervical/uterine/ovarian cancer types if Dr. Su agrees.
+- Testicular tissue cryopreservation (Rec 3.4/5.1): investigational, prepubertal males only; tool audience is 15 to 45 and the survey assumes puberty. Out of scope.
+- Post-treatment sperm banking for survivors: ASCO 4.3 covers post-treatment egg/embryo freezing (included); the male analog is not an ASCO recommendation in the set we read. Survivors with testes currently get the fertility-check guidance instead. Ask Dr. Su what survivors should be told about banking after recovery.
+
+## 19. JCO full text still unread
+ascopubs.org 403s; the recommendation set came verbatim from the COG endorsement PDF. The JCO discussion sections and any data supplement tables (the #sec-5 anchor Helen sent) have not been read directly. If Helen saves the article as PDF and drops it in the repo, reconcile the memo against it.

@@ -66,8 +66,8 @@ export const options: PreservationOption[] = [
     },
 
     expectations:
-      "Not every egg collected will be mature enough to freeze, and frozen eggs do not guarantee a pregnancy later. Results vary from person to person. Storage is billed every year, and there are added costs later if you thaw and use the eggs.",
-    expectationsCitations: [asrmJourney(), mskPreTreatment()],
+      "Freezing eggs rather than embryos may fit especially well if you do not have a partner, do not want to use donor sperm, or prefer not to create embryos. Not every egg collected will be mature enough to freeze, and frozen eggs do not guarantee a pregnancy later. Results vary from person to person. Storage is billed every year, and there are added costs later if you thaw and use the eggs.",
+    expectationsCitations: [asco("4.2"), asrmJourney(), mskPreTreatment()],
     costs: [
       {
         label: "One egg freezing cycle",
@@ -180,7 +180,7 @@ export const options: PreservationOption[] = [
     citations: [asco("3.1")],
     audience: {
       anatomy: ["testes"],
-      stages: ["not_started"],
+      stages: ["not_started", "in_treatment"],
     },
     audienceCitations: [asco("3.1"), asco("3.5")],
     steps: [
@@ -202,7 +202,7 @@ export const options: PreservationOption[] = [
       {
         title: "More samples if time allows",
         icon: "calendar",
-        body: "Banks usually suggest 3 samples, scheduled 2 to 3 days apart. If treatment starts soon, you can collect with only 1 day between samples. Even 1 or 2 samples is helpful.",
+        body: "Banks usually suggest at least 3 samples, scheduled 2 to 3 days apart, and collecting as many as time allows before treatment. If treatment starts soon, you can collect with only 1 day between samples. Even 1 or 2 samples is helpful.",
       },
       {
         title: "Freezing and storage",
@@ -224,7 +224,7 @@ export const options: PreservationOption[] = [
     },
 
     expectations:
-      "Any banked sperm can offer a chance at biological parenthood later, and a low sperm count should not stop you from banking. A lab method called ICSI can use a very small amount of sperm. Frozen sperm can be stored indefinitely; sperm frozen for over 20 years have been used to create pregnancies. Storage is billed every year. Banking does not guarantee a pregnancy later.",
+      "Doctors advise banking before the first dose of treatment when possible: even a single treatment can affect sperm quality and the DNA inside sperm, and samples collected soon after treatment starts or ends carry a higher risk of genetic damage. If treatment has already started, banking can still be worth discussing with your care team. Any banked sperm can offer a chance at biological parenthood later, and a low sperm count should not stop you from banking. A lab method called ICSI can use a very small amount of sperm. Frozen sperm can be stored indefinitely; sperm frozen for over 20 years have been used to create pregnancies. Storage is billed every year. Banking does not guarantee a pregnancy later.",
     expectationsCitations: [asco("3.1"), asco("3.5"), asrmSperm(), mskSpermBanking()],
     costs: [
       {

@@ -36,6 +36,28 @@ const menjivarDelay = () =>
 
 export const guidance: GuidanceSection[] = [
   {
+    id: "no_hormone_protection_males",
+    audience: { anatomy: ["testes"] },
+    heading: "Is there a medicine that protects sperm during treatment?",
+    paragraphs: [
+      {
+        text: "No. Hormone suppression therapy does not preserve fertility in males. It is not effective, and the ASCO guideline says it should not be offered for this purpose. Banking sperm before treatment is the recommended path.",
+        citations: [asco("3.3"), asco("3.1")],
+      },
+    ],
+  },
+  {
+    id: "hormone_shots_cancer_safety",
+    audience: { anatomy: ["ovaries_uterus"] },
+    heading: "Do the hormone shots feed hormone-sensitive cancers?",
+    paragraphs: [
+      {
+        text: "This worry comes up a lot with breast and gynecologic cancers. For these cancers, clinics use stimulation protocols built around a medicine called an aromatase inhibitor, which keeps estrogen levels lower during the egg collection cycle. These protocols are well established, and studies have not found an increased risk of the cancer coming back because of them. Your oncologist and fertility doctor plan this together.",
+        citations: [asco("4.1"), asco("4.2")],
+      },
+    ],
+  },
+  {
     id: "lgbtq_coverage",
     audience: {},
     heading: "If you're LGBTQ+",
