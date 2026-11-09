@@ -52,8 +52,9 @@ export default function AskSection({
   }
 
   return (
-    <div className="bg-paper fixed inset-0 z-50 flex flex-col overflow-y-auto">
-      <div className="mx-auto flex min-h-full w-full max-w-md flex-1 flex-col gap-4 px-6 pt-6 pb-28">
+    <div className="bg-paper fixed inset-0 z-50 flex flex-col">
+      <div className="flex-1 overflow-y-auto">
+        <div className="mx-auto flex w-full max-w-md flex-col gap-4 px-6 pt-6 pb-6">
         <button
           type="button"
           onClick={onClose}
@@ -127,7 +128,8 @@ export default function AskSection({
             </section>
           ),
         )}
-        <div ref={endRef} />
+          <div ref={endRef} />
+        </div>
       </div>
 
       <form
@@ -135,7 +137,7 @@ export default function AskSection({
           e.preventDefault();
           submit(draft);
         }}
-        className="border-line bg-card fixed right-0 bottom-0 left-0 border-t"
+        className="border-line bg-card border-t"
       >
         <div className="mx-auto flex max-w-md items-center gap-2 px-4 py-3">
           <input
