@@ -157,6 +157,18 @@ test("the ask panel answers from cited sources only", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Will insurance pay for this?" })).toBeVisible();
 });
 
+test("an out-of-state plan gets its state's AFP-tracked verdict", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Just learning for now" }).click();
+  await page.getByRole("button", { name: "Financing", exact: true }).click();
+  await page.getByRole("button", { name: "My job" }).click();
+  await page.getByRole("button", { name: "No, another state" }).click();
+  await page.getByLabel("Plan state").selectOption("NY");
+  await page.getByRole("button", { name: "Fully insured" }).click();
+  await expect(page.getByText("New York has a fertility preservation coverage law")).toBeVisible();
+  await expect(page.getByText("Per the Alliance for Fertility Preservation", { exact: false })).toBeVisible();
+});
+
 test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "I finished cancer treatment" }).click();

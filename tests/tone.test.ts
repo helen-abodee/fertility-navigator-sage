@@ -56,6 +56,10 @@ function collectAllText(): string {
   }
   // Exercise every coverage branch.
   const coverageInputs: CoverageInput[] = [
+    { channel: "job", basedInCalifornia: "no", planState: "NY", funding: "fully_insured" },
+    { channel: "job", basedInCalifornia: "no", planState: "TX", funding: "fully_insured" },
+    { channel: "job", basedInCalifornia: "no", planState: "WY", funding: "fully_insured" },
+    { channel: "job", basedInCalifornia: "no", planState: "NY", funding: "self_funded" },
     { channel: "medi_cal" },
     { channel: "medicare" },
     { channel: "military_active" },

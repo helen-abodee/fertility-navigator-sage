@@ -1,6 +1,6 @@
 # Fertility Preservation Navigator: LLM grounding corpus
 
-Generated from the app content on 2026-11-09. Regenerate: WRITE_LLM_GROUNDING=1 npx vitest run tests/llm-grounding.gen.test.ts
+Generated from the app content on 2026-11-10. Regenerate: WRITE_LLM_GROUNDING=1 npx vitest run tests/llm-grounding.gen.test.ts
 
 ## ANSWER RULES (non-negotiable, enforced again by the output filter)
 
@@ -107,6 +107,11 @@ No. Hormone suppression therapy does not preserve fertility in males. It is not 
 
 ### Do the hormone shots feed hormone-sensitive cancers?
 This worry comes up a lot with breast and gynecologic cancers. For these cancers, clinics use stimulation protocols built around a medicine called an aromatase inhibitor, which keeps estrogen levels lower during the egg collection cycle. These protocols are well established, and studies have not found an increased risk of the cancer coming back because of them. Your oncologist and fertility doctor plan this together. [ASCO 2025 Fertility Preservation Guideline, Recommendation 4.1 (via COG endorsement) (2025-03-19); ASCO 2025 Fertility Preservation Guideline, Recommendation 4.2 (via COG endorsement) (2025-03-19)]
+
+### Plan based outside California? More than 20 states have their own law
+The Alliance for Fertility Preservation tracks every state's fertility preservation insurance law on a live map, with each state's bills, what plans must cover, and what is excluded. The coverage checker above uses their tracking for other states. Federal employee plans (FEHB) cover sperm and egg freezing with storage, and the Veterans Health Administration covers fertility preservation too, per the same tracking. [Alliance for Fertility Preservation coverage map (2026-11-10); Alliance for Fertility Preservation: FEHB (2026-11-10); Alliance for Fertility Preservation: VHA (2026-11-10)]
+- Open the state coverage map: allianceforfertilitypreservation.org/resources/coverage-map
+- Their financial assistance list: allianceforfertilitypreservation.org/expenses/financial-assistance-programs
 
 ### If you're LGBTQ+
 California's SB 729 defines infertility to include the inability to reproduce either as an individual or with your partner, and bars plans from limiting coverage based on marital status or sexual orientation. In plain terms: not having a partner who produces the other half of an embryo counts, by law. [SB 729 chaptered text (2024), via CalMatters Digital Democracy; RESOLVE: Understanding California's IVF insurance law]

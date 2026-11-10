@@ -1,5 +1,6 @@
 import type { Citation, TreatmentStage } from "./types";
 import { d4, sb729 } from "../content/app/citations";
+import { afpCite, coverageForState, PLAN_LABELS, SERVICE_LABELS } from "../content/app/state-coverage";
 
 /**
  * Coverage checker: maps granular insurance answers to a likely-coverage
@@ -30,6 +31,8 @@ export interface CoverageInput {
   /** matters for SB 729 (survivors) */
   employerSize?: "small" | "large" | "unknown";
   basedInCalifornia?: "yes" | "no" | "unknown";
+  /** two-letter state when the plan is based outside California */
+  planState?: string;
   stage?: TreatmentStage;
 }
 
@@ -148,10 +151,60 @@ export function assessCoverage(input: CoverageInput): CoverageVerdict {
 
   // Employer or self-bought commercial plans from here.
   if (input.basedInCalifornia === "no") {
+    const sc = input.planState ? coverageForState(input.planState) : undefined;
+
+    // State laws never bind self-funded employer plans (federal ERISA rule).
+    if (sc && input.channel === "job" && input.funding === "self_funded") {
+      return {
+        verdict: "likely_not_covered",
+        headline: `Self-funded plans don't have to follow ${sc.name}'s law`,
+        body: "When an employer pays claims itself (self-funded), state coverage laws don't apply. Some employers still choose to include the benefit, so it is worth one call.",
+        steps: [
+          { label: "Still ask", detail: "Some self-funded employers include fertility benefits voluntarily. Ask HR or the plan." },
+          AID,
+        ],
+        citations: [d4(4), afpCite(`Alliance for Fertility Preservation: ${sc.name}`, sc.afpPath)],
+      };
+    }
+
+    if (sc) {
+      const noteBits: string[] = [];
+      if (sc.notes.includes("cancer_only")) noteBits.push("The law applies when a medical treatment, like cancer treatment, can cause infertility.");
+      if (sc.notes.includes("cancer_and_specific")) noteBits.push("The law applies to cancer and certain other diagnoses.");
+      if (sc.notes.includes("large_group_only")) noteBits.push("It covers large employer plans only.");
+      if (sc.notes.includes("religious_exemption")) noteBits.push("Plans from religious employers can be exempt.");
+      if (sc.notes.includes("no_prior_auth")) noteBits.push("The law bars plans from requiring prior authorization for this.");
+      return {
+        verdict: "likely_covered",
+        headline: `${sc.name} has a fertility preservation coverage law`,
+        body: `Per the Alliance for Fertility Preservation's tracking, it reaches ${sc.plans.map((pl) => PLAN_LABELS[pl]).join(", ")}, and covers ${sc.services.map((sv) => SERVICE_LABELS[sv]).join(", ")}. ${noteBits.join(" ")} Verify with your plan before scheduling.`.trim(),
+        steps: [
+          { label: "Read your state's page", detail: `The Alliance for Fertility Preservation keeps ${sc.name}'s bill details and history: allianceforfertilitypreservation.org${sc.afpPath}` },
+          CALL_SCRIPT,
+          WRITE_IT_DOWN,
+        ],
+        citations: [afpCite(`Alliance for Fertility Preservation: ${sc.name} coverage`, sc.afpPath), afpCite("Alliance for Fertility Preservation coverage map", "/resources/coverage-map/"), d4(4)],
+      };
+    }
+
+    if (input.planState) {
+      return {
+        verdict: "likely_not_covered",
+        headline: "No state fertility preservation law there yet",
+        body: "That state does not require plans to cover fertility preservation, per the Alliance for Fertility Preservation's tracking. Some plans include it anyway, and financial aid programs can help.",
+        steps: [
+          { label: "Still ask your plan", detail: "Coverage without a mandate exists. One call settles it." },
+          AID,
+          { label: "Check for new laws", detail: "Laws change; the Alliance for Fertility Preservation's map stays current: allianceforfertilitypreservation.org/resources/coverage-map/" },
+        ],
+        citations: [afpCite("Alliance for Fertility Preservation coverage map", "/resources/coverage-map/"), d4(4)],
+      };
+    }
+
     return {
       verdict: "depends",
       headline: "Depends on your plan's state",
-      body: "Coverage laws are state by state: 20 states and DC require some fertility preservation coverage. What matters is the state your plan is based in, not where you live.",
+      body: "Coverage laws are state by state: more than 20 states and DC require some fertility preservation coverage. What matters is the state your plan is based in, not where you live.",
       steps: [
         { label: "Ask what state your plan is based in", detail: "Then check that state on the Alliance for Fertility Preservation's law map (allianceforfertilitypreservation.org)." },
         CALL_SCRIPT,

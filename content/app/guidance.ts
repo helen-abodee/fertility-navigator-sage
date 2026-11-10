@@ -1,4 +1,5 @@
 import type { GuidanceSection } from "../../lib/content-schema";
+import { afpCite } from "./state-coverage";
 import {
   acsTeens,
   asco,
@@ -54,6 +55,33 @@ export const guidance: GuidanceSection[] = [
       {
         text: "This worry comes up a lot with breast and gynecologic cancers. For these cancers, clinics use stimulation protocols built around a medicine called an aromatase inhibitor, which keeps estrogen levels lower during the egg collection cycle. These protocols are well established, and studies have not found an increased risk of the cancer coming back because of them. Your oncologist and fertility doctor plan this together.",
         citations: [asco("4.1"), asco("4.2")],
+      },
+    ],
+  },
+  {
+    id: "afp_state_map",
+    audience: {},
+    heading: "Plan based outside California? More than 20 states have their own law",
+    paragraphs: [
+      {
+        text: "The Alliance for Fertility Preservation tracks every state's fertility preservation insurance law on a live map, with each state's bills, what plans must cover, and what is excluded. The coverage checker above uses their tracking for other states. Federal employee plans (FEHB) cover sperm and egg freezing with storage, and the Veterans Health Administration covers fertility preservation too, per the same tracking.",
+        citations: [
+          afpCite("Alliance for Fertility Preservation coverage map", "/resources/coverage-map/"),
+          afpCite("Alliance for Fertility Preservation: FEHB", "/states/fehb/"),
+          afpCite("Alliance for Fertility Preservation: VHA", "/states/vha/"),
+        ],
+      },
+    ],
+    actions: [
+      {
+        label: "Open the state coverage map",
+        detail: "allianceforfertilitypreservation.org/resources/coverage-map",
+        citations: [afpCite("Alliance for Fertility Preservation coverage map", "/resources/coverage-map/")],
+      },
+      {
+        label: "Their financial assistance list",
+        detail: "allianceforfertilitypreservation.org/expenses/financial-assistance-programs",
+        citations: [afpCite("Alliance for Fertility Preservation: financial assistance programs", "/expenses/financial-assistance-programs/")],
       },
     ],
   },

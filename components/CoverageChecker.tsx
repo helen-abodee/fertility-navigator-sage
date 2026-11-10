@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { CoverageInput } from "../lib/coverage";
 import { assessCoverage } from "../lib/coverage";
+import { coverageForState, US_STATES } from "../content/app/state-coverage";
 import type { InsuranceType, TreatmentStage } from "../lib/types";
 import Cite from "./Cite";
 import { track } from "../lib/analytics";
@@ -12,7 +13,7 @@ import { track } from "../lib/analytics";
  * with personalized next steps. Never asks for IDs or plan names.
  */
 
-type Phase = "channel" | "state" | "funding" | "size" | "military" | "verdict";
+type Phase = "channel" | "state" | "which_state" | "funding" | "size" | "military" | "verdict";
 
 const chip =
   "border-line bg-card rounded-full border-[1.5px] px-4 py-2.5 text-sm font-bold text-left";
@@ -50,8 +51,15 @@ export default function CoverageChecker({
   function pickState(v: "yes" | "no" | "unknown") {
     const next = { ...input, basedInCalifornia: v };
     setInput(next);
-    if (v === "no") setPhase("verdict");
+    if (v === "no") setPhase("which_state");
     else if (next.channel === "job") setPhase("funding");
+    else setPhase("verdict");
+  }
+
+  function pickPlanState(abb: string) {
+    const next = { ...input, planState: abb || undefined };
+    setInput(next);
+    if (next.channel === "job" && abb && coverageForState(abb)) setPhase("funding");
     else setPhase("verdict");
   }
 
@@ -145,10 +153,30 @@ export default function CoverageChecker({
           </div>
         </>
       )}
+      {phase === "which_state" && (
+        <>
+          <p className="font-bold">Which state is the plan based in?</p>
+          <p className="text-muted mt-1 text-sm">The state on your insurance card or plan documents, not where you live.</p>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <select
+              aria-label="Plan state"
+              defaultValue=""
+              onChange={(e) => { if (e.target.value) pickPlanState(e.target.value); }}
+              className="border-line bg-card min-h-12 rounded-xl border px-3 text-sm"
+            >
+              <option value="" disabled>Pick a state</option>
+              {US_STATES.map((st) => (
+                <option key={st.abb} value={st.abb}>{st.name}</option>
+              ))}
+            </select>
+            <button type="button" className={chip} onClick={() => pickPlanState("")}>I don't know</button>
+          </div>
+        </>
+      )}
       {phase === "funding" && (
         <>
           <p className="font-bold">Is the plan self-funded or fully insured?</p>
-          <p className="text-muted mt-1 text-sm">HR answers this routinely. It decides whether California's law applies.</p>
+          <p className="text-muted mt-1 text-sm">HR answers this routinely. It decides whether the state coverage law applies.</p>
           <div className="mt-3 flex flex-wrap gap-2">
             <button type="button" className={chip} onClick={() => pickFunding("fully_insured")}>Fully insured</button>
             <button type="button" className={chip} onClick={() => pickFunding("self_funded")}>Self-funded</button>
