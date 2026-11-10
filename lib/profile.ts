@@ -30,6 +30,24 @@ export function supabase(): SupabaseClient | null {
   return client;
 }
 
+/**
+ * The default Supabase email sends a LINK, not a code. When that link lands
+ * back on the site with tokens in the URL hash, creating the client (which
+ * has detectSessionInUrl on by default) stores the session; we then scrub
+ * the tokens from the address bar. Returns true when a sign-in just landed.
+ */
+export async function completeLinkSignIn(): Promise<boolean> {
+  if (typeof window === "undefined") return false;
+  if (!window.location.hash.includes("access_token")) return false;
+  const sb = supabase();
+  if (!sb) return false;
+  // give the client a tick to parse and persist the hash session
+  await new Promise((r) => setTimeout(r, 300));
+  const { data } = await sb.auth.getUser();
+  window.history.replaceState(null, "", window.location.pathname);
+  return Boolean(data.user);
+}
+
 export async function requestLoginCode(email: string): Promise<boolean> {
   const sb = supabase();
   if (!sb) return false;

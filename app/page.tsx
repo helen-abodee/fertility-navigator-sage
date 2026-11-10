@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Icon from "../components/icons";
+import { completeLinkSignIn } from "../lib/profile";
 
 export default function Home() {
   const [agreed, setAgreed] = useState(false);
@@ -10,10 +11,12 @@ export default function Home() {
   // hydration time can miss the error event entirely and leave a broken frame.
   const [hasArt, setHasArt] = useState(false);
   const router = useRouter();
+  const [signedIn, setSignedIn] = useState(false);
   useEffect(() => {
     const probe = new window.Image();
     probe.onload = () => setHasArt(true);
     probe.src = "/landing.jpg";
+    completeLinkSignIn().then(setSignedIn);
   }, []);
 
   return (
@@ -23,6 +26,11 @@ export default function Home() {
         <img src="/landing.jpg" alt="" className="border-line mb-6 h-44 w-full rounded-2xl border object-cover" />
       )}
 
+      {signedIn && (
+        <p className="bg-accent-tint text-accent-ink mb-4 rounded-xl px-4 py-3 text-sm font-bold">
+          Signed in. Return to your other tab and tap &ldquo;I opened the link&rdquo;, or continue here.
+        </p>
+      )}
       <p className="text-accent-ink text-xs font-bold tracking-[0.14em] uppercase">
         For young adults facing cancer
       </p>

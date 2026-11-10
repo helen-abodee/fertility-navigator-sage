@@ -83,11 +83,11 @@ export default function ProfileSection({ answers }: { answers: Answers }) {
                 const ok = await requestLoginCode(email);
                 setBusy(false);
                 if (ok) setPhase("code");
-                else setNotice("Couldn't send a code, check the address");
+                else setNotice("Couldn't send the email, check the address");
               }}
               className="bg-accent text-accent-contrast rounded-lg px-4 text-sm font-bold disabled:opacity-60"
             >
-              {busy ? "..." : "Get code"}
+              {busy ? "..." : "Email me a link"}
             </button>
           </div>
         </div>
@@ -95,7 +95,24 @@ export default function ProfileSection({ answers }: { answers: Answers }) {
 
       {phase === "code" && (
         <div className="mt-3">
-          <p className="text-sm">We emailed a 6-digit code to {email}.</p>
+          <p className="text-sm">We emailed a sign-in link to {email}. Open it on this device, then come back here.</p>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              const who = await currentUserEmail();
+              setBusy(false);
+              if (who) {
+                setWho(who);
+                setPhase("consent");
+              } else setNotice("Not signed in yet. Open the emailed link first, then tap this again.");
+            }}
+            className="bg-accent text-accent-contrast mt-2 min-h-11 w-full rounded-lg px-4 text-sm font-bold disabled:opacity-60"
+          >
+            I opened the link
+          </button>
+          <p className="text-muted mt-3 text-xs">If your email shows a 6-digit code instead, enter it here.</p>
           <div className="mt-2 flex gap-2">
             <input
               value={code}
