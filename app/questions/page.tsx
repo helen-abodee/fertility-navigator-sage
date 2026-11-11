@@ -209,6 +209,7 @@ export default function QuestionsPage() {
         def={def}
         stepIndex={Math.max(0, seq.indexOf(current as QuestionId))}
         stepCount={seq.length}
+        section={section}
         initialValue={answers[def.field]}
         onAnswer={answer}
         onSkip={def.skippable ? () => answer(def.kind === "number" ? undefined : null) : undefined}

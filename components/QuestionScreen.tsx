@@ -8,6 +8,8 @@ interface Props {
   def: QuestionDef;
   stepIndex: number;
   stepCount: number;
+  /** survey section 1-3, drives the left rail */
+  section?: number;
   initialValue?: unknown;
   onAnswer: (value: unknown) => void;
   onSkip?: () => void;
@@ -18,6 +20,7 @@ export default function QuestionScreen({
   def,
   stepIndex,
   stepCount,
+  section = 1,
   initialValue,
   onAnswer,
   onSkip,
@@ -51,9 +54,45 @@ export default function QuestionScreen({
     }
   }
 
+  const SECTIONS = [
+    { n: 1, label: "Facts" },
+    { n: 2, label: "You" },
+    { n: 3, label: "Plans" },
+  ];
+
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-md flex-col px-6 py-8">
-      <div className="mb-5 flex items-center justify-between">
+    <div className="mx-auto flex min-h-screen w-full max-w-md gap-4 px-5 py-8">
+      {/* Left progress rail: where you are, and how much is left. */}
+      <aside
+        className="flex w-11 shrink-0 flex-col items-center pt-12"
+        aria-label={`Question ${stepIndex + 1} of ${stepCount}, section ${section} of 3`}
+      >
+        {SECTIONS.map((sec, i) => (
+          <div key={sec.n} className="flex flex-col items-center">
+            {i > 0 && <span className={`my-1 h-7 w-0.5 rounded-full ${section >= sec.n ? "bg-accent" : "bg-line"}`} />}
+            <span
+              className={`flex h-7 w-7 items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
+                section > sec.n
+                  ? "bg-accent text-accent-contrast border-accent"
+                  : section === sec.n
+                    ? "border-accent text-accent-ink bg-accent-tint"
+                    : "border-line text-muted bg-card"
+              }`}
+            >
+              {section > sec.n ? "\u2713" : sec.n}
+            </span>
+            <span className={`mt-1 text-[0.6rem] font-bold ${section === sec.n ? "text-accent-ink" : "text-muted"}`}>
+              {sec.label}
+            </span>
+          </div>
+        ))}
+        <span className="num text-muted mt-4 text-xs whitespace-nowrap">
+          {stepIndex + 1}/{stepCount}
+        </span>
+      </aside>
+
+      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="mb-4 flex items-center">
         {onBack ? (
           <button
             type="button"
@@ -63,16 +102,8 @@ export default function QuestionScreen({
             &larr; Back
           </button>
         ) : (
-          <span />
+          <span className="py-2 text-sm">&nbsp;</span>
         )}
-        <div className="flex flex-1 gap-1 pl-6" aria-label={`Question ${stepIndex + 1} of ${stepCount}`}>
-          {Array.from({ length: stepCount }).map((_, i) => (
-            <span
-              key={i}
-              className={`h-1 flex-1 rounded-full ${i <= stepIndex ? "bg-accent" : "bg-line"}`}
-            />
-          ))}
-        </div>
       </div>
 
       <h1 className="text-2xl">
@@ -166,6 +197,7 @@ export default function QuestionScreen({
         )}
       </div>
 
+    </div>
     </div>
   );
 }

@@ -22,14 +22,18 @@ export const syncEnabled = Boolean(SYNC_URL && SYNC_KEY);
 
 const ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; // no 0/O/1/I/L
 
-/** Short, say-outloud-able link code like "MKT-4R7". */
+/**
+ * Link code like "MKT4-R7WD": 8 characters from a 31-letter alphabet, about
+ * 850 billion combinations, so it works like an unguessable share link.
+ * (Older 6-character codes from the first pilot days still read fine.)
+ */
 export function newLinkCode(rng: () => number = Math.random): string {
   const pick = () => ALPHABET[Math.floor(rng() * ALPHABET.length)];
-  return `${pick()}${pick()}${pick()}-${pick()}${pick()}${pick()}`;
+  return `${pick()}${pick()}${pick()}${pick()}-${pick()}${pick()}${pick()}${pick()}`;
 }
 
 export function isLinkCode(s: string): boolean {
-  return /^[A-Z2-9]{3}-[A-Z2-9]{3}$/.test(s.trim().toUpperCase());
+  return /^[A-Z2-9]{3,4}-[A-Z2-9]{3,4}$/.test(s.trim().toUpperCase());
 }
 
 /** The wire payload is exactly the share code: stages, outcome, date, plus
@@ -77,10 +81,12 @@ export async function fetchInbox(
 ): Promise<{ code: string; nickname: string; journey: Journey; riskLabel?: string; updatedAt: string }[]> {
   if (!syncEnabled) return [];
   try {
-    const res = await fetch(
-      `${SYNC_URL}/rest/v1/journey_sync?inbox=eq.${encodeURIComponent(inbox.toUpperCase())}&select=code,payload,updated_at`,
-      { headers: { apikey: SYNC_KEY!, Authorization: `Bearer ${SYNC_KEY!}` } },
-    );
+    // Reads go through an exact-code function; the table itself is not listable.
+    const res = await fetch(`${SYNC_URL}/rest/v1/rpc/get_inbox`, {
+      method: "POST",
+      headers: { apikey: SYNC_KEY!, Authorization: `Bearer ${SYNC_KEY!}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_inbox: inbox.toUpperCase() }),
+    });
     if (!res.ok) return [];
     const rows = await res.json();
     if (!Array.isArray(rows)) return [];
@@ -100,10 +106,11 @@ export async function fetchInbox(
 export async function fetchJourney(code: string): Promise<{ nickname: string; journey: Journey; updatedAt: string } | null> {
   if (!syncEnabled) return null;
   try {
-    const res = await fetch(
-      `${SYNC_URL}/rest/v1/journey_sync?code=eq.${encodeURIComponent(code.toUpperCase())}&select=payload,updated_at`,
-      { headers: { apikey: SYNC_KEY!, Authorization: `Bearer ${SYNC_KEY!}` } },
-    );
+    const res = await fetch(`${SYNC_URL}/rest/v1/rpc/get_journey`, {
+      method: "POST",
+      headers: { apikey: SYNC_KEY!, Authorization: `Bearer ${SYNC_KEY!}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_code: code.toUpperCase() }),
+    });
     if (!res.ok) return null;
     const rows = await res.json();
     if (!Array.isArray(rows) || rows.length === 0) return null;
