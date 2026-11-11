@@ -26,6 +26,15 @@ export function d4(page: number): Citation {
  * recommendations verbatim. `rec` is the ASCO recommendation number
  * (e.g. "4.10") or statement label (e.g. "GPS 6.4").
  */
+export function swConsult(): Citation {
+  return {
+    sourceId: "sw-consult-2026",
+    sourceName: "Oncology social work consultation for this tool",
+    sourceDate: "2026-11-11",
+    retrieved: "2026-11-11",
+  };
+}
+
 export function asco(rec: string): Citation {
   return {
     sourceId: "asco-2025",

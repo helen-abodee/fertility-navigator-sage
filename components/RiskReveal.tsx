@@ -37,6 +37,9 @@ export default function RiskReveal({
       <h1 className="text-3xl">{risk.headline}</h1>
       <p className="text-[1.02rem]">{risk.body}</p>
       <AskTeam text={risk.askTeam} />
+      <p className="text-muted text-sm">
+        If this differs from what your doctor told you, bring both to your next appointment. Treatment plans and histories differ in ways this tool cannot see.
+      </p>
       <Cite citations={risk.citations} />
       <button
         type="button"

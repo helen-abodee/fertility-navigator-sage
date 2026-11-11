@@ -64,7 +64,7 @@ export const aid: AidOrg[] = [
     id: "expect_miracles_samfund",
     fit: { minAge: 21, maxAge: 39, stage: "finished" },
     name: "Expect Miracles Foundation SAMFund",
-    what: "Grants for young adult cancer survivors who have finished active treatment. Family Building grants can help pay for fertility treatment and other paths to parenthood after cancer. Grant amounts vary, and not every applicant can be funded.",
+    what: "Grants for young adults with cancer who have finished active treatment. Family Building grants can help pay for fertility treatment and other paths to parenthood after cancer. Grant amounts vary, and not every applicant can be funded.",
     eligibility:
       "Age 21 to 39 at the time of application, with active cancer treatment completed. Applications open twice a year for about 3 weeks each (Family Building grants usually open in March and September). You hear back 6 to 7 weeks after a cycle closes. As of November 2026 the fall cycles are closed, and the next ones open in early 2027.",
     cap: "not published",

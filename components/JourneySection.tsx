@@ -17,6 +17,7 @@ import { encodeShareCode } from "../lib/share";
 import { isLinkCode, newLinkCode, pushJourney, syncEnabled } from "../lib/sync";
 import { contactHref } from "../lib/contact";
 import { track } from "../lib/analytics";
+import { downloadReminder } from "../lib/reminder";
 
 const INBOX_KEY = "navigator.team-inbox.v1";
 
@@ -148,6 +149,29 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
             <span className="text-xs leading-tight font-bold">{o.label}</span>
           </button>
         ))}
+      </div>
+
+      <div className="border-line mt-4 border-t pt-4 print:hidden">
+        <p className="text-sm font-bold">Want a nudge later?</p>
+        <p className="text-muted mt-1 text-sm">
+          Saves a check-in to your own calendar. Nothing is scheduled anywhere else, and you can move or delete it any time.
+        </p>
+        <div className="mt-2 flex gap-2">
+          <button
+            type="button"
+            onClick={() => { track("reminder_saved"); downloadReminder(3); }}
+            className="border-line bg-card min-h-11 flex-1 rounded-xl border px-3 text-sm font-bold"
+          >
+            In about 3 months
+          </button>
+          <button
+            type="button"
+            onClick={() => { track("reminder_saved"); downloadReminder(6); }}
+            className="border-line bg-card min-h-11 flex-1 rounded-xl border px-3 text-sm font-bold"
+          >
+            In about 6 months
+          </button>
+        </div>
       </div>
 
       <div className="border-line mt-4 border-t pt-4 print:hidden">

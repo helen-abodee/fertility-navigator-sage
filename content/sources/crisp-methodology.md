@@ -171,3 +171,10 @@ IMPORTANT caveat: these are the references cited IN THE PAPER. The per-regimen p
 14. **The 4+ flag:** The 2014 paper proposes a subscale mean of 4 or above as a provisional
     flag. Is that appropriate for routing a consumer-tool user toward mental health
     resources (per Gorman 2015 on depression), given clinical cutoffs are not validated?
+
+
+## Added 2026-11-11: permission on record
+
+In the 2026-11-11 meeting, Dr. Irene Su gave Helen verbal permission to use
+CRISP and her related research in this tool. Get it in writing (one email
+line) before public launch; until then this note is the record.

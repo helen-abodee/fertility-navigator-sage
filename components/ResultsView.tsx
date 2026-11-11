@@ -123,7 +123,12 @@ export default function ResultsView({
   const [panel, setPanel] = useState<"progress" | "reach" | "ask" | null>(null);
   const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip };
   const moneyUnlocked = browsing || feelings !== "no";
-  const activeTabs = tabs.filter((t) => t.id !== "money" || moneyUnlocked);
+  // The health tab is for after treatment: at diagnosis it reads as homework
+  // (care-team feedback), so lanes still facing treatment don't see it.
+  const healthUnlocked = stage !== "not_started" && stage !== "in_treatment";
+  const activeTabs = tabs.filter(
+    (t) => (t.id !== "money" || moneyUnlocked) && (t.id !== "health" || healthUnlocked),
+  );
 
   function goTab(next: Tab) {
     track("tab_viewed");
@@ -315,6 +320,9 @@ export default function ResultsView({
         {results.options.length > 0 && (
           <>
             <h2 className="text-lg">Your options</h2>
+            <p className="text-muted mt-1 text-sm">
+              Which method fits you is decided with a fertility specialist at your consult. This list is so you arrive knowing the landscape.
+            </p>
             {results.options.map((o) => (
               <div key={o.id}>
                 <OptionRow option={o} onOpen={() => { track("option_opened"); setOpenOption(o); }} />
@@ -445,6 +453,9 @@ export default function ResultsView({
 
       {/* Health */}
       <div className={`flex flex-col gap-6 ${show("health")}`}>
+        <p className="text-muted text-sm">
+          For the stretch after treatment: everyday factors tied to sperm and egg health. Nothing here is urgent, and none of it is a guarantee.
+        </p>
         <div className="border-line bg-card rounded-xl border p-3">
           <p className="text-[0.92rem]">{honestCaveat.text}</p>
           <Cite citations={honestCaveat.citations} />

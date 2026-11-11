@@ -127,7 +127,12 @@ export const reflectionSteps: ReflectionStep[] = [
     id: "talk_and_time",
     icon: "stethoscope",
     heading: "Who to talk with, and the pressure check",
-    body: "A partner, a parent, a close friend, a counselor, your care team. One more question worth asking yourself, from the Ottawa guide: is anyone pressuring you? Your answer belongs to you. And deciding later is itself a decision you are allowed to make: waiting keeps survivor options and aid programs open, while some pre-treatment options need time before treatment starts. Your care team can tell you how much time you actually have.",
+    body: "A partner, a parent, a close friend, a counselor, your care team. One more question worth asking yourself, from the Ottawa guide: is anyone pressuring you? Expectations can come from different places, and it helps to name each one separately before deciding. Your answer belongs to you. Deciding later is itself a decision you are allowed to make: waiting keeps after-treatment options and aid programs open, while some pre-treatment options need time before treatment starts. Your care team can tell you how much time you actually have.",
+    prompts: [
+      "What do the people closest to me expect?",
+      "What does my culture or community expect?",
+      "When it's just me, what do I want?",
+    ],
     citations: [opdg, beforeAid],
   },
 ];

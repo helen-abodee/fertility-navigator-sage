@@ -105,7 +105,11 @@ export function buildCorpus(): ChatEntry[] {
       text: g.paragraphs.map((p) => p.text).join(" "),
       citations: g.paragraphs.flatMap((p) => p.citations),
       audience: g.audience,
-      keywords: aboutCoverage ? ["insurance", "covered", "coverage", "plan", "law", ...COST_WORDS] : [],
+      keywords: aboutCoverage
+        ? ["insurance", "covered", "coverage", "plan", "law", ...COST_WORDS]
+        : g.id === "ok_to_step_back"
+          ? ["stuck", "overwhelmed", "pause", "break", "later", "therapist", "therapy", "counselor", "support", "scared", "anxious", "stressed", "cope", "stop"]
+          : [],
       goto: aboutCoverage ? { target: "money", label: "Open Financing" } : undefined,
     });
   }

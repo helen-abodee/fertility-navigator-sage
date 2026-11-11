@@ -156,3 +156,11 @@ https://www.theturekclinic.com/male-fertility-preservation/ — private urology 
 1. **COG Health Links (Testicular + Ovarian Reproductive Health, v6.0 2023)** — the authoritative survivorship source naming the exact labs per sex (male: AM testosterone, LH, FSH, inhibin, semen analysis after several days of abstinence; female: FSH, LH, estradiol) and tied to the COG LTFU Guidelines. 2. **MSKCC "Fertility Evaluation After Cancer Treatment"** for AMH + antral follicle count (which COG's female sheet omits) and the citable "wait at least 1 year" timing.
 
 **Rationale.** MSKCC emerges as the backbone for (a) and (b) because it is the only reputable publisher whose pages operate at the altitude this tool needs — actual day counts, abstinence windows, sample schedules, fees — while everything else (NCI, ASRM fact sheets, NCCN, ACS, St. Jude) stays one level up at "what the options are." ASRM earns the co-slot on (a) as the professional society of record whose step-by-step journey independently confirms MSKCC's timelines, insulating us against MSKCC's 2019 review dates on the female pages. For (c), COG + MSKCC together cover every lab in the brief (AMH, FSH, LH) with a defensible answer to "when": the 100-day figure should be dropped as unsourceable at patient-education grade, replaced by MSKCC's one-year guidance. NCI remains worth citing wherever we want to adapt wording outright, because it is the only source with public-domain-friendly reuse terms; NCCN AYA is the best model for decision framing and teen voice even though its procedure detail is coarse. SaveMyFertility and Mayo could not be read (bot walls) and should not be cited until someone verifies them manually.
+
+
+## Added 2026-11-11: Catherine Benedict
+
+Dr. Su recommended Catherine Benedict's work (Stanford; young adult cancer
+survivors' fertility decision-making and decisional conflict). Review her
+decision-aid and RCAC-adjacent papers on the next reflection-path pass; they
+are the same research family the path is built from.

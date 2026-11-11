@@ -51,7 +51,7 @@ export default function ReachOut({
   // never wrong about where they are.
   function templateFor(c: Clinic): string {
     if (stage === "finished") {
-      return `Hello, I am a cancer survivor interested in discussing fertility options. I would like to schedule a consultation at ${c.name}. Please let me know your next available appointments and what records I should bring. Thank you.`;
+      return `Hello, I finished cancer treatment and am interested in discussing fertility options. I would like to schedule a consultation at ${c.name}. Please let me know your next available appointments and what records I should bring. Thank you.`;
     }
     if (stage === "in_treatment") {
       return `Hello, I am currently in cancer treatment and would like to discuss fertility preservation options with a specialist. I would like to schedule an oncofertility consultation at ${c.name}. Please let me know your earliest availability. Thank you.`;

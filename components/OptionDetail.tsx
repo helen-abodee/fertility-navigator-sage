@@ -165,7 +165,7 @@ export default function OptionDetail({
         )}
 
         <p className="text-muted mt-6 text-sm">
-          Costs and coverage live on the "Financing" tab, when you're ready for them.
+          Whether this method is right for you is decided with a fertility specialist at your consult, alongside your cancer care team. Costs and coverage live on the "Financing" tab, when you're ready for them.
         </p>
 
         {/* Honest expectations */}

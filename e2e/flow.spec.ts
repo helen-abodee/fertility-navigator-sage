@@ -120,9 +120,11 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await expect(page.getByText("The money picture")).toBeVisible();
   await expect(page.getByText("The procedure, at published prices")).toBeVisible();
 
-  // Health tab
-  await page.getByRole("button", { name: "Health", exact: true }).click();
-  await expect(page.getByText("Smoking speeds up the loss of eggs", { exact: false })).toBeVisible();
+  // Health is an after-treatment tab now: hidden while still facing treatment
+  await expect(page.getByRole("button", { name: "Health", exact: true })).not.toBeVisible();
+  // The specialist-decides line sits on Options (tab name carries "(visited)" now)
+  await page.getByRole("button", { name: /Options/ }).first().click();
+  await expect(page.getByText("decided with a fertility specialist", { exact: false }).first()).toBeVisible();
 
   // My progress panel now carries the journey, risk recap, and doctor questions
   await page.getByRole("button", { name: "My progress" }).click();
@@ -193,6 +195,10 @@ test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
   await page.getByRole("button", { name: "Financing", exact: true }).click();
   await expect(page.getByText("Medi-Cal does not cover this right now")).toBeVisible();
   await expect(page.getByText("Likely not covered")).toBeVisible();
+
+  // Finished treatment: the Health tab exists for this lane
+  await page.getByRole("button", { name: "Health", exact: true }).click();
+  await expect(page.getByText("For the stretch after treatment", { exact: false })).toBeVisible();
 });
 
 test("the journey tracker records stages and respects deciding not to", async ({ page }) => {

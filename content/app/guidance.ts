@@ -1,5 +1,6 @@
 import type { GuidanceSection } from "../../lib/content-schema";
 import { afpCite } from "./state-coverage";
+import { swConsult } from "./citations";
 import {
   acsTeens,
   asco,
@@ -55,6 +56,21 @@ export const guidance: GuidanceSection[] = [
       {
         text: "This worry comes up a lot with breast and gynecologic cancers. For these cancers, clinics use stimulation protocols built around a medicine called an aromatase inhibitor, which keeps estrogen levels lower during the egg collection cycle. These protocols are well established, and studies have not found an increased risk of the cancer coming back because of them. Your oncologist and fertility doctor plan this together.",
         citations: [asco("4.1"), asco("4.2")],
+      },
+    ],
+  },
+  {
+    id: "ok_to_step_back",
+    audience: {},
+    heading: "Stuck on this decision? Stepping back is allowed",
+    paragraphs: [
+      {
+        text: "Feeling stuck here is common, and it is not a failure. Big decisions during cancer treatment take more than one sitting. You can close this tool and come back in a week; what you entered stays on your device, and nothing expires.",
+        citations: [swConsult()],
+      },
+      {
+        text: "If this topic brings up more than you want to carry alone, that is what the support side of your care team is for. Social workers screen for distress and connect you to help. Psychologists offer talk therapy. Psychiatrists can prescribe medication when that helps. Many centers run support groups just for young adults. You can also ask for a referral to a therapist who works with people with cancer.",
+        citations: [swConsult()],
       },
     ],
   },
@@ -285,7 +301,7 @@ export const guidance: GuidanceSection[] = [
       {
         label: "Ask for a referral to a fertility specialist",
         detail:
-          "ASCO recommends ongoing fertility discussions and referrals during survivorship, including when you are thinking about pregnancy. You do not have to be sure about wanting children to ask.",
+          "ASCO recommends ongoing fertility discussions and referrals in the years after treatment, including when you are thinking about pregnancy. You do not have to be sure about wanting children to ask.",
         citations: [asco("1.4"), asco("1.2")],
       },
     ],
@@ -319,7 +335,7 @@ export const guidance: GuidanceSection[] = [
       {
         label: "Ask for a referral to a fertility specialist",
         detail:
-          "ASCO recommends ongoing fertility discussions and referrals during survivorship. If you banked sperm before treatment, a fertility specialist can review your options for using it.",
+          "ASCO recommends ongoing fertility discussions and referrals in the years after treatment. If you banked sperm before treatment, a fertility specialist can review your options for using it.",
         citations: [asco("1.4"), cogTesticular()],
       },
     ],

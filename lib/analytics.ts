@@ -28,6 +28,7 @@ export const ALLOWED_EVENTS = [
   "chat_opened",
   "chat_question_answered",
   "chat_no_answer",
+  "reminder_saved",
 ] as const;
 
 export type AppEvent = (typeof ALLOWED_EVENTS)[number];
