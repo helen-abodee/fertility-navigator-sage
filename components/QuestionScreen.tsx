@@ -10,6 +10,8 @@ interface Props {
   stepCount: number;
   /** survey section 1-3, drives the left rail */
   section?: number;
+  /** 0..1 progress through each of the three sections, for the rail fill */
+  sectionFill?: number[];
   initialValue?: unknown;
   onAnswer: (value: unknown) => void;
   onSkip?: () => void;
@@ -21,6 +23,7 @@ export default function QuestionScreen({
   stepIndex,
   stepCount,
   section = 1,
+  sectionFill = [0, 0, 0],
   initialValue,
   onAnswer,
   onSkip,
@@ -69,7 +72,14 @@ export default function QuestionScreen({
       >
         {SECTIONS.map((sec, i) => (
           <div key={sec.n} className="flex flex-col items-center">
-            {i > 0 && <span className={`my-1 h-7 w-0.5 rounded-full ${section >= sec.n ? "bg-accent" : "bg-line"}`} />}
+            {i > 0 && (
+              <span className="bg-line relative my-1 h-9 w-1 overflow-hidden rounded-full">
+                <span
+                  className="bg-accent absolute top-0 left-0 w-full rounded-full transition-[height] duration-500 ease-out"
+                  style={{ height: `${Math.round((sectionFill[i - 1] ?? 0) * 100)}%` }}
+                />
+              </span>
+            )}
             <span
               className={`flex h-7 w-7 items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
                 section > sec.n

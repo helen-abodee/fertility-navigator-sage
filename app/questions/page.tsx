@@ -190,6 +190,16 @@ export default function QuestionsPage() {
       : baseDef;
   const seq = questionSequence(answers);
   const section = sectionOf(current);
+  const currentIdx = Math.max(0, seq.indexOf(current as QuestionId));
+  // How far through each section this person is, for the rail's filling bars.
+  const sectionFill = [1, 2, 3].map((n) => {
+    const idxs = seq.map((q, i) => ({ q, i })).filter((x) => sectionOf(x.q) === n);
+    if (idxs.length === 0) return section > n ? 1 : 0;
+    if (section > n) return 1;
+    if (section < n) return 0;
+    const done = idxs.filter((x) => x.i < currentIdx).length;
+    return done / idxs.length;
+  });
 
   function answer(value: unknown) {
     const nextAnswers = { ...answers, [def.field]: value } as Answers;
@@ -210,6 +220,7 @@ export default function QuestionsPage() {
         stepIndex={Math.max(0, seq.indexOf(current as QuestionId))}
         stepCount={seq.length}
         section={section}
+        sectionFill={sectionFill}
         initialValue={answers[def.field]}
         onAnswer={answer}
         onSkip={def.skippable ? () => answer(def.kind === "number" ? undefined : null) : undefined}

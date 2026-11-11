@@ -51,23 +51,20 @@ export async function pushJourney(
 ): Promise<boolean> {
   if (!syncEnabled) return false;
   try {
-    const row: Record<string, string> = {
-      code: code.toUpperCase(),
-      payload: syncPayload(journey, nickname, extras),
-      updated_at: new Date().toISOString(),
-    };
-    // Only include the inbox field when routing to one, so databases that
-    // haven't run migration 0002 yet still accept plain sends.
-    if (inbox && isLinkCode(inbox)) row.inbox = inbox.toUpperCase();
-    const res = await fetch(`${SYNC_URL}/rest/v1/journey_sync?on_conflict=code`, {
+    // Writes, like reads, go through an exact-code function; the table
+    // itself accepts no direct access from the browser at all.
+    const res = await fetch(`${SYNC_URL}/rest/v1/rpc/put_journey`, {
       method: "POST",
       headers: {
         apikey: SYNC_KEY!,
         Authorization: `Bearer ${SYNC_KEY!}`,
         "Content-Type": "application/json",
-        Prefer: "resolution=merge-duplicates",
       },
-      body: JSON.stringify(row),
+      body: JSON.stringify({
+        p_code: code.toUpperCase(),
+        p_payload: syncPayload(journey, nickname, extras),
+        p_inbox: inbox && isLinkCode(inbox) ? inbox.toUpperCase() : null,
+      }),
     });
     return res.ok;
   } catch {
