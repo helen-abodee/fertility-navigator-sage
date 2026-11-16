@@ -22,7 +22,7 @@ export default function Milestone({
   onContinue: () => void;
 }) {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
+    <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
       <span className="bg-accent-tint text-accent-ink animate-pop flex h-16 w-16 items-center justify-center rounded-full">
         <Icon name={icon} size={34} />
       </span>

@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6 py-10">
+    <main className="wash mx-auto flex min-h-dvh max-w-md flex-col justify-center px-6 py-10">
       {hasArt && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src="/landing.jpg" alt="" className="border-line mb-6 h-44 w-full rounded-2xl border object-cover" />

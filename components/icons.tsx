@@ -141,10 +141,13 @@ export default function Icon({
   name,
   size = 24,
   className = "",
+  stroke = 1.8,
 }: {
   name: string;
   size?: number;
   className?: string;
+  /** matched to the bold labels the icons sit beside */
+  stroke?: number;
 }) {
   const content = paths[name] ?? paths.clipboard;
   return (
@@ -154,7 +157,7 @@ export default function Icon({
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.6"
+      strokeWidth={stroke}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

@@ -20,7 +20,7 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
 
   if (step === -1) {
     return (
-      <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
+      <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
         <span className="bg-accent-tint text-accent-ink animate-pop flex h-16 w-16 items-center justify-center rounded-full">
           <Icon name="compass" size={34} />
         </span>
@@ -48,7 +48,7 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
   const last = step === reflectionSteps.length - 1;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col px-6 py-8">
+    <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-6 py-8">
       <div className="mb-5 flex items-center justify-between">
         <button
           type="button"

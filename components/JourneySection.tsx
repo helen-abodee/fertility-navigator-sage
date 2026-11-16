@@ -121,7 +121,7 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
                 track("journey_step_toggled");
                 update(toggleStage(journey, s.id));
               }}
-              className={`min-h-12 rounded-xl border-[1.5px] px-4 py-3 text-left text-[0.98rem] font-bold ${
+              className={`min-h-12 rounded-lg border-[1.5px] px-4 py-3 text-left text-[0.98rem] font-bold ${
                 on ? "border-accent bg-accent-tint" : "border-line bg-card"
               }`}
             >
@@ -160,14 +160,14 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
           <button
             type="button"
             onClick={() => { track("reminder_saved"); downloadReminder(3); }}
-            className="border-line bg-card min-h-11 flex-1 rounded-xl border px-3 text-sm font-bold"
+            className="border-line bg-card min-h-11 flex-1 rounded-lg border px-3 text-sm font-bold"
           >
             In about 3 months
           </button>
           <button
             type="button"
             onClick={() => { track("reminder_saved"); downloadReminder(6); }}
-            className="border-line bg-card min-h-11 flex-1 rounded-xl border px-3 text-sm font-bold"
+            className="border-line bg-card min-h-11 flex-1 rounded-lg border px-3 text-sm font-bold"
           >
             In about 6 months
           </button>

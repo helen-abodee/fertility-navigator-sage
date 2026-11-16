@@ -64,7 +64,7 @@ export default function ReachOut({
 
   return (
     <div className="bg-paper fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-label="Reach out">
-      <div className="mx-auto flex min-h-screen w-full max-w-md flex-col px-6 py-6">
+      <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-6 py-6">
         <button type="button" onClick={onClose} className="text-accent-ink -ml-2 self-start rounded-lg px-2 py-2 text-sm font-bold">
           &larr; Back
         </button>

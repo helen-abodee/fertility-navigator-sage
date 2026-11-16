@@ -75,7 +75,7 @@ export default function QuestionsPage() {
 
   if (resumeOffer) {
     return (
-      <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center gap-4 px-6 py-12">
+      <main className="mx-auto flex min-h-dvh max-w-md flex-col justify-center gap-4 px-6 py-12">
         <h1 className="text-2xl">Pick up where you left off?</h1>
         <button
           type="button"
@@ -105,7 +105,7 @@ export default function QuestionsPage() {
 
   if (current === "milestone_2") {
     return (
-      <div data-survey-section="2" className="bg-paper min-h-screen">
+      <div data-survey-section="2" className="bg-paper min-h-dvh">
         <Milestone
           icon="sprout"
           eyebrow="The medical part is done"
@@ -124,7 +124,7 @@ export default function QuestionsPage() {
 
   if (current === "milestone_3") {
     return (
-      <div data-survey-section="3" className="bg-paper min-h-screen">
+      <div data-survey-section="3" className="bg-paper min-h-dvh">
         <Milestone
           icon="dollar"
           eyebrow="Almost there"
@@ -143,7 +143,7 @@ export default function QuestionsPage() {
 
   if (current === "reflection") {
     return (
-      <div data-survey-section="2" className="bg-paper min-h-screen">
+      <div data-survey-section="2" className="bg-paper min-h-dvh">
         <ReflectionFlow
           onDone={() => {
             const next = nextQuestion(answers, "feelings");
@@ -214,7 +214,7 @@ export default function QuestionsPage() {
   }
 
   return (
-    <div data-survey-section={section} className="bg-paper min-h-screen">
+    <div data-survey-section={section} className="bg-paper min-h-dvh">
       <QuestionScreen
         def={def}
         stepIndex={Math.max(0, seq.indexOf(current as QuestionId))}

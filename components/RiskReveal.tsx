@@ -13,7 +13,7 @@ export default function RiskReveal({
   onContinue: () => void;
 }) {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
+    <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
       <span className="bg-accent-tint text-accent-ink animate-pop self-start rounded-full px-4 py-1.5 text-sm font-bold">
         {risk.label}
       </span>

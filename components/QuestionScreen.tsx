@@ -64,7 +64,7 @@ export default function QuestionScreen({
   ];
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-md gap-4 px-5 py-8">
+    <div className="mx-auto flex min-h-dvh w-full max-w-md gap-4 px-5 py-8">
       {/* Left progress rail: where you are, and how much is left. */}
       <aside
         className="flex w-11 shrink-0 flex-col items-center pt-12"

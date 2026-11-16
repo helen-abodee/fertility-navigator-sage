@@ -6,11 +6,13 @@
  * only; components must reference tokens, never literals.
  */
 :root {
-  --paper: #fafaf8;
-  --card: #ffffff;
-  --ink: #1c2126;
-  --muted: #687076;
-  --line: #e7e8e4;
+  /* Neutrals in OKLCH; borders are ink at low alpha so they blend with any
+     surface behind them instead of reading as a drawn gray line. */
+  --paper: oklch(98.3% 0.0035 106);
+  --card: oklch(100% 0 0);
+  --ink: oklch(23% 0.012 235);
+  --muted: oklch(52% 0.014 230);
+  --line: color-mix(in oklab, oklch(23% 0.012 235) 12%, transparent);
   --accent: #16697a;
   --accent-ink: #125a69;
   --accent-tint: #e2eef1;
@@ -24,16 +26,16 @@
   --cmp-mid-ink: #6d5518;
   --cmp-tough-bg: #f2ddd5;
   --cmp-tough-ink: #85402e;
-  --shadow: 0 1px 2px rgba(40, 48, 41, 0.06), 0 6px 20px rgba(40, 48, 41, 0.07);
+  --shadow: 0 1px 2px oklch(23% 0.012 235 / 0.05), 0 10px 28px -14px oklch(23% 0.012 235 / 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #11181c;
-    --card: #19232a;
-    --ink: #e8edef;
-    --muted: #9aa7ae;
-    --line: #2b3840;
+    --paper: oklch(19.5% 0.015 230);
+    --card: oklch(25% 0.017 230);
+    --ink: oklch(93% 0.006 220);
+    --muted: oklch(72% 0.012 225);
+    --line: color-mix(in oklab, oklch(93% 0.006 220) 14%, transparent);
     --accent: #6fc3d6;
     --accent-ink: #8ed2e2;
     --accent-tint: #16323b;
@@ -47,16 +49,17 @@
     --cmp-mid-ink: #d9bd7a;
     --cmp-tough-bg: #3d2a24;
     --cmp-tough-ink: #dd9f8b;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25);
+    /* Shadows barely read in dark mode; the lighter card surface does the lifting. */
+    --shadow: none;
   }
 }
 
 :root[data-theme="dark"] {
-  --paper: #11181c;
-  --card: #19232a;
-  --ink: #e8edef;
-  --muted: #9aa7ae;
-  --line: #2b3840;
+  --paper: oklch(19.5% 0.015 230);
+  --card: oklch(25% 0.017 230);
+  --ink: oklch(93% 0.006 220);
+  --muted: oklch(72% 0.012 225);
+  --line: color-mix(in oklab, oklch(93% 0.006 220) 14%, transparent);
   --accent: #6fc3d6;
   --accent-ink: #8ed2e2;
   --accent-tint: #16323b;
@@ -70,7 +73,7 @@
     --cmp-mid-ink: #d9bd7a;
     --cmp-tough-bg: #3d2a24;
     --cmp-tough-ink: #dd9f8b;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25);
+  --shadow: none;
 }
 
 @theme inline {
@@ -87,6 +90,22 @@
   --font-heading: var(--font-figtree), "Helvetica Neue", Arial, sans-serif;
   --font-body: var(--font-figtree), "Helvetica Neue", Arial, sans-serif;
   --font-num: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* Every bordered card gets the one soft shadow; inner hairline boxes opt out
+   by not pairing border with bg-card. */
+.bg-card.border,
+.bg-card.border-\[1\.5px\] {
+  box-shadow: var(--shadow);
+}
+
+/* Section-tinted wash that fades in OKLCH, so the middle never goes gray. */
+.wash {
+  background: linear-gradient(
+    in oklch to bottom,
+    color-mix(in oklch, var(--accent-tint) 55%, var(--paper)),
+    var(--paper) 44%
+  );
 }
 
 body {

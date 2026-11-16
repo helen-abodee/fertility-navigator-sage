@@ -146,7 +146,7 @@ export default function ResultsView({
 
   if (reflecting) {
     return (
-      <div data-survey-section="2" className="bg-paper min-h-screen">
+      <div data-survey-section="2" className="bg-paper min-h-dvh">
         <ReflectionFlow onDone={() => setReflecting(false)} />
       </div>
     );
@@ -191,7 +191,7 @@ export default function ResultsView({
   if (panel === "progress") {
     return (
       <div className="bg-paper fixed inset-0 z-50 overflow-y-auto">
-        <div className="mx-auto flex min-h-screen w-full max-w-md flex-col gap-4 px-6 py-6">
+        <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col gap-4 px-6 py-6">
           <button type="button" onClick={() => setPanel(null)} className="text-accent-ink -ml-2 self-start rounded-lg px-2 py-2 text-sm font-bold">
             &larr; Back
           </button>
@@ -229,7 +229,7 @@ export default function ResultsView({
                 {Array.from(new Set(results.doctorQuestions.map((q) => q.category))).map((cat) => {
                   const qs = results.doctorQuestions.filter((q) => q.category === cat);
                   return (
-                    <details key={cat} className="border-line rounded-xl border px-4 py-3 print:hidden">
+                    <details key={cat} className="border-line rounded-lg border px-4 py-3 print:hidden">
                       <summary className="cursor-pointer list-none font-bold">
                         {cat} <span className="text-muted text-sm font-normal">({qs.length})</span>
                         <span className="text-accent-ink float-right" aria-hidden="true">+</span>
