@@ -37,7 +37,7 @@ export const compare: CompareEntry[] = [
   {
     optionId: "egg_freezing",
     cells: {
-      time_needed: { grade: "mid", note: "About 2 to 3 weeks" },
+      time_needed: { grade: "mid", note: "About 2 to 3 weeks once started" },
       what_it_involves: { grade: "mid", note: "Daily shots, then retrieval while asleep" },
       upfront_cost: { grade: "tough", note: "Higher: $12,400 plus about $5,000 medicines" },
       ongoing_cost: { grade: "mid", note: "$200 to $500 per year storage" },
@@ -50,7 +50,7 @@ export const compare: CompareEntry[] = [
   {
     optionId: "embryo_freezing",
     cells: {
-      time_needed: { grade: "mid", note: "About 2 to 3 weeks" },
+      time_needed: { grade: "mid", note: "About 2 to 3 weeks once started" },
       what_it_involves: { grade: "mid", note: "Daily shots, retrieval, lab fertilization" },
       upfront_cost: { grade: "tough", note: "Higher: $12,400 plus about $5,000 medicines" },
       ongoing_cost: { grade: "mid", note: "$200 to $500 per year storage" },

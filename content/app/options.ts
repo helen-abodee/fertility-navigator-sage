@@ -52,7 +52,7 @@ export const options: PreservationOption[] = [
     ],
     stepsCitations: [mskPreTreatment(), asrmJourney(), asco("4.2")],
     timeline:
-      "The timing of the shots no longer depends on your menstrual cycle in most cases, so the process can usually start right away. From first visit to freezing is often about 2 to 3 weeks.",
+      "The medical part, shots to retrieval, takes about 2 weeks once it starts, and no longer has to wait for a menstrual cycle. What published numbers do not count: getting the first appointment, insurance authorization, and clinic scheduling, which vary a lot. Ask the clinic for their real start-to-finish time for cancer patients.",
     plan: {
       segments: [
         { label: "First visit and tests", icon: "clipboard", days: [1, 3] },
@@ -61,7 +61,7 @@ export const options: PreservationOption[] = [
         { label: "Egg retrieval, asleep for it", icon: "rest" },
         { label: "Freezing", icon: "snowflake" },
       ],
-      note: "First visit to freezing is often about 2 to 3 weeks, and scheduling in between can stretch that. Every clinic moves at its own pace, so ask yours for their real timeline.",
+      note: "The medical steps are about 2 weeks; the wait before them varies by clinic, insurance, and season. Every clinic moves at its own pace, so ask yours for their real timeline.",
       citations: [mskPreTreatment(), asrmJourney()],
     },
 
@@ -133,7 +133,7 @@ export const options: PreservationOption[] = [
       },
     ],
     stepsCitations: [mskPreTreatment(), mskAfterTreatment(), asrmJourney()],
-    timeline: "The whole process takes about 2 to 3 weeks.",
+    timeline: "The medical part, shots through fertilization and freezing, takes about 2 to 3 weeks once it starts. Published numbers do not count the wait for a first appointment, insurance authorization, or clinic scheduling. Ask the clinic for their real start-to-finish time for cancer patients.",
     plan: {
       segments: [
         { label: "First visit and tests", icon: "clipboard", days: [1, 3] },
@@ -142,7 +142,7 @@ export const options: PreservationOption[] = [
         { label: "Egg retrieval, asleep for it", icon: "rest" },
         { label: "Fertilization in the lab, then freezing", icon: "flask", days: [5, 6] },
       ],
-      note: "The whole process is often about 2 to 3 weeks, and scheduling in between can stretch that. Ask the clinic for their real timeline.",
+      note: "The medical steps are about 2 to 3 weeks; the wait before them varies by clinic, insurance, and season. Ask the clinic for their real timeline.",
       citations: [mskPreTreatment(), asrmJourney()],
     },
 
