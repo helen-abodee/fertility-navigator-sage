@@ -109,6 +109,10 @@ export default function QuestionsPage() {
         <Milestone
           icon="sprout"
           eyebrow="The medical part is done"
+          onBack={() => {
+            const qs = questionSequence(answers).filter((q) => sectionOf(q) === 1);
+            if (qs.length) setCurrent(qs[qs.length - 1]);
+          }}
           heading="Now the part that's about you"
           body="One question, and there is no wrong answer to it."
           cta="Keep going"
@@ -128,6 +132,11 @@ export default function QuestionsPage() {
         <Milestone
           icon="dollar"
           eyebrow="Almost there"
+          onBack={() => {
+            const qs = questionSequence(answers).filter((q) => sectionOf(q) === 2);
+            if (qs.length) setCurrent(qs[qs.length - 1]);
+            else setCurrent("milestone_2");
+          }}
           heading="Last stretch: the practical side"
           body="Insurance and location, so the results can talk money and places. Still skippable."
           cta="Finish up"
@@ -156,7 +165,16 @@ export default function QuestionsPage() {
   }
 
   if (current === "risk_reveal") {
-    return <RiskReveal risk={assessRisk(answers)} onContinue={() => setCurrent("results")} />;
+    return (
+      <RiskReveal
+        risk={assessRisk(answers)}
+        onContinue={() => setCurrent("results")}
+        onBack={() => {
+          const qs = questionSequence(answers);
+          if (qs.length) setCurrent(qs[qs.length - 1]);
+        }}
+      />
+    );
   }
 
   if (current === "results") {
@@ -221,6 +239,11 @@ export default function QuestionsPage() {
         stepCount={seq.length}
         section={section}
         sectionFill={sectionFill}
+        onJumpSection={(n) => {
+          if (n > section) return;
+          const q = seq.find((x) => sectionOf(x) === n);
+          if (q) setCurrent(q);
+        }}
         initialValue={answers[def.field]}
         onAnswer={answer}
         onSkip={def.skippable ? () => answer(def.kind === "number" ? undefined : null) : undefined}

@@ -8,10 +8,12 @@ interface Props {
   def: QuestionDef;
   stepIndex: number;
   stepCount: number;
-  /** survey section 1-3, drives the left rail */
+  /** survey section 1-3, drives the stepper */
   section?: number;
-  /** 0..1 progress through each of the three sections, for the rail fill */
+  /** 0..1 progress through each of the three sections, for the stepper fill */
   sectionFill?: number[];
+  /** tap a reached section's name to jump back to its first question */
+  onJumpSection?: (section: number) => void;
   initialValue?: unknown;
   onAnswer: (value: unknown) => void;
   onSkip?: () => void;
@@ -24,6 +26,7 @@ export default function QuestionScreen({
   stepCount,
   section = 1,
   sectionFill = [0, 0, 0],
+  onJumpSection,
   initialValue,
   onAnswer,
   onSkip,
@@ -58,51 +61,14 @@ export default function QuestionScreen({
   }
 
   const SECTIONS = [
-    { n: 1, label: "Facts" },
-    { n: 2, label: "You" },
-    { n: 3, label: "Plans" },
+    { n: 1, label: "Risk assessment" },
+    { n: 2, label: "Children" },
+    { n: 3, label: "Insurance" },
   ];
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-md gap-4 px-5 py-8">
-      {/* Left progress rail: where you are, and how much is left. */}
-      <aside
-        className="flex w-11 shrink-0 flex-col items-center pt-12"
-        aria-label={`Question ${stepIndex + 1} of ${stepCount}, section ${section} of 3`}
-      >
-        {SECTIONS.map((sec, i) => (
-          <div key={sec.n} className="flex flex-col items-center">
-            {i > 0 && (
-              <span className="bg-line relative my-1 h-9 w-1 overflow-hidden rounded-full">
-                <span
-                  className="bg-accent absolute top-0 left-0 w-full rounded-full transition-[height] duration-500 ease-out"
-                  style={{ height: `${Math.round((sectionFill[i - 1] ?? 0) * 100)}%` }}
-                />
-              </span>
-            )}
-            <span
-              className={`flex h-7 w-7 items-center justify-center rounded-full border-[1.5px] text-xs font-bold ${
-                section > sec.n
-                  ? "bg-accent text-accent-contrast border-accent"
-                  : section === sec.n
-                    ? "border-accent text-accent-ink bg-accent-tint"
-                    : "border-line text-muted bg-card"
-              }`}
-            >
-              {section > sec.n ? "\u2713" : sec.n}
-            </span>
-            <span className={`mt-1 text-[0.6rem] font-bold ${section === sec.n ? "text-accent-ink" : "text-muted"}`}>
-              {sec.label}
-            </span>
-          </div>
-        ))}
-        <span className="num text-muted mt-4 text-xs whitespace-nowrap">
-          {stepIndex + 1}/{stepCount}
-        </span>
-      </aside>
-
-      <div className="flex min-w-0 flex-1 flex-col">
-      <div className="mb-4 flex items-center">
+    <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-6 py-8">
+      <div className="mb-3 flex items-center justify-between">
         {onBack ? (
           <button
             type="button"
@@ -114,6 +80,42 @@ export default function QuestionScreen({
         ) : (
           <span className="py-2 text-sm">&nbsp;</span>
         )}
+        <span className="num text-muted text-xs" aria-label={`Question ${stepIndex + 1} of ${stepCount}`}>
+          {stepIndex + 1} of {stepCount}
+        </span>
+      </div>
+
+      {/* Full-width section stepper: names you can read, bars that fill as you
+          answer, and reached sections are tappable to go back. */}
+      <div className="mb-6 grid grid-cols-3 gap-2">
+        {SECTIONS.map((sec) => {
+          const reached = sec.n <= section;
+          const fill = sec.n < section ? 1 : sec.n === section ? (sectionFill[sec.n - 1] ?? 0) : 0;
+          return (
+            <button
+              key={sec.n}
+              type="button"
+              disabled={!reached || !onJumpSection}
+              onClick={() => onJumpSection?.(sec.n)}
+              aria-label={`Section ${sec.n}: ${sec.label}${reached ? "" : ", not reached yet"}`}
+              className="text-left disabled:cursor-default"
+            >
+              <span
+                className={`block truncate text-[0.7rem] font-bold tracking-wide ${
+                  sec.n === section ? "text-accent-ink" : reached ? "text-ink underline decoration-dotted" : "text-muted"
+                }`}
+              >
+                {sec.n < section ? "\u2713 " : ""}{sec.label}
+              </span>
+              <span className="bg-line relative mt-1 block h-1.5 overflow-hidden rounded-full">
+                <span
+                  className="bg-accent absolute top-0 left-0 h-full rounded-full transition-[width] duration-500 ease-out"
+                  style={{ width: `${Math.round(fill * 100)}%` }}
+                />
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       <h1 className="text-2xl">
@@ -207,7 +209,6 @@ export default function QuestionScreen({
         )}
       </div>
 
-    </div>
     </div>
   );
 }

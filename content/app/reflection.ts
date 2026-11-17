@@ -129,8 +129,8 @@ export const reflectionSteps: ReflectionStep[] = [
     heading: "Who to talk with, and the pressure check",
     body: "A partner, a parent, a close friend, a counselor, your care team. One more question worth asking yourself, from the Ottawa guide: is anyone pressuring you? Other people can have expectations; the decision is still yours alone, and no one else's expectations are a reason. Deciding later is itself a decision you are allowed to make: waiting keeps after-treatment options and aid programs open, while some pre-treatment options need time before treatment starts. Your care team can tell you how much time you actually have.",
     prompts: [
-      "Is any of what I feel someone else's wish rather than mine?",
-      "If no one expected anything of me, what would I want?",
+      "In my own words, why do I want children, or why not?",
+      "Which of those reasons are mine, and which are other people's hopes for me?",
     ],
     citations: [opdg, beforeAid],
   },

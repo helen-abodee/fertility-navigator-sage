@@ -13,6 +13,7 @@ export default function Milestone({
   body,
   cta,
   onContinue,
+  onBack,
 }: {
   icon: string;
   eyebrow: string;
@@ -20,9 +21,19 @@ export default function Milestone({
   body: string;
   cta: string;
   onContinue: () => void;
+  onBack?: () => void;
 }) {
   return (
-    <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
+    <main className="wash relative mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
+      {onBack && (
+        <button
+          type="button"
+          onClick={onBack}
+          className="text-accent-ink absolute top-6 left-4 rounded-lg px-2 py-2 text-sm font-bold"
+        >
+          &larr; Back
+        </button>
+      )}
       <span className="bg-accent-tint text-accent-ink animate-pop flex h-16 w-16 items-center justify-center rounded-full">
         <Icon name={icon} size={34} />
       </span>
