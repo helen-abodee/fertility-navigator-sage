@@ -95,7 +95,17 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
       </div>
 
       <div className="print:hidden">
-        <ClinicMap clinics={rows.map((r) => r.clinic)} home={home} />
+        <ClinicMap
+          clinics={rows.map((r) => r.clinic)}
+          home={home}
+          onOpenClinic={(id) => {
+            const row = rows.find((r) => r.clinic.id === id);
+            if (row) {
+              track("clinic_detail_opened");
+              setOpen({ clinic: row.clinic, miles: row.miles });
+            }
+          }}
+        />
         {zip && !home && (
           <p className="text-muted mt-1 text-xs">We couldn't place that ZIP code, so distances are hidden.</p>
         )}

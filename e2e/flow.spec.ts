@@ -115,8 +115,8 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await expect(page.getByText("SB 600", { exact: false }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Financial aid programs" })).toBeVisible();
 
-  // Per-option cost, coverage framing first
-  await page.getByRole("button", { name: "Egg freezing", exact: true }).click();
+  // Per-option cost, coverage framing first (picker is a dropdown now)
+  await page.getByLabel("Cost option").selectOption("egg_freezing");
   await expect(page.getByText("The money picture")).toBeVisible();
   await expect(page.getByText("The procedure, at published prices")).toBeVisible();
 
@@ -370,7 +370,7 @@ test("the compare tab grades options side by side in words", async ({ page }) =>
   await expect(page.getByRole("heading", { name: "Compare options side by side" })).toBeVisible();
   await expect(page.getByText("Takes a couple of weeks and real money", { exact: false })).toBeVisible();
   await page.getByRole("button", { name: /Ovarian tissue freezing/ }).first().click();
-  await expect(page.getByText("surgery under anesthesia")).toBeVisible();
+  await expect(page.getByText("Surgery under anesthesia")).toBeVisible();
 });
 
 test("reach out drafts a clinic message with copy and call", async ({ page }) => {

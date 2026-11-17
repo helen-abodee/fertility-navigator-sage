@@ -9,13 +9,15 @@ import type { Coords } from "../lib/distance";
 interface Props {
   clinics: Clinic[];
   home: Coords | null;
+  /** tapping a clinic name in a popup opens our page for it */
+  onOpenClinic?: (clinicId: string) => void;
 }
 
 /**
  * Leaflet + OpenStreetMap tiles: no API key, no tracking. Circle markers avoid
  * Leaflet's bundler-broken default icon images.
  */
-export default function ClinicMap({ clinics, home }: Props) {
+export default function ClinicMap({ clinics, home, onOpenClinic }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
 
@@ -46,6 +48,19 @@ export default function ClinicMap({ clinics, home }: Props) {
     for (const clinic of clinics) {
       for (const loc of clinic.locations) {
         points.push([loc.lat, loc.lng]);
+        // Popup content as a real DOM node so the clinic name is a working
+        // button that opens our page for that clinic.
+        const popup = document.createElement("div");
+        const nameBtn = document.createElement("button");
+        nameBtn.type = "button";
+        nameBtn.textContent = clinic.name;
+        nameBtn.style.cssText =
+          "font-weight:700;text-decoration:underline;color:var(--accent-ink);background:none;border:0;padding:0;cursor:pointer;text-align:left;font-size:0.9rem";
+        nameBtn.onclick = () => onOpenClinic?.(clinic.id);
+        const locEl = document.createElement("div");
+        locEl.textContent = loc.label;
+        popup.appendChild(nameBtn);
+        popup.appendChild(locEl);
         L.circleMarker([loc.lat, loc.lng], {
           radius: 8,
           color: "#125a69",
@@ -53,7 +68,7 @@ export default function ClinicMap({ clinics, home }: Props) {
           fillOpacity: 0.85,
           weight: 2,
         })
-          .bindPopup(`<strong>${clinic.name}</strong><br>${loc.label}`)
+          .bindPopup(popup)
           .addTo(layer);
       }
     }
@@ -69,15 +84,21 @@ export default function ClinicMap({ clinics, home }: Props) {
         .bindPopup("Your area")
         .addTo(layer);
     }
+    // Fit the CLINICS, not the world: the view hugs the clinic cluster, and a
+    // far-away home never drags the map out to a whole-country zoom.
+    const clinicPts = points.slice(0, points.length - (home ? 1 : 0));
     if (home) {
-      // Zoom to the user's area: home plus clinics within roughly 40 miles.
-      const near = points.filter((pt) => {
+      const near = clinicPts.filter((pt) => {
         const [lat, lng] = pt as [number, number];
         return Math.abs(lat - home.lat) < 0.6 && Math.abs(lng - home.lng) < 0.7;
       });
-      map.fitBounds(L.latLngBounds(near.length > 1 ? near : points).pad(0.12), { maxZoom: 11 });
-    } else if (points.length > 0) {
-      map.fitBounds(L.latLngBounds(points).pad(0.1), { maxZoom: 9 });
+      if (near.length > 1) {
+        map.fitBounds(L.latLngBounds([...near, [home.lat, home.lng]]).pad(0.1), { maxZoom: 11 });
+      } else {
+        map.fitBounds(L.latLngBounds(clinicPts).pad(0.06), { maxZoom: 10 });
+      }
+    } else if (clinicPts.length > 0) {
+      map.fitBounds(L.latLngBounds(clinicPts).pad(0.06), { maxZoom: 10 });
     }
     return () => {
       layer.remove();

@@ -16,7 +16,7 @@ import { track } from "../lib/analytics";
 type Phase = "channel" | "state" | "which_state" | "funding" | "size" | "military" | "verdict";
 
 const chip =
-  "border-line bg-card rounded-full border-[1.5px] px-4 py-2.5 text-sm font-bold text-left";
+  "border-line bg-card w-full rounded-xl border-[1.5px] px-4 py-3 text-sm font-bold text-left";
 
 function prefillChannel(insurance?: InsuranceType): CoverageInput["channel"] | undefined {
   if (insurance === "medi_cal") return "medi_cal";
@@ -121,7 +121,7 @@ export default function CoverageChecker({
       {phase === "channel" && (
         <>
           <p className="font-bold">How do you get your insurance?</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-col gap-2">
             <button type="button" className={chip} onClick={() => pickChannel("job")}>My job</button>
             <button type="button" className={chip} onClick={() => pickChannel("parent_spouse")}>A parent's or partner's job</button>
             <button type="button" className={chip} onClick={() => pickChannel("covered_ca")}>I bought it, or Covered California</button>
@@ -137,7 +137,7 @@ export default function CoverageChecker({
       {phase === "military" && (
         <>
           <p className="font-bold">Are you the service member?</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-col gap-2">
             <button type="button" className={chip} onClick={() => { setInput({ ...input, channel: "military_active" }); setPhase("verdict"); }}>Yes</button>
             <button type="button" className={chip} onClick={() => { setInput({ ...input, channel: "military_dependent" }); setPhase("verdict"); }}>No, a family member is</button>
           </div>
@@ -146,7 +146,7 @@ export default function CoverageChecker({
       {phase === "state" && (
         <>
           <p className="font-bold">Is the plan based in California?</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-col gap-2">
             <button type="button" className={chip} onClick={() => pickState("yes")}>Yes</button>
             <button type="button" className={chip} onClick={() => pickState("no")}>No, another state</button>
             <button type="button" className={chip} onClick={() => pickState("unknown")}>Not sure</button>
@@ -157,12 +157,12 @@ export default function CoverageChecker({
         <>
           <p className="font-bold">Which state is the plan based in?</p>
           <p className="text-muted mt-1 text-sm">The state on your insurance card or plan documents, not where you live.</p>
-          <div className="mt-3 flex flex-wrap items-center gap-2">
+          <div className="mt-3 flex flex-col gap-2">
             <select
               aria-label="Plan state"
               defaultValue=""
               onChange={(e) => { if (e.target.value) pickPlanState(e.target.value); }}
-              className="border-line bg-card min-h-12 rounded-xl border px-3 text-sm"
+              className="border-line bg-card min-h-12 w-full rounded-xl border px-3 text-sm"
             >
               <option value="" disabled>Pick a state</option>
               {US_STATES.map((st) => (
@@ -177,7 +177,7 @@ export default function CoverageChecker({
         <>
           <p className="font-bold">Is the plan self-funded or fully insured?</p>
           <p className="text-muted mt-1 text-sm">HR answers this routinely. It decides whether the state coverage law applies.</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-col gap-2">
             <button type="button" className={chip} onClick={() => pickFunding("fully_insured")}>Fully insured</button>
             <button type="button" className={chip} onClick={() => pickFunding("self_funded")}>Self-funded</button>
             <button type="button" className={chip} onClick={() => pickFunding("unknown")}>I don't know</button>
@@ -187,7 +187,7 @@ export default function CoverageChecker({
       {phase === "size" && (
         <>
           <p className="font-bold">Roughly how big is the employer?</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-col gap-2">
             <button type="button" className={chip} onClick={() => pickSize("large")}>Large (HR calls it large group)</button>
             <button type="button" className={chip} onClick={() => pickSize("small")}>Small (small group)</button>
             <button type="button" className={chip} onClick={() => pickSize("unknown")}>I don't know</button>

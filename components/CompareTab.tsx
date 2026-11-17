@@ -6,11 +6,11 @@ import { compare, considerations, type Grade } from "../content/app/compare";
 import Cite from "./Cite";
 import Icon, { optionIcon } from "./icons";
 
-const gradeStyle: Record<Grade, { bg: string; ink: string; word: string }> = {
-  good: { bg: "var(--cmp-good-bg)", ink: "var(--cmp-good-ink)", word: "easier" },
-  mid: { bg: "var(--cmp-mid-bg)", ink: "var(--cmp-mid-ink)", word: "in between" },
-  tough: { bg: "var(--cmp-tough-bg)", ink: "var(--cmp-tough-ink)", word: "bigger lift" },
-  unknown: { bg: "var(--line)", ink: "var(--muted)", word: "unknown" },
+const gradeStyle: Record<Grade, { bg: string; ink: string }> = {
+  good: { bg: "var(--cmp-good-bg)", ink: "var(--cmp-good-ink)" },
+  mid: { bg: "var(--cmp-mid-bg)", ink: "var(--cmp-mid-ink)" },
+  tough: { bg: "var(--cmp-tough-bg)", ink: "var(--cmp-tough-ink)" },
+  unknown: { bg: "var(--line)", ink: "var(--muted)" },
 };
 
 /** Side-by-side comparison with words in every cell, never color alone. */
@@ -69,8 +69,7 @@ export default function CompareTab({ options }: { options: PreservationOption[] 
                     return (
                       <td key={o.id} className="border-line border-t p-1.5 align-top">
                         <div className="rounded-lg px-2.5 py-2" style={{ background: st.bg, color: st.ink }}>
-                          <span className="block text-[0.68rem] font-bold tracking-wide uppercase">{st.word}</span>
-                          <span className="block text-[0.85rem] leading-snug">{cell.note}</span>
+                          <span className="block text-[0.85rem] leading-snug font-bold">{cell.note}</span>
                         </div>
                       </td>
                     );

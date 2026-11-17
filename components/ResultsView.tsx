@@ -350,21 +350,17 @@ export default function ResultsView({
           <section className="border-line bg-card rounded-2xl border p-5 print:hidden">
             <h2 className="text-lg">What could an option cost?</h2>
             <p className="text-muted mt-1 mb-3 text-sm">Pick one. Coverage comes first; the full prices follow.</p>
-            <div className="flex flex-wrap gap-2">
+            <select
+              aria-label="Cost option"
+              value={costOption?.id ?? ""}
+              onChange={(e) => setCostOption(results.options.find((o) => o.id === e.target.value) ?? null)}
+              className="border-line bg-card min-h-12 w-full rounded-xl border-[1.5px] px-3 text-sm font-bold"
+            >
+              <option value="">Pick an option</option>
               {results.options.map((o) => (
-                <button
-                  key={o.id}
-                  type="button"
-                  aria-pressed={costOption?.id === o.id}
-                  onClick={() => setCostOption(costOption?.id === o.id ? null : o)}
-                  className={`rounded-full border-[1.5px] px-3.5 py-2 text-sm font-bold ${
-                    costOption?.id === o.id ? "border-accent bg-accent-tint text-accent-ink" : "border-line bg-card"
-                  }`}
-                >
-                  {o.name}
-                </button>
+                <option key={o.id} value={o.id}>{o.name}</option>
               ))}
-            </div>
+            </select>
             {costOption && (
               <div className="mt-3">
                 <CostEstimator option={costOption} insurance={insurance} stage={stage} />
