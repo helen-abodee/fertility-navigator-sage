@@ -4,6 +4,7 @@ import { appContent } from "../content/app/content";
 import { compare, considerations } from "../content/app/compare";
 import { reflectionIntro, reflectionSteps } from "../content/app/reflection";
 import type { Citation } from "../lib/types";
+import { parenthoodIntro, parenthoodPaths } from "../content/app/parenthood";
 
 /**
  * Generates content/llm/grounding.md when WRITE_LLM_GROUNDING=1: the complete
@@ -84,6 +85,16 @@ function build(): string {
   L.push(reflectionIntro.body);
   for (const r of reflectionSteps) {
     L.push(`- ${r.heading}: ${r.body} [${cite(r.citations)}]`);
+  }
+
+  L.push("");
+  L.push("## Family building after treatment (Paths to Parenthood)");
+  L.push(parenthoodIntro.text);
+  for (const pp of parenthoodPaths) {
+    L.push("");
+    L.push(`### ${pp.name}`);
+    L.push(pp.short);
+    for (const para of pp.paragraphs) L.push(`${para.text} [${cite(para.citations)}]`);
   }
 
   L.push("");

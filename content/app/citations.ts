@@ -26,6 +26,46 @@ export function d4(page: number): Citation {
  * recommendations verbatim. `rec` is the ASCO recommendation number
  * (e.g. "4.10") or statement label (e.g. "GPS 6.4").
  */
+export function acsFamilyBuilding(): Citation {
+  return {
+    sourceId: "acs-fertility-assistance",
+    sourceName: "American Cancer Society: Fertility Assistance After Cancer",
+    url: "https://cancer.org/cancer/managing-cancer/side-effects/fertility/fertility-assistance-after-cancer.html",
+    sourceDate: "2025-01-17",
+    retrieved: "2026-11-17",
+  };
+}
+
+export function acsPregnancyAfter(): Citation {
+  return {
+    sourceId: "acs-pregnancy-after",
+    sourceName: "American Cancer Society: Having a Baby After Cancer, Pregnancy",
+    url: "https://www.cancer.org/cancer/managing-cancer/side-effects/fertility/pregnancy-after-cancer.html",
+    sourceDate: "2024-05-28",
+    retrieved: "2026-11-17",
+  };
+}
+
+export function positiveTrial(): Citation {
+  return {
+    sourceId: "positive-trial",
+    sourceName: "POSITIVE trial (Partridge et al., New England Journal of Medicine 2023)",
+    url: "https://pubmed.ncbi.nlm.nih.gov/37133584/",
+    sourceDate: "2023-05-04",
+    retrieved: "2026-11-17",
+  };
+}
+
+export function afpPostTreatment(): Citation {
+  return {
+    sourceId: "afp-post-treatment",
+    sourceName: "Alliance for Fertility Preservation: Post-Treatment Family Building",
+    url: "https://www.allianceforfertilitypreservation.org/get-informed/post-treatment-family-building/",
+    sourceDate: "2026-11-17",
+    retrieved: "2026-11-17",
+  };
+}
+
 export function swConsult(): Citation {
   return {
     sourceId: "sw-consult-2026",

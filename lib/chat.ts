@@ -2,6 +2,7 @@ import type { Answers, Citation } from "./types";
 import type { Audience } from "./content-schema";
 import { appContent } from "../content/app/content";
 import { matchesAudience } from "./results";
+import { parenthoodPaths } from "../content/app/parenthood";
 
 /**
  * The on-device "Ask" engine. No model, no server: a question is matched
@@ -135,6 +136,17 @@ export function buildCorpus(): ChatEntry[] {
       audience: a.audience,
       keywords: ["grant", "aid", "discount", "free", "help", "program", "financial", ...COST_WORDS],
       goto: { target: "money", label: "Open Financing" },
+    });
+  }
+
+  for (const pp of parenthoodPaths) {
+    entries.push({
+      id: `parenthood.${pp.id}`,
+      title: pp.name,
+      text: `${pp.short} ${pp.paragraphs.map((x) => x.text).join(" ")}`,
+      citations: pp.paragraphs.flatMap((x) => x.citations),
+      keywords: ["adoption", "adopt", "foster", "surrogate", "surrogacy", "carrier", "donor", "pregnant", "pregnancy", "family", "parenthood", "baby", "children", "after", "banked", "frozen", "thaw"],
+      goto: { target: "parenthood", label: "Open Family building" },
     });
   }
 

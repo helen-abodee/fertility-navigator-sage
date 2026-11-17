@@ -17,6 +17,7 @@ import CoverageChecker from "./CoverageChecker";
 import ReadMore from "./ReadMore";
 import ReachOut from "./ReachOut";
 import AskSection from "./AskSection";
+import ParenthoodSection from "./ParenthoodSection";
 import { track } from "../lib/analytics";
 import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
@@ -24,10 +25,11 @@ import OptionDetail from "./OptionDetail";
 import ProfileSection from "./ProfileSection";
 import Icon, { optionIcon } from "./icons";
 
-type Tab = "options" | "compare" | "money" | "clinics" | "health";
+type Tab = "options" | "parenthood" | "compare" | "money" | "clinics" | "health";
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: "options", label: "Options", icon: "egg" },
+  { id: "parenthood", label: "Family", icon: "heart" },
   { id: "money", label: "Financing", icon: "dollar" },
   { id: "compare", label: "Compare", icon: "clipboard" },
   { id: "clinics", label: "Clinics", icon: "door" },
@@ -126,8 +128,12 @@ export default function ResultsView({
   // The health tab is for after treatment: at diagnosis it reads as homework
   // (care-team feedback), so lanes still facing treatment don't see it.
   const healthUnlocked = stage !== "not_started" && stage !== "in_treatment";
+  // Family building is the after-treatment path (Benedict's Roadmap model);
+  // people still facing treatment see preservation options instead.
   const activeTabs = tabs.filter(
-    (t) => (t.id !== "money" || moneyUnlocked) && (t.id !== "health" || healthUnlocked),
+    (t) =>
+      (t.id !== "money" || moneyUnlocked) &&
+      ((t.id !== "health" && t.id !== "parenthood") || healthUnlocked),
   );
 
   function goTab(next: Tab) {
@@ -336,6 +342,11 @@ export default function ResultsView({
       {/* Compare */}
       <div className={show("compare")}>
         <CompareTab options={results.options} />
+      </div>
+
+      {/* Family building (after treatment) */}
+      <div className={`flex flex-col gap-6 ${show("parenthood")}`}>
+        <ParenthoodSection />
       </div>
 
       {/* Financing */}

@@ -120,8 +120,9 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await expect(page.getByText("The money picture")).toBeVisible();
   await expect(page.getByText("The procedure, at published prices")).toBeVisible();
 
-  // Health is an after-treatment tab now: hidden while still facing treatment
+  // Health and Family building are after-treatment tabs: hidden before then
   await expect(page.getByRole("button", { name: "Health", exact: true })).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "Family", exact: true })).not.toBeVisible();
   // The specialist-decides line sits on Options (tab name carries "(visited)" now)
   await page.getByRole("button", { name: /Options/ }).first().click();
   await expect(page.getByText("decided with a fertility specialist", { exact: false }).first()).toBeVisible();
@@ -196,9 +197,61 @@ test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
   await expect(page.getByText("Medi-Cal does not cover this right now")).toBeVisible();
   await expect(page.getByText("Likely not covered")).toBeVisible();
 
-  // Finished treatment: the Health tab exists for this lane
+  // Finished treatment: Health and Family building exist for this lane
   await page.getByRole("button", { name: "Health", exact: true }).click();
   await expect(page.getByText("For the stretch after treatment", { exact: false })).toBeVisible();
+  await page.getByRole("button", { name: "Family", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Paths to parenthood" })).toBeVisible();
+  await expect(page.getByText("Adoption and fostering")).toBeVisible();
+});
+
+test("after-treatment woman walks her own path", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "I finished cancer treatment" }).click();
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByRole("button", { name: "1 to 5 years ago" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Chemotherapy" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "I don't know the names" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Finish up" }).click();
+  await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "See my options" }).click();
+
+  await page.getByRole("button", { name: "Family", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Paths to parenthood" })).toBeVisible();
+  // all six paths present
+  for (const path of ["Using what you froze", "Trying for pregnancy", "Donor eggs, sperm, or embryos", "A gestational carrier", "Adoption and fostering", "A full life without children"]) {
+    await expect(page.getByText(path, { exact: true })).toBeVisible();
+  }
+  // the POSITIVE-trial fact sits behind the pregnancy card
+  await page.getByText("Trying for pregnancy", { exact: true }).click();
+  await expect(page.getByText("paused their endocrine therapy", { exact: false })).toBeVisible();
+});
+
+test("before-treatment man sees the pre-treatment path", async ({ page }) => {
+  await page.goto("/questions");
+  await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Just me" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "I have testes" }).click();
+  await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
+  await page.getByRole("button", { name: "Keep going" }).click();
+  await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Finish up" }).click();
+  await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
+  await page.getByRole("button", { name: "Skip this question" }).click();
+  await page.getByRole("button", { name: "See my options" }).click();
+
+  await expect(page.getByRole("button", { name: /Sperm banking/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Family", exact: true })).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "Health", exact: true })).not.toBeVisible();
 });
 
 test("the journey tracker records stages and respects deciding not to", async ({ page }) => {

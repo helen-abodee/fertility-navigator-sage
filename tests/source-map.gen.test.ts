@@ -4,6 +4,7 @@ import { appContent } from "../content/app/content";
 import { compare } from "../content/app/compare";
 import { reflectionSteps } from "../content/app/reflection";
 import { riskRules } from "../lib/risk/rules";
+import { parenthoodPaths } from "../content/app/parenthood";
 import type { Citation } from "../lib/types";
 
 /**
@@ -38,6 +39,9 @@ function buildRows(): string[][] {
   }
   for (const h of appContent.health) {
     rows.push(["Health", h.fact, h.mechanism ?? "", srcs(h.citations), latest(h.citations)]);
+  }
+  for (const pp of parenthoodPaths) {
+    rows.push(["Family building", pp.name, pp.short, srcs(pp.paragraphs.flatMap((x) => x.citations)), latest(pp.paragraphs.flatMap((x) => x.citations))]);
   }
   for (const e of compare) {
     rows.push(["Compare", e.optionId, e.summary, srcs(e.citations), latest(e.citations)]);

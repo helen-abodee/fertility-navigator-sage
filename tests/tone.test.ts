@@ -7,6 +7,7 @@ import { journeyStages, journeyOutcomes, emptyJourney, summaryLines, setOutcome 
 import { reflectionIntro, reflectionSteps, reflectionAttribution } from "../content/app/reflection";
 import { compare, considerations } from "../content/app/compare";
 import { buildCorpus, CHAT_STRINGS, cannedQuestions } from "../lib/chat";
+import { parenthoodIntro, parenthoodPaths } from "../content/app/parenthood";
 
 /**
  * Ported from Dyad's cycle-education tone tests: the copy rules are enforced
@@ -18,6 +19,10 @@ function collectAllText(): string {
   parts.push(...Object.values(CHAT_STRINGS));
   parts.push(...cannedQuestions({}), ...cannedQuestions({ anatomy: "testes" }), ...cannedQuestions({ anatomy: "ovaries_uterus" }));
   for (const e of buildCorpus()) parts.push(e.title, e.text, e.goto?.label ?? "");
+  parts.push(parenthoodIntro.text);
+  for (const pp of parenthoodPaths) {
+    parts.push(pp.name, pp.short, ...pp.paragraphs.map((x) => x.text));
+  }
   for (const o of appContent.options) {
     parts.push(o.name, o.shortDescription, o.statusNote ?? "", o.timeline ?? "", o.expectations);
     for (const s of o.steps) parts.push(s.title, s.body);
