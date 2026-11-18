@@ -1,6 +1,6 @@
 # Fertility Preservation Navigator: LLM grounding corpus
 
-Generated from the app content on 2026-11-17. Regenerate: WRITE_LLM_GROUNDING=1 npx vitest run tests/llm-grounding.gen.test.ts
+Generated from the app content on 2026-11-18. Regenerate: WRITE_LLM_GROUNDING=1 npx vitest run tests/llm-grounding.gen.test.ts
 
 ## ANSWER RULES (non-negotiable, enforced again by the output filter)
 
@@ -273,6 +273,58 @@ Plenty of people decide not to parent, cancer or no cancer. If you and a partner
 - (Insurance and cost) If my insurance says no, would you submit an appeal saying fertility preservation is medically necessary for me?
 - (Insurance and cost) Who on the team can help me with costs and insurance, like a social worker or financial counselor?
 - (Support) Can I talk this through with a counselor before deciding?
+
+## ASCO 2025 guideline, the recommendations in brief
+Source for this whole section: Fertility Preservation in People With Cancer: ASCO Guideline Update (Su et al., J Clin Oncol 2025), recommendations read verbatim via the Children's Oncology Group endorsement. Use these as the guideline backbone; the option sections above carry the patient-level detail.
+- Clinicians should discuss possible infertility as early as possible before treatment starts, with ALL patients, regardless of prognosis, finances, orientation, or family size (Rec 1.1, 1.3-1.4 QS).
+- Patients who are interested OR unsure should be referred to reproductive specialists (Rec 1.2); discussing fertility can reduce distress even if the person never preserves (Rec 1.3).
+- Fertility should be revisited yearly through the years after treatment (Rec 1.4).
+- Established methods: sperm banking and TESE for males (Rec 3.1, 3.2); embryo, egg, and ovarian tissue freezing for females (Rec 4.1, 4.2, 4.10). Ovarian tissue freezing needs no hormone stimulation and can happen without delaying chemotherapy.
+- Hormone suppression does NOT preserve fertility in males and should not be offered for that (Rec 3.3). GnRH agonists must never replace established methods for females; they may be offered as an add-on in breast cancer (Rec 4.8), and can help stop periods during urgent chemotherapy (Rec 4.9).
+- Males should bank before the first dose when possible: even a single treatment can affect sperm DNA (Rec 3.5). At least 3 samples are suggested, and any banked sperm offers a chance at biological parenthood (Rec 3.1 QS).
+- Egg and embryo freezing no longer wait for a menstrual cycle, and for hormone-sensitive cancers, aromatase-inhibitor stimulation protocols have not shown added recurrence risk (Rec 4.1/4.2 QS).
+- Post-treatment egg or embryo freezing may be offered to survivors; there may be no egg yield within about 3 months of the last chemotherapy dose (Rec 4.3).
+- Ovarian transposition may be offered when pelvic radiation is planned, done as close to radiation as possible; scatter means it is not always successful (Rec 4.5).
+
+## State fertility preservation insurance laws (per the Alliance for Fertility Preservation's tracking, 2026-11-10)
+California is covered in detail in the insurance section above (SB 600, SB 729). Other jurisdictions with laws, with what their law reaches:
+- Colorado: plans large employer plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking; notes: large group only, religious exemption.
+- Connecticut: plans individual plans, large employer plans, small employer plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking; notes: religious exemption.
+- District of Columbia: plans individual plans, large employer plans, small employer plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage.
+- Delaware: plans individual plans, large employer plans, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage; notes: religious exemption.
+- Federal Employees Health Benefits: plans see AFP; covers egg freezing, sperm banking, storage.
+- Florida: plans state employee plans; covers egg freezing, ovarian tissue freezing, sperm banking, storage; notes: cancer only, no prior auth.
+- Georgia: plans individual plans, large employer plans, small employer plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage; notes: cancer and specific.
+- Illinois: plans individual plans, large employer plans, that state's Medicaid program, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking.
+- Kentucky: plans individual plans, large employer plans, small employer plans, state employee plans; covers egg freezing, sperm banking, storage; notes: religious exemption.
+- Louisiana: plans individual plans, large employer plans, small employer plans, state employee plans; covers egg freezing, sperm banking, storage; notes: cancer only, no prior auth, religious exemption.
+- Massachusetts: plans individual plans, large employer plans, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage.
+- Maryland: plans large employer plans, that state's Medicaid program; covers egg freezing, ovarian tissue freezing, sperm banking; notes: large group only, religious exemption.
+- Maine: plans individual plans, large employer plans, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage.
+- Montana: plans individual plans, large employer plans, that state's Medicaid program, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking; notes: cancer only.
+- New Hampshire: plans large employer plans, small employer plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage.
+- New Jersey: plans large employer plans, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking; notes: religious exemption.
+- Nevada: plans individual plans, large employer plans, that state's Medicaid program, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking; notes: cancer only, religious exemption.
+- New York: plans individual plans, large employer plans, that state's Medicaid program, small employer plans, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage.
+- Oklahoma: plans individual plans, large employer plans, small employer plans, state employee plans; covers egg freezing, ovarian tissue freezing, sperm banking; notes: cancer only, no prior auth, religious exemption.
+- Rhode Island: plans individual plans, large employer plans, small employer plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking; notes: religious exemption.
+- Texas: plans large employer plans, small employer plans; covers egg freezing, ovarian tissue freezing, sperm banking; notes: cancer only.
+- Utah: plans that state's Medicaid program, state employee plans; covers egg freezing, embryo freezing, ovarian tissue freezing, sperm banking, storage; notes: cancer and specific, cancer only.
+- Veterans Health Administration: plans see AFP; covers egg freezing, ovarian tissue freezing, sperm banking, storage.
+States not listed have no fertility preservation insurance law per AFP's tracking. Self-funded employer plans are exempt from every state mandate (federal ERISA rule). Always verify with the plan.
+
+## Bibliography (the only universe of sources; cite these names)
+- Fertility Preservation in People With Cancer: ASCO Guideline Update, Su et al., J Clin Oncol 2025 (PMID 40106739)
+- UCSD CRISP tool (oncofertilityrisk.com): the app's risk engine; the model never quotes its numbers
+- POSITIVE trial: Partridge et al., N Engl J Med 2023;388:1645-56 (PMID 37133584)
+- American Cancer Society: Fertility Assistance After Cancer (2025); Having a Baby After Cancer: Pregnancy (2024)
+- Memorial Sloan Kettering patient education: pre-treatment and post-treatment fertility pages, sperm banking, building a family
+- ASRM patient resources; NCI patient pages; Children's Oncology Group guidance
+- Alliance for Fertility Preservation: coverage map, post-treatment family building, UCSD/AFP insurance toolkit (D4)
+- California SB 600 (2019) and SB 729 (2024, plan years 2026) bill texts
+- Ottawa Personal Decision Guide; BEFORE decision aid; CDC reproductive life plan (the reflection path's sources)
+- Benedict et al., Roadmap to Parenthood decision aid studies (JMIR 2021, 2022; pilot 2024): the family-building model
+- The 12 financial aid organizations' own published program pages (re-verified 2026-11)
 
 ## What is deliberately NOT in this corpus
 - Regimen-level or personal infertility risk of any kind. The app's deterministic risk module (UCSD CRISP categories) owns that; the model only points to the My progress screen.

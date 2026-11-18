@@ -5,6 +5,7 @@ import { compare, considerations } from "../content/app/compare";
 import { reflectionIntro, reflectionSteps } from "../content/app/reflection";
 import type { Citation } from "../lib/types";
 import { parenthoodIntro, parenthoodPaths } from "../content/app/parenthood";
+import { stateCoverage, PLAN_LABELS, SERVICE_LABELS } from "../content/app/state-coverage";
 
 /**
  * Generates content/llm/grounding.md when WRITE_LLM_GROUNDING=1: the complete
@@ -101,6 +102,38 @@ function build(): string {
   L.push("## Questions worth bringing to the care team");
   for (const q of appContent.doctorQuestions) L.push(`- (${q.category}) ${q.text}`);
 
+  L.push("");
+  L.push("## ASCO 2025 guideline, the recommendations in brief");
+  L.push("Source for this whole section: Fertility Preservation in People With Cancer: ASCO Guideline Update (Su et al., J Clin Oncol 2025), recommendations read verbatim via the Children's Oncology Group endorsement. Use these as the guideline backbone; the option sections above carry the patient-level detail.");
+  L.push("- Clinicians should discuss possible infertility as early as possible before treatment starts, with ALL patients, regardless of prognosis, finances, orientation, or family size (Rec 1.1, 1.3-1.4 QS).");
+  L.push("- Patients who are interested OR unsure should be referred to reproductive specialists (Rec 1.2); discussing fertility can reduce distress even if the person never preserves (Rec 1.3).");
+  L.push("- Fertility should be revisited yearly through the years after treatment (Rec 1.4).");
+  L.push("- Established methods: sperm banking and TESE for males (Rec 3.1, 3.2); embryo, egg, and ovarian tissue freezing for females (Rec 4.1, 4.2, 4.10). Ovarian tissue freezing needs no hormone stimulation and can happen without delaying chemotherapy.");
+  L.push("- Hormone suppression does NOT preserve fertility in males and should not be offered for that (Rec 3.3). GnRH agonists must never replace established methods for females; they may be offered as an add-on in breast cancer (Rec 4.8), and can help stop periods during urgent chemotherapy (Rec 4.9).");
+  L.push("- Males should bank before the first dose when possible: even a single treatment can affect sperm DNA (Rec 3.5). At least 3 samples are suggested, and any banked sperm offers a chance at biological parenthood (Rec 3.1 QS).");
+  L.push("- Egg and embryo freezing no longer wait for a menstrual cycle, and for hormone-sensitive cancers, aromatase-inhibitor stimulation protocols have not shown added recurrence risk (Rec 4.1/4.2 QS).");
+  L.push("- Post-treatment egg or embryo freezing may be offered to survivors; there may be no egg yield within about 3 months of the last chemotherapy dose (Rec 4.3).");
+  L.push("- Ovarian transposition may be offered when pelvic radiation is planned, done as close to radiation as possible; scatter means it is not always successful (Rec 4.5).");
+  L.push("");
+  L.push("## State fertility preservation insurance laws (per the Alliance for Fertility Preservation's tracking, 2026-11-10)");
+  L.push("California is covered in detail in the insurance section above (SB 600, SB 729). Other jurisdictions with laws, with what their law reaches:");
+  for (const sc of stateCoverage) {
+    L.push(`- ${sc.name}: plans ${sc.plans.map((x) => PLAN_LABELS[x]).join(", ") || "see AFP"}; covers ${sc.services.map((x) => SERVICE_LABELS[x]).join(", ")}${sc.notes.length ? "; notes: " + sc.notes.join(", ").replace(/_/g, " ") : ""}.`);
+  }
+  L.push("States not listed have no fertility preservation insurance law per AFP's tracking. Self-funded employer plans are exempt from every state mandate (federal ERISA rule). Always verify with the plan.");
+  L.push("");
+  L.push("## Bibliography (the only universe of sources; cite these names)");
+  L.push("- Fertility Preservation in People With Cancer: ASCO Guideline Update, Su et al., J Clin Oncol 2025 (PMID 40106739)");
+  L.push("- UCSD CRISP tool (oncofertilityrisk.com): the app's risk engine; the model never quotes its numbers");
+  L.push("- POSITIVE trial: Partridge et al., N Engl J Med 2023;388:1645-56 (PMID 37133584)");
+  L.push("- American Cancer Society: Fertility Assistance After Cancer (2025); Having a Baby After Cancer: Pregnancy (2024)");
+  L.push("- Memorial Sloan Kettering patient education: pre-treatment and post-treatment fertility pages, sperm banking, building a family");
+  L.push("- ASRM patient resources; NCI patient pages; Children's Oncology Group guidance");
+  L.push("- Alliance for Fertility Preservation: coverage map, post-treatment family building, UCSD/AFP insurance toolkit (D4)");
+  L.push("- California SB 600 (2019) and SB 729 (2024, plan years 2026) bill texts");
+  L.push("- Ottawa Personal Decision Guide; BEFORE decision aid; CDC reproductive life plan (the reflection path's sources)");
+  L.push("- Benedict et al., Roadmap to Parenthood decision aid studies (JMIR 2021, 2022; pilot 2024): the family-building model");
+  L.push("- The 12 financial aid organizations' own published program pages (re-verified 2026-11)");
   L.push("");
   L.push("## What is deliberately NOT in this corpus");
   L.push("- Regimen-level or personal infertility risk of any kind. The app's deterministic risk module (UCSD CRISP categories) owns that; the model only points to the My progress screen.");

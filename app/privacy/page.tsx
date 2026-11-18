@@ -75,6 +75,19 @@ export default function PrivacyPage() {
           </p>
         </section>
         <section>
+          <h2 className="text-lg">2b. Optional AI answers in Ask (pilot)</h2>
+          <p className="mt-2">
+            The Ask feature normally answers from this tool's own cited content, on your device.
+            If AI answers are available and you turn them on, the questions you type are sent to
+            our server and to an AI service (Anthropic) to generate the answer, along with at most
+            two of your survey answers (anatomy and treatment stage) to make the answer fit. Your
+            other survey answers, age, ZIP code, and diagnosis are never sent. We do not store
+            your questions or the answers; our only record is a count of questions asked. AI
+            answers can be wrong and are not medical advice. This feature is off unless you check
+            the box that turns it on.
+          </p>
+        </section>
+        <section>
           <h2 className="text-lg">3. How information is used</h2>
           <p>
             Locally stored information is used solely to restore your session on your device.

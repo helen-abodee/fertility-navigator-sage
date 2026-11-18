@@ -3,7 +3,33 @@
 import { useRef, useState } from "react";
 import type { Answers } from "../lib/types";
 import { askCorpus, cannedQuestions, CHAT_STRINGS, type ChatEntry } from "../lib/chat";
+import { ASK_DISCLOSURE } from "../lib/ask-filter";
 import { track } from "../lib/analytics";
+
+const LLM_ENABLED =
+  process.env.NEXT_PUBLIC_ASK_LLM === "1" && Boolean(process.env.NEXT_PUBLIC_SYNC_URL);
+
+/** Calls the hosted answer service; null means fall back to retrieval. */
+async function askModel(
+  question: string,
+  answers: { anatomy?: string; stage?: string },
+): Promise<string | null> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SYNC_URL}/functions/v1/ask`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SYNC_ANON_KEY ?? ""}`,
+      },
+      body: JSON.stringify({ question, anatomy: answers.anatomy, stage: answers.stage }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return typeof data.answer === "string" && data.answer ? data.answer : null;
+  } catch {
+    return null;
+  }
+}
 import Cite from "./Cite";
 import Icon from "./icons";
 
@@ -12,6 +38,8 @@ interface Message {
   text?: string;
   entries?: ChatEntry[];
   crisis?: boolean;
+  ai?: boolean;
+  thinking?: boolean;
 }
 
 /**
@@ -30,25 +58,51 @@ export default function AskSection({
 }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [draft, setDraft] = useState("");
+  const [aiConsent, setAiConsent] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
   const chips = cannedQuestions(answers);
+
+  const scrollDown = () =>
+    setTimeout(() => endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 50);
 
   function submit(q: string) {
     const question = q.trim();
     if (!question) return;
-    const answer = askCorpus(question, answers);
-    track(answer.entries.length > 0 ? "chat_question_answered" : "chat_no_answer");
+    const retrieval = askCorpus(question, answers);
+    setDraft("");
+
+    // Crisis language never leaves the device, AI mode or not.
+    if (retrieval.kind === "crisis") {
+      setMessages((m) => [...m, { role: "user", text: question }, { role: "app", crisis: true }]);
+      scrollDown();
+      return;
+    }
+
+    if (LLM_ENABLED && aiConsent) {
+      setMessages((m) => [...m, { role: "user", text: question }, { role: "app", thinking: true }]);
+      scrollDown();
+      void askModel(question, { anatomy: answers.anatomy, stage: answers.stage }).then((ai) => {
+        track(ai || retrieval.entries.length > 0 ? "chat_question_answered" : "chat_no_answer");
+        setMessages((m) => {
+          const out = m.filter((x) => !x.thinking);
+          if (ai) return [...out, { role: "app", text: ai, ai: true }];
+          if (retrieval.kind === "results") return [...out, { role: "app", entries: retrieval.entries }];
+          return [...out, { role: "app", text: CHAT_STRINGS.noAnswer }];
+        });
+        scrollDown();
+      });
+      return;
+    }
+
+    track(retrieval.entries.length > 0 ? "chat_question_answered" : "chat_no_answer");
     setMessages((m) => [
       ...m,
       { role: "user", text: question },
-      answer.kind === "crisis"
-        ? { role: "app", crisis: true }
-        : answer.kind === "results"
-          ? { role: "app", entries: answer.entries }
-          : { role: "app", text: CHAT_STRINGS.noAnswer },
+      retrieval.kind === "results"
+        ? { role: "app", entries: retrieval.entries }
+        : { role: "app", text: CHAT_STRINGS.noAnswer },
     ]);
-    setDraft("");
-    setTimeout(() => endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 50);
+    scrollDown();
   }
 
   return (
@@ -72,7 +126,20 @@ export default function AskSection({
 
         <section className="border-line bg-card rounded-2xl border p-4">
           <p className="text-sm">{CHAT_STRINGS.scope}</p>
-          <p className="text-muted mt-2 text-xs">{CHAT_STRINGS.intro}</p>
+          <p className="text-muted mt-2 text-xs">{aiConsent ? ASK_DISCLOSURE : CHAT_STRINGS.intro}</p>
+          {LLM_ENABLED && (
+            <label className="mt-3 flex items-start gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={aiConsent}
+                onChange={(e) => setAiConsent(e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0"
+              />
+              <span>
+                Use AI answers. {!aiConsent && <span className="text-muted">{ASK_DISCLOSURE}</span>}
+              </span>
+            </label>
+          )}
         </section>
 
         {messages.length === 0 && (
@@ -98,6 +165,15 @@ export default function AskSection({
           ) : m.crisis ? (
             <section key={i} className="border-line bg-card max-w-[92%] self-start rounded-2xl rounded-bl-md border p-4" style={{ borderColor: "var(--warn, #A8653A)" }}>
               <p className="text-sm font-bold">{CHAT_STRINGS.crisis}</p>
+            </section>
+          ) : m.thinking ? (
+            <section key={i} className="border-line bg-card max-w-[92%] self-start rounded-2xl rounded-bl-md border p-4">
+              <p className="text-muted text-sm">Checking the sources&hellip;</p>
+            </section>
+          ) : m.ai ? (
+            <section key={i} className="border-line bg-card max-w-[92%] self-start rounded-2xl rounded-bl-md border p-4">
+              <p className="text-sm">{m.text}</p>
+              <p className="text-muted mt-2 text-xs">AI-written from this tool's cited sources. It can be wrong, and it is not medical advice.</p>
             </section>
           ) : m.entries ? (
             <div key={i} className="flex max-w-[92%] flex-col gap-2 self-start">

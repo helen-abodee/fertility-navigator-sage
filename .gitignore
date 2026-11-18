@@ -6,3 +6,4 @@ tsconfig.tsbuildinfo
 .claude/
 scratch/
 .vercel
+supabase/.env*
