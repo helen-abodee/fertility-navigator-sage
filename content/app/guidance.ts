@@ -304,7 +304,7 @@ export const guidance: GuidanceSection[] = [
     heading: "Finding out where your fertility stands now",
     paragraphs: [
       {
-        text: "If your treatment could affect the ovaries, a yearly check-up is recommended. It covers your periods, pregnancy history, and sexual health, and blood may be tested for hormone levels (FSH, LH, and estradiol) if a problem is suspected. Regular monthly periods with normal hormone levels are a good sign for fertility. Recent results from another clinic can usually be reused, so ask before repeating anything, and while you wait for a specialist, a primary care doctor or OB-GYN can often order the basics, like an AMH blood test.",
+        text: "If your treatment could affect the ovaries, a yearly check-up is recommended. It covers your periods, pregnancy history, and sexual health, and blood may be tested for hormone levels (FSH, LH, and estradiol) if a problem is suspected. Regular monthly periods with normal hormone levels are a good sign for fertility. As a cancer survivor you do not need to collect these tests yourself first: ask for a referral straight to a fertility specialist (reproductive endocrinologist), who runs all of them in one visit, and many clinics hold urgent slots for cancer patients. Recent results from another clinic can usually be reused, so bring what you have.",
         citations: [cogOvarian()],
       },
       {
@@ -338,7 +338,7 @@ export const guidance: GuidanceSection[] = [
     heading: "Finding out where your fertility stands now",
     paragraphs: [
       {
-        text: "If your treatment could affect the testes, a yearly check-up is recommended. Blood may be tested for hormone levels: a morning (AM) testosterone, LH, FSH, and inhibin. Recent results from another clinic can usually be reused, so ask before repeating anything, and while you wait for a specialist, a primary care doctor can often order a semen analysis to start.",
+        text: "If your treatment could affect the testes, a yearly check-up is recommended. Blood may be tested for hormone levels: a morning (AM) testosterone, LH, FSH, and inhibin. As a cancer survivor you do not need to collect these tests yourself first: ask for a referral straight to a fertility specialist, who orders all of it in one visit, and many clinics hold urgent slots for cancer patients. Recent results from another clinic can usually be reused, so bring what you have.",
         citations: [cogTesticular()],
       },
       {

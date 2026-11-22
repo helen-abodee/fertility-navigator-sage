@@ -42,6 +42,20 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "exploring", label: "Just learning for now", icon: "compass", notSure: true },
     ],
   },
+  fertility_position: {
+    id: "fertility_position",
+    field: "fertilityPosition",
+    kind: "single",
+    heading: "And where are you with fertility preservation?",
+    options: [
+      { value: "not_started", label: "Haven't really started thinking about it", icon: "compass" },
+      { value: "deciding", label: "Thinking it through right now", icon: "clipboard" },
+      { value: "preserved", label: "Already preserved (eggs, sperm, or embryos)", icon: "snowflake" },
+      { value: "family_building", label: "Thinking about building a family", icon: "sprout" },
+      { value: "not_pursuing", label: "Decided not to pursue it", icon: "shield" },
+      { value: "not_sure", label: "I'm not sure", notSure: true, icon: "door" },
+    ],
+  },
   who_for: {
     id: "who_for",
     field: "whoFor",

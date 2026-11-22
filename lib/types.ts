@@ -43,6 +43,13 @@ export type ChemoAgent =
 
 export type FeelingsAboutChildren = "yes" | "maybe" | "not_sure" | "no";
 export type FamilySize = "one" | "two" | "three_plus" | "not_sure";
+export type FertilityPosition =
+  | "not_started"
+  | "deciding"
+  | "preserved"
+  | "family_building"
+  | "not_pursuing"
+  | "not_sure";
 
 export type InsuranceType = "ca_commercial" | "medi_cal" | "other" | "none" | "unknown";
 
@@ -66,6 +73,8 @@ export interface Answers {
   feelings?: FeelingsAboutChildren;
   /** asked only when feelings is "yes"; shapes the planning conversation */
   familySize?: FamilySize | null;
+  /** second axis of the intake: where they are with fertility preservation */
+  fertilityPosition?: FertilityPosition | null;
   insurance?: InsuranceType;
   partnerInsurance?: YesNoUnsure;
   /** undefined = not reached, null = skipped. Used only for clinic distance, on device. */
@@ -74,6 +83,7 @@ export interface Answers {
 
 export type QuestionId =
   | "entry"
+  | "fertility_position"
   | "who_for"
   | "stage"
   | "time_since"

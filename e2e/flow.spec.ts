@@ -3,6 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 /** Shared walk: the checkpoint persona through section 1. */
 async function walkSection1(page: Page) {
   await page.getByRole("button", { name: "I have a treatment plan, or I'm in treatment" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Not yet" }).click();
   await page.getByPlaceholder("Your age").fill("24");
@@ -49,6 +50,7 @@ test("the checkpoint path walks end to end with section milestones", async ({ pa
 test("no treatment plan yet means a short flow with no treatment questions", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await expect(page.getByRole("heading", { name: "How old are you?" })).toBeVisible();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -70,6 +72,7 @@ test("'just learning' goes straight to the browse hub", async ({ page }) => {
 test("answering no to children skips the practical section with dignity", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
@@ -177,6 +180,7 @@ test("an out-of-state plan gets its state's AFP-tracked verdict", async ({ page 
 test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "I finished cancer treatment" }).click();
+  await page.getByRole("button", { name: "Haven't really started thinking about it" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "1 to 5 years ago" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -210,6 +214,7 @@ test("Medi-Cal survivors get the honest verdict", async ({ page }) => {
 test("after-treatment woman walks her own path", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "I finished cancer treatment" }).click();
+  await page.getByRole("button", { name: "Thinking about building a family" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "1 to 5 years ago" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -241,6 +246,7 @@ test("after-treatment woman walks her own path", async ({ page }) => {
 test("before-treatment man sees the pre-treatment path", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "I have testes" }).click();
@@ -253,6 +259,7 @@ test("before-treatment man sees the pre-treatment path", async ({ page }) => {
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "See my options" }).click();
 
+  await page.getByRole("button", { name: "Options", exact: true }).click();
   await expect(page.getByRole("button", { name: /Sperm banking/ })).toBeVisible();
   await expect(page.getByRole("button", { name: "Family", exact: true })).not.toBeVisible();
   await expect(page.getByRole("button", { name: "Health", exact: true })).not.toBeVisible();
@@ -274,6 +281,7 @@ test("the journey tracker records stages and respects deciding not to", async ({
 test("'I'm not sure' about children offers the thinking-it-through path", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
@@ -298,6 +306,7 @@ test("'I'm not sure' about children offers the thinking-it-through path", async 
 test("skipping the reflection also lands safely", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "I have testes" }).click();
@@ -311,6 +320,7 @@ test("skipping the reflection also lands safely", async ({ page }) => {
 test("the money tab is hidden when children are a no", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
@@ -374,6 +384,7 @@ test("clinics: map first, radius filter, tappable detail pages", async ({ page }
 test("partner insurance is asked only when partnered, and the LGBTQ+ card shows", async ({ page }) => {
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Me and my partner" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "I have ovaries, a uterus, or both" }).click();
@@ -405,6 +416,7 @@ test("the team board demo and the aid fit check work", async ({ page }) => {
 
   await page.goto("/questions");
   await page.getByRole("button", { name: "Diagnosed, no treatment plan yet" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByPlaceholder("Your age").fill("19");
   await page.getByRole("button", { name: "Continue" }).click();

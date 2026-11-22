@@ -21,6 +21,7 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.screenshot({ path: `${OUT}/02-entry.png` });
 
   await page.getByRole("button", { name: "I have a treatment plan, or I'm in treatment" }).click();
+  await page.getByRole("button", { name: "Thinking it through right now" }).click();
   await page.getByRole("button", { name: "Just me" }).click();
   await page.getByRole("button", { name: "Not yet" }).click();
   await page.getByPlaceholder("Your age").fill("24");

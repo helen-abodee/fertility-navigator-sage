@@ -18,6 +18,12 @@ import ReadMore from "./ReadMore";
 import ReachOut from "./ReachOut";
 import AskSection from "./AskSection";
 import ParenthoodSection from "./ParenthoodSection";
+import PathHome from "./PathHome";
+import CheckinCard from "./CheckinCard";
+import NudgeCard from "./NudgeCard";
+import { noteTopic } from "../lib/checkin";
+import { loadJourney } from "../lib/storage";
+import type { RoadGo } from "../lib/road";
 import { track } from "../lib/analytics";
 import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
@@ -25,9 +31,10 @@ import OptionDetail from "./OptionDetail";
 import ProfileSection from "./ProfileSection";
 import Icon, { optionIcon } from "./icons";
 
-type Tab = "options" | "parenthood" | "compare" | "money" | "clinics" | "health";
+type Tab = "path" | "options" | "parenthood" | "compare" | "money" | "clinics" | "health";
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
+  { id: "path", label: "Road", icon: "compass" },
   { id: "options", label: "Options", icon: "egg" },
   { id: "parenthood", label: "Family", icon: "heart" },
   { id: "money", label: "Financing", icon: "dollar" },
@@ -99,6 +106,8 @@ export default function ResultsView({
   insurance,
   stage,
   feelings,
+  fertilityPosition,
+  familySize,
   age,
   anatomy,
   zip,
@@ -111,6 +120,8 @@ export default function ResultsView({
   insurance?: InsuranceType;
   stage?: TreatmentStage;
   feelings?: FeelingsAboutChildren;
+  fertilityPosition?: Answers["fertilityPosition"];
+  familySize?: Answers["familySize"];
   age?: number;
   anatomy?: Answers["anatomy"];
   zip?: string | null;
@@ -118,12 +129,12 @@ export default function ResultsView({
   onStartOver: () => void;
 }) {
   const [openOption, setOpenOption] = useState<PreservationOption | null>(null);
-  const [tab, setTab] = useState<Tab>("options");
+  const [tab, setTab] = useState<Tab>("path");
   const [reflecting, setReflecting] = useState(false);
   const [costOption, setCostOption] = useState<PreservationOption | null>(null);
-  const [visited, setVisited] = useState<Tab[]>(["options"]);
-  const [panel, setPanel] = useState<"progress" | "reach" | "ask" | null>(null);
-  const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip };
+  const [visited, setVisited] = useState<Tab[]>(["path"]);
+  const [panel, setPanel] = useState<"progress" | "reach" | "ask" | "checkin" | null>(null);
+  const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip, fertilityPosition, familySize };
   const moneyUnlocked = browsing || feelings !== "no";
   // The health tab is for after treatment: at diagnosis it reads as homework
   // (care-team feedback), so lanes still facing treatment don't see it.
@@ -138,6 +149,7 @@ export default function ResultsView({
 
   function goTab(next: Tab) {
     track("tab_viewed");
+    noteTopic(next);
     if (next === "compare") track("compare_used");
     setTab(next);
     setVisited((v) => (v.includes(next) ? v : [...v, next]));
@@ -182,6 +194,19 @@ export default function ResultsView({
     );
   }
 
+  if (panel === "checkin") {
+    return (
+      <div className="bg-paper fixed inset-0 z-50 overflow-y-auto">
+        <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col gap-4 px-6 py-6">
+          <button type="button" onClick={() => setPanel(null)} className="text-accent-ink -ml-2 self-start rounded-lg px-2 py-2 text-sm font-bold">
+            &larr; Back
+          </button>
+          <CheckinCard onReachOut={() => setPanel("reach")} />
+        </div>
+      </div>
+    );
+  }
+
   if (panel === "reach") {
     return (
       <ReachOut
@@ -212,6 +237,18 @@ export default function ResultsView({
           )}
 
           <JourneySection riskLabel={browsing ? undefined : risk.label} />
+
+          <NudgeCard
+            mode={
+              stage === "in_treatment"
+                ? "during"
+                : stage === "finished"
+                  ? "after"
+                  : fertilityPosition === "not_pursuing" || fertilityPosition === "preserved"
+                    ? "waiting"
+                    : "deciding"
+            }
+          />
 
           <button
             type="button"
@@ -343,6 +380,23 @@ export default function ResultsView({
       {/* Compare */}
       <div className={show("compare")}>
         <CompareTab options={results.options} />
+      </div>
+
+      {/* The road */}
+      <div className={`flex flex-col gap-6 ${show("path")}`}>
+        <PathHome
+          answers={answersForProfile}
+          journey={typeof window === "undefined" ? null : loadJourney()}
+          riskLabel={browsing ? undefined : risk.label}
+          visited={visited}
+          onGo={(go: RoadGo) => {
+            if (go.kind === "tab") goTab(go.tab as Tab);
+            else if (go.kind === "reach") { track("reach_out_opened"); setPanel("reach"); }
+            else if (go.kind === "progress") setPanel("progress");
+            else if (go.kind === "reflect") setReflecting(true);
+            else if (go.kind === "checkin") setPanel("checkin");
+          }}
+        />
       </div>
 
       {/* Family building (after treatment) */}

@@ -17,6 +17,7 @@ import { encodeShareCode } from "../lib/share";
 import { isLinkCode, newLinkCode, pushJourney, syncEnabled } from "../lib/sync";
 import { contactHref } from "../lib/contact";
 import { track } from "../lib/analytics";
+import CareShareCard from "./CareShareCard";
 import { downloadReminder } from "../lib/reminder";
 
 const INBOX_KEY = "navigator.team-inbox.v1";
@@ -175,6 +176,7 @@ export default function JourneySection({ riskLabel }: { riskLabel?: string }) {
       </div>
 
       <div className="border-line mt-4 border-t pt-4 print:hidden">
+        <CareShareCard journey={journey} riskLabel={riskLabel} />
         {syncEnabled && (
           <div className="mb-3">
             {riskLabel && (

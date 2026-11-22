@@ -10,7 +10,7 @@ describe("entry triage calibrates the depth", () => {
 
   it("no treatment plan yet: no treatment-detail questions at all", () => {
     const seq = questionSequence({ entry: "plan_no" });
-    expect(seq).toEqual(["entry", "who_for", "age", "anatomy", "cancer_type", "feelings", "insurance", "zip"]);
+    expect(seq).toEqual(["entry", "fertility_position", "who_for", "age", "anatomy", "cancer_type", "feelings", "insurance", "zip"]);
   });
 
   it("with a plan: asks whether treatment started, then the full detail", () => {
@@ -75,7 +75,7 @@ describe("sections", () => {
 
 describe("navigation still works", () => {
   it("advances and returns 'results' after the last question", () => {
-    expect(nextQuestion({}, "entry")).toBe("who_for");
+    expect(nextQuestion({ entry: "plan_no" }, "entry")).toBe("fertility_position");
     expect(nextQuestion({ entry: "plan_no" }, "zip")).toBe("results");
   });
 

@@ -16,6 +16,9 @@ import { regimensFor } from "./crisp";
  */
 export function questionSequence(answers: Answers): QuestionId[] {
   const seq: QuestionId[] = ["entry"];
+  // The second axis: everyone who isn't just browsing places themselves on
+  // the fertility journey right after the cancer one.
+  if (answers.entry && answers.entry !== "exploring") seq.push("fertility_position");
   if (answers.entry === "exploring") return seq;
   seq.push("who_for");
   if (answers.entry === "plan_yes") seq.push("stage");
@@ -47,6 +50,7 @@ export function questionSequence(answers: Answers): QuestionId[] {
 /** Survey sections: 1 = you and your treatment, 2 = children someday, 3 = practical. */
 export function sectionOf(q: QuestionId): 1 | 2 | 3 {
   if (q === "feelings" || q === "family_size") return 2;
+  if (q === "fertility_position") return 1;
   if (q === "insurance" || q === "partner_insurance" || q === "zip") return 3;
   return 1;
 }

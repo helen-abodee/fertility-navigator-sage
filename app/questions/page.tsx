@@ -186,6 +186,8 @@ export default function QuestionsPage() {
         insurance={answers.insurance}
         stage={answers.stage}
         feelings={answers.feelings}
+        fertilityPosition={answers.fertilityPosition}
+        familySize={answers.familySize}
         age={answers.age}
         anatomy={answers.anatomy}
         zip={answers.zip}

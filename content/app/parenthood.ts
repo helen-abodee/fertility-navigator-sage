@@ -59,7 +59,7 @@ export const parenthoodPaths: ParenthoodPath[] = [
     audience: {},
     paragraphs: [
       {
-        text: "Start with the fertility check. On timing, advice differs: some providers suggest waiting at least about 6 months after chemotherapy, others about 2 to 5 years, depending on your cancer, treatment, and age. Your oncologist sets the timeline that fits your situation.",
+        text: "Start by asking for a referral straight to a fertility specialist; as a cancer survivor you skip the usual testing runaround, and they run everything in one visit. On timing, advice differs: some providers suggest waiting at least about 6 months after chemotherapy, others about 2 to 5 years, depending on your cancer, treatment, and age. Your oncologist sets the timeline that fits your situation.",
         citations: [acsPregnancyAfter()],
       },
       {
