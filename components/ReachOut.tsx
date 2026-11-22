@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Clinic, TreatmentStage } from "../lib/types";
+import { clinicFitsAnatomy } from "../lib/clinic-fit";
+import type { Anatomy, Clinic, TreatmentStage } from "../lib/types";
 import type { GuidanceSection } from "../lib/content-schema";
 import Cite from "./Cite";
 import { contactHref } from "../lib/contact";
@@ -20,12 +21,13 @@ export default function ReachOut({
   stage,
   guidance = [],
   onClose,
+  anatomy,
 }: {
   clinics: Clinic[];
   zip?: string | null;
   stage?: TreatmentStage;
   guidance?: GuidanceSection[];
-  onClose: () => void;
+  onClose: () => void; anatomy?: Anatomy;
 }) {
   const [contact, setContact] = useState("");
   const [clinic, setClinic] = useState<Clinic | null>(null);
@@ -41,7 +43,7 @@ export default function ReachOut({
   }, []);
 
   const home = zip ? zipToCoords(zip) : null;
-  const sorted = [...clinics].sort((a, b) => {
+  const sorted = clinics.filter((c) => clinicFitsAnatomy(c, anatomy)).sort((a, b) => {
     const da = home && a.locations[0] ? milesBetween(home, a.locations[0]) : Infinity;
     const db = home && b.locations[0] ? milesBetween(home, b.locations[0]) : Infinity;
     return da - db;

@@ -15,12 +15,12 @@ const CORS = {
 
 const SYSTEM_TAIL = `
 You are the Ask feature inside the Fertility Preservation Navigator, a free
-tool for young adults with cancer. The document above is your ENTIRE world.
-Follow its ANSWER RULES exactly. Answer in at most 120 words of plain
-sentences at a 6th to 8th grade level. End with the source name(s) in
-parentheses. If the question is outside the document, say the tool has no
-sourced answer and point to the care team and the question list under My
-progress. Never use an em dash.`;
+tool for young adults with cancer. The document above is your ENTIRE world;
+follow its ANSWER RULES exactly, especially rule 0 (VOICE): 2 to 4 short
+plain sentences, about 60 words, the most useful fact first, at most one
+source name in parentheses and only when it adds trust. Talk like a kind,
+plainspoken nurse. Never mention a document, corpus, sources list, or rules.
+Never use an em dash.`;
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
@@ -53,11 +53,13 @@ Deno.serve(async (req) => {
     });
     if (!res.ok) return json({ error: "upstream" }, 502);
     const data = await res.json();
-    const text: string = (data.content ?? [])
+    const raw: string = (data.content ?? [])
       .filter((b: { type: string }) => b.type === "text")
       .map((b: { text: string }) => b.text)
       .join(" ")
       .trim();
+    // House style bans em dashes; enforce mechanically rather than hoping.
+    const text = raw.replace(/\s*[\u2014\u2013]\s*/g, ", ");
 
     const verdict = filterAnswer(text);
     if (!text || !verdict.ok) {

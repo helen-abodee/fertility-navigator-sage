@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import type { Clinic, SourcedField } from "../lib/types";
+import type { Anatomy, Clinic, SourcedField } from "../lib/types";
 import { milesBetween, zipToCoords } from "../lib/distance";
+import { clinicFitsAnatomy } from "../lib/clinic-fit";
 import ClinicDetail from "./ClinicDetail";
 import { track } from "../lib/analytics";
 
@@ -47,14 +48,14 @@ const RADII = [
   { label: "Any distance", miles: Infinity },
 ];
 
-export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zip?: string | null }) {
+export default function ClinicsSection({ clinics, zip, anatomy }: { clinics: Clinic[]; zip?: string | null; anatomy?: Anatomy }) {
   const [filters, setFilters] = useState<ServiceFilter[]>([]);
   const [radius, setRadius] = useState<number>(Infinity);
   const [open, setOpen] = useState<{ clinic: Clinic; miles: number | null } | null>(null);
   const home = zip ? zipToCoords(zip) : null;
 
   const rows = useMemo(() => {
-    const filtered = clinics.filter((c) =>
+    const filtered = clinics.filter((c) => clinicFitsAnatomy(c, anatomy)).filter((c) =>
       filters.every((f) =>
         f === "oncofertility" ? fieldTrue(c.oncofertility) :
         f === "spermBanking" ? fieldTrue(c.spermBanking) :
@@ -78,7 +79,7 @@ export default function ClinicsSection({ clinics, zip }: { clinics: Clinic[]; zi
       return a.miles - b.miles;
     });
     return inRadius;
-  }, [clinics, filters, home, radius]);
+  }, [clinics, filters, home, radius, anatomy]);
 
   function toggle(f: ServiceFilter) {
     setFilters((prev) => (prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f]));

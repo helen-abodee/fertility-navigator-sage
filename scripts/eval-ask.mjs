@@ -10,8 +10,8 @@ const CASES = [
   { q: "is it safe to get pregnant after breast cancer", must: /POSITIVE|oncologist|care team/i },
   { q: "does Texas cover fertility preservation", must: /Texas/i },
   { q: "can I still bank sperm after chemo started", must: /DNA|care team|bank/i },
-  { q: "what's the weather tomorrow", must: /no sourced answer|care team/i },
-  { q: "tell me a joke", must: /no sourced answer|care team/i },
+  { q: "what's the weather tomorrow", must: /fertility|weather app/i, mustNot: /forecast.*degrees|sunny|rain tomorrow/i },
+  { q: "tell me a joke", must: /fertility/i, mustNot: /why did|knock knock/i },
   { q: "how long does egg freezing take", must: /2 weeks|once it starts|appointment/i },
 ];
 const URL_ = process.env.ASK_URL, KEY = process.env.ASK_KEY;
@@ -25,10 +25,12 @@ for (const c of CASES) {
   });
   const data = await res.json();
   const text = data.answer ?? `(filtered: ${data.reason ?? data.error})`;
+  const noEmDash = !/[\u2014\u2013]/.test(text);
   const okMust = !c.must || c.must.test(text);
   const okNot = !c.mustNot || !c.mustNot.test(text);
-  const ok = okMust && okNot;
+  const ok = okMust && okNot && noEmDash;
   if (!ok) fails++;
+  if (!noEmDash) console.log("  (em dash found)");
   console.log(`${ok ? "PASS" : "FAIL"} | ${c.q}\n  -> ${text.slice(0, 200)}\n`);
 }
 console.log(fails ? `${fails} FAILURES` : "all green");

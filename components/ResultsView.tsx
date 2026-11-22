@@ -186,6 +186,7 @@ export default function ResultsView({
     return (
       <ReachOut
         clinics={clinics}
+        anatomy={anatomy}
         zip={zip}
         stage={stage}
         guidance={results.guidance}
@@ -455,7 +456,7 @@ export default function ResultsView({
 
       {/* Clinics */}
       <div className={show("clinics")}>
-        {clinics.length > 0 && <ClinicsSection clinics={clinics} zip={zip} />}
+        {clinics.length > 0 && <ClinicsSection clinics={clinics} zip={zip} anatomy={anatomy} />}
       </div>
 
       {/* Health */}
