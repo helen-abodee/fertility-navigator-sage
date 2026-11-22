@@ -41,6 +41,7 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.waitForTimeout(300);
   await page.screenshot({ path: `${OUT}/06-feelings-warm.png` });
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.waitForTimeout(300);
   await page.screenshot({ path: `${OUT}/07-milestone-3.png` });
   await page.getByRole("button", { name: "Finish up" }).click();

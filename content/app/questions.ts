@@ -1,5 +1,5 @@
 import type { DoctorQuestion } from "../../lib/content-schema";
-import { asco, cogTesticular, d4, mskAfterTreatment } from "./citations";
+import { asco, cogTesticular, d4, mskAfterTreatment, reiConsult } from "./citations";
 
 /**
  * Questions to bring to the care team, generated from the ASCO 2025
@@ -27,6 +27,13 @@ export const doctorQuestions: DoctorQuestion[] = [
     text: "I'm not sure yet what I want. Can you still refer me to a fertility specialist?",
     audience: {},
     citations: [asco("1.2")],
+  },
+  {
+    id: "q_urgent_slots",
+    category: "Timing",
+    text: "Can you refer me to a fertility clinic that holds urgent appointment slots for cancer patients?",
+    audience: { stages: ["not_started", "in_treatment"] },
+    citations: [reiConsult()],
   },
   {
     id: "q_which_options_fit",

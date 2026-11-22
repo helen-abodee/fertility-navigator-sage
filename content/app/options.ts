@@ -1,6 +1,8 @@
 import type { PreservationOption } from "../../lib/content-schema";
 import {
   acsTeens,
+  goldmanModel,
+  reiConsult,
   asco,
   asrmJourney,
   asrmSperm,
@@ -66,8 +68,8 @@ export const options: PreservationOption[] = [
     },
 
     expectations:
-      "Freezing eggs rather than embryos may fit especially well if you do not have a partner, do not want to use donor sperm, or prefer not to create embryos. Not every egg collected will be mature enough to freeze, and frozen eggs do not guarantee a pregnancy later. Results vary from person to person. Storage is billed every year, and there are added costs later if you thaw and use the eggs.",
-    expectationsCitations: [asco("4.2"), asrmJourney(), mskPreTreatment()],
+      "Freezing eggs rather than embryos may fit especially well if you do not have a partner, do not want to use donor sperm, or prefer not to create embryos. Not every egg collected will be mature enough to freeze, and frozen eggs do not guarantee a pregnancy later. The chance of a baby rises with the number of mature eggs stored and is higher the younger you are at retrieval; published models let a specialist estimate it for your age, and fertility doctors consulted for this tool often plan around 15 to 20 eggs per hoped-for child for people under 35, sometimes over more than one cycle. An egg count from one cycle is not a fertility grade. Storage is billed every year, and there are added costs later if you thaw and use the eggs.",
+    expectationsCitations: [asco("4.2"), asrmJourney(), mskPreTreatment(), goldmanModel(), reiConsult()],
     costs: [
       {
         label: "One egg freezing cycle",
@@ -154,7 +156,7 @@ export const options: PreservationOption[] = [
         label: "Egg collection cycle",
         range: "$12,400 on average (US)",
         amount: { min: 12400, max: 12400, per: "once" },
-        note: "Published average is for one egg freezing cycle, which uses the same collection steps. Lab work to create embryos adds costs that are not published.",
+        note: "Published average is for one egg freezing cycle, which uses the same collection steps. Lab work to create embryos adds costs that are not published, and fertility doctors consulted for this tool put a typical full IVF cycle later near $30,000 all-in.",
         citations: [d4(3), d4(9)],
       },
       {

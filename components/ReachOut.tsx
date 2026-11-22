@@ -54,10 +54,10 @@ export default function ReachOut({
       return `Hello, I finished cancer treatment and am interested in discussing fertility options. I would like to schedule a consultation at ${c.name}. Please let me know your next available appointments and what records I should bring. Thank you.`;
     }
     if (stage === "in_treatment") {
-      return `Hello, I am currently in cancer treatment and would like to discuss fertility preservation options with a specialist. I would like to schedule an oncofertility consultation at ${c.name}. Please let me know your earliest availability. Thank you.`;
+      return `Hello, I am currently in cancer treatment and would like to discuss fertility preservation options with a specialist. I would like to schedule an oncofertility consultation at ${c.name}. Do you reserve urgent consultation slots for oncology patients? Please let me know your earliest availability. Thank you.`;
     }
     if (stage === "not_started") {
-      return `Hello, I was recently diagnosed with cancer and my care team has advised discussing fertility preservation before treatment begins, so timing matters. I would like to schedule a new patient oncofertility consultation at ${c.name} as soon as possible. Please let me know your earliest availability. Thank you.`;
+      return `Hello, I was recently diagnosed with cancer and my care team has advised discussing fertility preservation before treatment begins, so timing matters. I would like to schedule a new patient oncofertility consultation at ${c.name}. Do you reserve urgent consultation slots for oncology patients? Please let me know your earliest availability. Thank you.`;
     }
     return `Hello, I am a cancer patient interested in fertility preservation. I would like to schedule an oncofertility consultation at ${c.name}. Please let me know your next available appointments. Thank you.`;
   }

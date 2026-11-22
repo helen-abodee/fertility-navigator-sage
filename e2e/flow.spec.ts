@@ -28,6 +28,7 @@ test("the checkpoint path walks end to end with section milestones", async ({ pa
   await expect(page.getByRole("heading", { name: "Now the part that's about you" })).toBeVisible();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
 
   // Milestone into the practical section
   await expect(page.getByRole("heading", { name: "Last stretch: the practical side" })).toBeVisible();
@@ -92,6 +93,7 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await walkSection1(page);
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -219,6 +221,7 @@ test("after-treatment woman walks her own path", async ({ page }) => {
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -244,6 +247,7 @@ test("before-treatment man sees the pre-treatment path", async ({ page }) => {
   await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -351,6 +355,7 @@ test("clinics: map first, radius filter, tappable detail pages", async ({ page }
   await walkSection1(page);
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByPlaceholder("5-digit ZIP").fill("91101");
@@ -375,6 +380,7 @@ test("partner insurance is asked only when partnered, and the LGBTQ+ card shows"
   await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
 
@@ -406,6 +412,7 @@ test("the team board demo and the aid fit check work", async ({ page }) => {
   await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();

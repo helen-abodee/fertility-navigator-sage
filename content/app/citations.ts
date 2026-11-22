@@ -66,6 +66,54 @@ export function afpPostTreatment(): Citation {
   };
 }
 
+export function asrmOvarianReserve(): Citation {
+  return {
+    sourceId: "asrm-ovarian-reserve-2020",
+    sourceName: "ASRM Practice Committee: Testing and interpreting measures of ovarian reserve (Fertil Steril 2020)",
+    url: "https://pubmed.ncbi.nlm.nih.gov/33280722/",
+    sourceDate: "2020-12-01",
+    retrieved: "2026-11-22",
+  };
+}
+
+export function asrmDefinition2023(): Citation {
+  return {
+    sourceId: "asrm-definition-2023",
+    sourceName: "ASRM Practice Committee: Definition of infertility, a committee opinion (2023)",
+    url: "https://www.asrm.org/practice-guidance/practice-committee-documents/definition-of-infertility/",
+    sourceDate: "2023-10-15",
+    retrieved: "2026-11-22",
+  };
+}
+
+export function goldmanModel(): Citation {
+  return {
+    sourceId: "goldman-2017",
+    sourceName: "Goldman et al.: Predicting the likelihood of live birth for elective oocyte cryopreservation (Hum Reprod 2017)",
+    url: "https://pubmed.ncbi.nlm.nih.gov/28166330/",
+    sourceDate: "2017-04-01",
+    retrieved: "2026-11-22",
+  };
+}
+
+export function reiConsult(): Citation {
+  return {
+    sourceId: "rei-consult-2026",
+    sourceName: "Reproductive endocrinology consultation for this tool (Stanford, 2026)",
+    sourceDate: "2026-11-21",
+    retrieved: "2026-11-21",
+  };
+}
+
+export function psychConsult(): Citation {
+  return {
+    sourceId: "psych-consult-2026",
+    sourceName: "Fertility psychology consultation for this tool (Stanford, 2026)",
+    sourceDate: "2026-11-21",
+    retrieved: "2026-11-21",
+  };
+}
+
 export function swConsult(): Citation {
   return {
     sourceId: "sw-consult-2026",

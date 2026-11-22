@@ -185,6 +185,20 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "no", label: "No", icon: "shield" },
     ],
   },
+  family_size: {
+    id: "family_size",
+    field: "familySize",
+    kind: "single",
+    optional: true,
+    skippable: true,
+    heading: "How many children do you hope for, someday?",
+    options: [
+      { value: "one", label: "One" },
+      { value: "two", label: "Two" },
+      { value: "three_plus", label: "Three or more" },
+      { value: "not_sure", label: "I'm not sure", notSure: true },
+    ],
+  },
   insurance: {
     id: "insurance",
     field: "insurance",

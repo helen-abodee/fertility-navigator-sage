@@ -42,6 +42,7 @@ export type ChemoAgent =
   | "not_sure";
 
 export type FeelingsAboutChildren = "yes" | "maybe" | "not_sure" | "no";
+export type FamilySize = "one" | "two" | "three_plus" | "not_sure";
 
 export type InsuranceType = "ca_commercial" | "medi_cal" | "other" | "none" | "unknown";
 
@@ -63,6 +64,8 @@ export interface Answers {
   chemoRegimen?: string;
   radiationArea?: RadiationArea;
   feelings?: FeelingsAboutChildren;
+  /** asked only when feelings is "yes"; shapes the planning conversation */
+  familySize?: FamilySize | null;
   insurance?: InsuranceType;
   partnerInsurance?: YesNoUnsure;
   /** undefined = not reached, null = skipped. Used only for clinic distance, on device. */
@@ -82,6 +85,7 @@ export type QuestionId =
   | "chemo_regimen"
   | "radiation_area"
   | "feelings"
+  | "family_size"
   | "insurance"
   | "partner_insurance"
   | "zip";

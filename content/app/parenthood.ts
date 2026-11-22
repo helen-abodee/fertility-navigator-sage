@@ -2,6 +2,7 @@ import type { Audience } from "../../lib/content-schema";
 import type { Citation } from "../../lib/types";
 import {
   acsFamilyBuilding,
+  reiConsult,
   acsPregnancyAfter,
   afpPostTreatment,
   asco,
@@ -45,8 +46,8 @@ export const parenthoodPaths: ParenthoodPath[] = [
         citations: [acsFamilyBuilding()],
       },
       {
-        text: "Thawing and treatment are billed separately from the yearly storage you have been paying. Prices vary widely and are rarely published, so ask the clinic for an itemized list before you start.",
-        citations: [acsFamilyBuilding(), mskBuildingFamily()],
+        text: "Thawing and treatment are billed separately from the yearly storage you have been paying. Prices vary widely and are rarely published; fertility doctors consulted for this tool put a typical full IVF cycle near $30,000 all-in, so ask the clinic for an itemized list before you start.",
+        citations: [acsFamilyBuilding(), mskBuildingFamily(), reiConsult()],
       },
     ],
   },

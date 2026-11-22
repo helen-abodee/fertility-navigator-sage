@@ -1,6 +1,6 @@
 import type { GuidanceSection } from "../../lib/content-schema";
 import { afpCite } from "./state-coverage";
-import { swConsult } from "./citations";
+import { asrmDefinition2023, asrmOvarianReserve, psychConsult, reiConsult, swConsult } from "./citations";
 import {
   acsTeens,
   asco,
@@ -60,6 +60,21 @@ export const guidance: GuidanceSection[] = [
     ],
   },
   {
+    id: "amh_timeline",
+    audience: { anatomy: ["ovaries_uterus"] },
+    heading: "What an AMH test does and does not tell you",
+    paragraphs: [
+      {
+        text: "AMH and ultrasound egg counts are not a fertility grade. Per the ASRM guideline, they predict how many eggs one stimulation cycle might collect and help set medicine doses, and they are poor predictors of your ability to get pregnant apart from age. A low number does not mean you cannot conceive, and a high one is not a promise.",
+        citations: [asrmOvarianReserve()],
+      },
+      {
+        text: "What these tests are good for is your timeline. The freeze decision rests on your age, how many children you hope for, and when you would be ready: hoping for three children at 35 is a different timeline than hoping for three at 40, because egg number and quality decline faster in the later 30s.",
+        citations: [asrmOvarianReserve(), reiConsult()],
+      },
+    ],
+  },
+  {
     id: "ok_to_step_back",
     audience: {},
     heading: "Stuck on this decision? Stepping back is allowed",
@@ -71,6 +86,10 @@ export const guidance: GuidanceSection[] = [
       {
         text: "If this topic brings up more than you want to carry alone, that is what the support side of your care team is for. Social workers screen for distress and connect you to help. Psychologists offer talk therapy. Psychiatrists can prescribe medication when that helps. Many centers run support groups just for young adults. You can also ask for a referral to a therapist who works with people with cancer.",
         citations: [swConsult()],
+      },
+      {
+        text: "Practical ways in, from clinicians who do this work: ask the clinic for an in-network provider list and their plain self-pay rates, ask about free group sessions, and know that virtual therapy can often be paid with FSA or HSA money.",
+        citations: [psychConsult()],
       },
     ],
   },
@@ -111,8 +130,12 @@ export const guidance: GuidanceSection[] = [
         citations: [calmattersSb729(), resolveFaq()],
       },
       {
-        text: "Donor agreements, parentage, and surrogacy are legal questions, and the answers are state-specific. A family-formation attorney is the right person for them; many offer one free consult, and your social worker may know local ones.",
-        citations: [],
+        text: "Nationally, ASRM's 2023 definition of infertility includes needing medical intervention, including donor eggs, sperm, or embryos, to achieve pregnancy, as an individual or with a partner, and says the definition shall not be used to deny or delay treatment to anyone regardless of relationship status or sexual orientation. That wording is useful in coverage conversations.",
+        citations: [asrmDefinition2023()],
+      },
+      {
+        text: "Paths differ by couple. Two people with ovaries can use donor sperm, and some choose reciprocal IVF, where one partner's eggs are used and the other carries. Couples or single parents without a uterus generally need donor eggs plus a gestational carrier, which is one of the most expensive routes and needs a lawyer early. Donor agreements, parentage, and surrogacy are legal questions, and the answers are state-specific; a family-formation attorney is the right person, and many offer one free consult.",
+        citations: [asrmDefinition2023(), reiConsult()],
       },
     ],
   },
@@ -281,7 +304,7 @@ export const guidance: GuidanceSection[] = [
     heading: "Finding out where your fertility stands now",
     paragraphs: [
       {
-        text: "If your treatment could affect the ovaries, a yearly check-up is recommended. It covers your periods, pregnancy history, and sexual health, and blood may be tested for hormone levels (FSH, LH, and estradiol) if a problem is suspected. Regular monthly periods with normal hormone levels are a good sign for fertility.",
+        text: "If your treatment could affect the ovaries, a yearly check-up is recommended. It covers your periods, pregnancy history, and sexual health, and blood may be tested for hormone levels (FSH, LH, and estradiol) if a problem is suspected. Regular monthly periods with normal hormone levels are a good sign for fertility. Recent results from another clinic can usually be reused, so ask before repeating anything, and while you wait for a specialist, a primary care doctor or OB-GYN can often order the basics, like an AMH blood test.",
         citations: [cogOvarian()],
       },
       {
@@ -315,7 +338,7 @@ export const guidance: GuidanceSection[] = [
     heading: "Finding out where your fertility stands now",
     paragraphs: [
       {
-        text: "If your treatment could affect the testes, a yearly check-up is recommended. Blood may be tested for hormone levels: a morning (AM) testosterone, LH, FSH, and inhibin.",
+        text: "If your treatment could affect the testes, a yearly check-up is recommended. Blood may be tested for hormone levels: a morning (AM) testosterone, LH, FSH, and inhibin. Recent results from another clinic can usually be reused, so ask before repeating anything, and while you wait for a specialist, a primary care doctor can often order a semen analysis to start.",
         citations: [cogTesticular()],
       },
       {

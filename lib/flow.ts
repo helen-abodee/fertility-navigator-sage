@@ -34,6 +34,7 @@ export function questionSequence(answers: Answers): QuestionId[] {
     if (answers.treatments?.includes("radiation")) seq.push("radiation_area");
   }
   seq.push("feelings");
+  if (answers.feelings === "yes") seq.push("family_size");
   // The practical section only matters when children are (or may be) wanted.
   if (answers.feelings !== "no") {
     seq.push("insurance");
@@ -45,7 +46,7 @@ export function questionSequence(answers: Answers): QuestionId[] {
 
 /** Survey sections: 1 = you and your treatment, 2 = children someday, 3 = practical. */
 export function sectionOf(q: QuestionId): 1 | 2 | 3 {
-  if (q === "feelings") return 2;
+  if (q === "feelings" || q === "family_size") return 2;
   if (q === "insurance" || q === "partner_insurance" || q === "zip") return 3;
   return 1;
 }
