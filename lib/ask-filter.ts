@@ -13,8 +13,9 @@ const RULES: { id: string; re: RegExp }[] = [
   { id: "recommendation", re: /\byou should (choose|pick|go with|do|freeze|bank|preserve)\b|\bI (recommend|suggest|advise)\b|\bthe best option for you\b/i },
   // benefit claims the tone gates ban
   { id: "claim", re: /\b(boost|improve|improves|improving|increase[sd]?)\s(your\s)?(fertility|chances?)\b|\bguarantee[sd]?\s(a\s)?(baby|child|pregnancy)\b/i },
-  // diagnosis / personal medical interpretation
-  { id: "diagnosis", re: /\byou (have|likely have|probably have|are infertile|are sterile)\b|\byour (results|labs|pathology) (mean|show|indicate)\b/i },
+  // diagnosis / personal medical interpretation (narrow: "you have options"
+  // and "if you have ovaries" are fine; diagnosing the person is not)
+  { id: "diagnosis", re: /\byou (are|'re) (infertile|sterile)\b|\byou (likely |probably )?have (cancer|infertility|low|poor|diminished)\b|\byour (results|labs|pathology) (mean|show|indicate)\b/i },
   // tone bans
   { id: "tone", re: /\b(be gentle with yourself|self-care|stay positive|stay strong|listen to your body)\b/i },
   // urgency

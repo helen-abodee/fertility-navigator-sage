@@ -25,6 +25,8 @@ describe("ask output filter", () => {
     "Storage is billed every year, usually $200 to $500.",
     "The POSITIVE trial followed 516 women; after 3 years their outcomes matched women who did not pause therapy.",
     "Sperm banking usually takes about a week, and even one sample helps.",
+    "The options you have depend on your treatment plan, and the specialist decides with you.",
+    "If you have ovaries, egg freezing and ovarian tissue freezing are the established methods.",
   ];
   for (const t of allowed) {
     it(`allows: ${t.slice(0, 40)}`, () => {
