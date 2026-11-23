@@ -219,8 +219,19 @@ export default function QuestionsPage() {
   }
 
   const baseDef = questions[current];
+  const FEMALE_ONLY_CANCERS = ["breast", "cervical", "ovarian", "uterine"];
+  const MALE_ONLY_CANCERS = ["testicular"];
   const def =
-    current === "fertility_position" && answers.entry === "finished"
+    current === "cancer_type" && (answers.anatomy === "testes" || answers.anatomy === "ovaries_uterus")
+      ? {
+          ...baseDef,
+          options: (baseDef.options ?? []).filter((o) =>
+            answers.anatomy === "testes"
+              ? !FEMALE_ONLY_CANCERS.includes(o.value)
+              : !MALE_ONLY_CANCERS.includes(o.value),
+          ),
+        }
+      : current === "fertility_position" && answers.entry === "finished"
       ? {
           ...baseDef,
           options: [

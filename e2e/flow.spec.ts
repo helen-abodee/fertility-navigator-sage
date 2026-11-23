@@ -385,7 +385,7 @@ test("clinics: map first, radius filter, tappable detail pages", async ({ page }
   await page.getByRole("button", { name: "Within 40 mi" }).click();
   await page.getByRole("button", { name: /HRC Fertility/ }).first().click();
   await expect(page.getByRole("heading", { name: /HRC Fertility/ }).first()).toBeVisible();
-  await expect(page.getByText("Consult", { exact: true })).toBeVisible();
+  await expect(page.getByText("Consult", { exact: true }).last()).toBeVisible();
   await expect(page.getByText("Aetna", { exact: false }).first()).toBeVisible();
   await page.getByRole("button", { name: "Back to clinics" }).first().click();
 });

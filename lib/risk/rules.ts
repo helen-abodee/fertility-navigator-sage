@@ -234,7 +234,7 @@ export const riskRules: RiskRule[] = [
       label: "Depends on the surgery",
       headline: "Your risk depends on what the surgery involves",
       body:
-        "Surgery matters when it removes or works near reproductive organs. Other operations range from no effect to meaningful effects.",
+        "Surgery matters when it removes or works near reproductive organs.",
       askTeam: "Will my surgery affect my reproductive organs? " + CONFIRM,
       citations: [citations.cogLtfu],
     },
