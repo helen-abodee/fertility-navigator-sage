@@ -22,6 +22,7 @@ import PathHome from "./PathHome";
 import CheckinCard from "./CheckinCard";
 import NudgeCard from "./NudgeCard";
 import { noteTopic } from "../lib/checkin";
+import { cashRange } from "./CostEstimator";
 import { loadJourney } from "../lib/storage";
 import type { Journey } from "../lib/journey";
 import type { RoadGo } from "../lib/road";
@@ -30,6 +31,7 @@ import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
 import ProfileSection from "./ProfileSection";
+import ProfileNudge from "./ProfileNudge";
 import Icon, { optionIcon } from "./icons";
 
 type Tab = "path" | "options" | "parenthood" | "compare" | "money" | "clinics" | "health";
@@ -136,6 +138,7 @@ export default function ResultsView({
   const [visited, setVisited] = useState<Tab[]>(["path"]);
   const [panel, setPanel] = useState<"progress" | "reach" | "ask" | "checkin" | null>(null);
   const [roadJourney, setRoadJourney] = useState<Journey | null>(null);
+  const [verdict, setVerdict] = useState<"likely_covered" | "likely_not_covered" | "depends" | null>(null);
   useEffect(() => {
     // Journey lives in localStorage; read it after mount so server and
     // client render the same first frame.
@@ -157,6 +160,9 @@ export default function ResultsView({
   function goTab(next: Tab) {
     track("tab_viewed");
     noteTopic(next);
+    if (next === "money" && !costOption && results.options.length > 0) {
+      setCostOption(results.options[0]);
+    }
     if (next === "compare") track("compare_used");
     setTab(next);
     setVisited((v) => (v.includes(next) ? v : [...v, next]));
@@ -185,6 +191,7 @@ export default function ResultsView({
     return (
       <AskSection
         answers={answersForProfile}
+        guidance={results.guidance}
         onClose={() => setPanel(null)}
         onNavigate={(target) => {
           if (target === "progress") {
@@ -391,6 +398,7 @@ export default function ResultsView({
 
       {/* The road */}
       <div className={`flex flex-col gap-6 ${show("path")}`}>
+        <ProfileNudge answers={answersForProfile} />
         <PathHome
           answers={answersForProfile}
           journey={roadJourney}
@@ -413,16 +421,33 @@ export default function ResultsView({
 
       {/* Financing */}
       <div className={`flex flex-col gap-6 ${moneyUnlocked ? show("money") : "hidden"}`} data-survey-section="3">
+        {verdict && costOption && (() => {
+          const { min, max } = cashRange(costOption, 1);
+          const cash = min > 0 ? `about $${min.toLocaleString()} to $${max.toLocaleString()}` : null;
+          return (
+            <section className="border-accent bg-accent-tint rounded-2xl border-[1.5px] p-4">
+              <p className="text-accent-ink text-[0.68rem] font-bold tracking-[0.08em] uppercase">Your ballpark · {costOption.name}</p>
+              <p className="mt-1 text-sm font-bold">
+                {verdict === "likely_covered"
+                  ? `Likely your plan's usual share, not the ${cash ? `${cash} ` : ""}cash price. One call verifies it.`
+                  : verdict === "likely_not_covered"
+                    ? `Likely ${cash ?? "the clinic's quoted price"} out of pocket, before the aid in step 3.`
+                    : `The cash price runs ${cash ?? "by clinic quote"}; step 1 decides who pays it.`}
+              </p>
+            </section>
+          );
+        })()}
+
         <section className="border-line bg-card rounded-2xl border p-5">
+          <p className="text-accent-ink text-[0.68rem] font-bold tracking-[0.08em] uppercase">Step 1 · Where you stand</p>
           <h2 className="text-lg">Will insurance pay for this?</h2>
-          <p className="text-muted mt-1 mb-3 text-sm">A few taps. No member IDs, ever.</p>
-          <CoverageChecker insurance={insurance} stage={stage} />
+          <CoverageChecker insurance={insurance} stage={stage} onVerdict={setVerdict} />
         </section>
 
         {results.options.length > 0 && (
           <section className="border-line bg-card rounded-2xl border p-5 print:hidden">
+            <p className="text-accent-ink text-[0.68rem] font-bold tracking-[0.08em] uppercase">Step 2 · What it costs</p>
             <h2 className="text-lg">What could an option cost?</h2>
-            <p className="text-muted mt-1 mb-3 text-sm">Pick one. Coverage comes first; the full prices follow.</p>
             <select
               aria-label="Cost option"
               value={costOption?.id ?? ""}
@@ -463,7 +488,8 @@ export default function ResultsView({
           const unlikely = checked.filter((x) => x.r.fit === "unlikely");
           return (
             <section>
-              <h2 className="text-lg">Financial aid programs</h2>
+              <div><p className="text-accent-ink text-[0.68rem] font-bold tracking-[0.08em] uppercase">Step 3 · Aid that can cut it</p>
+            <h2 className="text-lg">Financial aid programs</h2></div>
               <div className="mt-2">
                 <AskTeam text="You don't have to sort these alone. Social workers connect patients to these programs every week; ask yours to help you apply." />
               </div>

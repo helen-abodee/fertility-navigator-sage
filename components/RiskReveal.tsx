@@ -1,17 +1,35 @@
 "use client";
 
 import type { RiskAssessment } from "../lib/risk";
-import AskTeam from "./AskTeam";
+import type { Answers } from "../lib/types";
 import Cite from "./Cite";
+import { withGlossary } from "./Term";
 
-/** The dedicated risk screen between the questions and the options. */
+const SIZE_WORD: Record<string, string> = { one: "one child", two: "two children", three_plus: "three or more children" };
+const WHEN_WORD: Record<string, string> = {
+  within_year: "within about a year",
+  one_to_three: "in about 1 to 3 years",
+  three_plus_years: "in 3 or more years",
+};
+
+/**
+ * The risk screen, kept spare on purpose: one headline, one explanation,
+ * your own timeline if you gave one, and everything else folded away.
+ */
 export default function RiskReveal({
   risk,
-  onContinue, onBack,
+  answers,
+  onContinue,
+  onBack,
 }: {
   risk: RiskAssessment;
-  onContinue: () => void; onBack?: () => void;
+  answers?: Answers;
+  onContinue: () => void;
+  onBack?: () => void;
 }) {
+  const size = answers?.familySize ? SIZE_WORD[answers.familySize] : undefined;
+  const when = answers?.familyTimeline ? WHEN_WORD[answers.familyTimeline] : undefined;
+
   return (
     <main className="wash relative mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
       {onBack && (
@@ -23,32 +41,30 @@ export default function RiskReveal({
           &larr; Back
         </button>
       )}
-      <span className="bg-accent-tint text-accent-ink animate-pop self-start rounded-full px-4 py-1.5 text-sm font-bold">
-        {risk.label}
-      </span>
-      <div className="flex flex-wrap gap-1.5">
-        {Array.from(
-          new Set(
-            risk.citations.map((c) => {
-              const n = c.sourceName;
-              if (n.toLowerCase().startsWith("study behind") || n.toLowerCase().startsWith("studies behind")) {
-                return n.split(":")[1]?.split(",")[0]?.trim() ?? n;
-              }
-              return n.split(" (")[0].split(":")[0];
-            }),
-          ),
-        ).slice(0, 2).map((name) => (
-          <span key={name} className="border-line bg-card text-muted rounded-full border px-2.5 py-0.5 text-[0.65rem] font-bold tracking-wide uppercase">
-            Evidence: {name}
-          </span>
-        ))}
-      </div>
-      <h1 className="text-3xl">{risk.headline}</h1>
-      <p className="text-[1.02rem]">{risk.body}</p>
-      <AskTeam text={risk.askTeam} />
-      <p className="text-muted text-sm">
-        If this differs from what your doctor told you, bring both to your next appointment. Treatment plans and histories differ in ways this tool cannot see.
-      </p>
+      <h1 className="animate-pop text-3xl">{risk.headline}</h1>
+      <p className="text-[1.02rem]">{withGlossary(risk.body)}</p>
+
+      {(size || when) && (
+        <div className="border-line bg-card rounded-2xl border p-4">
+          <p className="text-accent-ink text-[0.68rem] font-bold tracking-[0.08em] uppercase">Your timeline</p>
+          <p className="mt-1 text-sm">
+            You hoped for {size ?? "children"}{when ? `, starting ${when}` : ""}. That is exactly what a
+            fertility specialist plans cycles and timing around, so say it at the consult.
+          </p>
+        </div>
+      )}
+
+      <details className="border-line bg-card rounded-2xl border px-4 py-3">
+        <summary className="cursor-pointer list-none text-sm font-bold">
+          For your care team <span className="text-accent-ink float-right">+</span>
+        </summary>
+        <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-sm">
+          <li>{risk.askTeam}</li>
+          <li>Does this match what you have told me so far?</li>
+          <li>Have I had fertility counseling yet, and if not, can we schedule it?</li>
+        </ul>
+      </details>
+
       <Cite citations={risk.citations} />
       <button
         type="button"

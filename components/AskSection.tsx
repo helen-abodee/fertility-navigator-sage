@@ -2,6 +2,8 @@
 
 import { useRef, useState } from "react";
 import type { Answers } from "../lib/types";
+import type { GuidanceSection } from "../lib/content-schema";
+import Cite from "./Cite";
 import { askCorpus, cannedQuestions, CHAT_STRINGS, type ChatEntry } from "../lib/chat";
 import { ASK_DISCLOSURE } from "../lib/ask-filter";
 import { track } from "../lib/analytics";
@@ -30,7 +32,6 @@ async function askModel(
     return null;
   }
 }
-import Cite from "./Cite";
 import Icon from "./icons";
 
 interface Message {
@@ -50,10 +51,12 @@ interface Message {
  */
 export default function AskSection({
   answers,
+  guidance = [],
   onClose,
   onNavigate,
 }: {
   answers: Answers;
+  guidance?: GuidanceSection[];
   onClose: () => void;
   onNavigate: (target: string) => void;
 }) {
@@ -161,6 +164,25 @@ export default function AskSection({
               </button>
             ))}
           </div>
+        )}
+
+        {messages.length === 0 && guidance.length > 0 && (
+          <details className="border-line bg-card rounded-2xl border px-4 py-3">
+            <summary className="cursor-pointer list-none font-bold">
+              Common questions <span className="text-accent-ink float-right">+</span>
+            </summary>
+            <div className="mt-2 flex flex-col gap-2">
+              {guidance.map((g) => (
+                <details key={g.id} className="border-line rounded-lg border px-3 py-2">
+                  <summary className="cursor-pointer list-none text-sm font-bold">{g.heading}</summary>
+                  {g.paragraphs.map((p, i) => (
+                    <p key={i} className="mt-2 text-sm">{p.text}</p>
+                  ))}
+                  <Cite citations={g.paragraphs.flatMap((p) => p.citations)} />
+                </details>
+              ))}
+            </div>
+          </details>
         )}
 
         {messages.map((m, i) =>

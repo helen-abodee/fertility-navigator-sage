@@ -220,6 +220,20 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "not_sure", label: "I'm not sure", notSure: true },
     ],
   },
+  family_timeline: {
+    id: "family_timeline",
+    field: "familyTimeline",
+    kind: "single",
+    optional: true,
+    skippable: true,
+    heading: "Any sense of when you'd want to start?",
+    options: [
+      { value: "within_year", label: "Within about a year" },
+      { value: "one_to_three", label: "In about 1 to 3 years" },
+      { value: "three_plus_years", label: "In 3 or more years" },
+      { value: "not_sure", label: "No idea yet", notSure: true },
+    ],
+  },
   insurance: {
     id: "insurance",
     field: "insurance",

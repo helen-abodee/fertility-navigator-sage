@@ -36,6 +36,13 @@ export default function QuestionScreen({
     typeof initialValue === "string" || typeof initialValue === "number" ? String(initialValue) : "",
   );
   const [multi, setMulti] = useState<string[]>(Array.isArray(initialValue) ? (initialValue as string[]) : []);
+  const [query, setQuery] = useState("");
+  const LONG = (def.options?.length ?? 0) > 7;
+  const shownOptions = LONG && query.trim()
+    ? (def.options ?? []).filter(
+        (o) => o.label.toLowerCase().includes(query.trim().toLowerCase()) || o.notSure,
+      )
+    : def.options ?? [];
 
   useEffect(() => {
     setText(typeof initialValue === "string" || typeof initialValue === "number" ? String(initialValue) : "");
@@ -124,8 +131,18 @@ export default function QuestionScreen({
       </h1>
 
       <div className="mt-6 flex flex-col gap-3">
+        {LONG && (
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Type to find it faster (names or abbreviations)"
+            aria-label="Filter the list"
+            className="border-line bg-card min-h-12 w-full rounded-xl border-[1.5px] px-4 text-sm"
+          />
+        )}
         {def.kind === "single" &&
-          def.options?.map((opt) => (
+          shownOptions.map((opt) => (
             <button
               key={opt.value}
               type="button"
@@ -147,7 +164,7 @@ export default function QuestionScreen({
 
         {def.kind === "multi" && (
           <>
-            {def.options?.map((opt) => {
+            {shownOptions.map((opt) => {
               const on = multi.includes(opt.value);
               return (
                 <button

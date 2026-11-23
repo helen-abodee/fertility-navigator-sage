@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CoverageInput } from "../lib/coverage";
 import { assessCoverage } from "../lib/coverage";
 import { coverageForState, US_STATES } from "../content/app/state-coverage";
@@ -27,9 +27,11 @@ function prefillChannel(insurance?: InsuranceType): CoverageInput["channel"] | u
 export default function CoverageChecker({
   insurance,
   stage,
+  onVerdict,
 }: {
   insurance?: InsuranceType;
   stage?: TreatmentStage;
+  onVerdict?: (verdict: "likely_covered" | "likely_not_covered" | "depends" | null) => void;
 }) {
   const pre = prefillChannel(insurance);
   const [input, setInput] = useState<CoverageInput>({ stage, channel: pre });
@@ -79,6 +81,11 @@ export default function CoverageChecker({
     setInput({ stage });
     setPhase("channel");
   }
+
+  useEffect(() => {
+    onVerdict?.(phase === "verdict" ? assessCoverage(input).verdict : null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, input]);
 
   if (phase === "verdict") {
     track("coverage_checked");

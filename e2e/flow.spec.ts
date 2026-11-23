@@ -29,6 +29,7 @@ test("the checkpoint path walks end to end with section milestones", async ({ pa
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
+  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
 
   // Milestone into the practical section
   await expect(page.getByRole("heading", { name: "Last stretch: the practical side" })).toBeVisible();
@@ -37,9 +38,9 @@ test("the checkpoint path walks end to end with section milestones", async ({ pa
   await page.getByRole("button", { name: "Skip this question" }).click();
 
   // CRISP-powered risk reveal
-  await expect(page.getByText("Lower risk group", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /lower risk group/ })).toBeVisible();
   await expect(page.getByText("studies behind this tool", { exact: false })).toBeVisible();
-  await expect(page.getByText("For your care team")).toBeVisible();
+  await expect(page.getByText("For your care team")).toBeVisible(); // now a collapsible
   await page.getByRole("button", { name: "See my options" }).click();
 
   await expect(page.getByRole("heading", { name: "Your results, one piece at a time" })).toBeVisible();
@@ -96,6 +97,7 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
+  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -147,7 +149,7 @@ test("the ask panel answers from cited sources only", async ({ page }) => {
   // a canned question gets a cited card
   await page.getByRole("button", { name: "Will insurance cover it?" }).click();
   await expect(page.getByText("California law", { exact: false }).first()).toBeVisible();
-  await expect(page.getByText("Where this comes from").first()).toBeVisible();
+  await expect(page.getByText(/^Sources?$/).first()).toBeVisible();
 
   // free text about risk routes to the pointer, never a number
   await page.getByRole("textbox", { name: "Type a question" }).fill("what are my chances of being infertile");
@@ -224,6 +226,7 @@ test("after-treatment woman walks her own path", async ({ page }) => {
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
+  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -251,6 +254,7 @@ test("before-treatment man sees the pre-treatment path", async ({ page }) => {
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
+  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();
@@ -363,6 +367,7 @@ test("clinics: map first, radius filter, tappable detail pages", async ({ page }
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
+  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByPlaceholder("5-digit ZIP").fill("91101");
@@ -389,6 +394,7 @@ test("the survey never asks about partners, and the LGBTQ+ guidance still shows"
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
+  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   // straight to ZIP: no partner question exists anymore
@@ -396,7 +402,8 @@ test("the survey never asks about partners, and the LGBTQ+ guidance still shows"
   await page.getByRole("button", { name: "Skip this question" }).click();
   await page.getByRole("button", { name: "See my options" }).click();
 
-  await page.getByRole("button", { name: "Reach out" }).click();
+  await page.getByRole("button", { name: "Ask", exact: true }).click();
+  await page.getByText("Common questions").click();
   await expect(page.getByText("If you're LGBTQ+").first()).toBeVisible();
   await expect(page.getByText("Check your partner's plan too").first()).toBeVisible();
 });
@@ -418,6 +425,7 @@ test("the team board demo and the aid fit check work", async ({ page }) => {
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
+  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
   await page.getByRole("button", { name: "A job-based or private plan in California" }).click();
   await page.getByRole("button", { name: "Skip this question" }).click();

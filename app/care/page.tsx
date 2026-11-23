@@ -77,6 +77,14 @@ export default function CarePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Waiting on the emailed link: poll so the dashboard appears by itself.
+  useEffect(() => {
+    if (phase !== "code") return;
+    const t = setInterval(() => void loadDash(), 2500);
+    return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col gap-5 px-6 py-10">
       <h1 className="font-myth text-3xl">Care team</h1>

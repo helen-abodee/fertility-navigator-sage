@@ -168,6 +168,7 @@ export default function QuestionsPage() {
     return (
       <RiskReveal
         risk={assessRisk(answers)}
+        answers={answers}
         onContinue={() => setCurrent("results")}
         onBack={() => {
           const qs = questionSequence(answers);

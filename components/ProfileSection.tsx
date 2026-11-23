@@ -25,6 +25,22 @@ export default function ProfileSection({ answers }: { answers: Answers }) {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [phase, setPhase] = useState<"signedout" | "code" | "consent" | "signedin">("signedout");
+
+  // While waiting on the emailed link, poll for the session so signing in
+  // in the other tab advances this one with zero extra taps.
+  useEffect(() => {
+    if (phase !== "code") return;
+    const t = setInterval(() => {
+      void currentUserEmail().then((e) => {
+        if (e) {
+          setWho(e);
+          setPhase("consent");
+        }
+      });
+    }, 2500);
+    return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
   const [who, setWho] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
