@@ -238,7 +238,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
     kind: "single",
     optional: true,
     skippable: true,
-    heading: "Any sense of when you'd want to start?",
+    heading: "When would you want to have (more) children?",
     options: [
       { value: "within_year", label: "Within about a year" },
       { value: "one_to_three", label: "In about 1 to 3 years" },

@@ -64,12 +64,12 @@ export const riskRules: RiskRule[] = [
       const hit = crispLookup(a.cancerType, a.chemoRegimen, a.age)!;
       const statLine =
         hit.band !== "UNKNOWN" && hit.pct && hit.outcome
-          ? ` In the studies behind this tool, ${hit.pct} of women your age developed ${hit.outcome.toLowerCase()} after this treatment plan.`
+          ? `In the studies behind this tool, ${hit.pct} of women your age had ${hit.outcome.toLowerCase()} after this treatment plan.`
           : "";
       const body =
         hit.band === "UNKNOWN"
           ? `The counseling tool your care team uses does not have enough published data to place ${a.chemoRegimen} for ${hit.crispCancer.toLowerCase()} cancer in a risk group. That is a fact about the research, not about you.`
-          : `This comes from the same tool many cancer-center teams use to counsel patients, matched to your diagnosis, your treatment plan, and your age.${statLine}`;
+          : `Based on your diagnosis, treatment plan, and age. ${statLine}`;
       const citations: RiskAssessment["citations"] = [crispCitation()];
       if (hit.refs) {
         citations.push({
@@ -102,7 +102,7 @@ export const riskRules: RiskRule[] = [
           label: "Higher risk group",
           headline: "Your treatment plan is in the higher risk group",
           body:
-            "This comes from the same tool many cancer-center teams use to counsel patients. In the studies behind it, conditioning treatment for a transplant carried an 80 to 90% risk of amenorrhea at 1 to 2 years post-transplant.",
+            "In the studies behind this tool, conditioning treatment for a transplant carried an 80 to 90% risk of amenorrhea at 1 to 2 years post-transplant.",
           askTeam: "Is there time to preserve before conditioning starts? " + CONFIRM,
           citations: [
             crispCitation(),

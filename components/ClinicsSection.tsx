@@ -177,11 +177,18 @@ export default function ClinicsSection({ clinics, zip, anatomy }: { clinics: Cli
                 <span className="text-muted block truncate text-sm">
                   {loc?.address ?? "Address on their site"}
                 </span>
-                {fieldTrue(clinic.oncofertility) && (
-                  <span className="bg-accent-tint text-accent-ink mt-1 inline-block rounded-full px-2 py-0.5 text-[0.65rem] font-bold">
-                    oncofertility
-                  </span>
-                )}
+                <span className="mt-1 flex flex-wrap gap-1">
+                  {fieldTrue(clinic.oncofertility) && (
+                    <span className="bg-accent-tint text-accent-ink inline-block rounded-full px-2 py-0.5 text-[0.65rem] font-bold">
+                      oncofertility
+                    </span>
+                  )}
+                  {/free/i.test(String(clinic.consultCost?.value ?? "")) && (
+                    <span className="inline-block rounded-full px-2 py-0.5 text-[0.65rem] font-bold" style={{ background: "var(--cmp-good-bg)", color: "var(--cmp-good-ink)" }}>
+                      free consult
+                    </span>
+                  )}
+                </span>
               </span>
               <span className="flex flex-col items-end gap-0.5">
                 {miles !== null && (

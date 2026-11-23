@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { PreservationOption } from "../lib/content-schema";
 import Icon, { optionIcon } from "./icons";
 import Cite from "./Cite";
@@ -18,26 +18,7 @@ export default function OptionDetail({
   option: PreservationOption;
   onClose: () => void;
 }) {
-  const [step, setStep] = useState(0);
   const [showPlan, setShowPlan] = useState(false);
-  const track = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = track.current;
-    if (!el) return;
-    const onScroll = () => {
-      const i = Math.round(el.scrollLeft / el.clientWidth);
-      setStep(Math.min(option.steps.length - 1, Math.max(0, i)));
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [option.steps.length]);
-
-  function goTo(i: number) {
-    const el = track.current;
-    if (!el) return;
-    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
-  }
 
   return (
     <div className="bg-paper fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-label={option.name}>
@@ -61,63 +42,22 @@ export default function OptionDetail({
         )}
         <Cite citations={option.citations} />
 
-        {/* Swipeable steps */}
-        <h2 className="mt-6 text-lg">The steps, one swipe at a time</h2>
-        <div
-          ref={track}
-          className="mt-2 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {option.steps.map((s, i) => (
-            <div
-              key={i}
-              className="border-line bg-card flex w-full shrink-0 snap-center flex-col items-center rounded-2xl border p-6 text-center"
-            >
-              <span
-                className={`bg-accent-tint text-accent-ink flex h-14 w-14 items-center justify-center rounded-full ${i === step ? "animate-pop" : ""}`}
-              >
-                <Icon name={s.icon ?? "clipboard"} size={30} />
+        {/* The steps, at a glance */}
+        <h2 className="mt-6 text-lg">The steps</h2>
+        <ol className="mt-2 flex flex-col gap-1.5">
+          {option.steps.map((st, i) => (
+            <li key={i} className="border-line bg-card rounded-lg border px-3.5 py-2.5">
+              <span className="flex items-center gap-2.5">
+                <span className="bg-accent-tint text-accent-ink flex h-7 w-7 shrink-0 items-center justify-center rounded-full">
+                  <Icon name={st.icon ?? "clipboard"} size={15} />
+                </span>
+                <span className="text-[0.95rem] font-bold">{st.title}</span>
+                {st.duration && <span className="text-accent-ink ml-auto text-xs font-bold whitespace-nowrap">{st.duration}</span>}
               </span>
-              <p className="text-muted mt-3 text-xs font-bold tracking-widest uppercase">
-                Step {i + 1} of {option.steps.length}
-              </p>
-              <p className="mt-1 font-bold">{s.title}</p>
-              {s.duration && <p className="text-accent-ink text-sm font-bold">{s.duration}</p>}
-              <p className="mt-2 text-[0.95rem]">{s.body}</p>
-            </div>
+              <span className="text-muted mt-1 block pl-[38px] text-sm">{st.body}</span>
+            </li>
           ))}
-        </div>
-        <div className="mt-2 flex items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => goTo(step - 1)}
-            disabled={step === 0}
-            aria-label="Previous step"
-            className="text-accent-ink disabled:text-line px-2 text-xl font-bold"
-          >
-            &larr;
-          </button>
-          <div className="flex gap-1.5">
-            {option.steps.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Go to step ${i + 1}`}
-                onClick={() => goTo(i)}
-                className={`h-2 w-2 rounded-full ${i === step ? "bg-accent" : "bg-line"}`}
-              />
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={() => goTo(step + 1)}
-            disabled={step === option.steps.length - 1}
-            aria-label="Next step"
-            className="text-accent-ink disabled:text-line px-2 text-xl font-bold"
-          >
-            &rarr;
-          </button>
-        </div>
+        </ol>
         <Cite citations={option.stepsCitations} />
 
         {/* Personal timeline */}
@@ -164,15 +104,40 @@ export default function OptionDetail({
           </div>
         )}
 
-        <p className="text-muted mt-6 text-sm">
-          Whether this method is right for you is decided with a fertility specialist at your consult, alongside your cancer care team. Costs and coverage live on the "Financing" tab, when you're ready for them.
-        </p>
+        <p className="text-muted mt-6 text-sm">Costs and coverage live on the "Financing" tab.</p>
 
-        {/* Honest expectations */}
+        {/* Pros and cons, honest and scannable */}
         <div className="mt-6">
-          <h2 className="text-lg">Good to know</h2>
-          <p className="mt-1 text-[0.95rem]">{option.expectations}</p>
-          <Cite citations={option.expectationsCitations} />
+          {(option.pros || option.cons) && (
+            <details open className="border-line bg-card rounded-2xl border px-4 py-3">
+              <summary className="flex cursor-pointer list-none items-center gap-2 text-lg font-bold">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full" style={{ background: "var(--cmp-good-bg)", color: "var(--cmp-good-ink)" }}>
+                  <Icon name="sprout" size={16} />
+                </span>
+                Pros and cons <span className="text-accent-ink ml-auto">+</span>
+              </summary>
+              <ul className="mt-2 flex flex-col gap-1.5">
+                {(option.pros ?? []).map((t, i) => (
+                  <li key={`p${i}`} className="flex items-start gap-2 rounded-lg px-2.5 py-1.5 text-sm" style={{ background: "var(--cmp-good-bg)", color: "var(--cmp-good-ink)" }}>
+                    <span aria-hidden="true" className="font-bold">+</span> {t}
+                  </li>
+                ))}
+                {(option.cons ?? []).map((t, i) => (
+                  <li key={`c${i}`} className="flex items-start gap-2 rounded-lg px-2.5 py-1.5 text-sm" style={{ background: "var(--cmp-tough-bg)", color: "var(--cmp-tough-ink)" }}>
+                    <span aria-hidden="true" className="font-bold">&minus;</span> {t}
+                  </li>
+                ))}
+              </ul>
+              <Cite citations={option.expectationsCitations} />
+            </details>
+          )}
+          {!(option.pros || option.cons) && (
+            <>
+              <h2 className="text-lg">Good to know</h2>
+              <p className="mt-1 text-[0.95rem]">{option.expectations}</p>
+              <Cite citations={option.expectationsCitations} />
+            </>
+          )}
         </div>
 
         <button

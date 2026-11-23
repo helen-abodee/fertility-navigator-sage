@@ -19,6 +19,7 @@ export interface Place {
   id: string;
   label: string;
   sub: string;
+  icon?: string;
   state: "done" | "here" | "open" | "far";
   go: RoadGo;
   /** side places sit off the road: optional, never sequential */
@@ -48,47 +49,47 @@ export function buildRoad(
   const places: Place[] = [];
 
   if (after) {
-    places.push({ id: "behind", label: "Treatment, behind you", sub: "the hardest road already walked", state: "done", go: { kind: "none" } });
+    places.push({ id: "behind", icon: "sprout", label: "Treatment, behind you", sub: "the hardest road already walked", state: "done", go: { kind: "none" } });
     if (preserved) {
-      places.push({ id: "preserved", label: "Preserved", sub: "your frozen chances, waiting", state: "done", go: { kind: "tab", tab: "options" } });
+      places.push({ id: "preserved", icon: "snowflake", label: "Preserved", sub: "your frozen chances, waiting", state: "done", go: { kind: "tab", tab: "options" } });
     } else {
       places.push({
-        id: "specialist", label: "A specialist, first", sub: "one visit runs every test; urgent slots exist",
+        id: "specialist", icon: "stethoscope", label: "A specialist, first", sub: "one visit runs every test; urgent slots exist",
         state: fert === "family_building" ? "done" : "here", go: { kind: "reach" },
       });
     }
     places.push({
-      id: "family", label: "Family building", sub: "six paths, none ranked",
+      id: "family", icon: "heart", label: "Family building", sub: "six paths, none ranked",
       state: fert === "family_building" ? "here" : "open", go: { kind: "tab", tab: "parenthood" },
     });
-    places.push({ id: "money", label: "The money part", sub: "your ballpark, in three steps", state: "open", go: { kind: "tab", tab: "money" } });
+    places.push({ id: "money", icon: "dollar", label: "The money part", sub: "your ballpark, in three steps", state: "open", go: { kind: "tab", tab: "money" } });
     places.push({
-      id: "outcome", label: "Whatever you choose", sub: "three real answers, and minds change",
+      id: "outcome", icon: "compass", label: "Whatever you choose", sub: "three real answers, and minds change",
       state: notPursuing ? "here" : "far", go: { kind: "progress" },
     });
   } else {
     places.push({
-      id: "risk", label: "Your risk group", sub: riskLabel ? riskLabel : "a guideline group, not a prediction",
+      id: "risk", icon: "clipboard", label: "Your risk group", sub: riskLabel ? riskLabel : "a guideline group, not a prediction",
       state: riskLabel ? "done" : "open", go: { kind: "progress" },
     });
     places.push({
-      id: "decide", label: "The decision", sub: "options, side by side, honestly priced",
+      id: "decide", icon: "egg", label: "The decision", sub: "options, side by side, honestly priced",
       state: preserved || notPursuing ? "done" : during ? "open" : "here", go: { kind: "tab", tab: "options" },
     });
     if (answers.feelings !== "no") {
-      places.push({ id: "money", label: "The money part", sub: "your ballpark, in three steps", state: "open", go: { kind: "tab", tab: "money" } });
+      places.push({ id: "money", icon: "dollar", label: "The money part", sub: "your ballpark, in three steps", state: "open", go: { kind: "tab", tab: "money" } });
     }
     places.push({
-      id: "clinic", label: "A clinic, if you choose", sub: "the first message is already written",
+      id: "clinic", icon: "door", label: "A clinic, if you choose", sub: "the first message is already written",
       state: preserved ? "done" : "open", go: { kind: "reach" },
     });
     places.push({
-      id: "treatment", label: "Treatment", sub: during
+      id: "treatment", icon: "syringe", label: "Treatment", sub: during
         ? "happening now; this road keeps pace with you"
         : "when it starts, this road waits with you",
       state: during ? "here" : "far", go: { kind: "checkin" },
     });
-    places.push({ id: "after", label: "After", sub: "a specialist first, then every path to a family", state: "far", go: { kind: "none" } });
+    places.push({ id: "after", icon: "sprout", label: "After", sub: "a specialist first, then every path to a family", state: "far", go: { kind: "none" } });
   }
 
   // Side places: never sequential, always open.

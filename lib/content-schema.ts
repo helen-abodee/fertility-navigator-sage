@@ -75,6 +75,9 @@ export interface PreservationOption {
   audienceCitations: Citation[];
   steps: Step[];
   stepsCitations: Citation[];
+  /** scannable upsides/downsides, reorganized from the cited expectations */
+  pros?: string[];
+  cons?: string[];
   /** e.g. "From first visit to freezing: usually about 2 weeks." */
   timeline?: string;
   /** personal timeline model; only when the sources support the durations */

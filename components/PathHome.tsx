@@ -44,12 +44,18 @@ export default function PathHome({
     <div className="flex flex-col gap-4">
       <div>
         <h2 className="font-myth text-[1.7rem] leading-tight">Your road</h2>
-        <p className="text-muted mt-0.5 text-sm">No two run the same, and this one runs both ways.</p>
+        <p className="text-muted mt-0.5 text-sm">More than one way down, and it runs both ways.</p>
       </div>
 
       <div className="relative" style={{ height: H }} role="list" aria-label="Your journey places">
         <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} className="absolute inset-0" aria-hidden="true" preserveAspectRatio="xMidYMin meet">
           <path d={d} fill="none" stroke="var(--line)" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 9" pathLength={1} className="road-draw" />
+          {main.length >= 4 && (
+            <path
+              d={`M ${xAt(1)} ${yAt(1)} C ${xAt(1) === 72 ? W - 40 : 40} ${yAt(1) + rowH}, ${xAt(main.length - 2) === 72 ? W - 40 : 40} ${yAt(main.length - 2) - rowH}, ${xAt(main.length - 2)} ${yAt(main.length - 2)}`}
+              fill="none" stroke="var(--line)" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 11" opacity="0.8" pathLength={1} className="road-draw"
+            />
+          )}
           {doneCount > 1 && (
             <path
               d={`M ${xAt(0)} ${yAt(0)}` + Array.from({ length: doneCount - 1 }, (_, k) => {
@@ -90,7 +96,7 @@ export default function PathHome({
                         : "border-line bg-card text-muted"
                 }`}
               >
-                {p.state === "done" ? "✓" : p.state === "here" ? "•" : ""}
+                {p.state === "done" ? "✓" : <Icon name={p.icon ?? "compass"} size={13} stroke={2.2} />}
               </span>
               <span className={left ? "" : "text-right"}>
                 <span className={`block text-[0.92rem] leading-tight font-bold ${p.state === "far" ? "text-muted" : p.state === "here" ? "text-accent-ink" : ""}`}>

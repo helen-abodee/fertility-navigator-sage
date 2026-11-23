@@ -10,6 +10,28 @@ function val<T>(f?: SourcedField<T>): string {
   return String(f.value);
 }
 
+function isFreeConsult(clinic: Clinic): boolean {
+  return /free/i.test(val(clinic.consultCost));
+}
+
+/** "Label: $1,234 per vial (vial-pricing page)" -> { label, num } for clean rows. */
+function parsePrice(line: string): { label: string; num: string } {
+  const noSuffix = line.replace(/\s*\([^)]*page[^)]*\)\s*$/i, "");
+  const m = noSuffix.match(/^(.*?):\s*(\$[\d,.]+.*)$/);
+  if (m) return { label: m[1], num: m[2] };
+  return { label: noSuffix, num: "" };
+}
+
+/** Long lists compress to "A, B, C +4 more". */
+function shortList(f?: SourcedField<unknown>): string {
+  if (!f || f.value === "not_published") return "Not published";
+  if (Array.isArray(f.value)) {
+    const arr = f.value as unknown as string[];
+    return arr.slice(0, 3).join(", ") + (arr.length > 3 ? ` +${arr.length - 3} more` : "");
+  }
+  return String(f.value);
+}
+
 /** One clinic, one screen: the digestible version of a directory row. */
 export default function ClinicDetail({ clinic, miles, onClose }: { clinic: Clinic; miles: number | null; onClose: () => void }) {
   const fields: { label: string; f?: SourcedField<unknown> }[] = [
@@ -43,27 +65,63 @@ export default function ClinicDetail({ clinic, miles, onClose }: { clinic: Clini
           </div>
         )}
 
-        <div className="mt-4 flex flex-col gap-3">
-          {fields.map(({ label, f }) => (
-            <div key={label} className="border-line bg-card rounded-xl border p-3">
-              <p className="text-muted text-xs font-bold tracking-widest uppercase">{label}</p>
-              <p className={`mt-0.5 text-[0.95rem] ${val(f) === "not published" ? "text-muted" : ""}`}>{val(f)}</p>
-              {f && "sourceUrl" in f && (
-                <p className="text-muted mt-1 text-xs">
-                  Checked {String((f as { retrieved?: string }).retrieved ?? "")}
-                </p>
-              )}
+        {isFreeConsult(clinic) && (
+          <div className="mt-4 rounded-t-xl px-4 py-1.5 text-xs font-bold tracking-wide text-white uppercase" style={{ background: "var(--cmp-good-ink)" }}>
+            Free consultation
+          </div>
+        )}
+        <div className={`border-line bg-card border p-4 ${isFreeConsult(clinic) ? "rounded-b-xl" : "mt-4 rounded-xl"}`}>
+          <div className="flex flex-col">
+            <div className="border-line flex justify-between gap-3 border-b py-2 text-sm">
+              <span className="text-muted shrink-0">Consult</span>
+              <span className={`text-right font-bold ${isFreeConsult(clinic) ? "" : val(clinic.consultCost) === "not published" ? "text-muted font-normal" : ""}`} style={isFreeConsult(clinic) ? { color: "var(--cmp-good-ink)" } : undefined}>
+                {isFreeConsult(clinic) ? "Free" : val(clinic.consultCost) === "not published" ? "Not published" : val(clinic.consultCost)}
+              </span>
             </div>
-          ))}
-          {clinic.locations.length > 0 && (
-            <div className="border-line bg-card rounded-xl border p-3">
-              <p className="text-muted text-xs font-bold tracking-widest uppercase">Locations</p>
-              {clinic.locations.map((l) => (
-                <p key={l.label} className="mt-0.5 text-[0.95rem]">{l.label}: {l.address}</p>
-              ))}
+            <div className="border-line flex justify-between gap-3 border-b py-2 text-sm">
+              <span className="text-muted shrink-0">Insurance</span>
+              <span className={`text-right ${shortList(clinic.insuranceAccepted) === "Not published" ? "text-muted" : "font-bold"}`}>{shortList(clinic.insuranceAccepted)}</span>
             </div>
-          )}
+            <div className="border-line flex justify-between gap-3 border-b py-2 text-sm">
+              <span className="text-muted shrink-0">Financing</span>
+              <span className={`text-right ${shortList(clinic.financing) === "Not published" ? "text-muted" : "font-bold"}`}>{shortList(clinic.financing)}</span>
+            </div>
+            <div className="flex justify-between gap-3 py-2 text-sm">
+              <span className="text-muted shrink-0">Services</span>
+              <span className={`text-right ${shortList(clinic.services) === "Not published" ? "text-muted" : ""}`}>{shortList(clinic.services)}</span>
+            </div>
+          </div>
         </div>
+
+        {clinic.publishedPrices && clinic.publishedPrices.value !== "not_published" && Array.isArray(clinic.publishedPrices.value) && (
+          <div className="border-line bg-card mt-3 rounded-xl border p-4">
+            <p className="text-muted text-xs font-bold tracking-widest uppercase">Published prices</p>
+            <div className="mt-1 flex flex-col">
+              {(clinic.publishedPrices.value as unknown as string[]).map((line) => {
+                const { label, num } = parsePrice(line);
+                return (
+                  <div key={line} className="border-line flex justify-between gap-3 border-b py-2 text-sm last:border-b-0">
+                    <span>{label}</span>
+                    <span className="num shrink-0 font-bold">{num}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {clinic.locations.length > 0 && (
+          <div className="border-line bg-card mt-3 rounded-xl border p-4">
+            <p className="text-muted text-xs font-bold tracking-widest uppercase">Locations</p>
+            {clinic.locations.map((l) => (
+              <p key={l.label} className="mt-0.5 text-sm">{l.label}: {l.address}</p>
+            ))}
+          </div>
+        )}
+
+        <p className="text-muted mt-2 text-xs">
+          Source: the clinic's own site, checked {String((clinic.services as { retrieved?: string } | undefined)?.retrieved ?? "Oct 2026")}
+        </p>
 
         <div className="mt-5 flex gap-2">
           <a

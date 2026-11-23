@@ -37,7 +37,7 @@ export default function QuestionScreen({
   );
   const [multi, setMulti] = useState<string[]>(Array.isArray(initialValue) ? (initialValue as string[]) : []);
   const [query, setQuery] = useState("");
-  const LONG = (def.options?.length ?? 0) > 7;
+  const LONG = (def.options?.length ?? 0) > 5;
   const shownOptions = LONG && query.trim()
     ? (def.options ?? []).filter(
         (o) => o.label.toLowerCase().includes(query.trim().toLowerCase()) || o.notSure,

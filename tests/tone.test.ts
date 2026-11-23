@@ -27,6 +27,7 @@ function collectAllText(): string {
     parts.push(o.name, o.shortDescription, o.statusNote ?? "", o.timeline ?? "", o.expectations);
     for (const s of o.steps) parts.push(s.title, s.body);
     for (const c of o.costs) parts.push(c.label, c.range, c.note ?? "");
+    parts.push(...(o.pros ?? []), ...(o.cons ?? []));
     for (const seg of o.plan?.segments ?? []) parts.push(seg.label);
     if (o.plan?.note) parts.push(o.plan.note);
   }

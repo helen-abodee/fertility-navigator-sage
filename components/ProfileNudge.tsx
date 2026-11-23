@@ -72,14 +72,14 @@ export default function ProfileNudge({ answers, onSaved }: { answers: Answers; o
       )}
       {phase === "waiting" && (
         <p className="text-sm">
-          Check your email and open the link; this page notices by itself. Nothing is saved until you agree on the next step.
+          Open the link we emailed you. This page will notice by itself.
         </p>
       )}
       {phase === "consent" && (
         <>
           <label className="flex items-start gap-2 text-sm">
             <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5" />
-            <span>Save my answers and my road to my profile, so I can pick up anywhere. I can delete everything, any time, from My progress.</span>
+            <span>Save my answers to my profile. Delete anytime.</span>
           </label>
           <button
             type="button"

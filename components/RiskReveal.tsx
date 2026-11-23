@@ -3,6 +3,7 @@
 import type { RiskAssessment } from "../lib/risk";
 import type { Answers } from "../lib/types";
 import Cite from "./Cite";
+import Icon from "./icons";
 import { withGlossary } from "./Term";
 
 const SIZE_WORD: Record<string, string> = { one: "one child", two: "two children", three_plus: "three or more children" };
@@ -44,6 +45,18 @@ export default function RiskReveal({
       <h1 className="animate-pop text-3xl">{risk.headline}</h1>
       <p className="text-[1.02rem]">{withGlossary(risk.body)}</p>
 
+      {/amenorrhea/i.test(risk.body) && (
+        <details className="border-line bg-card rounded-xl border px-4 py-2.5">
+          <summary className="text-muted cursor-pointer list-none text-sm">
+            Why do studies measure amenorrhea? <span className="text-accent-ink float-right">+</span>
+          </summary>
+          <p className="mt-2 text-sm">
+            Periods stopping is the clearest outward sign that treatment affected the ovaries, so
+            studies count it as the stand-in for fertility risk. It is a signal, not a verdict either way.
+          </p>
+        </details>
+      )}
+
       {(size || when) && (
         <div className="border-line bg-card rounded-2xl border p-4">
           <p className="text-accent-ink text-[0.68rem] font-bold tracking-[0.08em] uppercase">Your timeline</p>
@@ -55,8 +68,11 @@ export default function RiskReveal({
       )}
 
       <details className="border-line bg-card rounded-2xl border px-4 py-3">
-        <summary className="cursor-pointer list-none text-sm font-bold">
-          For your care team <span className="text-accent-ink float-right">+</span>
+        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-bold">
+          <span className="bg-accent-tint text-accent-ink flex h-7 w-7 shrink-0 items-center justify-center rounded-full">
+            <Icon name="stethoscope" size={15} />
+          </span>
+          For your care team <span className="text-accent-ink ml-auto">+</span>
         </summary>
         <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-sm">
           <li>{risk.askTeam}</li>

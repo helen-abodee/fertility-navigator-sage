@@ -70,6 +70,8 @@ export const options: PreservationOption[] = [
     expectations:
       "Freezing eggs rather than embryos may fit especially well if you do not have a partner, do not want to use donor sperm, or prefer not to create embryos. Not every egg collected will be mature enough to freeze, and frozen eggs do not guarantee a pregnancy later. The chance of a baby rises with the number of mature eggs stored and is higher the younger you are at retrieval; published models let a specialist estimate it for your age, and fertility doctors consulted for this tool often plan around 15 to 20 eggs per hoped-for child for people under 35, sometimes over more than one cycle. An egg count from one cycle is not a fertility grade. Storage is billed every year, and there are added costs later if you thaw and use the eggs.",
     expectationsCitations: [asco("4.2"), asrmJourney(), mskPreTreatment(), goldmanModel(), reiConsult()],
+    pros: ["Established method", "No partner or donor sperm needed", "Can start any day of the cycle"],
+    cons: ["About 2 weeks of shots once started, plus the wait before", "Higher upfront cost, about $12,400 plus medicines", "Not every egg is mature enough to freeze; no guarantee later"],
     costs: [
       {
         label: "One egg freezing cycle",
@@ -151,6 +153,8 @@ export const options: PreservationOption[] = [
     expectations:
       "Not every egg collected will become an embryo, and frozen embryos do not guarantee a pregnancy later. Results vary from person to person. Storage is billed every year, and there are added costs later if you thaw and use the embryos.",
     expectationsCitations: [asrmJourney(), mskPreTreatment()],
+    pros: ["Established method", "Embryos freeze and thaw reliably"],
+    cons: ["Needs sperm now, from a partner or donor", "Higher upfront cost, about $12,400 plus medicines and lab work", "No guarantee of a child later"],
     costs: [
       {
         label: "Egg collection cycle",
@@ -228,6 +232,8 @@ export const options: PreservationOption[] = [
     expectations:
       "Doctors advise banking before the first dose of treatment when possible: even a single treatment can affect sperm quality and the DNA inside sperm, and samples collected soon after treatment starts or ends carry a higher risk of genetic damage. If treatment has already started, banking can still be worth discussing with your care team. Any banked sperm can offer a chance at biological parenthood later, and a low sperm count should not stop you from banking. A lab method called ICSI can use a very small amount of sperm. Frozen sperm can be stored indefinitely; sperm frozen for over 20 years have been used to create pregnancies. Storage is billed every year. Banking does not guarantee a pregnancy later.",
     expectationsCitations: [asco("3.1"), asco("3.5"), asrmSperm(), mskSpermBanking()],
+    pros: ["Established, quick, and low cost", "Even 1 or 2 samples help", "Banking before the first dose protects sperm DNA"],
+    cons: ["Yearly storage fees continue", "No guarantee of a pregnancy later"],
     costs: [
       {
         label: "Testing, analyzing, and freezing sperm",
@@ -282,6 +288,8 @@ export const options: PreservationOption[] = [
     expectations:
       "Sperm collected this way can later be injected directly into an egg in a lab process called ICSI, which can work with a very small amount of sperm. Results vary from person to person, and this does not guarantee a pregnancy later. Storage is billed every year.",
     expectationsCitations: [asrmSperm(), asco("3.5")],
+    pros: ["An option when a semen sample is not possible", "ICSI can work with very few sperm"],
+    cons: ["A surgical procedure", "Costs not published; results vary person to person"],
     costs: [
       {
         label: "Surgical sperm retrieval",
@@ -336,6 +344,8 @@ export const options: PreservationOption[] = [
     expectations:
       "Results vary from person to person, and frozen tissue does not guarantee a pregnancy later. Before tissue is placed back, doctors check it carefully because there is a theoretical risk of reintroducing cancer cells, and the importance of that risk is unknown. Re-implanting the tissue means another surgery. Storage is billed every year.",
     expectationsCitations: [asco("4.10"), mskPreTreatment()],
+    pros: ["No hormone shots, so chemotherapy is not delayed", "Works before puberty", "May also restore hormone function (an emerging use)"],
+    cons: ["Two surgeries: one to remove tissue, one to place it back", "Small theoretical risk of reintroducing cancer cells", "Costs not published"],
     costs: [
       {
         label: "Surgery, processing, and freezing",
@@ -377,6 +387,8 @@ export const options: PreservationOption[] = [
     expectations:
       "This is not a replacement for freezing eggs, embryos, or ovarian tissue. It may be offered as an add-on in breast cancer. One clear use is stopping periods during urgent chemotherapy. It does not guarantee your ovaries will work normally after treatment.",
     expectationsCitations: [asco("4.8"), asco("4.9")],
+    pros: ["Just an injection during chemotherapy", "Can stop periods during urgent treatment"],
+    cons: ["Not a replacement for freezing eggs, embryos, or tissue", "Benefit beyond breast cancer still unproven"],
     costs: [
       {
         label: "GnRH agonist medicine",
@@ -414,6 +426,8 @@ export const options: PreservationOption[] = [
     expectations:
       "Because radiation can scatter, the ovaries are not always protected, and this technique is not always successful. It is not suitable for people with a moderate or high risk of cancer in the ovaries, or for people getting chemotherapy that harms the ovaries at the same time.",
     expectationsCitations: [asco("4.5")],
+    pros: ["Can protect the ovaries from pelvic radiation", "Sometimes done during the same cancer surgery"],
+    cons: ["Radiation can scatter, so the ovaries are not always protected", "Not suitable with moderate or high risk of cancer in the ovaries", "Not for those also getting ovary-harming chemotherapy"],
     costs: [
       {
         label: "Surgery",

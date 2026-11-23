@@ -109,7 +109,8 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await page.getByRole("button", { name: "Options", exact: true }).click();
   await expect(page.getByRole("button", { name: /Egg freezing/ })).toBeVisible();
   await page.getByRole("button", { name: /Egg freezing/ }).click();
-  await expect(page.getByText("Step 1 of 4")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "The steps" })).toBeVisible();
+  await expect(page.getByText("Pros and cons")).toBeVisible();
   await page.getByRole("button", { name: "What would this look like for me?" }).click();
   await expect(page.getByText("about 10 to 12 days").first()).toBeVisible();
   await page.getByRole("button", { name: "Back to results" }).first().click();
@@ -384,7 +385,8 @@ test("clinics: map first, radius filter, tappable detail pages", async ({ page }
   await page.getByRole("button", { name: "Within 40 mi" }).click();
   await page.getByRole("button", { name: /HRC Fertility/ }).first().click();
   await expect(page.getByRole("heading", { name: /HRC Fertility/ }).first()).toBeVisible();
-  await expect(page.getByText("Published prices", { exact: false }).first()).toBeVisible();
+  await expect(page.getByText("Consult", { exact: true })).toBeVisible();
+  await expect(page.getByText("Aetna", { exact: false }).first()).toBeVisible();
   await page.getByRole("button", { name: "Back to clinics" }).first().click();
 });
 
