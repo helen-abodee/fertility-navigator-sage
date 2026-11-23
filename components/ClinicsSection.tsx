@@ -23,13 +23,22 @@ function monogram(name: string): string {
 
 const ClinicMap = dynamic(() => import("./ClinicMap"), { ssr: false });
 
-type ServiceFilter = "oncofertility" | "spermBanking" | "ovarianTissueFreezing";
+type ClinicFilter =
+  | "all"
+  | "oncofertility"
+  | "freeConsult"
+  | "publishesPrices"
+  | "spermBanking"
+  | "ovarianTissueFreezing";
 
-const filterLabels: Record<ServiceFilter, string> = {
-  oncofertility: "Works with cancer patients",
-  spermBanking: "Sperm banking",
-  ovarianTissueFreezing: "Ovarian tissue freezing",
-};
+const FILTER_OPTIONS: { value: ClinicFilter; label: string }[] = [
+  { value: "all", label: "All clinics" },
+  { value: "oncofertility", label: "Works with cancer patients" },
+  { value: "freeConsult", label: "Free consultation" },
+  { value: "publishesPrices", label: "Publishes prices" },
+  { value: "spermBanking", label: "Sperm banking" },
+  { value: "ovarianTissueFreezing", label: "Ovarian tissue freezing" },
+];
 
 function fieldTrue(f?: SourcedField<boolean>): boolean {
   return !!f && f.value === true;
@@ -49,19 +58,21 @@ const RADII = [
 ];
 
 export default function ClinicsSection({ clinics, zip, anatomy }: { clinics: Clinic[]; zip?: string | null; anatomy?: Anatomy }) {
-  const [filters, setFilters] = useState<ServiceFilter[]>([]);
+  const [filter, setFilter] = useState<ClinicFilter>("all");
   const [radius, setRadius] = useState<number>(Infinity);
   const [open, setOpen] = useState<{ clinic: Clinic; miles: number | null } | null>(null);
   const home = zip ? zipToCoords(zip) : null;
 
   const rows = useMemo(() => {
-    const filtered = clinics.filter((c) => clinicFitsAnatomy(c, anatomy)).filter((c) =>
-      filters.every((f) =>
-        f === "oncofertility" ? fieldTrue(c.oncofertility) :
-        f === "spermBanking" ? fieldTrue(c.spermBanking) :
-        fieldTrue(c.ovarianTissueFreezing),
-      ),
-    );
+    const filtered = clinics.filter((c) => clinicFitsAnatomy(c, anatomy)).filter((c) => {
+      if (filter === "all") return true;
+      if (filter === "oncofertility") return fieldTrue(c.oncofertility);
+      if (filter === "spermBanking") return fieldTrue(c.spermBanking);
+      if (filter === "ovarianTissueFreezing") return fieldTrue(c.ovarianTissueFreezing);
+      if (filter === "freeConsult") return /free/i.test(String(c.consultCost?.value ?? ""));
+      if (filter === "publishesPrices") return Array.isArray(c.publishedPrices?.value);
+      return true;
+    });
     const withDistance = filtered.map((c) => {
       let miles: number | null = null;
       if (home && c.locations.length > 0) {
@@ -79,11 +90,8 @@ export default function ClinicsSection({ clinics, zip, anatomy }: { clinics: Cli
       return a.miles - b.miles;
     });
     return inRadius;
-  }, [clinics, filters, home, radius, anatomy]);
+  }, [clinics, filter, home, radius, anatomy]);
 
-  function toggle(f: ServiceFilter) {
-    setFilters((prev) => (prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f]));
-  }
 
   return (
     <section className="flex flex-col gap-4">
@@ -112,21 +120,16 @@ export default function ClinicsSection({ clinics, zip, anatomy }: { clinics: Cli
         )}
       </div>
 
-      <div className="flex flex-wrap gap-2 print:hidden">
-        {(Object.keys(filterLabels) as ServiceFilter[]).map((f) => (
-          <button
-            key={f}
-            type="button"
-            aria-pressed={filters.includes(f)}
-            onClick={() => toggle(f)}
-            className={`rounded-full border px-3 py-1.5 text-sm font-bold ${
-              filters.includes(f) ? "border-accent bg-accent-tint text-accent-ink" : "border-line bg-card"
-            }`}
-          >
-            {filterLabels[f]}
-          </button>
+      <select
+        aria-label="Filter clinics"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value as ClinicFilter)}
+        className="border-line bg-card min-h-12 w-full rounded-xl border-[1.5px] px-3 text-sm font-bold print:hidden"
+      >
+        {FILTER_OPTIONS.map((o) => (
+          <option key={o.value} value={o.value}>{o.label}</option>
         ))}
-      </div>
+      </select>
 
       {home && (
         <div className="flex flex-wrap gap-2 print:hidden">
@@ -201,7 +204,7 @@ export default function ClinicsSection({ clinics, zip, anatomy }: { clinics: Cli
         })}
         {rows.length === 0 && (
           <p className="text-muted text-sm">
-            No listed clinic matches those filters. Try widening the distance or removing a service
+            No listed clinic matches those filters. Try widening the distance or changing the filter
             filter.
           </p>
         )}

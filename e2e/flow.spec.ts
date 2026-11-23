@@ -297,7 +297,7 @@ test("'I'm not sure' about children offers the thinking-it-through path", async 
 
   await expect(page.getByRole("heading", { name: "Not sure? That's worth taking seriously." })).toBeVisible();
   await page.getByRole("button", { name: "Walk me through it" }).click();
-  await expect(page.getByRole("heading", { name: "This is two decisions, not one" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Do I want children someday/ })).toBeVisible();
   await page.getByRole("button", { name: "Next thought" }).click();
   await page.getByRole("button", { name: "Truly torn" }).click();
   for (let i = 0; i < 6; i++) {

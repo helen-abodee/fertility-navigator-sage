@@ -68,7 +68,7 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
         <Icon name={s.icon} size={28} />
       </span>
       <p className="text-accent-ink mt-3 text-xs font-bold tracking-widest uppercase">
-        Thinking it through · {step + 1} of {reflectionSteps.length}
+        {step + 1} of {reflectionSteps.length}
       </p>
       <h1 className="mt-1 text-2xl">{s.heading}</h1>
       <p className="mt-2 text-[1.02rem]">{s.body}</p>

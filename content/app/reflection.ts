@@ -64,8 +64,8 @@ export const reflectionSteps: ReflectionStep[] = [
   {
     id: "two_clocks",
     icon: "calendar",
-    heading: "This is two decisions, not one",
-    body: "There are two questions here, not one: do I want children someday, and do I want to preserve now? You can answer the second without being sure of the first.",
+    heading: "Do I want children someday, and do I want to preserve now?",
+    body: "Two different questions. You can answer the second without being sure of the first.",
     citations: [opdg, beforeAid],
   },
   {
@@ -92,21 +92,21 @@ export const reflectionSteps: ReflectionStep[] = [
   {
     id: "plans_change",
     icon: "sprout",
-    heading: "Plans are allowed to change",
-    body: "Plans are allowed to change. Deciding for the person you are now is enough.",
+    heading: "What if I change my mind?",
+    body: "Changing is allowed. Deciding for the person you are now is enough.",
     citations: [cdcRlp],
   },
   {
     id: "honest_promise",
     icon: "shield",
-    heading: "What preserving does, and doesn't, promise",
-    body: "Preserving keeps a possibility open. It does not guarantee a child, and storage costs continue until you decide.",
+    heading: "Preserving opens a possibility, not a promise",
+    body: "No guarantee of a child, and storage costs continue until you decide.",
     citations: [beforeAid, cfm],
   },
   {
     id: "many_roads",
     icon: "door",
-    heading: "There is more than one road to parenthood",
+    heading: "What are the other roads to parenthood?",
     body: "Donor eggs or sperm, surrogacy, adoption, fostering. Preserving is one road of several, not the toll for parenthood.",
     citations: [beforeAid, cfm],
   },
@@ -126,8 +126,8 @@ export const reflectionSteps: ReflectionStep[] = [
   {
     id: "talk_and_time",
     icon: "stethoscope",
-    heading: "Who to talk with, and the pressure check",
-    body: "Is anyone pressuring you? Other people can hope; the decision is yours alone. And deciding later is a real decision too. Your care team can tell you how much time you have.",
+    heading: "Is this decision yours alone?",
+    body: "Other people can hope; the choice is still yours. Deciding later is a real decision too, and your care team can tell you how much time you have.",
     prompts: [
       "In my own words, why do I want children, or why not?",
       "Which of those reasons are mine, and which are other people's hopes for me?",
