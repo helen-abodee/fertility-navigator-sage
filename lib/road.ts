@@ -61,13 +61,11 @@ export function buildRoad(
       id: "family", label: "Family building", sub: "six paths, none ranked",
       state: fert === "family_building" ? "here" : "open", go: { kind: "tab", tab: "parenthood" },
     });
-    places.push({ id: "money", label: "The money part", sub: "coverage, aid, real prices", state: "open", go: { kind: "tab", tab: "money" } });
     places.push({
       id: "outcome", label: "Whatever you choose", sub: "three real answers, and minds change",
       state: notPursuing ? "here" : "far", go: { kind: "progress" },
     });
   } else {
-    places.push({ id: "start", label: "Where you started", sub: "the facts are in", state: "done", go: { kind: "none" } });
     places.push({
       id: "risk", label: "Your risk group", sub: riskLabel ? riskLabel : "a guideline group, not a prediction",
       state: riskLabel ? "done" : "open", go: { kind: "progress" },
@@ -76,16 +74,13 @@ export function buildRoad(
       id: "decide", label: "The decision", sub: "options, side by side, honestly priced",
       state: preserved || notPursuing ? "done" : during ? "open" : "here", go: { kind: "tab", tab: "options" },
     });
-    if (answers.feelings !== "no") {
-      places.push({ id: "money", label: "The money part", sub: "coverage, aid, real prices", state: "open", go: { kind: "tab", tab: "money" } });
-    }
     places.push({
-      id: "clinic", label: "A clinic, if you choose", sub: "the first message is already written",
+      id: "clinic", label: "A clinic, if you choose", sub: "the first message is already written, money included",
       state: preserved ? "done" : "open", go: { kind: "reach" },
     });
     places.push({
       id: "treatment", label: "Treatment", sub: during
-        ? "your only job right now; this road waits"
+        ? "happening now; this road keeps pace with you"
         : "when it starts, this road waits with you",
       state: during ? "here" : "far", go: { kind: "checkin" },
     });
@@ -100,8 +95,8 @@ export function buildRoad(
   let now: RoadNow;
   if (during) {
     now = {
-      heading: "Your only job right now is treatment",
-      body: "Fertility can still be thought about in quiet minutes, one small question at a time, so the decision is ready when you are.",
+      heading: "Treatment is underway",
+      body: "Fertility can sit beside it, one small question at a time, whenever you choose, so the decision is ready when you are.",
       cta: "One small question",
       go: { kind: "reflect" },
     };

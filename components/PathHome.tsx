@@ -49,7 +49,7 @@ export default function PathHome({
 
       <div className="relative" style={{ height: H }} role="list" aria-label="Your journey places">
         <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} className="absolute inset-0" aria-hidden="true" preserveAspectRatio="xMidYMin meet">
-          <path d={d} fill="none" stroke="var(--line)" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 9" />
+          <path d={d} fill="none" stroke="var(--line)" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 9" pathLength={1} className="road-draw" />
           {doneCount > 1 && (
             <path
               d={`M ${xAt(0)} ${yAt(0)}` + Array.from({ length: doneCount - 1 }, (_, k) => {
@@ -70,8 +70,9 @@ export default function PathHome({
               role="listitem"
               disabled={p.go.kind === "none"}
               onClick={() => onGo(p.go)}
-              className="absolute flex w-[46%] items-start gap-2.5 text-left disabled:cursor-default"
+              className="road-place absolute flex w-[46%] items-start gap-2.5 text-left disabled:cursor-default"
               style={{
+                animationDelay: `${0.12 + i * 0.09}s`,
                 top: yAt(i) - 14,
                 left: left ? `calc(${(xAt(i) / W) * 100}% - 13px)` : undefined,
                 right: !left ? `calc(${((W - xAt(i)) / W) * 100}% - 13px)` : undefined,

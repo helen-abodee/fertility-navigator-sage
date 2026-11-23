@@ -391,7 +391,6 @@ export const guidance: GuidanceSection[] = [
   {
     id: "partner_insurance",
     audience: {
-      partnered: true,
     },
     heading: "Check your partner's plan too",
     paragraphs: [

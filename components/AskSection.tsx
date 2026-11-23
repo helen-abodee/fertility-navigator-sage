@@ -40,6 +40,7 @@ interface Message {
   crisis?: boolean;
   ai?: boolean;
   thinking?: boolean;
+  related?: ChatEntry[];
 }
 
 /**
@@ -83,9 +84,13 @@ export default function AskSection({
       scrollDown();
       void askModel(question, { anatomy: answers.anatomy, stage: answers.stage }).then((ai) => {
         track(ai || retrieval.entries.length > 0 ? "chat_question_answered" : "chat_no_answer");
+        // Link the parts of the tool the question touches, like footnotes.
+        const related = retrieval.kind === "results"
+          ? retrieval.entries.filter((e) => e.goto).slice(0, 2)
+          : [];
         setMessages((m) => {
           const out = m.filter((x) => !x.thinking);
-          if (ai) return [...out, { role: "app", text: ai, ai: true }];
+          if (ai) return [...out, { role: "app", text: ai, ai: true, related }];
           if (retrieval.kind === "results") return [...out, { role: "app", entries: retrieval.entries }];
           return [...out, { role: "app", text: CHAT_STRINGS.noAnswer }];
         });
@@ -124,23 +129,24 @@ export default function AskSection({
           <h2 className="text-lg leading-tight">Ask</h2>
         </div>
 
-        <section className="border-line bg-card rounded-2xl border p-4">
-          <p className="text-sm">{CHAT_STRINGS.scope}</p>
-          <p className="text-muted mt-2 text-xs">{aiConsent ? ASK_DISCLOSURE : CHAT_STRINGS.intro}</p>
-          {LLM_ENABLED && (
-            <label className="mt-3 flex items-start gap-2 text-sm">
+        {messages.length === 0 && <p className="text-muted text-sm">{CHAT_STRINGS.scope}</p>}
+        {LLM_ENABLED && (
+          <div className="flex items-center justify-between gap-3">
+            <label className="flex items-center gap-2 text-sm font-bold">
               <input
                 type="checkbox"
                 checked={aiConsent}
                 onChange={(e) => setAiConsent(e.target.checked)}
-                className="mt-0.5 h-4 w-4 shrink-0"
+                className="h-4 w-4 shrink-0"
               />
-              <span>
-                Use AI answers. {!aiConsent && <span className="text-muted">{ASK_DISCLOSURE}</span>}
-              </span>
+              AI answers
             </label>
-          )}
-        </section>
+            <details>
+              <summary className="text-muted cursor-pointer list-none text-xs underline decoration-dotted">What gets sent?</summary>
+              <p className="text-muted mt-1 max-w-[240px] text-right text-xs">{ASK_DISCLOSURE}</p>
+            </details>
+          </div>
+        )}
 
         {messages.length === 0 && (
           <div className="flex flex-col gap-2">
@@ -173,7 +179,26 @@ export default function AskSection({
           ) : m.ai ? (
             <section key={i} className="border-line bg-card max-w-[92%] self-start rounded-2xl rounded-bl-md border p-4">
               <p className="text-sm">{m.text}</p>
-              <p className="text-muted mt-2 text-xs">AI-written from this tool's cited sources. It can be wrong, and it is not medical advice.</p>
+              {m.related && m.related.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {m.related.map((e) =>
+                    e.goto!.target === "sources" ? (
+                      <a key={e.id} href="/sources" className="border-line bg-paper text-accent-ink rounded-full border px-3 py-1 text-xs font-bold">
+                        {e.goto!.label}
+                      </a>
+                    ) : (
+                      <button
+                        key={e.id}
+                        type="button"
+                        onClick={() => onNavigate(e.goto!.target)}
+                        className="border-line bg-paper text-accent-ink rounded-full border px-3 py-1 text-xs font-bold"
+                      >
+                        {e.goto!.label} &rsaquo;
+                      </button>
+                    ),
+                  )}
+                </div>
+              )}
             </section>
           ) : m.entries ? (
             <div key={i} className="flex max-w-[92%] flex-col gap-2 self-start">
@@ -215,6 +240,11 @@ export default function AskSection({
         }}
         className="border-line bg-card border-t"
       >
+        {aiConsent && (
+          <p className="text-muted mx-auto max-w-md px-4 pt-2 text-center text-[0.68rem]">
+            AI answers can be wrong. Not medical advice.
+          </p>
+        )}
         <div className="mx-auto flex max-w-md items-center gap-2 px-4 py-3">
           <input
             type="text"

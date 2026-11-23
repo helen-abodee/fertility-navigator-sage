@@ -20,12 +20,14 @@ export function questionSequence(answers: Answers): QuestionId[] {
   // the fertility journey right after the cancer one.
   if (answers.entry && answers.entry !== "exploring") seq.push("fertility_position");
   if (answers.entry === "exploring") return seq;
-  seq.push("who_for");
-  if (answers.entry === "plan_yes") seq.push("stage");
+  if (answers.entry === "plan_no") seq.push("has_plan");
   if (answers.entry === "finished") seq.push("time_since");
   seq.push("age", "anatomy", "cancer_type");
-  // No treatment plan yet: skip every treatment-detail question.
-  const knowsTreatment = answers.entry === "plan_yes" || answers.entry === "finished";
+  // Treatment-detail questions only when a plan exists to describe.
+  const knowsTreatment =
+    answers.entry === "plan_yes" ||
+    answers.entry === "finished" ||
+    (answers.entry === "plan_no" && answers.hasPlan === "yes");
   if (knowsTreatment) {
     seq.push("treatments");
     if (answers.treatments?.includes("chemo")) {
@@ -41,7 +43,6 @@ export function questionSequence(answers: Answers): QuestionId[] {
   // The practical section only matters when children are (or may be) wanted.
   if (answers.feelings !== "no") {
     seq.push("insurance");
-    if (answers.whoFor === "me_and_partner") seq.push("partner_insurance");
     seq.push("zip");
   }
   return seq;
@@ -50,7 +51,7 @@ export function questionSequence(answers: Answers): QuestionId[] {
 /** Survey sections: 1 = you and your treatment, 2 = children someday, 3 = practical. */
 export function sectionOf(q: QuestionId): 1 | 2 | 3 {
   if (q === "feelings" || q === "family_size") return 2;
-  if (q === "fertility_position") return 1;
+  if (q === "fertility_position" || q === "has_plan") return 1;
   if (q === "insurance" || q === "partner_insurance" || q === "zip") return 3;
   return 1;
 }

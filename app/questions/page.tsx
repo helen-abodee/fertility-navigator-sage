@@ -199,7 +199,15 @@ export default function QuestionsPage() {
 
   const baseDef = questions[current];
   const def =
-    current === "chemo_regimen"
+    current === "fertility_position" && answers.entry === "finished"
+      ? {
+          ...baseDef,
+          options: [
+            ...(baseDef.options ?? []),
+            { value: "family_building", label: "Thinking about building a family", icon: "sprout" },
+          ],
+        }
+      : current === "chemo_regimen"
       ? {
           ...baseDef,
           options: [
@@ -227,7 +235,7 @@ export default function QuestionsPage() {
     if (def.id === "entry") {
       if (value === "plan_no") nextAnswers.stage = "not_started";
       if (value === "finished") nextAnswers.stage = "finished";
-      if (value === "plan_yes") nextAnswers.stage = undefined;
+      if (value === "plan_yes") nextAnswers.stage = "in_treatment";
     }
     setAnswers(nextAnswers);
     advance(nextAnswers, current as QuestionId);

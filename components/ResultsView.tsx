@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Results } from "../lib/results";
 import type { PreservationOption } from "../lib/content-schema";
 import type { RiskAssessment } from "../lib/risk";
@@ -23,6 +23,7 @@ import CheckinCard from "./CheckinCard";
 import NudgeCard from "./NudgeCard";
 import { noteTopic } from "../lib/checkin";
 import { loadJourney } from "../lib/storage";
+import type { Journey } from "../lib/journey";
 import type { RoadGo } from "../lib/road";
 import { track } from "../lib/analytics";
 import ReflectionFlow from "./ReflectionFlow";
@@ -134,6 +135,12 @@ export default function ResultsView({
   const [costOption, setCostOption] = useState<PreservationOption | null>(null);
   const [visited, setVisited] = useState<Tab[]>(["path"]);
   const [panel, setPanel] = useState<"progress" | "reach" | "ask" | "checkin" | null>(null);
+  const [roadJourney, setRoadJourney] = useState<Journey | null>(null);
+  useEffect(() => {
+    // Journey lives in localStorage; read it after mount so server and
+    // client render the same first frame.
+    setRoadJourney(loadJourney());
+  }, [panel, tab]);
   const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip, fertilityPosition, familySize };
   const moneyUnlocked = browsing || feelings !== "no";
   // The health tab is for after treatment: at diagnosis it reads as homework
@@ -386,7 +393,7 @@ export default function ResultsView({
       <div className={`flex flex-col gap-6 ${show("path")}`}>
         <PathHome
           answers={answersForProfile}
-          journey={typeof window === "undefined" ? null : loadJourney()}
+          journey={roadJourney}
           riskLabel={browsing ? undefined : risk.label}
           visited={visited}
           onGo={(go: RoadGo) => {

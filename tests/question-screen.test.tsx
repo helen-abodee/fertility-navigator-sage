@@ -24,7 +24,7 @@ describe("QuestionScreen", () => {
       <QuestionScreen def={questions.entry} stepIndex={0} stepCount={9} onAnswer={() => {}} onBack={null} />,
     );
     expect(screen.getByText("Just learning for now")).toBeInTheDocument();
-    expect(screen.getByText("Diagnosed, no treatment plan yet")).toBeInTheDocument();
+    expect(screen.getByText("Before treatment starts")).toBeInTheDocument();
   });
 
   it("multi-select: picking a treatment clears 'not sure', and Continue submits the picks", () => {

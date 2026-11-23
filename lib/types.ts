@@ -8,10 +8,10 @@ export type WhoFor = "me" | "me_and_partner";
 
 /** Entry triage: calibrates depth to where the person actually is. */
 export type Entry =
-  | "plan_no"     /* diagnosed, no treatment plan yet: short flow, no treatment detail */
-  | "plan_yes"    /* has a plan or in treatment: full flow */
-  | "finished"    /* survivor spine */
-  | "caregiver"   /* answering for someone else */
+  | "plan_no"     /* before treatment starts (has_plan decides treatment detail) */
+  | "plan_yes"    /* in treatment now: full flow */
+  | "finished"    /* after treatment */
+  | "caregiver"   /* legacy value; the lane was removed from the UI 2026-11-22 */
   | "exploring";  /* just learning: straight to the browse hub */
 
 export type TreatmentStage = "not_started" | "in_treatment" | "finished" | "not_sure";
@@ -75,6 +75,8 @@ export interface Answers {
   familySize?: FamilySize | null;
   /** second axis of the intake: where they are with fertility preservation */
   fertilityPosition?: FertilityPosition | null;
+  /** before-treatment lane: is there a treatment plan yet? */
+  hasPlan?: "yes" | "no" | null;
   insurance?: InsuranceType;
   partnerInsurance?: YesNoUnsure;
   /** undefined = not reached, null = skipped. Used only for clinic distance, on device. */
@@ -84,6 +86,7 @@ export interface Answers {
 export type QuestionId =
   | "entry"
   | "fertility_position"
+  | "has_plan"
   | "who_for"
   | "stage"
   | "time_since"

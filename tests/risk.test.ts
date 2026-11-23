@@ -21,7 +21,8 @@ describe("CRISP regimen rule (most specific, wins when the regimen is known)", (
   it("falls back to the general rules when the regimen is unknown", () => {
     const r = assessRisk({ ...base, chemoRegimen: "not_sure", chemoAgents: ["cyclophosphamide"], age: 24 });
     expect(r.category).toBe("lower"); // the breast+cyclophosphamide+under-30 rule
-    expect(r.citations.some((c) => c.sourceName.includes("Livestrong"))).toBe(true);
+    expect(r.citations.some((c) => c.sourceName.includes("ESMO"))).toBe(true);
+    expect(r.citations.some((c) => c.sourceName.includes("Livestrong"))).toBe(false);
   });
 
   it("an UNKNOWN CRISP band is honest, not a guess", () => {

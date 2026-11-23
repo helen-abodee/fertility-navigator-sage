@@ -93,7 +93,8 @@ export const riskRules: RiskRule[] = [
     id: "transplant_conditioning",
     applies: (a) => helpers.treatments(a).includes("transplant"),
     // Vetted language only: CRISP's own transplant output for ovaries,
-    // Livestrong's verbatim category definition otherwise.
+    // the COG/ESMO high-risk classification for testes. (Livestrong was
+    // retired from the evidence set 2026-11-22.)
     result: (a) => {
       if (a.anatomy === "ovaries_uterus") {
         return {
@@ -119,9 +120,9 @@ export const riskRules: RiskRule[] = [
         label: "Higher risk group",
         headline: "Your treatment plan is in the higher risk group",
         body:
-          'The Livestrong fertility risk chart places transplant conditioning in its high risk group, which it defines as "prolonged/permanent azoospermia is common after treatment."',
+          "Guideline groups place transplant conditioning in the highest risk group for sperm production: long-lasting or permanent loss is common after this treatment.",
         askTeam: "Is there time to preserve before conditioning starts? " + CONFIRM,
-        citations: [citations.livestrongMen],
+        citations: [citations.cogLtfu, citations.esmo2020],
       };
     },
   },
@@ -136,7 +137,7 @@ export const riskRules: RiskRule[] = [
         "An alkylating chemo medicine plus radiation to the belly or pelvis sits in the highest risk group.",
       askTeam:
         "What do my doses mean for my fertility, and is there time to preserve first? " + CONFIRM,
-      citations: [citations.livestrongWomen, citations.livestrongMen],
+      citations: [citations.cogLtfu, citations.esmo2020],
     },
   },
   {
@@ -155,7 +156,7 @@ export const riskRules: RiskRule[] = [
         "Cyclophosphamide breast cancer plans sit in the lower risk group under age 30. Lower is not zero: earlier menopause is still possible.",
       askTeam:
         "Does my cycle count or dose change my group? " + CONFIRM,
-      citations: [citations.livestrongWomen, citations.esmo2020],
+      citations: [citations.esmo2020],
     },
   },
   {
@@ -168,7 +169,7 @@ export const riskRules: RiskRule[] = [
       body:
         "Cisplatin plans sit in the intermediate group for the ovaries: affected for some people, not others.",
       askTeam: "What does my cisplatin dose mean for my ovaries? " + CONFIRM,
-      citations: [citations.livestrongWomen],
+      citations: [citations.esmo2020],
     },
   },
   {
@@ -182,7 +183,7 @@ export const riskRules: RiskRule[] = [
         "Alkylating medicines do the most damage to fertility, and how much depends on your total dose, which this tool cannot know.",
       askTeam:
         "What is my total dose (the CED), and which group does it put me in? " + CONFIRM,
-      citations: [citations.livestrongMenLive, citations.cogLtfu],
+      citations: [citations.cogLtfu, citations.esmo2020],
     },
   },
   {
@@ -195,7 +196,7 @@ export const riskRules: RiskRule[] = [
       body:
         "Cisplatin and carboplatin affect sperm production by dose and cycle count, which this tool cannot know.",
       askTeam: "What is my total dose, and which group does it put me in? " + CONFIRM,
-      citations: [citations.livestrongMen, citations.esmo2020],
+      citations: [citations.esmo2020, citations.cogLtfu],
     },
   },
   {
@@ -208,7 +209,7 @@ export const riskRules: RiskRule[] = [
       body:
         "Radiation to the belly, pelvis, head, or whole body can affect fertility; the dose decides how much. Fields farther away carry less risk, though scatter can matter.",
       askTeam: "What dose will reach my ovaries or testes? " + CONFIRM,
-      citations: [citations.livestrongWomen, citations.livestrongMen, citations.cogLtfu],
+      citations: [citations.cogLtfu, citations.esmo2020],
     },
   },
   {
@@ -222,7 +223,7 @@ export const riskRules: RiskRule[] = [
         "Chemo medicines range from barely affecting fertility to affecting it a lot. Without names and doses, no guideline can place a plan.",
       askTeam:
         "Which of my medicines can affect fertility? " + CONFIRM,
-      citations: [citations.esmo2020, citations.livestrongMenLive],
+      citations: [citations.esmo2020],
     },
   },
   {

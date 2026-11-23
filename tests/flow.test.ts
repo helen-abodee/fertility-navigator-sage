@@ -10,19 +10,25 @@ describe("entry triage calibrates the depth", () => {
 
   it("no treatment plan yet: no treatment-detail questions at all", () => {
     const seq = questionSequence({ entry: "plan_no" });
-    expect(seq).toEqual(["entry", "fertility_position", "who_for", "age", "anatomy", "cancer_type", "feelings", "insurance", "zip"]);
+    expect(seq).toEqual(["entry", "fertility_position", "has_plan", "age", "anatomy", "cancer_type", "feelings", "insurance", "zip"]);
   });
 
-  it("with a plan: asks whether treatment started, then the full detail", () => {
+  it("in treatment now: full detail, no started-yet question needed", () => {
     const seq = questionSequence({ entry: "plan_yes", treatments: ["chemo"], cancerType: "breast", anatomy: "ovaries_uterus" });
-    expect(seq.indexOf("stage")).toBe(seq.indexOf("who_for") + 1);
+    expect(seq).not.toContain("stage");
     expect(seq.indexOf("chemo_drugs")).toBe(seq.indexOf("treatments") + 1);
     expect(seq.indexOf("chemo_regimen")).toBe(seq.indexOf("chemo_drugs") + 1);
   });
 
+  it("before treatment with a plan gets the treatment detail; without one, not", () => {
+    expect(questionSequence({ entry: "plan_no", hasPlan: "yes" })).toContain("treatments");
+    expect(questionSequence({ entry: "plan_no", hasPlan: "no" })).not.toContain("treatments");
+    expect(questionSequence({ entry: "plan_no" })).not.toContain("treatments");
+  });
+
   it("survivors get how-long-ago and the treatment detail", () => {
     const seq = questionSequence({ entry: "finished", stage: "finished" });
-    expect(seq.indexOf("time_since")).toBe(seq.indexOf("who_for") + 1);
+    expect(seq.indexOf("time_since")).toBe(seq.indexOf("fertility_position") + 1);
     expect(seq).toContain("treatments");
   });
 
@@ -57,9 +63,9 @@ describe("the practical section is gated on wanting children", () => {
     }
   });
 
-  it("partner insurance still only appears when partnered", () => {
-    expect(questionSequence({ entry: "plan_no", whoFor: "me_and_partner", feelings: "yes" })).toContain("partner_insurance");
-    expect(questionSequence({ entry: "plan_no", whoFor: "me", feelings: "yes" })).not.toContain("partner_insurance");
+  it("the survey never asks about partners (individual-first, per the social work guidance)", () => {
+    expect(questionSequence({ entry: "plan_no", whoFor: "me_and_partner", feelings: "yes" })).not.toContain("partner_insurance");
+    expect(questionSequence({ entry: "plan_no", feelings: "yes" })).not.toContain("who_for");
   });
 });
 
