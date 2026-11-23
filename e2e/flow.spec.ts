@@ -28,6 +28,7 @@ test("the checkpoint path walks end to end with section milestones", async ({ pa
   await expect(page.getByRole("heading", { name: "Now the part that's about you" })).toBeVisible();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
 
@@ -96,6 +97,7 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await walkSection1(page);
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
@@ -225,6 +227,7 @@ test("after-treatment woman walks her own path", async ({ page }) => {
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
@@ -253,6 +256,7 @@ test("before-treatment man sees the pre-treatment path", async ({ page }) => {
   await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
@@ -366,6 +370,7 @@ test("clinics: map first, radius filter, tappable detail pages", async ({ page }
   await walkSection1(page);
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
@@ -393,6 +398,7 @@ test("the survey never asks about partners, and the LGBTQ+ guidance still shows"
   await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();
@@ -424,6 +430,7 @@ test("the team board demo and the aid fit check work", async ({ page }) => {
   await page.getByRole("button", { name: "I'm not sure", exact: true }).click();
   await page.getByRole("button", { name: "Keep going" }).click();
   await page.getByRole("button", { name: "Yes, I want to" }).click();
+  await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
   await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
   await page.getByRole("button", { name: "Finish up" }).click();

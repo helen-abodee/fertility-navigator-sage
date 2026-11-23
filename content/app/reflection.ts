@@ -65,7 +65,7 @@ export const reflectionSteps: ReflectionStep[] = [
     id: "two_clocks",
     icon: "calendar",
     heading: "This is two decisions, not one",
-    body: "Whether to preserve fertility now is a decision with a clock, set by your treatment schedule. Whether to become a parent someday has no clock. You can answer the first without answering the second.",
+    body: "There are two questions here, not one: do I want children someday, and do I want to preserve now? You can answer the second without being sure of the first.",
     citations: [opdg, beforeAid],
   },
   {
@@ -93,21 +93,21 @@ export const reflectionSteps: ReflectionStep[] = [
     id: "plans_change",
     icon: "sprout",
     heading: "Plans are allowed to change",
-    body: "Public health guidance on reproductive life planning is built on one observation: people's plans change. What you feel during cancer treatment does not have to be your final answer, in either direction.",
+    body: "Plans are allowed to change. Deciding for the person you are now is enough.",
     citations: [cdcRlp],
   },
   {
     id: "honest_promise",
     icon: "shield",
     heading: "What preserving does, and doesn't, promise",
-    body: "Preserving keeps a possibility open. It does not guarantee a child later, and storage costs continue each year. Deciding with that honest picture beats deciding with a hopeful blur.",
+    body: "Preserving keeps a possibility open. It does not guarantee a child, and storage costs continue until you decide.",
     citations: [beforeAid, cfm],
   },
   {
     id: "many_roads",
     icon: "door",
     heading: "There is more than one road to parenthood",
-    body: "Donor eggs or sperm, surrogacy, adoption, fostering. Preserving your own eggs or sperm is one road, not the only one. Some people find this the single most relieving fact on these screens.",
+    body: "Donor eggs or sperm, surrogacy, adoption, fostering. Preserving is one road of several, not the toll for parenthood.",
     citations: [beforeAid, cfm],
   },
   {
@@ -127,7 +127,7 @@ export const reflectionSteps: ReflectionStep[] = [
     id: "talk_and_time",
     icon: "stethoscope",
     heading: "Who to talk with, and the pressure check",
-    body: "A partner, a parent, a close friend, a counselor, your care team. One more question worth asking yourself, from the Ottawa guide: is anyone pressuring you? Other people can have expectations; the decision is still yours alone, and no one else's expectations are a reason. Deciding later is itself a decision you are allowed to make: waiting keeps after-treatment options and aid programs open, while some pre-treatment options need time before treatment starts. Your care team can tell you how much time you actually have.",
+    body: "Is anyone pressuring you? Other people can hope; the decision is yours alone. And deciding later is a real decision too. Your care team can tell you how much time you have.",
     prompts: [
       "In my own words, why do I want children, or why not?",
       "Which of those reasons are mine, and which are other people's hopes for me?",

@@ -13,7 +13,7 @@ import {
  * The save-your-road card: email in, link tapped, consent, saved. Sits on
  * the road so saving is the default thing to do, not a buried option.
  */
-export default function ProfileNudge({ answers }: { answers: Answers }) {
+export default function ProfileNudge({ answers, onSaved }: { answers: Answers; onSaved?: () => void }) {
   const [phase, setPhase] = useState<"hidden" | "email" | "waiting" | "consent" | "saved">("hidden");
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
@@ -88,7 +88,7 @@ export default function ProfileNudge({ answers }: { answers: Answers }) {
               setBusy(true);
               const ok = await saveProfileData(answers, loadJourney() ?? emptyJourney(), true);
               setBusy(false);
-              if (ok) setPhase("saved");
+              if (ok) { setPhase("saved"); onSaved?.(); }
             }}
             className="bg-accent text-accent-contrast mt-2 min-h-11 w-full rounded-xl font-bold disabled:opacity-60"
           >

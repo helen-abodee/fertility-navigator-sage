@@ -31,7 +31,6 @@ import ReflectionFlow from "./ReflectionFlow";
 import JourneySection from "./JourneySection";
 import OptionDetail from "./OptionDetail";
 import ProfileSection from "./ProfileSection";
-import ProfileNudge from "./ProfileNudge";
 import Icon, { optionIcon } from "./icons";
 
 type Tab = "path" | "options" | "parenthood" | "compare" | "money" | "clinics" | "health";
@@ -398,7 +397,6 @@ export default function ResultsView({
 
       {/* The road */}
       <div className={`flex flex-col gap-6 ${show("path")}`}>
-        <ProfileNudge answers={answersForProfile} />
         <PathHome
           answers={answersForProfile}
           journey={roadJourney}

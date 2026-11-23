@@ -59,7 +59,6 @@ export const questions: Record<QuestionId, QuestionDef> = {
     heading: "And where are you with fertility preservation?",
     options: [
       { value: "deciding", label: "Haven't decided yet", icon: "compass" },
-      { value: "preserved", label: "Already preserved (eggs, sperm, or embryos)", icon: "snowflake" },
       { value: "not_pursuing", label: "Decided not to pursue it", icon: "shield" },
     ],
   },
@@ -206,13 +205,26 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "no", label: "No", icon: "shield" },
     ],
   },
+  have_kids: {
+    id: "have_kids",
+    field: "kidsAlready",
+    kind: "single",
+    optional: true,
+    skippable: true,
+    heading: "Do you already have children?",
+    options: [
+      { value: "none", label: "Not yet" },
+      { value: "one", label: "One" },
+      { value: "two_plus", label: "Two or more" },
+    ],
+  },
   family_size: {
     id: "family_size",
     field: "familySize",
     kind: "single",
     optional: true,
     skippable: true,
-    heading: "How many children do you hope for, someday?",
+    heading: "How many (more) children do you hope for?",
     options: [
       { value: "one", label: "One" },
       { value: "two", label: "Two" },

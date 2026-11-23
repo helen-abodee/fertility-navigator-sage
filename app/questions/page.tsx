@@ -13,12 +13,15 @@ import type { Clinic } from "../../lib/types";
 import { eraseEverything, loadProgress, saveProgress } from "../../lib/storage";
 import { track } from "../../lib/analytics";
 import QuestionScreen from "../../components/QuestionScreen";
+import ProfileNudge from "../../components/ProfileNudge";
+import { profilesEnabled } from "../../lib/profile";
 import Milestone from "../../components/Milestone";
 import ReflectionFlow from "../../components/ReflectionFlow";
 import RiskReveal from "../../components/RiskReveal";
 import ResultsView from "../../components/ResultsView";
 
-type Screen = QuestionId | "milestone_2" | "milestone_3" | "reflection" | "risk_reveal" | "results";
+type Screen = QuestionId | "milestone_2" | "milestone_3" | "reflection" | "risk_reveal"
+  | "save_gate" | "results";
 
 export default function QuestionsPage() {
   const [answers, setAnswers] = useState<Answers>({});
@@ -56,7 +59,7 @@ export default function QuestionsPage() {
       // "Just learning" browses the hub directly, skipping the risk screen.
       track("survey_complete");
       if (nextAnswers.entry !== "exploring") track("risk_viewed");
-      setCurrent(nextAnswers.entry === "exploring" ? "results" : "risk_reveal");
+      setCurrent(nextAnswers.entry === "exploring" ? "results" : profilesEnabled ? "save_gate" : "risk_reveal");
       return;
     }
     // A breath between sections.
@@ -164,6 +167,23 @@ export default function QuestionsPage() {
     );
   }
 
+  if (current === "save_gate") {
+    return (
+      <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
+        <h1 className="font-myth text-3xl">Before your results</h1>
+        <p className="text-muted -mt-3 text-sm">Save them to your email and pick up on any device. Optional, always.</p>
+        <ProfileNudge answers={answers} onSaved={() => setCurrent("risk_reveal")} />
+        <button
+          type="button"
+          onClick={() => setCurrent("risk_reveal")}
+          className="border-line bg-card min-h-12 rounded-xl border px-4 font-bold"
+        >
+          Not now, show my results
+        </button>
+      </main>
+    );
+  }
+
   if (current === "risk_reveal") {
     return (
       <RiskReveal
@@ -204,8 +224,10 @@ export default function QuestionsPage() {
       ? {
           ...baseDef,
           options: [
-            ...(baseDef.options ?? []),
+            (baseDef.options ?? [])[0],
+            { value: "preserved", label: "Already preserved (eggs, sperm, or embryos)", icon: "snowflake" },
             { value: "family_building", label: "Thinking about building a family", icon: "sprout" },
+            (baseDef.options ?? [])[1],
           ],
         }
       : current === "chemo_regimen"

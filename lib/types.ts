@@ -44,6 +44,7 @@ export type ChemoAgent =
 export type FeelingsAboutChildren = "yes" | "maybe" | "not_sure" | "no";
 export type FamilySize = "one" | "two" | "three_plus" | "not_sure";
 export type FamilyTimeline = "within_year" | "one_to_three" | "three_plus_years" | "not_sure";
+export type KidsAlready = "none" | "one" | "two_plus";
 export type FertilityPosition =
   | "not_started"
   | "deciding"
@@ -76,6 +77,8 @@ export interface Answers {
   familySize?: FamilySize | null;
   /** when they hope to start, for the urgency conversation */
   familyTimeline?: FamilyTimeline | null;
+  /** children they already have; shapes the family-size conversation */
+  kidsAlready?: KidsAlready | null;
   /** second axis of the intake: where they are with fertility preservation */
   fertilityPosition?: FertilityPosition | null;
   /** before-treatment lane: is there a treatment plan yet? */
@@ -91,6 +94,7 @@ export type QuestionId =
   | "fertility_position"
   | "has_plan"
   | "family_timeline"
+  | "have_kids"
   | "who_for"
   | "stage"
   | "time_since"

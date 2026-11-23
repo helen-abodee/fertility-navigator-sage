@@ -61,6 +61,7 @@ export function buildRoad(
       id: "family", label: "Family building", sub: "six paths, none ranked",
       state: fert === "family_building" ? "here" : "open", go: { kind: "tab", tab: "parenthood" },
     });
+    places.push({ id: "money", label: "The money part", sub: "your ballpark, in three steps", state: "open", go: { kind: "tab", tab: "money" } });
     places.push({
       id: "outcome", label: "Whatever you choose", sub: "three real answers, and minds change",
       state: notPursuing ? "here" : "far", go: { kind: "progress" },
@@ -74,8 +75,11 @@ export function buildRoad(
       id: "decide", label: "The decision", sub: "options, side by side, honestly priced",
       state: preserved || notPursuing ? "done" : during ? "open" : "here", go: { kind: "tab", tab: "options" },
     });
+    if (answers.feelings !== "no") {
+      places.push({ id: "money", label: "The money part", sub: "your ballpark, in three steps", state: "open", go: { kind: "tab", tab: "money" } });
+    }
     places.push({
-      id: "clinic", label: "A clinic, if you choose", sub: "the first message is already written, money included",
+      id: "clinic", label: "A clinic, if you choose", sub: "the first message is already written",
       state: preserved ? "done" : "open", go: { kind: "reach" },
     });
     places.push({
