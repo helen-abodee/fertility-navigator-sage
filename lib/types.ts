@@ -7,6 +7,7 @@
 export type WhoFor = "me" | "me_and_partner";
 
 /** Entry triage: calibrates depth to where the person actually is. */
+export type Goal = "options" | "costs" | "children" | "browse";
 export type Entry =
   | "plan_no"     /* before treatment starts (has_plan decides treatment detail) */
   | "plan_yes"    /* in treatment now: full flow */
@@ -43,7 +44,7 @@ export type ChemoAgent =
 
 export type FeelingsAboutChildren = "yes" | "maybe" | "not_sure" | "no";
 export type FamilySize = "one" | "two" | "three_plus" | "not_sure";
-export type FamilyTimeline = "within_year" | "one_to_three" | "three_plus_years" | "not_sure";
+export type FamilyTimeline = "within_year" | "one_to_two" | "three_to_five" | "five_plus" | "not_sure";
 export type KidsAlready = "none" | "one" | "two_plus";
 export type FertilityPosition =
   | "not_started"
@@ -60,6 +61,8 @@ export type YesNoUnsure = "yes" | "no" | "not_sure";
 /** Every field optional: every question can be skipped or answered "not sure". */
 export interface Answers {
   entry?: Entry;
+  /** why they came, in their own tap; recorded for tailoring and the study */
+  goal?: Goal | null;
   whoFor?: WhoFor;
   stage?: TreatmentStage;
   timeSince?: TimeSinceTreatment;
@@ -90,6 +93,7 @@ export interface Answers {
 }
 
 export type QuestionId =
+  | "goal"
   | "entry"
   | "fertility_position"
   | "has_plan"

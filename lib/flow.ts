@@ -15,7 +15,7 @@ import { regimensFor } from "./crisp";
  * having been answered, only on the answers that gate branches.
  */
 export function questionSequence(answers: Answers): QuestionId[] {
-  const seq: QuestionId[] = ["entry"];
+  const seq: QuestionId[] = ["goal", "entry"];
   // The second axis: everyone who isn't just browsing places themselves on
   // the fertility journey right after the cancer one.
   if (answers.entry && answers.entry !== "exploring") seq.push("fertility_position");
@@ -51,7 +51,7 @@ export function questionSequence(answers: Answers): QuestionId[] {
 /** Survey sections: 1 = you and your treatment, 2 = children someday, 3 = practical. */
 export function sectionOf(q: QuestionId): 1 | 2 | 3 {
   if (q === "feelings" || q === "family_size" || q === "family_timeline" || q === "have_kids") return 2;
-  if (q === "fertility_position" || q === "has_plan") return 1;
+  if (q === "fertility_position" || q === "has_plan" || q === "goal") return 1;
   if (q === "insurance" || q === "partner_insurance" || q === "zip") return 3;
   return 1;
 }

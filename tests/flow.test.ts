@@ -4,13 +4,13 @@ import type { Answers } from "../lib/types";
 
 describe("entry triage calibrates the depth", () => {
   it("'just learning' goes straight to the hub, no personal questions", () => {
-    expect(questionSequence({ entry: "exploring" })).toEqual(["entry"]);
+    expect(questionSequence({ entry: "exploring" })).toEqual(["goal", "entry"]);
     expect(nextQuestion({ entry: "exploring" }, "entry")).toBe("results");
   });
 
   it("no treatment plan yet: no treatment-detail questions at all", () => {
     const seq = questionSequence({ entry: "plan_no" });
-    expect(seq).toEqual(["entry", "fertility_position", "has_plan", "age", "anatomy", "cancer_type", "feelings", "insurance", "zip"]);
+    expect(seq).toEqual(["goal", "entry", "fertility_position", "has_plan", "age", "anatomy", "cancer_type", "feelings", "insurance", "zip"]);
   });
 
   it("in treatment now: full detail, no started-yet question needed", () => {
@@ -87,7 +87,8 @@ describe("navigation still works", () => {
 
   it("back works across conditional questions", () => {
     expect(prevQuestion({ entry: "finished", stage: "finished" }, "age")).toBe("time_since");
-    expect(prevQuestion({}, "entry")).toBe(null);
+    expect(prevQuestion({}, "entry")).toBe("goal");
+    expect(prevQuestion({}, "goal")).toBe(null);
   });
 
   it("progress stays within [0, 1) everywhere", () => {

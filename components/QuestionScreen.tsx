@@ -125,10 +125,24 @@ export default function QuestionScreen({
         })}
       </div>
 
-      <h1 className="text-2xl">
-        {def.heading}
+      <h1 className="font-myth text-[1.75rem] leading-tight">
+        {def.accent && def.heading.includes(def.accent) ? (
+          <>
+            {def.heading.split(def.accent)[0]}
+            <span className="text-accent-ink">{def.accent}</span>
+            {def.heading.split(def.accent)[1]}
+          </>
+        ) : (
+          def.heading
+        )}
         {def.optional && <span className="text-muted ml-2 align-middle text-sm font-normal">optional</span>}
       </h1>
+      {def.why && (
+        <details className="mt-1.5">
+          <summary className="text-muted cursor-pointer list-none text-xs underline decoration-dotted">Why we ask this</summary>
+          <p className="text-muted mt-1 text-sm">{def.why}</p>
+        </details>
+      )}
 
       <div className="mt-6 flex flex-col gap-3">
         {LONG && (
@@ -158,7 +172,8 @@ export default function QuestionScreen({
                   <Icon name={opt.icon} size={20} />
                 </span>
               )}
-              <span>{opt.label}</span>
+              <span className="flex-1">{opt.label}</span>
+              <span aria-hidden="true" className="text-muted">&rsaquo;</span>
             </button>
           ))}
 

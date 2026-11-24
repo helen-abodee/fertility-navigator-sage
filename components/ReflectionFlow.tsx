@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { reflectionAttribution, reflectionIntro, reflectionSteps } from "../content/app/reflection";
 import Cite from "./Cite";
+import InlineSources from "./InlineSources";
 import { track } from "../lib/analytics";
 import Icon from "./icons";
 
@@ -20,11 +21,11 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
 
   if (step === -1) {
     return (
-      <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
+      <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
         <span className="bg-accent-tint text-accent-ink animate-pop flex h-16 w-16 items-center justify-center rounded-full">
           <Icon name="compass" size={34} />
         </span>
-        <h1 className="text-3xl">{reflectionIntro.heading}</h1>
+        <h1 className="font-myth text-3xl">{reflectionIntro.heading}</h1>
         <p className="text-muted">{reflectionIntro.body}</p>
         <button
           type="button"
@@ -48,7 +49,7 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
   const last = step === reflectionSteps.length - 1;
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-6 py-8">
+    <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col px-6 py-8">
       <div className="mb-5 flex items-center justify-between">
         <button
           type="button"
@@ -70,7 +71,7 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
       <p className="text-accent-ink mt-3 text-xs font-bold tracking-widest uppercase">
         {step + 1} of {reflectionSteps.length}
       </p>
-      <h1 className="mt-1 text-2xl">{s.heading}</h1>
+      <h1 className="font-myth mt-1 text-[1.7rem] leading-tight">{s.heading}</h1>
       <p className="mt-2 text-[1.02rem]">{s.body}</p>
 
       {s.chips && (
@@ -145,7 +146,7 @@ export default function ReflectionFlow({ onDone }: { onDone: () => void }) {
       )}
 
       <div className="mt-auto pt-6">
-        <Cite citations={s.citations} />
+        <InlineSources citations={s.citations} />
         <button
           type="button"
           onClick={() => { if (last) { track("reflection_complete"); onDone(); } else setStep(step + 1); }}

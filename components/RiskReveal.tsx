@@ -2,15 +2,16 @@
 
 import type { RiskAssessment } from "../lib/risk";
 import type { Answers } from "../lib/types";
-import Cite from "./Cite";
+import InlineSources from "./InlineSources";
 import Icon from "./icons";
 import { withGlossary } from "./Term";
 
 const SIZE_WORD: Record<string, string> = { one: "one child", two: "two children", three_plus: "three or more children" };
 const WHEN_WORD: Record<string, string> = {
-  within_year: "within about a year",
-  one_to_three: "in about 1 to 3 years",
-  three_plus_years: "in 3 or more years",
+  within_year: "within a year",
+  one_to_two: "in 1 to 2 years",
+  three_to_five: "in 3 to 5 years",
+  five_plus: "in more than 5 years",
 };
 
 /**
@@ -81,7 +82,7 @@ export default function RiskReveal({
         </ul>
       </details>
 
-      <Cite citations={risk.citations} />
+      <InlineSources citations={risk.citations} />
       <button
         type="button"
         onClick={onContinue}

@@ -26,11 +26,29 @@ export interface QuestionDef {
   skippable?: boolean;
   placeholder?: string;
   inputMode?: "numeric" | "text";
+  /** the keyword the heading highlights, Headway-style */
+  accent?: string;
+  /** one honest sentence behind a "Why we ask" tap */
+  why?: string;
 }
 
 export const questions: Record<QuestionId, QuestionDef> = {
+  goal: {
+    id: "goal",
+    accent: "brings you here",
+    field: "goal",
+    kind: "single",
+    heading: "Hi. What brings you here today?",
+    options: [
+      { value: "options", label: "Understanding my fertility options", icon: "egg" },
+      { value: "costs", label: "What preserving would cost me", icon: "dollar" },
+      { value: "children", label: "Thinking through whether I want children", icon: "compass" },
+      { value: "browse", label: "Just looking around", icon: "door", notSure: true },
+    ],
+  },
   entry: {
     id: "entry",
+    accent: "cancer treatment",
     field: "entry",
     kind: "single",
     heading: "Where are you right now with cancer treatment?",
@@ -43,6 +61,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   has_plan: {
     id: "has_plan",
+    accent: "treatment plan",
     field: "hasPlan",
     kind: "single",
     skippable: true,
@@ -54,6 +73,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   fertility_position: {
     id: "fertility_position",
+    accent: "fertility preservation",
     field: "fertilityPosition",
     kind: "single",
     heading: "And where are you with fertility preservation?",
@@ -96,6 +116,8 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   age: {
     id: "age",
+    accent: "age",
+    why: "Age is the single biggest factor in every fertility guideline, so it shapes your risk group and your options.",
     field: "age",
     kind: "number",
     heading: "How old are you?",
@@ -105,6 +127,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   anatomy: {
     id: "anatomy",
+    why: "Options differ by body, not identity. This one answer decides which options we show.",
     field: "anatomy",
     kind: "single",
     heading: "Which describes your body?",
@@ -117,6 +140,8 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   cancer_type: {
     id: "cancer_type",
+    accent: "diagnosis",
+    why: "Risk groups in the research are organized by diagnosis and treatment plan.",
     field: "cancerType",
     kind: "single",
     heading: "What is your diagnosis?",
@@ -195,6 +220,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   feelings: {
     id: "feelings",
+    accent: "children someday",
     field: "feelings",
     kind: "single",
     heading: "How do you feel about having children someday?",
@@ -207,6 +233,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   have_kids: {
     id: "have_kids",
+    accent: "already have children",
     field: "kidsAlready",
     kind: "single",
     optional: true,
@@ -220,6 +247,8 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   family_size: {
     id: "family_size",
+    accent: "(more) children",
+    why: "Family size sets how many eggs, embryos, or samples a specialist plans for.",
     field: "familySize",
     kind: "single",
     optional: true,
@@ -234,20 +263,25 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   family_timeline: {
     id: "family_timeline",
+    accent: "When",
+    why: "Timeline plus age is how specialists decide how urgent preserving is for you.",
     field: "familyTimeline",
     kind: "single",
     optional: true,
     skippable: true,
     heading: "When would you want to have (more) children?",
     options: [
-      { value: "within_year", label: "Within about a year" },
-      { value: "one_to_three", label: "In about 1 to 3 years" },
-      { value: "three_plus_years", label: "In 3 or more years" },
+      { value: "within_year", label: "Within a year" },
+      { value: "one_to_two", label: "In 1 to 2 years" },
+      { value: "three_to_five", label: "In 3 to 5 years" },
+      { value: "five_plus", label: "In more than 5 years" },
       { value: "not_sure", label: "No idea yet", notSure: true },
     ],
   },
   insurance: {
     id: "insurance",
+    accent: "insurance",
+    why: "Coverage laws differ by plan type; this routes you to the right one.",
     field: "insurance",
     kind: "single",
     heading: "What health insurance do you have?",
@@ -272,6 +306,7 @@ export const questions: Record<QuestionId, QuestionDef> = {
   },
   zip: {
     id: "zip",
+    why: "Only used on this device to measure distance to clinics. Never sent anywhere.",
     field: "zip",
     kind: "text",
     heading: "Your ZIP code",

@@ -25,7 +25,7 @@ type Screen = QuestionId | "milestone_2" | "milestone_3" | "reflection" | "risk_
 
 export default function QuestionsPage() {
   const [answers, setAnswers] = useState<Answers>({});
-  const [current, setCurrent] = useState<Screen>("entry");
+  const [current, setCurrent] = useState<Screen>("goal");
   const [saveOptIn, setSaveOptIn] = useState(false);
   const [resumeOffer, setResumeOffer] = useState<{ answers: Answers; current: string } | null>(null);
 
@@ -44,7 +44,7 @@ export default function QuestionsPage() {
     eraseEverything();
     setAnswers({});
     setSaveOptIn(false);
-    setCurrent("entry");
+    setCurrent("goal");
   }
 
   function advance(nextAnswers: Answers, from: QuestionId) {
@@ -170,8 +170,8 @@ export default function QuestionsPage() {
   if (current === "save_gate") {
     return (
       <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
-        <h1 className="font-myth text-3xl">Before your results</h1>
-        <p className="text-muted -mt-3 text-sm">Save them to your email and pick up on any device. Optional, always.</p>
+        <h1 className="font-myth text-3xl">You\u2019ve done the work. Keep it.</h1>
+        <p className="text-muted -mt-3 text-sm">Save your answers to your email so nothing is lost. Optional, always.</p>
         <ProfileNudge answers={answers} onSaved={() => setCurrent("risk_reveal")} />
         <button
           type="button"

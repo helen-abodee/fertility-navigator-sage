@@ -19,7 +19,7 @@ test("capture iteration screenshots", async ({ page }) => {
   }
   await page.getByRole("button", { name: "Start" }).click();
   await page.screenshot({ path: `${OUT}/02-entry.png` });
-
+  await page.getByRole("button", { name: "Understanding my fertility options" }).click();
   await page.getByRole("button", { name: "Before treatment starts" }).click();
   await page.getByRole("button", { name: "Haven't decided yet" }).click();
   await page.getByRole("button", { name: "Yes, I have a plan" }).click();
@@ -43,7 +43,7 @@ test("capture iteration screenshots", async ({ page }) => {
   await page.getByRole("button", { name: "Yes, I want to" }).click();
   await page.getByRole("button", { name: "Not yet", exact: true }).click();
   await page.getByRole("button", { name: "Two", exact: true }).click();
-  await page.getByRole("button", { name: "In about 1 to 3 years" }).click();
+  await page.getByRole("button", { name: "In 1 to 2 years" }).click();
   await page.waitForTimeout(300);
   await page.screenshot({ path: `${OUT}/07-milestone-3.png` });
   await page.getByRole("button", { name: "Finish up" }).click();
