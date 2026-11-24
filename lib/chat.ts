@@ -67,7 +67,7 @@ export function buildCorpus(): ChatEntry[] {
     entries.push({
       id: `${o.id}.what`,
       title: o.name,
-      text: [o.shortDescription, o.statusNote ?? "", o.expectations].filter(Boolean).join(" "),
+      text: [o.shortDescription, o.statusNote ?? ""].filter(Boolean).join(" "),
       citations: [...o.citations, ...o.expectationsCitations],
       audience: o.audience,
       keywords: [...kw, "option", "work", "works", "safe", "guarantee", "treatment", "during"],
@@ -282,8 +282,16 @@ function index(): Indexed[] {
 
 const CRISIS = /suicid|kill (myself|me)|end my life|hurt myself|harm myself|don'?t want to (live|be alive)/i;
 
+const COMPARE_INTENT = /\b(vs\.?|versus|compare[ds]?|comparison|difference between|better than|or should I)\b/i;
+
 export function askCorpus(query: string, answers: Answers): ChatAnswer {
   if (CRISIS.test(query)) return { kind: "crisis", entries: [] };
+
+  // "X vs Y" questions get the Compare tab, not three essays.
+  if (COMPARE_INTENT.test(query)) {
+    const cmp = index().find((ix) => ix.entry.id === "pointer.compare");
+    if (cmp) return { kind: "results", entries: [cmp.entry] };
+  }
 
   const qTokens = new Set(tokens(query));
   for (const t of Array.from(qTokens)) {

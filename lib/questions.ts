@@ -43,7 +43,8 @@ export const questions: Record<QuestionId, QuestionDef> = {
       { value: "options", label: "Understanding my fertility options", icon: "egg" },
       { value: "costs", label: "What preserving would cost me", icon: "dollar" },
       { value: "children", label: "Thinking through whether I want children", icon: "compass" },
-      { value: "browse", label: "Just looking around", icon: "door", notSure: true },
+      { value: "clinic", label: "Getting ready to reach out to a clinic", icon: "door" },
+      { value: "browse", label: "Just looking around", icon: "compass", notSure: true },
     ],
   },
   entry: {

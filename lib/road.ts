@@ -126,6 +126,27 @@ export function buildRoad(
       cta: "Where I landed",
       go: { kind: "progress" },
     };
+  } else if (answers.goal === "costs") {
+    now = {
+      heading: "You came for the money picture",
+      body: "Your coverage, the real prices, and the aid that cuts them, in three steps.",
+      cta: "See what it would cost",
+      go: { kind: "tab", tab: "money" },
+    };
+  } else if (answers.goal === "clinic") {
+    now = {
+      heading: "You came to reach out",
+      body: "The first message is already written, urgent-slot question included.",
+      cta: "Get the message ready",
+      go: { kind: "reach" },
+    };
+  } else if (answers.goal === "children") {
+    now = {
+      heading: "You came to think it through",
+      body: "A few quiet screens on the children question. Unsure is a real answer.",
+      cta: "Think it through",
+      go: { kind: "reflect" },
+    };
   } else {
     now = {
       heading: "See what your options really are",

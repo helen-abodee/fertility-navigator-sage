@@ -7,7 +7,7 @@
 export type WhoFor = "me" | "me_and_partner";
 
 /** Entry triage: calibrates depth to where the person actually is. */
-export type Goal = "options" | "costs" | "children" | "browse";
+export type Goal = "options" | "costs" | "children" | "clinic" | "browse";
 export type Entry =
   | "plan_no"     /* before treatment starts (has_plan decides treatment detail) */
   | "plan_yes"    /* in treatment now: full flow */

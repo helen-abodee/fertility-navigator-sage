@@ -1,6 +1,6 @@
 # What the Fertility Preservation Navigator knows
 
-Generated from the app content on 2026-11-23. Regenerate: WRITE_LLM_GROUNDING=1 npx vitest run tests/llm-grounding.gen.test.ts
+Generated from the app content on 2026-11-24. Regenerate: WRITE_LLM_GROUNDING=1 npx vitest run tests/llm-grounding.gen.test.ts
 
 ## ANSWER RULES (non-negotiable, enforced again by the output filter)
 

@@ -110,6 +110,7 @@ export default function ResultsView({
   feelings,
   fertilityPosition,
   familySize,
+  goal,
   age,
   anatomy,
   zip,
@@ -124,6 +125,7 @@ export default function ResultsView({
   feelings?: FeelingsAboutChildren;
   fertilityPosition?: Answers["fertilityPosition"];
   familySize?: Answers["familySize"];
+  goal?: Answers["goal"];
   age?: number;
   anatomy?: Answers["anatomy"];
   zip?: string | null;
@@ -143,7 +145,7 @@ export default function ResultsView({
     // client render the same first frame.
     setRoadJourney(loadJourney());
   }, [panel, tab]);
-  const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip, fertilityPosition, familySize };
+  const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip, fertilityPosition, familySize, goal };
   const moneyUnlocked = browsing || feelings !== "no";
   // The health tab is for after treatment: at diagnosis it reads as homework
   // (care-team feedback), so lanes still facing treatment don't see it.
@@ -309,6 +311,15 @@ export default function ResultsView({
           )}
 
           <ProfileSection answers={answersForProfile} />
+
+          <button
+            type="button"
+            onClick={onStartOver}
+            className="border-line bg-card min-h-11 rounded-xl border px-4 text-sm font-bold"
+          >
+            Life changed? Retake the two-minute intake
+          </button>
+          <p className="text-muted -mt-3 text-xs">Thoughts about children often shift after treatment. Your checklist here stays.</p>
           <button type="button" onClick={() => setPanel(null)} className="border-line bg-card min-h-12 rounded-xl border px-4 py-3 font-bold">
             Back
           </button>
@@ -547,7 +558,7 @@ export default function ResultsView({
       {/* Health */}
       <div className={`flex flex-col gap-6 ${show("health")}`}>
         <p className="text-muted text-sm">
-          For the stretch after treatment: everyday factors tied to sperm and egg health. Nothing here is urgent, and none of it is a guarantee.
+          For the stretch after treatment: everyday factors tied to sperm and egg health. Nothing here is urgent, none of it is a guarantee, and anything new, supplements included, goes past your care team first in case it interacts with treatment.
         </p>
         <div className="border-line bg-card rounded-xl border p-3">
           <p className="text-[0.92rem]">{honestCaveat.text}</p>

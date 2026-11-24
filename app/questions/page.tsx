@@ -170,7 +170,7 @@ export default function QuestionsPage() {
   if (current === "save_gate") {
     return (
       <main className="wash mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center gap-5 px-6 py-12">
-        <h1 className="font-myth text-3xl">You\u2019ve done the work. Keep it.</h1>
+        <h1 className="font-myth text-3xl">You've done the work. Keep it.</h1>
         <p className="text-muted -mt-3 text-sm">Save your answers to your email so nothing is lost. Optional, always.</p>
         <ProfileNudge answers={answers} onSaved={() => setCurrent("risk_reveal")} />
         <button
@@ -209,6 +209,7 @@ export default function QuestionsPage() {
         feelings={answers.feelings}
         fertilityPosition={answers.fertilityPosition}
         familySize={answers.familySize}
+        goal={answers.goal}
         age={answers.age}
         anatomy={answers.anatomy}
         zip={answers.zip}

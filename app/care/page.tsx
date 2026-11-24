@@ -226,6 +226,13 @@ export default function CarePage() {
                     {OUTCOME_LABEL[r.journey.outcome] ?? r.journey.outcome}
                   </span>
                 )}
+                {r.journey?.done?.includes("contacted_clinic") &&
+                  !r.journey?.done?.includes("clinic_replied") &&
+                  Date.now() - new Date(r.updated_at).getTime() > 5 * 864e5 && (
+                    <span className="rounded-full px-2.5 py-0.5 text-xs font-bold" style={{ background: "var(--cmp-tough-bg)", color: "var(--cmp-tough-ink)" }}>
+                      waiting on clinic {Math.floor((Date.now() - new Date(r.updated_at).getTime()) / 864e5)}d
+                    </span>
+                  )}
                 {r.risk_label && (
                   <span className="border-line rounded-full border px-2.5 py-0.5 text-xs font-bold">{r.risk_label}</span>
                 )}

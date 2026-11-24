@@ -227,7 +227,7 @@ export default function AskSection({
               {m.entries.map((e) => (
                 <section key={e.id} className="border-line bg-card rounded-2xl rounded-bl-md border p-4">
                   <p className="text-sm font-bold">{e.title}</p>
-                  {e.text !== e.title && <p className="mt-1 text-sm">{e.text}</p>}
+                  {e.text !== e.title && <p className="mt-1 text-sm">{e.text.length > 240 ? e.text.slice(0, 237).trimEnd() + "\u2026" : e.text}</p>}
                   {e.citations && e.citations.length > 0 && <Cite citations={e.citations} />}
                   {e.goto && e.goto.target === "sources" ? (
                     <a href="/sources" className="text-accent-ink mt-2 inline-block text-sm font-bold underline">

@@ -13,6 +13,7 @@ export type JourneyStageId =
   | "talked_care_team"
   | "checked_coverage"
   | "contacted_clinic"
+  | "clinic_replied"
   | "had_consult"
   | "started_preservation";
 
@@ -30,6 +31,7 @@ export const journeyStages: { id: JourneyStageId; label: string }[] = [
   { id: "talked_care_team", label: "Talked with my care team" },
   { id: "checked_coverage", label: "Checked my insurance coverage" },
   { id: "contacted_clinic", label: "Contacted a clinic" },
+  { id: "clinic_replied", label: "Heard back from the clinic" },
   { id: "had_consult", label: "Had a consult" },
   { id: "started_preservation", label: "Started preservation" },
 ];

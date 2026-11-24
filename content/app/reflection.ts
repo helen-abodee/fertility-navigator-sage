@@ -129,8 +129,8 @@ export const reflectionSteps: ReflectionStep[] = [
     heading: "Is this decision yours alone?",
     body: "Other people can hope; the choice is still yours. Deciding later is a real decision too, and your care team can tell you how much time you have.",
     prompts: [
-      "In my own words, why do I want children, or why not?",
-      "Which of those reasons are mine, and which are other people's hopes for me?",
+      "Yes. This one is mine.",
+      "Honestly, other people are pulling on it more than I want.",
     ],
     citations: [opdg, beforeAid],
   },

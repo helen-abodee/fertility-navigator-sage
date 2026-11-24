@@ -27,9 +27,12 @@ export default function Home() {
       )}
 
       {signedIn && (
-        <p className="bg-accent-tint text-accent-ink mb-4 rounded-xl px-4 py-3 text-sm font-bold">
-          Signed in. Return to your other tab and tap &ldquo;I opened the link&rdquo;, or continue here.
-        </p>
+        <section className="border-line bg-card mb-6 rounded-2xl border p-5 text-center">
+          <p className="text-lg font-bold">Signed in ✓</p>
+          <p className="text-muted mt-1 text-sm">
+            Your progress is safe. Return to your other tab; it continues by itself in a moment.
+          </p>
+        </section>
       )}
       <p className="text-accent-ink text-xs font-bold tracking-[0.14em] uppercase">
         For young adults facing cancer
