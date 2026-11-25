@@ -136,9 +136,9 @@ test("the hub tabs carry the real cited content", async ({ page }) => {
   await expect(page.getByText("The money picture")).toBeVisible();
   await expect(page.getByText("The procedure, at published prices")).toBeVisible();
 
-  // Health and Family building are after-treatment tabs: hidden before then
-  await expect(page.getByRole("button", { name: "Health", exact: true })).not.toBeVisible();
-  await expect(page.getByRole("button", { name: "Family", exact: true })).not.toBeVisible();
+  // Health and Family building show in every lane, before treatment included
+  await expect(page.getByRole("button", { name: "Health", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Family", exact: true })).toBeVisible();
   // The specialist-decides line sits on Options (tab name carries "(visited)" now)
   await page.getByRole("button", { name: /Options/ }).first().click();
   await expect(page.getByText("decided with a fertility specialist", { exact: false }).first()).toBeVisible();
@@ -279,8 +279,10 @@ test("before-treatment man sees the pre-treatment path", async ({ page }) => {
 
   await page.getByRole("button", { name: "Options", exact: true }).click();
   await expect(page.getByRole("button", { name: /Sperm banking/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Family", exact: true })).not.toBeVisible();
-  await expect(page.getByRole("button", { name: "Health", exact: true })).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "Family", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Health", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Family", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Paths to parenthood" })).toBeVisible();
 });
 
 test("the journey tracker records stages and respects deciding not to", async ({ page }) => {

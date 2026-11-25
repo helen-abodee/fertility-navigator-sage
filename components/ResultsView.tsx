@@ -147,16 +147,9 @@ export default function ResultsView({
   }, [panel, tab]);
   const answersForProfile: Answers = { age, stage, anatomy, insurance, feelings, zip, fertilityPosition, familySize, goal };
   const moneyUnlocked = browsing || feelings !== "no";
-  // The health tab is for after treatment: at diagnosis it reads as homework
-  // (care-team feedback), so lanes still facing treatment don't see it.
-  const healthUnlocked = stage !== "not_started" && stage !== "in_treatment";
-  // Family building is the after-treatment path (Benedict's Roadmap model);
-  // people still facing treatment see preservation options instead.
-  const activeTabs = tabs.filter(
-    (t) =>
-      (t.id !== "money" || moneyUnlocked) &&
-      ((t.id !== "health" && t.id !== "parenthood") || healthUnlocked),
-  );
+  // Every lane gets the full tab set, the same one the browse hub shows:
+  // Family and Health are no longer held back until after treatment.
+  const activeTabs = tabs.filter((t) => t.id !== "money" || moneyUnlocked);
 
   function goTab(next: Tab) {
     track("tab_viewed");
